@@ -1,8 +1,8 @@
-import 'package:amad_furniture/presentation/core/utils/constantes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'color_manager.dart';
+import '../../../../core/utils/color_manager.dart';
+import '../../../../core/utils/constantes.dart';
 
 Widget mySlider (context) => Container(
   width: double.infinity,

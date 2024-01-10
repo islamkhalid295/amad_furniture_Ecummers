@@ -1,9 +1,10 @@
-import 'package:amad_furniture/presentation/resources/color_manager.dart';
-import 'package:amad_furniture/presentation/resources/my_widget.dart';
+import 'package:amad_furniture/core/utils/color_manager.dart';
+import 'package:amad_furniture/features/home_screen/presentation/widgets/my_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-import 'core/utils/constantes.dart';
+import '../../../../core/utils/constantes.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
