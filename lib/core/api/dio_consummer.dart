@@ -11,7 +11,9 @@ import 'api_consummer.dart';
 class DioConsumer implements ApiConsumer {
   final Dio client;
   DioConsumer({required this.client}) {
-    client.options.baseUrl = EndPoints.baseUrl;
+
+    client.options.baseUrl = EndPoints.BASE_URL;
+
     client.options.headers = {
       "Accept": "application/json",
       "Content-Type": "application/json",
