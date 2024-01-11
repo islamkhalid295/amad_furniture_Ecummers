@@ -1,7 +1,7 @@
 import 'package:amad_furniture/features/home_screen/presentation/pages/home_screen.dart';
 import 'package:amad_furniture/core/utils/color_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:amad_furniture/core/utils/locator/locator.dart'as di;
+import 'package:amad_furniture/core/utils/locator.dart'as di;
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
