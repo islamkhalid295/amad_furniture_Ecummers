@@ -1,10 +1,15 @@
 import 'package:amad_furniture/core/utils/color_manager.dart';
+
 import 'package:amad_furniture/features/home_screen/presentation/manager/home_screen_cubit.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../../../../core/utils/constantes.dart';
+
 import '../widgets/home_slider/presentation/widgets/slider.dart';
+
 
 
 class HomeScreen extends StatefulWidget {
@@ -30,7 +35,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
 
+
   }
+
 
 
 
@@ -40,7 +47,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
         return i;
       }
     }
+
     return -1; // Return the last section if offset is beyond all sections
+
   }
 
   void _onSectionChange(int index) {
@@ -176,7 +185,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                       preferPosition: AutoScrollPosition.begin);
                   _onSectionChange(index);
                 },
+
                 tabs: HomeScreenCubit.tabBarTabs,
+
                 indicatorColor: ColorManager.myYellow,
                 labelStyle: const TextStyle(
                   color: Colors.black,
@@ -211,7 +222,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                 print(notification.metrics.pixels);
                 final index = _getSectionIndexFromScrollOffset(
                     notification.metrics.pixels,getSectionHeight(context));
+
                 if (index != currentSection && !_tabController.indexIsChanging && index != -1) {
+
                   setState(() {
                     _tabController.index = index;
                     currentSection = index;
@@ -222,13 +235,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
             },
             child: ListView.builder(
               controller: _scrollController,
+
               itemCount: sectionsNumber,
+
               itemBuilder: (context, index) {
                 return AutoScrollTag(
                   key: ValueKey(index),
                   controller: _scrollController,
                   index: index,
+
                   child: HomeScreenCubit.homeScreenSections[index],
+
                 );
               },
             ),
