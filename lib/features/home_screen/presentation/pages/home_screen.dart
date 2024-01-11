@@ -2,6 +2,7 @@ import 'package:amad_furniture/core/utils/color_manager.dart';
 
 import 'package:amad_furniture/features/home_screen/presentation/manager/home_screen_cubit.dart';
 
+
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
