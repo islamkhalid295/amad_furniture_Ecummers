@@ -1,9 +1,10 @@
 import 'package:amad_furniture/core/utils/color_manager.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/my_widget.dart';
+import 'package:amad_furniture/features/home_screen/presentation/manager/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../../../../core/utils/constantes.dart';
+import '../widgets/home_slider/presentation/widgets/slider.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
   final AutoScrollController _scrollController = AutoScrollController();
   late TabController _tabController;
   int currentSection = 0;
-  
+
 
   @override
   void dispose() {
@@ -28,19 +29,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
-    _tabController.addListener(_handleTabSelection);
+
   }
 
-  void _handleTabSelection() {
-    final int selectedTabIndex = _tabController.index;
 
-    // _scrollController.scrollToIndex(selectedTabIndex,
-    //     preferPosition: AutoScrollPosition.begin);
-    // _onSectionChange(selectedTabIndex);
-  }
-  // void selectTab(int tabIndex) {
-  //   _tabController.index = tabIndex;
-  // }
 
   int _getSectionIndexFromScrollOffset(double offset,double sectionHeight) {
     for (int i = 0; i < 3; i++) {
@@ -48,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
         return i;
       }
     }
-    return 2; // Return the last section if offset is beyond all sections
+    return -1; // Return the last section if offset is beyond all sections
   }
 
   void _onSectionChange(int index) {
@@ -184,20 +176,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                       preferPosition: AutoScrollPosition.begin);
                   _onSectionChange(index);
                 },
-                tabs: const [
-                  Tab(
-                    text: "رئيسية",
-                  ),
-                  Tab(
-                    text: "تسوق",
-                  ),
-                  Tab(
-                    text: "منتجات",
-                  ),
-                  Tab(
-                    text: "عربة السوق",
-                  ),
-                ],
+                tabs: HomeScreenCubit.tabBarTabs,
                 indicatorColor: ColorManager.myYellow,
                 labelStyle: const TextStyle(
                   color: Colors.black,
@@ -232,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                 print(notification.metrics.pixels);
                 final index = _getSectionIndexFromScrollOffset(
                     notification.metrics.pixels,getSectionHeight(context));
-                if (index != currentSection && !_tabController.indexIsChanging) {
+                if (index != currentSection && !_tabController.indexIsChanging && index != -1) {
                   setState(() {
                     _tabController.index = index;
                     currentSection = index;
@@ -243,13 +222,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
             },
             child: ListView.builder(
               controller: _scrollController,
-              itemCount: 3,
+              itemCount: sectionsNumber,
               itemBuilder: (context, index) {
                 return AutoScrollTag(
                   key: ValueKey(index),
                   controller: _scrollController,
                   index: index,
-                  child: mySlider(context),
+                  child: HomeScreenCubit.homeScreenSections[index],
                 );
               },
             ),

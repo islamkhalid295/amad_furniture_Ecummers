@@ -1,5 +1,6 @@
 import 'package:amad_furniture/core/use_case/use_case.dart';
-import 'package:amad_furniture/features/home_slider/domain/repositories/slider_repo.dart';
+
+import '../repositories/slider_repo.dart';
 
 class RetriveSliderItemsUC extends UseCase<void,NoParams> {
   final SliderRepo sliderRepo;

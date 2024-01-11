@@ -1,5 +1,6 @@
 import 'package:amad_furniture/core/use_case/use_case.dart';
 import 'package:bloc/bloc.dart';
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:meta/meta.dart';
 
 import '../../domain/use_cases/retrive_slider_items_uc.dart';
@@ -10,6 +11,7 @@ class SliderCubit extends Cubit<SliderState> {
   final RetriveSliderItemsUC retriveSliderItemsUC;
   SliderCubit(this.retriveSliderItemsUC) : super(SliderInitial());
 
+  static CarouselController carouselController = CarouselController();
 
   void retriveSliderItems ()async
   {
@@ -22,4 +24,13 @@ class SliderCubit extends Cubit<SliderState> {
     }
   }
 
+
+  void getNextPage(){
+    carouselController.nextPage();
+    emit(GetNextPage());
+  }
+  void getPreviousPage(){
+    carouselController.previousPage();
+    emit(GetPreviousPage());
+  }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 const double yellowBannarHeight = 40;
 const double tabBarHeight = 72;
+const int sectionsNumber = 3;
 
 
 

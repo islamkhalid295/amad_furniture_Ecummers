@@ -1,4 +1,5 @@
-import 'package:amad_furniture/features/home_slider/data/remote/data_sources/slider_rds.dart';
+
+import '../../data/remote/data_sources/slider_rds.dart';
 
 abstract class SliderRepo {
   Future<void> retriveSliderItems ();
