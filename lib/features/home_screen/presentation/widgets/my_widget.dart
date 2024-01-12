@@ -4,6 +4,20 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constantes.dart';
 
+class DefaultSelectableText extends StatelessWidget {
+  const DefaultSelectableText({super.key, this.text, this.textStyle});
+final String? text;
+final TextStyle? textStyle;
+  @override
+  Widget build(BuildContext context) {
+    return SelectableText(
+        text!,
+      style: textStyle,
+    );
+  }
+}
+
+
 Widget mySlider (context) => Container(
   width: double.infinity,
   height: getSectionHeight(context),

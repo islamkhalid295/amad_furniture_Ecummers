@@ -12,5 +12,7 @@ class ColorManager {
   // static const Color myGreen = Color(0xff3BC04D);//#3BC04D
   // static const Color myRed = Color(0xffEB2929);//#EB2929
   static const Color myYellow = Color(0xffFBB710); //#FAFAFA
+  static const Color myGrayLiteMore = Color(0xfff8f8f8); //#FAFAFA
+
 
 }

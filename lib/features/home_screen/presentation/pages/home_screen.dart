@@ -33,13 +33,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: HomeScreenCubit.homeScreenSections.length, vsync: this);
 
 
   }
-
-
-
 
   int _getSectionIndexFromScrollOffset(double offset,double sectionHeight) {
     for (int i = 0; i < 3; i++) {
@@ -236,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
             child: ListView.builder(
               controller: _scrollController,
 
-              itemCount: sectionsNumber,
+              itemCount: HomeScreenCubit.sectionsNumber,
 
               itemBuilder: (context, index) {
                 return AutoScrollTag(
