@@ -12,9 +12,12 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
   HomeScreenCubit() : super(HomeScreenInitial());
 
   late TabController tabController;
+
   static  int sectionsNumber = homeScreenSections.length;
+
   static final bool isLogedIn = false; // make it true
   static final String userName = "إسلام خالد";
+
   static const List<Widget> homeScreenSections = [
     HomeSlider(),
     CategoriesScreen(),
@@ -31,10 +34,12 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       text: "تسوق",
     ),
     Tab(
+
       text: "تواصل معنا",
     ),
     Tab(
       text: "عن منتجاتنا",
+
     ),
   ];
 }
