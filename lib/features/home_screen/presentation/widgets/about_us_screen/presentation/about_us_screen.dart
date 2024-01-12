@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/constantes.dart';
+import '../../my_widget.dart';
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});
@@ -24,7 +25,7 @@ class AboutUsScreen extends StatelessWidget {
 
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                DefaultSelectableText(
                   'اتصل بنا',
                   style: TextStyle(
                     color: Colors.black,
@@ -34,7 +35,7 @@ class AboutUsScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20,),
-                Text(
+                DefaultSelectableText(
                   'البريد الالكتروني',
                   style: TextStyle(
                     color: Color(0xFF848484),
@@ -43,7 +44,7 @@ class AboutUsScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Text(
+                DefaultSelectableText(
                   'Amad furniture1@gmail.com',
                   style: TextStyle(
                     color: Color(0xFF848484),
@@ -53,7 +54,7 @@ class AboutUsScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 15,),
-                Text(
+                DefaultSelectableText(
                   'رقم الجوال',
                   style: TextStyle(
                     color: Color(0xFF848484),
@@ -61,7 +62,7 @@ class AboutUsScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Text(
+                DefaultSelectableText(
                   '(+966) 8989 7878',
                   style: TextStyle(
                     color: Color(0xFF848484),
@@ -70,7 +71,7 @@ class AboutUsScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 15,),
-                Text(
+                DefaultSelectableText(
                   'العنوان ',
                   style: TextStyle(
                     color: Color(0xFF848484),
@@ -78,7 +79,7 @@ class AboutUsScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                Text(
+                DefaultSelectableText(
                   'القاهره , مدينه نصر',
                   style: TextStyle(
                     color: Color(0xFF848484),
@@ -93,7 +94,7 @@ class AboutUsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
+                const DefaultSelectableText(
                   'تواصل معانا',
                   style: TextStyle(
                     color: Colors.black,
@@ -143,7 +144,7 @@ class AboutUsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(25),
                           side: const BorderSide(color: ColorManager.myBlack,style: BorderStyle.solid)
                       ),
-                      child: const Text(
+                      child: const DefaultSelectableText(
                         'ارسال',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -193,7 +194,7 @@ class AboutUsScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  const DefaultSelectableText(
                     'اتصل بنا',
                     style: TextStyle(
                       color: Colors.black,
@@ -203,7 +204,7 @@ class AboutUsScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20,),
-                  const Text(
+                  const DefaultSelectableText(
                     'البريد الالكتروني',
                     style: TextStyle(
                       color: Color(0xFF848484),
@@ -212,7 +213,7 @@ class AboutUsScreen extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const Text(
+                  const DefaultSelectableText(
                     'Amad furniture1@gmail.com',
                     style: TextStyle(
                       color: Color(0xFF848484),
@@ -222,7 +223,7 @@ class AboutUsScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 15,),
-                  const Text(
+                  const DefaultSelectableText(
                     'رقم الجوال',
                     style: TextStyle(
                       color: Color(0xFF848484),
@@ -230,7 +231,7 @@ class AboutUsScreen extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const Text(
+                  const DefaultSelectableText(
                     '(+966) 8989 7878',
                     style: TextStyle(
                       color: Color(0xFF848484),
@@ -239,7 +240,7 @@ class AboutUsScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 15,),
-                  const Text(
+                  const DefaultSelectableText(
                     'العنوان ',
                     style: TextStyle(
                       color: Color(0xFF848484),
@@ -247,7 +248,7 @@ class AboutUsScreen extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const Text(
+                  const DefaultSelectableText(
                     'القاهره , مدينه نصر',
                     style: TextStyle(
                       color: Color(0xFF848484),
@@ -257,7 +258,7 @@ class AboutUsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 60,),
 
-                  const Text(
+                  const DefaultSelectableText(
                     'تواصل معانا',
                     style: TextStyle(
                       color: Colors.black,
@@ -307,7 +308,7 @@ class AboutUsScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(25),
                             side: const BorderSide(color: ColorManager.myBlack,style: BorderStyle.solid)
                         ),
-                        child: const Text(
+                        child: const DefaultSelectableText(
                           'ارسال',
                           textAlign: TextAlign.center,
                           style: TextStyle(

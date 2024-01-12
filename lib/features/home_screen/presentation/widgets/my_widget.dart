@@ -4,6 +4,22 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constantes.dart';
 
+class DefaultSelectableText extends StatelessWidget {
+  const DefaultSelectableText(this.text,{super.key, this.style, this.textAlign, });
+final String text;
+final TextStyle? style;
+final TextAlign? textAlign;
+  @override
+  Widget build(BuildContext context) {
+    return SelectableText(
+        text,
+      style: style,
+      textAlign: textAlign,
+    );
+  }
+}
+
+
 Widget mySlider (context) => Container(
   width: double.infinity,
   height: getSectionHeight(context),
@@ -21,7 +37,7 @@ Widget mySlider (context) => Container(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        const DefaultSelectableText(
           'أحصل علي منتجات طبيعه للعنايه بالشعر',
           textAlign: TextAlign.right,
           style: TextStyle(
@@ -41,7 +57,7 @@ Widget mySlider (context) => Container(
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width < 400 ? 320 * MediaQuery.of(context).size.width / 400 : 320,
-              child: Text(
+              child: DefaultSelectableText(
                 'العنايه بالشعر من أكثر ما يشغل الفتيات والسيدات، خاصة نموه وزيادة طوله، لذا تحرص العديد منهن على اللجوء لموضة الاكستينشين وتطويل الشعر بشكل ظاهرى فقط،',
                 textAlign: TextAlign.right,
                 style: TextStyle(
@@ -66,7 +82,7 @@ Widget mySlider (context) => Container(
               borderRadius: BorderRadius.circular(20),
               side: const BorderSide(color: ColorManager.myBlack,style: BorderStyle.solid)
           ),
-          child: const Text(
+          child: const DefaultSelectableText(
             'تسوق الان',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -99,7 +115,7 @@ Widget aboutUs (context) => Container(
 
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            DefaultSelectableText(
               'اتصل بنا',
               style: TextStyle(
                 color: Colors.black,
@@ -109,7 +125,7 @@ Widget aboutUs (context) => Container(
               ),
             ),
             SizedBox(height: 20,),
-            Text(
+            DefaultSelectableText(
               'البريد الالكتروني',
               style: TextStyle(
                 color: Color(0xFF848484),
@@ -118,7 +134,7 @@ Widget aboutUs (context) => Container(
                 fontWeight: FontWeight.w500,
               ),
             ),
-            Text(
+            DefaultSelectableText(
               'Amad furniture1@gmail.com',
               style: TextStyle(
                 color: Color(0xFF848484),
@@ -128,7 +144,7 @@ Widget aboutUs (context) => Container(
               ),
             ),
             SizedBox(height: 15,),
-            Text(
+            DefaultSelectableText(
               'رقم الجوال',
               style: TextStyle(
                 color: Color(0xFF848484),
@@ -136,7 +152,7 @@ Widget aboutUs (context) => Container(
                 fontWeight: FontWeight.w500,
               ),
             ),
-            Text(
+            DefaultSelectableText(
               '(+966) 8989 7878',
               style: TextStyle(
                 color: Color(0xFF848484),
@@ -145,7 +161,7 @@ Widget aboutUs (context) => Container(
               ),
             ),
             SizedBox(height: 15,),
-            Text(
+            DefaultSelectableText(
               'العنوان ',
               style: TextStyle(
                 color: Color(0xFF848484),
@@ -153,7 +169,7 @@ Widget aboutUs (context) => Container(
                 fontWeight: FontWeight.w500,
               ),
             ),
-            Text(
+            DefaultSelectableText(
               'القاهره , مدينه نصر',
               style: TextStyle(
                 color: Color(0xFF848484),
@@ -168,7 +184,7 @@ Widget aboutUs (context) => Container(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
+            const DefaultSelectableText(
               'تواصل معانا',
               style: TextStyle(
                 color: Colors.black,
@@ -218,7 +234,7 @@ Widget aboutUs (context) => Container(
                       borderRadius: BorderRadius.circular(25),
                       side: const BorderSide(color: ColorManager.myBlack,style: BorderStyle.solid)
                   ),
-                  child: const Text(
+                  child: const DefaultSelectableText(
                     'ارسال',
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -268,7 +284,7 @@ Widget aboutUs (context) => Container(
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              const DefaultSelectableText(
                 'اتصل بنا',
                 style: TextStyle(
                   color: Colors.black,
@@ -278,7 +294,7 @@ Widget aboutUs (context) => Container(
                 ),
               ),
               const SizedBox(height: 20,),
-              const Text(
+              const DefaultSelectableText(
                 'البريد الالكتروني',
                 style: TextStyle(
                   color: Color(0xFF848484),
@@ -287,7 +303,7 @@ Widget aboutUs (context) => Container(
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const Text(
+              const DefaultSelectableText(
                 'Amad furniture1@gmail.com',
                 style: TextStyle(
                   color: Color(0xFF848484),
@@ -297,7 +313,7 @@ Widget aboutUs (context) => Container(
                 ),
               ),
               const SizedBox(height: 15,),
-              const Text(
+              const DefaultSelectableText(
                 'رقم الجوال',
                 style: TextStyle(
                   color: Color(0xFF848484),
@@ -305,7 +321,7 @@ Widget aboutUs (context) => Container(
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const Text(
+              const DefaultSelectableText(
                 '(+966) 8989 7878',
                 style: TextStyle(
                   color: Color(0xFF848484),
@@ -314,7 +330,7 @@ Widget aboutUs (context) => Container(
                 ),
               ),
               const SizedBox(height: 15,),
-              const Text(
+              const DefaultSelectableText(
                 'العنوان ',
                 style: TextStyle(
                   color: Color(0xFF848484),
@@ -322,7 +338,7 @@ Widget aboutUs (context) => Container(
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const Text(
+              const DefaultSelectableText(
                 'القاهره , مدينه نصر',
                 style: TextStyle(
                   color: Color(0xFF848484),
@@ -332,7 +348,7 @@ Widget aboutUs (context) => Container(
               ),
               const SizedBox(height: 60,),
 
-              const Text(
+              const DefaultSelectableText(
                 'تواصل معانا',
                 style: TextStyle(
                   color: Colors.black,
@@ -382,7 +398,7 @@ Widget aboutUs (context) => Container(
                         borderRadius: BorderRadius.circular(25),
                         side: const BorderSide(color: ColorManager.myBlack,style: BorderStyle.solid)
                     ),
-                    child: const Text(
+                    child: const DefaultSelectableText(
                       'ارسال',
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -435,7 +451,7 @@ Widget topYellowBanner() => Row(
         onPressed: () {
 
         },
-        child: const Text(
+        child: const DefaultSelectableText(
           "مصر",
           style: TextStyle(
             color: ColorManager.myBlack,
@@ -446,7 +462,7 @@ Widget topYellowBanner() => Row(
         )),
     TextButton(
         onPressed: () {},
-        child: const Text(
+        child: const DefaultSelectableText(
           "English",
           style: TextStyle(
             color: ColorManager.myBlack,

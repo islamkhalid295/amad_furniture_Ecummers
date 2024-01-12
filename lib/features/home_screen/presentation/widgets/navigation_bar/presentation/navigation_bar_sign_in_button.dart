@@ -3,6 +3,7 @@ import 'package:amad_furniture/features/home_screen/presentation/pages/home_scre
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/utils/color_manager.dart';
+import '../../my_widget.dart';
 
 class NavigationBarSignInButton extends StatelessWidget {
   const NavigationBarSignInButton({super.key});
@@ -12,7 +13,7 @@ class NavigationBarSignInButton extends StatelessWidget {
     return !HomeScreenCubit.isLogedIn ? Container(
       decoration:  BoxDecoration(border: Border.all(color: ColorManager.myYellow),borderRadius:  BorderRadius.circular(10)),
       child: TextButton(onPressed: (){}, child: FittedBox(
-        child: Text("تسجيل الدخول",style: TextStyle(
+        child: DefaultSelectableText("تسجيل الدخول",style: TextStyle(
           color: Colors.black,
           fontSize: 16,
           fontFamily: 'Almarai',
@@ -27,9 +28,9 @@ class NavigationBarSignInButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
 
           children: [
-            Text("مرحباً",style: TextStyle(color: ColorManager.myGrayLite,fontWeight: FontWeight.bold)),
+            DefaultSelectableText("مرحباً",style: TextStyle(color: ColorManager.myGrayLite,fontWeight: FontWeight.bold)),
             SizedBox(width: 10,),
-            Text(HomeScreenCubit.userName,style: TextStyle(fontWeight: FontWeight.bold)),
+            DefaultSelectableText(HomeScreenCubit.userName,style: TextStyle(fontWeight: FontWeight.bold)),
           ],
         ),
       ),
