@@ -38,7 +38,7 @@ class ContactUsScreen extends StatelessWidget {
                   SizedBox(
                     height: 300 * MediaQuery.of(context).size.width / 1440,
                     width: 300 * MediaQuery.of(context).size.width / 1440,
-                    child: SelectableText("أننا نعمل باستمرار لجعل تجربتك فى طلب الأدوية اون لاين أفضل وأسهل لكى تتجنب عناء البحث عن دواء في الصيدليات بمصر ، لذا إذا لديك أي شكاوى أو أسئلة أو مقترحات فتواصل معنا في أي وقت عبر ملأ هذه البيانات.",
+                    child: SelectableText("أننا نعمل باستمرار لجعل تجربتك فى طلب منتجاتنا اون لاين أفضل وأسهل لكى تتجنب عناء البحث عن المنتج في الصيدليات بمصر ، لذا إذا لديك أي شكاوى أو أسئلة أو مقترحات فتواصل معنا في أي وقت عبر ملأ هذه البيانات.",
                         style: TextStyle(fontSize: 20,)),
                   ),
                 ],
