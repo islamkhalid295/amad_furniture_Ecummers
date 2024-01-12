@@ -75,6 +75,7 @@ class HomeSlider extends StatelessWidget {
 
 
 
+
 // List<SliderItem> sliderItems = [
 //   SliderItem(
 //       title: "العنوان الأول",
