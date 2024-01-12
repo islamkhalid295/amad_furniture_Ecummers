@@ -38,6 +38,7 @@ class HomeSlider extends StatelessWidget {
                   viewportFraction: 1,
                   autoPlay: true,
                 ),
+
                 items: SliderCubit.sliderItemsList?.slider?.map((sliderItem) {
 
                   return Builder(
