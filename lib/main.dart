@@ -4,9 +4,15 @@ import 'package:flutter/material.dart';
 
 import 'package:amad_furniture/core/utils/locator.dart'as di;
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'core/utils/bloc_observer.dart';
+
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = const AppBlocObserver();
   await di.init();
   runApp(const MyApp());
 }
