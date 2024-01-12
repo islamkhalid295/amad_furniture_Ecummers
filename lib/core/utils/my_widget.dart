@@ -1,12 +1,15 @@
 import 'dart:ui_web';
 
+
 import 'package:amad_furniture/features/home_screen/presentation/widgets/home_slider/presentation/manager/slider_cubit.dart';
+
 import 'package:amad_furniture/features/home_screen/presentation/widgets/home_slider/presentation/widgets/slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/home_screen/presentation/widgets/home_slider/domain/models/slider_item_model.dart';
+
 import 'color_manager.dart';
 import 'constantes.dart';
 
@@ -14,6 +17,7 @@ Widget mySlider (context, SliderItem sliderItem) => Stack(
   fit: StackFit.expand,
   children: [
     CachedNetworkImage(
+
       imageUrl: sliderItem.imageUrl ?? "",
       placeholder: (context, url) => Center(child: CircularProgressIndicator()),
       errorWidget: (context, url, error)  {
@@ -28,6 +32,7 @@ Widget mySlider (context, SliderItem sliderItem) => Stack(
           },
           fit: BoxFit.cover,
         );
+
       },
       fit: BoxFit.cover,
     ),
@@ -39,7 +44,9 @@ Widget mySlider (context, SliderItem sliderItem) => Stack(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
+
             sliderItem.title ?? "",
+
             textAlign: TextAlign.right,
             style: TextStyle(
               color: Colors.black,
@@ -59,7 +66,9 @@ Widget mySlider (context, SliderItem sliderItem) => Stack(
               SizedBox(
                 width: MediaQuery.of(context).size.width < 400 ? 320 * MediaQuery.of(context).size.width / 400 : 320,
                 child: Text(
+
                   sliderItem.description ?? "",
+
                   textAlign: TextAlign.right,
                   style: TextStyle(
                     color: Colors.black.withOpacity(0.8999999761581421),

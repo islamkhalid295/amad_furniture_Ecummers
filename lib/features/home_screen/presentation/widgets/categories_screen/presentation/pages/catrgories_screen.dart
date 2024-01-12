@@ -1,3 +1,4 @@
+
 import 'package:amad_furniture/features/home_screen/presentation/widgets/categories_screen/data/models/categories_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,11 +9,13 @@ import '../../../../../../../core/utils/locator.dart';
 import '../manager/categories_screen_cubit.dart';
 import '../widgets/category_item.dart';
 
+
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return BlocProvider(
       create: (context) => CategoriesCubit(sl())..retriveCategories(),
 
@@ -38,6 +41,7 @@ class CategoriesScreen extends StatelessWidget {
             ),
           );
         },
+
       ),
     );
   }

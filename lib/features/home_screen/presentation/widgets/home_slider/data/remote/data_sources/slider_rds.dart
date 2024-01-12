@@ -5,12 +5,14 @@ import '../../../domain/models/slider_item_model.dart';
 
 abstract class SliderRDS {
   Future<SliderItemsList> retriveSliderItems ();
+
 }
 class SliderRdsImp implements SliderRDS{
   final ApiConsumer client;
 
   SliderRdsImp({required this.client});
   @override
+
   Future<SliderItemsList> retriveSliderItems() async{
 
     final response =
@@ -18,6 +20,7 @@ class SliderRdsImp implements SliderRDS{
     SliderItemsList sliderItemsList = SliderItemsList.fromJson(response);
     print(sliderItemsList);
     return sliderItemsList;
+
 
     throw UnimplementedError();
   }
