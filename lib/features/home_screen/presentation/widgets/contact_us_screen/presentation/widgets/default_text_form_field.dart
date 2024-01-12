@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../../core/utils/color_manager.dart';
+import '../../../my_widget.dart';
 
 class DefaultTextFormField extends StatelessWidget {
   const DefaultTextFormField({super.key, this.title, this.hintText, this.icon, this.suffixIcon, this.maxLines, this.width, this.height, this.boxShape});
@@ -21,7 +22,7 @@ final BoxShape? boxShape;
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 4),
-            child: title != null ? Text(
+            child: title != null ? DefaultSelectableText(
               title!,
               style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
             ) : null,

@@ -23,7 +23,7 @@ class CategoriesScreen extends StatelessWidget {
             height: getSectionHeight(context),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: state is RetriveCategoriesLoading || true ? Container(
+              child: state is RetriveCategoriesLoading  ? Container(
                   height: getSectionHeight(context),
                   child: Center(child: CircularProgressIndicator())):MasonryGridView.count(
                 crossAxisCount: 5,

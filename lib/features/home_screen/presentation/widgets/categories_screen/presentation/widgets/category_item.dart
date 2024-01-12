@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../core/utils/color_manager.dart';
+import '../../../my_widget.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({super.key, required this.height, required this.name, required this.imageUrl});
@@ -38,7 +39,7 @@ final String imageUrl;
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(
+              child: DefaultSelectableText(
                 name,
                 textAlign: TextAlign.center,
                 style: TextStyle(

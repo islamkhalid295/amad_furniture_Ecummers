@@ -21,7 +21,7 @@ class ShopCart extends StatelessWidget {
                   size: 30,
                 )),
             CircleAvatar(
-              child: Text(
+              child: DefaultSelectableText(
                 "1",
                 style: TextStyle(color: ColorManager.myWhite),
               ),

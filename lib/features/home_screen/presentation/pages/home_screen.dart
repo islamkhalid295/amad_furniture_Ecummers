@@ -9,6 +9,7 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 import '../../../../core/utils/constantes.dart';
 
 import '../widgets/home_slider/presentation/widgets/slider.dart';
+import '../widgets/my_widget.dart';
 
 
 
@@ -75,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                           onPressed: () {
 
                           },
-                          child: const Text(
+                          child: const DefaultSelectableText(
                             "مصر",
                             style: TextStyle(
                               color: ColorManager.myBlack,
@@ -86,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                           )),
                       TextButton(
                           onPressed: () {},
-                          child: const Text(
+                          child: const DefaultSelectableText(
                             "English",
                             style: TextStyle(
                               color: ColorManager.myBlack,
@@ -111,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                           SizedBox(
                             width: 70,
                           ),
-                          Text(
+                          DefaultSelectableText(
                             "تمتع بخصم يصل الي 50% علي الماركات المختاره",
                             style: TextStyle(
                               color: Colors.black,
@@ -135,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
             // actions: [
             //   TextButton(
             //       onPressed: () {},
-            //       child: const Text(
+            //       child: const DefaultSelectableText(
             //         "اتصل بنا",
             //         style: TextStyle(
             //           color: Color(0xFF000F1F),
@@ -151,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
             //   ),
             //   TextButton(
             //       onPressed: () {},
-            //       child: const Text(
+            //       child: const DefaultSelectableText(
             //         "التسجيل / تسجيل الدخول",
             //         style: TextStyle(
             //           color: Color(0xFF000F1F),
@@ -201,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
               actions: [
                 Container(
                   decoration: BoxDecoration(border: Border.all(color: ColorManager.myYellow),borderRadius: BorderRadius.circular(10)),
-                  child: TextButton(onPressed: (){}, child: Text("تسجيل الدخول",style: TextStyle(
+                  child: TextButton(onPressed: (){}, child: DefaultSelectableText("تسجيل الدخول",style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
                     fontFamily: 'Almarai',
