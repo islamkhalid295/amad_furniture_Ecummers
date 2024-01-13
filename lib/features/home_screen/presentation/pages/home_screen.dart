@@ -233,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
             },
             child: ListView.builder(
               controller: _scrollController,
-
+shrinkWrap: true,
               itemCount: HomeScreenCubit.sectionsNumber,
 
               itemBuilder: (context, index) {

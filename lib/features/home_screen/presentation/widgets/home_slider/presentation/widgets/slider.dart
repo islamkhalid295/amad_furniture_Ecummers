@@ -25,7 +25,7 @@ class HomeSlider extends StatelessWidget {
       child: BlocBuilder<SliderCubit, SliderState>(
         builder: (context, state) {
           SliderCubit sliderCubit = SliderCubit(sl());
-          return state is RetriveSliderItemsLoading  ? Container(
+          return state is RetriveSliderItemsLoading || true ? Container(
             height: getSectionHeight(context),
               child: Center(child: CircularProgressIndicator())):Stack(
 

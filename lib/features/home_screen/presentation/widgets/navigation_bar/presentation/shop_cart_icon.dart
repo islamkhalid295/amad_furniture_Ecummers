@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/utils/color_manager.dart';
+import '../../my_widget.dart';
 
 class ShopCart extends StatelessWidget {
   const ShopCart({super.key});
