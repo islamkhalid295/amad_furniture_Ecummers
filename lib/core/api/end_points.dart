@@ -6,6 +6,7 @@ class EndPoints {
   static const String CONTACT_US = "client/basic/contactus";
   static const String GET_SLIDER = "client/home/getslider";
   static const String GET_CATEGORIES = "client/products/getcategories";
+  static const String GET_FAQ = "client/basic/faq";
 
   static const String ANY_WRONG_ROUTE = "any_wrong_route";
 

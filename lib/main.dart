@@ -1,5 +1,6 @@
 import 'package:amad_furniture/features/home_screen/presentation/pages/home_screen.dart';
 import 'package:amad_furniture/core/utils/color_manager.dart';
+import 'package:amad_furniture/features/home_screen/presentation/widgets/FAQ_screen/presentation/manager/faq_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:amad_furniture/core/utils/locator.dart'as di;
@@ -7,6 +8,7 @@ import 'package:amad_furniture/core/utils/locator.dart'as di;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/utils/bloc_observer.dart';
+import 'core/utils/locator.dart';
 
 
 
@@ -33,7 +35,14 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: ColorManager.myYellow),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider<FaqCubit>(
+            create: (context) => FaqCubit(sl())..retriveFaq(),
+          ),
+        ],
+        child: HomeScreen(),
+      ),
     );
   }
 }

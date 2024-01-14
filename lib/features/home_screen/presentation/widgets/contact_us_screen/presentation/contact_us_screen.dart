@@ -51,8 +51,9 @@ class ContactUsScreen extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                   color: ColorManager.myYellow.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(10)
-              ),
+                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(20),topRight: Radius.circular(20)),
+
+            ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -63,7 +64,7 @@ class ContactUsScreen extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                       children: [
                         DefaultTextFormField(
-                          title: "البردي الالكتروني",
+                          title: "البريد الالكتروني",
                           hintText: "examble@gmail.com",
                           icon: Icon(Icons.email_outlined),
                         ),

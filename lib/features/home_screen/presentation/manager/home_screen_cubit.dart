@@ -3,6 +3,7 @@ import 'package:amad_furniture/features/home_screen/presentation/widgets/categor
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/FAQ_screen/presentation/pages/faq_screen.dart';
 import '../widgets/contact_us_screen/presentation/contact_us_screen.dart';
 import '../widgets/home_slider/presentation/widgets/slider.dart';
 
@@ -21,6 +22,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
   static const List<Widget> homeScreenSections = [
     HomeSlider(),
     CategoriesScreen(),
+    FaqScreen(),
     ContactUsScreen(),
     AboutUsScreen(),
     // AboutUsScreen(),
@@ -32,6 +34,10 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     ),
     Tab(
       text: "تسوق",
+    ),
+    Tab(
+
+      text: "الأسئلة الشائعة",
     ),
     Tab(
 
