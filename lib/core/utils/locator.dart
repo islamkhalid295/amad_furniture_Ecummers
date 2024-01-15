@@ -1,3 +1,4 @@
+import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/domain/use_cases/about_us_uc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -6,6 +7,9 @@ import '../../features/home_screen/presentation/widgets/FAQ_screen/data/data_sou
 import '../../features/home_screen/presentation/widgets/FAQ_screen/domain/repositories/faq_repo.dart';
 import '../../features/home_screen/presentation/widgets/FAQ_screen/domain/use_cases/retrive_faq_uc.dart';
 import '../../features/home_screen/presentation/widgets/FAQ_screen/presentation/manager/faq_cubit.dart';
+import '../../features/home_screen/presentation/widgets/about_us_screen/data/data_sources/about_us_rds.dart';
+import '../../features/home_screen/presentation/widgets/about_us_screen/domain/repositories/about_us_repo.dart';
+import '../../features/home_screen/presentation/widgets/about_us_screen/presentation/manager/about_us_screen_cubit.dart';
 import '../../features/home_screen/presentation/widgets/categories_screen/data/data_sources/categories_rds.dart';
 import '../../features/home_screen/presentation/widgets/categories_screen/domain/repositories/categories_repo.dart';
 import '../../features/home_screen/presentation/widgets/categories_screen/domain/use_cases/retrive_categories_uc.dart';
@@ -60,6 +64,14 @@ Future<void> init() async {
           () => ContactUsRepoImp(contactUsRDS:   sl()));
   sl.registerLazySingleton<ContactUsRDS>(
           () => ContactUsRdsImp(client: sl()));
+
+  // Features - AboutUs
+  sl.registerFactory(() => AboutUsCubit(sl()));
+  sl.registerLazySingleton(() => RetriveAboutUsUC(aboutUsRepo: sl()));
+  sl.registerLazySingleton<AboutUsRepo>(
+          () => AboutUsRepoImp(aboutUsRDS: sl()));
+  sl.registerLazySingleton<AboutUsRDS>(
+          () => AboutUsRdsImp(client: sl()));
   // Core
 
   sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(client: sl()));

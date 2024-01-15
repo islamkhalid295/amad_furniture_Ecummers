@@ -56,7 +56,7 @@ class ContactUsScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 30),
                     child: SelectableText("تواصل معنا",
                         style: TextStyle(
-                            fontSize: 50 * MediaQuery.of(context).size.width / 1440, fontWeight: FontWeight.w500)),
+                            fontSize: 40 * MediaQuery.of(context).size.width / 1440, fontWeight: FontWeight.w500)),
                   ),
                   SizedBox(
 
@@ -64,7 +64,7 @@ class ContactUsScreen extends StatelessWidget {
                     child: SelectableText(
                         "أننا نعمل باستمرار لجعل تجربتك فى طلب منتجاتنا اون لاين أفضل وأسهل لكى تتجنب عناء البحث عن المنتج في الصيدليات بمصر ، لذا إذا لديك أي شكاوى أو أسئلة أو مقترحات فتواصل معنا في أي وقت عبر ملأ هذه البيانات.",
                         style: TextStyle(
-                          fontSize: 20 * MediaQuery.of(context).size.width / 1000,
+                          fontSize: 15 * MediaQuery.of(context).size.width / 1000,
                         )),
                   ),
                 ],

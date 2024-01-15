@@ -9,26 +9,27 @@ import 'color_manager.dart';
 Widget mySlider(context, SliderItem sliderItem) => Stack(
       fit: StackFit.expand,
       children: [
-        CachedNetworkImage(
-          imageUrl: sliderItem.imageUrl ?? "",
-          placeholder: (context, url) =>
-              Center(child: CircularProgressIndicator()),
-          errorWidget: (context, url, error) {
-            print(error.toString());
-            //return Icon(Icons.error);
-            return CachedNetworkImage(
-              imageUrl: SliderCubit.imageOnErrorLodingImage ?? "",
-              placeholder: (context, url) =>
-                  Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) {
-                print(error.toString());
-                return Icon(Icons.error);
-              },
-              fit: BoxFit.cover,
-            );
-          },
-          fit: BoxFit.cover,
-        ),
+        Image.asset("assets/images/home_background.jpeg",fit: BoxFit.cover,),
+        // CachedNetworkImage(
+        //   imageUrl: sliderItem.imageUrl ?? "",
+        //   placeholder: (context, url) =>
+        //       Center(child: CircularProgressIndicator()),
+        //   errorWidget: (context, url, error) {
+        //     print(error.toString());
+        //     //return Icon(Icons.error);
+        //     return CachedNetworkImage(
+        //       imageUrl: SliderCubit.imageOnErrorLodingImage ?? "",
+        //       placeholder: (context, url) =>
+        //           Center(child: CircularProgressIndicator()),
+        //       errorWidget: (context, url, error) {
+        //         print(error.toString());
+        //         return Icon(Icons.error);
+        //       },
+        //       fit: BoxFit.cover,
+        //     );
+        //   },
+        //   fit: BoxFit.cover,
+        // ),
         Padding(
           padding: EdgeInsets.only(
               top: 255, right: 140 * MediaQuery.of(context).size.width / 1440),

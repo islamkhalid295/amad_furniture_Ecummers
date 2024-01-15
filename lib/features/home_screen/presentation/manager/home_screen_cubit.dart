@@ -20,25 +20,25 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
   static final String userName = "إسلام خالد";
 
   static List<Widget> homeScreenSections = [
-    // HomeSlider(),
-    // CategoriesScreen(),
-    // FaqScreen(),
+    HomeSlider(),
+    CategoriesScreen(),
+    FaqScreen(),
     ContactUsScreen(),
     AboutUsScreen(),
     // AboutUsScreen(),
     // AboutUsScreen(),
   ];
   static const List<Tab> tabBarTabs = [
-    // Tab(
-    //   text: "رئيسية",
-    // ),
-    // Tab(
-    //   text: "تسوق",
-    // ),
-    // Tab(
-    //
-    //   text: "الأسئلة الشائعة",
-    // ),
+    Tab(
+      text: "رئيسية",
+    ),
+    Tab(
+      text: "تسوق",
+    ),
+    Tab(
+
+      text: "الأسئلة الشائعة",
+    ),
     Tab(
 
       text: "تواصل معنا",

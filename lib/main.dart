@@ -1,7 +1,9 @@
 import 'package:amad_furniture/features/home_screen/presentation/pages/home_screen.dart';
 import 'package:amad_furniture/core/utils/color_manager.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/FAQ_screen/presentation/manager/faq_cubit.dart';
+import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/presentation/manager/about_us_screen_cubit.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/presentation/manager/contact_us_cubit.dart';
+import 'package:amad_furniture/features/home_screen/presentation/widgets/home_slider/presentation/manager/slider_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:amad_furniture/core/utils/locator.dart'as di;
@@ -10,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/utils/bloc_observer.dart';
 import 'core/utils/locator.dart';
+import 'features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
 
 
 
@@ -40,6 +43,15 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider<FaqCubit>(
             create: (context) => FaqCubit(sl())..retriveFaq(),
+          ),
+          BlocProvider<CategoriesCubit>(
+            create: (context) => CategoriesCubit(sl())..retriveCategories(),
+          ),
+          BlocProvider<SliderCubit>(
+            create: (context) => SliderCubit(sl())..retriveSliderItems(),
+          ),
+          BlocProvider<AboutUsCubit>(
+            create: (context) => AboutUsCubit(sl())..retriveAboutUs(),
           ),
 
 

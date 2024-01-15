@@ -16,33 +16,29 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return BlocProvider(
-      create: (context) => CategoriesCubit(sl())..retriveCategories(),
-
-      child: BlocBuilder<CategoriesCubit, CategoriesState>(
-        builder: (context, state) {
-          return Container(
-            width: double.infinity,
-            height: getSectionHeight(context),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: state is RetriveCategoriesLoading  ? Container(
-                  height: getSectionHeight(context),
-                  child: Center(child: CircularProgressIndicator())):MasonryGridView.count(
-                crossAxisCount: 5,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: CategoriesCubit.categoriesList?.categories?.length,
-                itemBuilder: (context, index) {
-                  return CategoryItem(height: (index % 4 + 2) * 100,
-                    imageUrl: CategoriesCubit.categoriesList!.categories![index].imageUrl ?? "",
-                    name: CategoriesCubit.categoriesList!.categories![index].name ?? "",);
-                },
-              ),
+    return BlocBuilder<CategoriesCubit, CategoriesState>(
+      builder: (context, state) {
+        return Container(
+          width: double.infinity,
+          height: getSectionHeight(context),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: state is RetriveCategoriesLoading  ? Container(
+                height: getSectionHeight(context),
+                child: Center(child: CircularProgressIndicator())):MasonryGridView.count(
+              crossAxisCount: 5,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: CategoriesCubit.categoriesList?.categories?.length,
+              itemBuilder: (context, index) {
+                return CategoryItem(height: (index % 4 + 2) * 100,
+                  imageUrl: CategoriesCubit.categoriesList!.categories![index].imageUrl ?? "",
+                  name: CategoriesCubit.categoriesList!.categories![index].name ?? "",);
+              },
             ),
-          );
-        },
+          ),
+        );
+      },
 
-      ),
     );
   }
 }
