@@ -11,6 +11,10 @@ import '../../features/home_screen/presentation/widgets/categories_screen/domain
 import '../../features/home_screen/presentation/widgets/categories_screen/domain/use_cases/retrive_categories_uc.dart';
 import '../../features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
 
+import '../../features/home_screen/presentation/widgets/contact_us_screen/data/data_sources/contact_us_rds.dart';
+import '../../features/home_screen/presentation/widgets/contact_us_screen/domain/repositories/contact_us_repo.dart';
+import '../../features/home_screen/presentation/widgets/contact_us_screen/domain/use_cases/send_contact_info_uc.dart';
+import '../../features/home_screen/presentation/widgets/contact_us_screen/presentation/manager/contact_us_cubit.dart';
 import '../../features/home_screen/presentation/widgets/home_slider/data/remote/data_sources/slider_rds.dart';
 import '../../features/home_screen/presentation/widgets/home_slider/domain/repositories/slider_repo.dart';
 import '../../features/home_screen/presentation/widgets/home_slider/domain/use_cases/retrive_slider_items_uc.dart';
@@ -48,6 +52,14 @@ Future<void> init() async {
           () => FaqRepoImp(faqRDS:   sl()));
   sl.registerLazySingleton<FaqRDS>(
           () => FaqRdsImp(client: sl()));
+
+  // Features - ContactUs
+  sl.registerFactory(() => ContactUsCubit(sl()));
+  sl.registerLazySingleton(() => SendContactUsUC(contactUsRepo: sl()));
+  sl.registerLazySingleton<ContactUsRepo>(
+          () => ContactUsRepoImp(contactUsRDS:   sl()));
+  sl.registerLazySingleton<ContactUsRDS>(
+          () => ContactUsRdsImp(client: sl()));
   // Core
 
   sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(client: sl()));

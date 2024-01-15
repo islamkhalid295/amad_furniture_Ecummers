@@ -4,7 +4,8 @@ import '../../../../../../../core/utils/color_manager.dart';
 import '../../../my_widget.dart';
 
 class DefaultTextFormField extends StatelessWidget {
-  const DefaultTextFormField({super.key, this.title, this.hintText, this.icon, this.suffixIcon, this.maxLines, this.width, this.height, this.boxShape});
+
+  const DefaultTextFormField({super.key, this.title, this.hintText, this.icon, this.suffixIcon, this.maxLines, this.width, this.height, this.boxShape, this.validator, this.controller});
 final String? title;
 final String? hintText;
 final Icon? icon;
@@ -13,6 +14,9 @@ final int? maxLines;
 final double? width;
 final double? height;
 final BoxShape? boxShape;
+final TextEditingController? controller;
+  final FormFieldValidator<String>? validator;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,15 +34,24 @@ final BoxShape? boxShape;
           Container(
             width: width ?? 300,
             height: height,
-
             decoration: BoxDecoration(
                 color: ColorManager.myGrayLiteMore,
-                border: Border.all(color: ColorManager.myGrayLite,),borderRadius: BorderRadius.circular(10)),
+                border: Border.all(color: ColorManager.myGrayLite,),
+                borderRadius: BorderRadius.circular(10),
+            ),
             child: Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: TextFormField(
+                controller: controller,
+                validator: validator /*(value) {
+                  if (value!.isEmpty) {
+                    return 'name can\'t be empty';
+                  } else {
+                    return null;
+                  }
+                }*/,
                 decoration: InputDecoration(
-
+errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
                   hintStyle: TextStyle(
                       fontSize: 14, color: ColorManager.myGrayLite),
                   border: InputBorder.none,

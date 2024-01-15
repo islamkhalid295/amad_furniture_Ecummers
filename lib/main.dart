@@ -1,6 +1,7 @@
 import 'package:amad_furniture/features/home_screen/presentation/pages/home_screen.dart';
 import 'package:amad_furniture/core/utils/color_manager.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/FAQ_screen/presentation/manager/faq_cubit.dart';
+import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/presentation/manager/contact_us_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:amad_furniture/core/utils/locator.dart'as di;
@@ -40,6 +41,8 @@ class MyApp extends StatelessWidget {
           BlocProvider<FaqCubit>(
             create: (context) => FaqCubit(sl())..retriveFaq(),
           ),
+
+
         ],
         child: HomeScreen(),
       ),
