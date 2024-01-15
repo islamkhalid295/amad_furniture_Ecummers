@@ -59,13 +59,11 @@ class DioConsumer implements ApiConsumer {
   @override
   Future post(String path,
       {Map<String, dynamic>? queryParameters, body}) async {
-    try {
+
       final Response response =
       await client.post(path, queryParameters: queryParameters, data: body);
       return response.data;
-    } on DioException catch (e) {
-      _errorHandler(e);
-    }
+
   }
 
   @override

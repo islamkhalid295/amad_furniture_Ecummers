@@ -1,5 +1,6 @@
 import 'package:amad_furniture/core/exceptions/server/server_exception.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/models/contatct_us_model.dart';
@@ -56,10 +57,10 @@ class ContactUsCubit extends Cubit<ContactUsState> {
     try {
       message = await sendContactUsUC.call(contactUsModel);
       emit(SendContactUsSuccsess());
-    }catch(e){
+    } on DioException catch (e){
 
-      print("error : ${e.toString()}");
-      emit(SendContactUsError(error: e.toString()));
+      print("error : ${e.response?.data["message"]}");
+      emit(SendContactUsError(error: e.response?.data["message"]));
     }
   }
 
