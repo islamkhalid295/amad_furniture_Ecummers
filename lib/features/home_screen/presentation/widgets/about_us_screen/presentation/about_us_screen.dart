@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/constantes.dart';
 import '../../my_widget.dart';
@@ -283,7 +284,7 @@ class AboutUsScreen extends StatelessWidget {
                             height: 68,
                             width: 164,
                             child: Image.asset(
-                              "assets/icons/Link → logo.png (1).png",
+                              AssetsManager.camponyLogo,
                             ),
                           ),
                           const SizedBox(
@@ -479,7 +480,7 @@ class AboutUsScreen extends StatelessWidget {
                               height: 68,
                               width: 164,
                               child: Image.asset(
-                                "assets/icons/Link → logo.png (1).png",
+                                AssetsManager.camponyLogo,
                               ),
                             ),
                             const SizedBox(

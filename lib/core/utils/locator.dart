@@ -1,8 +1,12 @@
+import 'package:amad_furniture/features/Authantication/domain/use_cases/create_account_uc.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/domain/use_cases/about_us_uc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 
+import '../../features/Authantication/data/data_sources/Authantication_rds.dart';
+import '../../features/Authantication/domain/repositories/Authantication_repo.dart';
+import '../../features/Authantication/presentation/manager/authantication_cubit.dart';
 import '../../features/home_screen/presentation/widgets/FAQ_screen/data/data_sources/faq_rds.dart';
 import '../../features/home_screen/presentation/widgets/FAQ_screen/domain/repositories/faq_repo.dart';
 import '../../features/home_screen/presentation/widgets/FAQ_screen/domain/use_cases/retrive_faq_uc.dart';
@@ -72,6 +76,22 @@ Future<void> init() async {
           () => AboutUsRepoImp(aboutUsRDS: sl()));
   sl.registerLazySingleton<AboutUsRDS>(
           () => AboutUsRdsImp(client: sl()));
+
+  // Features - Authantication
+
+  sl.registerFactory(() => AuthanticationCubit(sl()));
+  sl.registerLazySingleton(() => CreateAccountUC(authanticationRepo: sl()));
+  sl.registerLazySingleton<AuthanticationRepo>(
+          () => AuthanticationRepoImp(authanticationRDS: sl()));
+  sl.registerLazySingleton<AuthanticationRDS>(
+          () => AuthanticationRdsImp(client: sl()));
+
+  // sl.registerFactory(() => AuthanticationCubit(sl()));
+  // sl.registerLazySingleton(() => CreateAccountUC(authanticationRepo: sl()));
+  // sl.registerLazySingleton<AuthanticationRepo>(
+  //         () => AuthanticationRepoImp(authanticationRDS:  sl()));
+  // sl.registerLazySingleton<AuthanticationRDS>(
+  //         () => AuthanticationRdsImp(client: sl()));
   // Core
 
   sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(client: sl()));

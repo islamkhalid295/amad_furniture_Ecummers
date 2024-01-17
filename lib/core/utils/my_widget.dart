@@ -1,3 +1,4 @@
+import 'package:amad_furniture/core/utils/assets_manager.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/home_slider/presentation/manager/slider_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -273,7 +274,7 @@ Widget aboutUs(context) => Container(
                         height: 68,
                         width: 164,
                         child: Image.asset(
-                          "assets/icons/Link → logo.png (1).png",
+                          AssetsManager.camponyLogo,
                         ),
                       ),
                       const SizedBox(
@@ -468,7 +469,7 @@ Widget aboutUs(context) => Container(
                           height: 68,
                           width: 164,
                           child: Image.asset(
-                            "assets/icons/Link → logo.png (1).png",
+                            AssetsManager.camponyLogo,
                           ),
                         ),
                         const SizedBox(

@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../../core/utils/color_manager.dart';
-import '../../../my_widget.dart';
+import '../../features/home_screen/presentation/widgets/my_widget.dart';
 
 class DefaultTextFormField extends StatelessWidget {
 
-  const DefaultTextFormField({super.key, this.title, this.hintText, this.icon, this.suffixIcon, this.maxLines, this.width, this.height, this.boxShape, this.validator, this.controller, this.obscureText});
+  const DefaultTextFormField({super.key, this.title, this.hintText, this.icon, this.suffixIcon, this.maxLines, this.width, this.height, this.boxShape, this.validator, this.controller});
 final String? title;
 final String? hintText;
 final Icon? icon;
-final Widget? suffixIcon;
+final Icon? suffixIcon;
 final int? maxLines;
 final double? width;
 final double? height;
 final BoxShape? boxShape;
-final bool? obscureText;
 final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
 
@@ -43,7 +42,6 @@ final TextEditingController? controller;
             child: Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: TextFormField(
-                obscureText: obscureText ?? false,
                 controller: controller,
                 validator: validator /*(value) {
                   if (value!.isEmpty) {

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/assets_manager.dart';
 import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constantes.dart';
 
@@ -258,7 +259,7 @@ Widget aboutUs (context) => Container(
             Container(
               height: 68,
               width: 164,
-              child: Image.asset("assets/icons/Link → logo.png (1).png",),
+              child: Image.asset(AssetsManager.camponyLogo,),
             ),
             const SizedBox(height: 100,),
             Row(
@@ -417,7 +418,7 @@ Widget aboutUs (context) => Container(
               Container(
                 height: 68,
                 width: 164,
-                child: Image.asset("assets/icons/Link → logo.png (1).png",),
+                child: Image.asset(AssetsManager.camponyLogo,),
               ),
               const SizedBox(height: 100,),
               Row(
