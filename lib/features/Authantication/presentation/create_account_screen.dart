@@ -8,8 +8,10 @@ import 'package:amad_furniture/features/Authantication/presentation/manager/auth
 import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/presentation/widgets/default_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/utils/assets_manager.dart';
+
 
 class CreateAccountScreen extends StatelessWidget {
   const CreateAccountScreen({super.key});
@@ -19,6 +21,19 @@ class CreateAccountScreen extends StatelessWidget {
     AuthanticationCubit cubit = BlocProvider.of(context);
     return BlocBuilder<AuthanticationCubit, AuthanticationState>(
       builder: (context, state) {
+        if (state is CreateAccountSuccsess)
+          {
+            return AlertDialog(
+              title: Text('تم انشاء الحساب بنجاح'),
+              content: Text('الرجاء تفعيل الحساب عن طريق الضغط علي الرابط الذي تم ارسالة الي البريد الإلكتروني الخاص بك'),
+              actions: [
+                TextButton(
+                  onPressed: ()=> context.go('/authentication/login'),
+                  child: Text('تسجيل الدخول'),
+                ),
+              ],
+            );
+          }
         return Scaffold(
           body: Row(
             children: [
@@ -51,7 +66,7 @@ class CreateAccountScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 30),
                         child: Form(
-                          key: AuthanticationCubit.formKey,
+                          key: AuthanticationCubit.createAccountFormKey,
                           child: Container(
                             width: double.infinity,
                             child: Column(
@@ -103,7 +118,7 @@ class CreateAccountScreen extends StatelessWidget {
                                     icon: Icon(Icons.phone_outlined)),
                                 DefaultTextFormField(
                                   maxLines: 1,
-                                  obscureText:true,
+                                  obscureText:AuthanticationCubit.isPassword1,
                                   validator:
                                       AuthanticationCubit.passwordValidator,
                                   controller:
@@ -113,23 +128,28 @@ class CreateAccountScreen extends StatelessWidget {
                                     Icons.vpn_key_outlined,
                                   ),
                                   suffixIcon: IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        cubit.showOrHidePassword1();
+                                      },
                                       icon:
-                                          Icon(Icons.remove_red_eye_outlined)),
+                                           AuthanticationCubit.isPassword1 ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined)),
                                 ),
                                 DefaultTextFormField(
                                   maxLines: 1,
-                                  obscureText: true,
+                                  obscureText: AuthanticationCubit.isPassword2,
                                   validator:
                                       AuthanticationCubit.rePasswordValidator,
                                   controller:
                                       AuthanticationCubit.rePasswordController,
-                                  title: "تأكدي كلمة السر",
+                                  title: "تأكيد كلمة السر",
                                   icon: const Icon(Icons.vpn_key_outlined),
                                   suffixIcon: IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        cubit.showOrHidePassword2();
+                                      },
                                       icon:
-                                          const Icon(Icons.remove_red_eye_outlined)),
+                                      AuthanticationCubit.isPassword2 ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined)),
+
                                 ),
                                 const SizedBox(height: 24),
                                 state is CreateAccountError ? Padding(
@@ -144,7 +164,7 @@ class CreateAccountScreen extends StatelessWidget {
                                     text: "انشاء حساب",
                                     onPressed: () {
                                       if (AuthanticationCubit
-                                          .formKey.currentState
+                                          .createAccountFormKey.currentState
                                           !.validate()) {
                                         cubit.createAccount(CreateAccountModel(
                                             email: AuthanticationCubit
@@ -168,7 +188,7 @@ class CreateAccountScreen extends StatelessWidget {
                                   ),
                                 ),
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: ()=> context.go('/authentication/login'),
                                   child: Text(
                                     'تسجيل الدخول',
                                     textAlign: TextAlign.center,
@@ -240,11 +260,14 @@ class CreateAccountScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                 ),
-                                child: Text(
-                                  'تعرف علي المزيد',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
+                                child: TextButton(
+                                  onPressed: ()=> context.go('/'),
+                                  child: Text(
+                                    'تعرف علي المزيد',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                    ),
                                   ),
                                 ),
                               ),

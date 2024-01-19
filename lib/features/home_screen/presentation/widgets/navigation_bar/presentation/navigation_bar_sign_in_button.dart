@@ -1,6 +1,8 @@
+import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
 import 'package:amad_furniture/features/home_screen/presentation/manager/home_screen_cubit.dart';
 import 'package:amad_furniture/features/home_screen/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../../core/utils/color_manager.dart';
 import '../../my_widget.dart';
@@ -10,10 +12,12 @@ class NavigationBarSignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return !HomeScreenCubit.isLogedIn ? Container(
+    return AuthanticationCubit.userModel?.name == null ? Container(
       decoration:  BoxDecoration(border: Border.all(color: ColorManager.myYellow),borderRadius:  BorderRadius.circular(10)),
-      child: TextButton(onPressed: (){}, child: FittedBox(
-        child: DefaultSelectableText("تسجيل الدخول",style: TextStyle(
+      child: TextButton(
+        onPressed: ()=> context.go('/authentication/create_account'),
+       child: FittedBox(
+        child: Text("تسجيل الدخول",style: TextStyle(
           color: Colors.black,
           fontSize: 16,
           fontFamily: 'Almarai',
@@ -30,7 +34,7 @@ class NavigationBarSignInButton extends StatelessWidget {
           children: [
             DefaultSelectableText("مرحباً",style: TextStyle(color: ColorManager.myGrayLite,fontWeight: FontWeight.bold)),
             SizedBox(width: 10,),
-            DefaultSelectableText(HomeScreenCubit.userName,style: TextStyle(fontWeight: FontWeight.bold)),
+            DefaultSelectableText(AuthanticationCubit.userModel?.name ?? "",style: TextStyle(fontWeight: FontWeight.bold)),
           ],
         ),
       ),

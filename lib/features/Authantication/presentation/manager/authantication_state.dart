@@ -1,6 +1,7 @@
 abstract class AuthanticationState {}
 
 class AuthanticationInitial extends AuthanticationState {}
+class changePasswordState extends AuthanticationState {}
 
 class CreateAccountLoading extends AuthanticationState{}
 class CreateAccountSuccsess extends AuthanticationState{}

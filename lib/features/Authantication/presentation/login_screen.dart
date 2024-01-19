@@ -5,6 +5,7 @@ import 'package:amad_furniture/features/Authantication/presentation/manager/auth
 import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/presentation/widgets/default_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/utils/assets_manager.dart';
 import '../data/models/login_model.dart';
@@ -15,7 +16,6 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthanticationCubit cubit = BlocProvider.of(context);
-
     return Scaffold(
       body: Row(
         children: [
@@ -54,6 +54,9 @@ class LoginScreen extends StatelessWidget {
                               AuthanticationCubit,
                               AuthanticationState>(
                             builder: (context, state) {
+                              if(state is LoginSuccsess){
+                                context.go('/');
+                              }
                               return Form(
                                 key: AuthanticationCubit.formKey,
                                 child: Column(
@@ -99,14 +102,16 @@ class LoginScreen extends StatelessWidget {
                                           .passwordValidator,
                                       maxLines: 1,
                                       title: "كلمة السر",
-                                      obscureText: true,
+                                      obscureText: AuthanticationCubit.isPassword3,
                                       icon: Icon(
                                         Icons.vpn_key_outlined,
                                       ),
                                       suffixIcon: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                              Icons.remove_red_eye_outlined)),
+                                          onPressed: () {
+                                            cubit.showOrHidePassword3();
+                                          },
+                                          icon: AuthanticationCubit.isPassword3 ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined)),
+
                                     ),
                                     const SizedBox(height: 10),
                                     TextButton(
@@ -155,7 +160,7 @@ class LoginScreen extends StatelessWidget {
                                       ),
                                     ),
                                     TextButton(
-                                      onPressed: () {},
+                                      onPressed: () => context.go('/authentication/create_account'),
                                       child: Text(
                                         'انشاء حساب',
                                         textAlign: TextAlign.center,
@@ -230,11 +235,14 @@ class LoginScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      child: Text(
-                        'تعرف علي المزيد',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
+                      child: TextButton(
+                        onPressed: ()=> context.go('/'),
+                        child: Text(
+                          'تعرف علي المزيد',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
                     ),

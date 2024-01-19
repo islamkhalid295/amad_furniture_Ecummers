@@ -1,17 +1,12 @@
 import 'package:amad_furniture/core/utils/color_manager.dart';
-
 import 'package:amad_furniture/features/home_screen/presentation/manager/home_screen_cubit.dart';
-
-
 import 'package:flutter/material.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../../../../core/utils/constantes.dart';
-
-import '../widgets/home_slider/presentation/widgets/slider.dart';
 import '../widgets/my_widget.dart';
-
-
+import '../widgets/navigation_bar/presentation/navigation_bar_sign_in_button.dart';
+import '../widgets/navigation_bar/presentation/shop_cart_icon.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,34 +15,32 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final AutoScrollController _scrollController = AutoScrollController();
   late TabController _tabController;
   int currentSection = 0;
-
 
   @override
   void dispose() {
     _tabController.dispose();
     super.dispose();
   }
+
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: HomeScreenCubit.homeScreenSections.length, vsync: this);
-
-
+    _tabController = TabController(
+        length: HomeScreenCubit.homeScreenSections.length, vsync: this);
   }
 
-  int _getSectionIndexFromScrollOffset(double offset,double sectionHeight) {
+  int _getSectionIndexFromScrollOffset(double offset, double sectionHeight) {
     for (int i = 0; i < 3; i++) {
-      if (offset <=  (sectionHeight*(4/5)) * (i + 1)) {
+      if (offset <= (sectionHeight * (4 / 5)) * (i + 1)) {
         return i;
       }
     }
 
     return -1; // Return the last section if offset is beyond all sections
-
   }
 
   void _onSectionChange(int index) {
@@ -73,9 +66,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                       const SizedBox(width: 15),
                       Image.asset("assets/icons/eg.png"),
                       TextButton(
-                          onPressed: () {
-
-                          },
+                          onPressed: () {},
                           child: const DefaultSelectableText(
                             "مصر",
                             style: TextStyle(
@@ -176,16 +167,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                   ? 200 * MediaQuery.of(context).size.width / 800
                   : 200,
               title: TabBar(
-
- controller: _tabController,
+                controller: _tabController,
                 onTap: (index) {
                   _scrollController.scrollToIndex(index,
                       preferPosition: AutoScrollPosition.begin);
                   _onSectionChange(index);
                 },
-
                 tabs: HomeScreenCubit.tabBarTabs,
-
                 indicatorColor: ColorManager.myYellow,
                 labelStyle: const TextStyle(
                   color: Colors.black,
@@ -196,21 +184,31 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
                 indicatorSize: TabBarIndicatorSize.label,
                 dividerHeight: 0,
                 labelPadding: EdgeInsets.symmetric(
-                    horizontal: 50 * MediaQuery.of(context).size.width / 1440),
+                    horizontal: 40 * MediaQuery.of(context).size.width / 1440),
                 isScrollable: true,
+
               ),
               actions: [
-                Container(
-                  decoration: BoxDecoration(border: Border.all(color: ColorManager.myYellow),borderRadius: BorderRadius.circular(10)),
-                  child: TextButton(onPressed: (){}, child: DefaultSelectableText("تسجيل الدخول",style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontFamily: 'Almarai',
-                    fontWeight: FontWeight.w700,
-                  ),)),
+                SizedBox(
+                  width: 30 * MediaQuery.of(context).size.width / 1440,
                 ),
-                SizedBox(width: 20,),
-
+                ShopCart(),
+                SizedBox(
+                  width: 30 * MediaQuery.of(context).size.width / 1440,
+                ),
+                NavigationBarSignInButton(),
+                // Container(
+                //   decoration: BoxDecoration(border: Border.all(color: ColorManager.myYellow),borderRadius: BorderRadius.circular(10)),
+                //   child: TextButton(onPressed: ()=> context.go('/authentication/create_account'), child: Text("تسجيل الدخول",style: TextStyle(
+                //     color: Colors.black,
+                //     fontSize: 16,
+                //     fontFamily: 'Almarai',
+                //     fontWeight: FontWeight.w700,
+                //   ),)),
+                // ),
+                SizedBox(
+                  width: 20,
+                ),
               ],
             ),
           ),
@@ -219,10 +217,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
               if (notification is ScrollEndNotification) {
                 print(notification.metrics.pixels);
                 final index = _getSectionIndexFromScrollOffset(
-                    notification.metrics.pixels,getSectionHeight(context));
+                    notification.metrics.pixels, getSectionHeight(context));
 
-                if (index != currentSection && !_tabController.indexIsChanging && index != -1) {
-
+                if (index != currentSection &&
+                    !_tabController.indexIsChanging &&
+                    index != -1) {
                   setState(() {
                     _tabController.index = index;
                     currentSection = index;
@@ -233,17 +232,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin{
             },
             child: ListView.builder(
               controller: _scrollController,
-shrinkWrap: true,
+              shrinkWrap: true,
               itemCount: HomeScreenCubit.sectionsNumber,
-
               itemBuilder: (context, index) {
                 return AutoScrollTag(
                   key: ValueKey(index),
                   controller: _scrollController,
                   index: index,
-
                   child: HomeScreenCubit.homeScreenSections[index],
-
                 );
               },
             ),

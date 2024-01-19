@@ -1,8 +1,6 @@
-import 'package:amad_furniture/core/exceptions/server/server_exception.dart';
 import 'package:amad_furniture/features/Authantication/data/models/login_model.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/create_account_uc.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/login_uc.dart';
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,15 +9,19 @@ import '../../data/models/create_account_model.dart';
 import '../../data/models/user_model.dart';
 import 'authantication_state.dart';
 
-
 class AuthanticationCubit extends Cubit<AuthanticationState> {
   final CreateAccountUC createAccountUC;
   final LoginUC loginUC;
 
-  AuthanticationCubit({required this.createAccountUC, required this.loginUC}) : super(AuthanticationInitial());
-  UserModel? userModel;
+  AuthanticationCubit({required this.createAccountUC, required this.loginUC})
+      : super(AuthanticationInitial());
+  static UserModel? userModel;
   static String? message;
+  static var createAccountFormKey = GlobalKey<FormState>();
   static var formKey = GlobalKey<FormState>();
+  static bool isPassword1 = true;
+  static bool isPassword2 = true;
+  static bool isPassword3 = true;
   static TextEditingController emailController = TextEditingController();
   static TextEditingController nameController = TextEditingController();
   static TextEditingController phoneController = TextEditingController();
@@ -47,8 +49,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
       return 'يجب ادخال رقم الهاتف';
     } else if (!RegExp(r'^\+\d{1,4}\d{6,}$').hasMatch(value)) {
       return 'يرجي ادخال كود الدولة متبوعاً برقم الهاتف +20115222222';
-    }
-    else {
+    } else {
       return null;
     }
   };
@@ -62,7 +63,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
   static FormFieldValidator<String> rePasswordValidator = (value) {
     if (value!.isEmpty) {
       return 'يجب دخال السر';
-    } else if (passwordController.text != rePasswordController.text){
+    } else if (passwordController.text != rePasswordController.text) {
       return 'يجب ان تكون كلمتي السر متطابقتان';
     } else {
       return null;
@@ -71,29 +72,38 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
 
   static AuthanticationCubit get(context) => BlocProvider.of(context);
 
-   void createAccount (CreateAccountModel createAccountModel)async
-  {
+  void createAccount(CreateAccountModel createAccountModel) async {
     emit(CreateAccountLoading());
     try {
       message = await createAccountUC.call(createAccountModel);
       emit(CreateAccountSuccsess());
-    } on DioException catch (e){
-
+    } on DioException catch (e) {
       print("error : ${e.response?.data["message"]}");
       emit(CreateAccountError(error: e.response?.data["message"]));
     }
   }
-   void login (LoginModel loginModel)async
-  {
+
+  void login(LoginModel loginModel) async {
     emit(LoginLoading());
     try {
       userModel = await loginUC.call(loginModel);
       emit(LoginSuccsess());
-    } on DioException catch (e){
-
+    } on DioException catch (e) {
       print("error : ${e.response?.data["message"]}");
       emit(LoginError(error: e.response?.data["message"]));
     }
   }
 
+  void showOrHidePassword1() {
+    isPassword1 = !isPassword1;
+    emit(changePasswordState());
+  }
+  void showOrHidePassword2() {
+    isPassword2 = !isPassword2;
+    emit(changePasswordState());
+  }
+  void showOrHidePassword3() {
+    isPassword3 = !isPassword3;
+    emit(changePasswordState());
+  }
 }

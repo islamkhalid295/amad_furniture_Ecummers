@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:amad_furniture/core/utils/locator.dart'as di;
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import 'core/utils/bloc_observer.dart';
 import 'core/utils/locator.dart';
@@ -29,17 +30,62 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = const AppBlocObserver();
   await di.init();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final _router = GoRouter(
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider<FaqCubit>(
+              create: (context) => FaqCubit(sl())..retriveFaq(),
+            ),
+            BlocProvider<CategoriesCubit>(
+              create: (context) => CategoriesCubit(sl())..retriveCategories(),
+            ),
+            BlocProvider<SliderCubit>(
+              create: (context) => SliderCubit(sl())..retriveSliderItems(),
+            ),
+            BlocProvider<AboutUsCubit>(
+              create: (context) => AboutUsCubit(sl())..retriveAboutUs(),
+            ),
+          ],
+          child: Directionality(
+              textDirection: TextDirection.rtl,
+              child: HomeScreen()),
+        ),
+      ),
+      GoRoute(
+        path: '/authentication/create_account',
+        builder: (context, state) => BlocProvider(
+          create: (context) =>/*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/AuthanticationCubit(createAccountUC: CreateAccountUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),loginUC: LoginUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))))),
+          child: Directionality(textDirection: TextDirection.rtl,
+          child: CreateAccountScreen()),
+),
+      ),
+      GoRoute(
+        path: '/authentication/login',
+        builder: (context, state) => BlocProvider(
+          create: (context) =>/*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/AuthanticationCubit(createAccountUC: CreateAccountUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),loginUC: LoginUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))))),
+          child: Directionality(textDirection: TextDirection.rtl,
+          child: LoginScreen()),
+),
+      ),
+      // ... other routes
+    ],
+  );
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      routerConfig: _router,
       title: 'Flutter Demo',
       theme: ThemeData(
         textTheme: Theme.of(context).textTheme.apply(
@@ -47,30 +93,6 @@ class MyApp extends StatelessWidget {
         ),
         colorScheme: ColorScheme.fromSeed(seedColor: ColorManager.myYellow),
         useMaterial3: true,
-      ),
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider<FaqCubit>(
-            create: (context) => FaqCubit(sl())..retriveFaq(),
-          ),
-          BlocProvider<CategoriesCubit>(
-            create: (context) => CategoriesCubit(sl())..retriveCategories(),
-          ),
-          BlocProvider<SliderCubit>(
-            create: (context) => SliderCubit(sl())..retriveSliderItems(),
-          ),
-          BlocProvider<AboutUsCubit>(
-            create: (context) => AboutUsCubit(sl())..retriveAboutUs(),
-          ),
-          BlocProvider<AuthanticationCubit>(
-            create: (context) =>/*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/AuthanticationCubit(createAccountUC: CreateAccountUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),loginUC: LoginUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))))),
-          ),
-
-
-        ],
-        child: Directionality(
-          textDirection: TextDirection.rtl,
-            child: LoginScreen()),
       ),
     );
   }
