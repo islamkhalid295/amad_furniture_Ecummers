@@ -2,6 +2,7 @@ import 'package:amad_furniture/core/api/dio_consummer.dart';
 import 'package:amad_furniture/features/Authantication/data/data_sources/Authantication_rds.dart';
 import 'package:amad_furniture/features/Authantication/domain/repositories/authantication_repo.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/create_account_uc.dart';
+import 'package:amad_furniture/features/Authantication/domain/use_cases/login_uc.dart';
 import 'package:amad_furniture/features/Authantication/presentation/login_screen.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
 import 'package:amad_furniture/features/home_screen/presentation/pages/home_screen.dart';
@@ -62,14 +63,14 @@ class MyApp extends StatelessWidget {
             create: (context) => AboutUsCubit(sl())..retriveAboutUs(),
           ),
           BlocProvider<AuthanticationCubit>(
-            create: (context) =>AuthanticationCubit(CreateAccountUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))))),
+            create: (context) =>/*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/AuthanticationCubit(createAccountUC: CreateAccountUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),loginUC: LoginUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))))),
           ),
 
 
         ],
         child: Directionality(
           textDirection: TextDirection.rtl,
-            child: CreateAccountScreen()),
+            child: LoginScreen()),
       ),
     );
   }

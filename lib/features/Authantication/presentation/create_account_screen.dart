@@ -52,132 +52,135 @@ class CreateAccountScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 30),
                         child: Form(
                           key: AuthanticationCubit.formKey,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: 167,
-                                height: 27,
-                                child: Text(
-                                  'انشاء حساب ',
+                          child: Container(
+                            width: double.infinity,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  width: 167,
+                                  height: 27,
+                                  child: Text(
+                                    'انشاء حساب ',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: ColorManager.myBlack,
+                                      fontSize: 22.80,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  'سجل الان',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: ColorManager.myBlack,
-                                    fontSize: 22.80,
-                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 16),
-                              Text(
-                                'سجل الان',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: ColorManager.myBlack,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(height: 24),
-                              DefaultTextFormField(
+                                const SizedBox(height: 24),
+                                DefaultTextFormField(
+                                    validator:
+                                        AuthanticationCubit.nameValidator,
+                                    controller:
+                                        AuthanticationCubit.nameController,
+                                    title: "اسم المستخدم",
+                                    icon: Icon(Icons.person_outline)),
+                                DefaultTextFormField(
+                                    validator:
+                                        AuthanticationCubit.emailValidator,
+                                    controller:
+                                        AuthanticationCubit.emailController,
+                                    title: "البريد الإلكتروني",
+                                    icon: Icon(Icons.email_outlined)),
+                                DefaultTextFormField(
+                                    validator:
+                                        AuthanticationCubit.phoneValidator,
+                                    controller:
+                                        AuthanticationCubit.phoneController,
+                                    title: "رقم الهاتف",
+                                    icon: Icon(Icons.phone_outlined)),
+                                DefaultTextFormField(
+                                  maxLines: 1,
+                                  obscureText:true,
                                   validator:
-                                      AuthanticationCubit.nameValidator,
+                                      AuthanticationCubit.passwordValidator,
                                   controller:
-                                      AuthanticationCubit.nameController,
-                                  title: "اسم المستخدم",
-                                  icon: Icon(Icons.person_outline)),
-                              DefaultTextFormField(
-                                  validator:
-                                      AuthanticationCubit.emailValidator,
-                                  controller:
-                                      AuthanticationCubit.emailController,
-                                  title: "البريد الإلكتروني",
-                                  icon: Icon(Icons.email_outlined)),
-                              DefaultTextFormField(
-                                  validator:
-                                      AuthanticationCubit.phoneValidator,
-                                  controller:
-                                      AuthanticationCubit.phoneController,
-                                  title: "رقم الهاتف",
-                                  icon: Icon(Icons.phone_outlined)),
-                              DefaultTextFormField(
-                                maxLines: 1,
-                                obscureText:true,
-                                validator:
-                                    AuthanticationCubit.passwordValidator,
-                                controller:
-                                    AuthanticationCubit.passwordController,
-                                title: "كلمة السر",
-                                icon: Icon(
-                                  Icons.vpn_key_outlined,
+                                      AuthanticationCubit.passwordController,
+                                  title: "كلمة السر",
+                                  icon: Icon(
+                                    Icons.vpn_key_outlined,
+                                  ),
+                                  suffixIcon: IconButton(
+                                      onPressed: () {},
+                                      icon:
+                                          Icon(Icons.remove_red_eye_outlined)),
                                 ),
-                                suffixIcon: IconButton(
-                                    onPressed: () {},
-                                    icon:
-                                        Icon(Icons.remove_red_eye_outlined)),
-                              ),
-                              DefaultTextFormField(
-                                maxLines: 1,
-                                obscureText: true,
-                                validator:
-                                    AuthanticationCubit.rePasswordValidator,
-                                controller:
-                                    AuthanticationCubit.rePasswordController,
-                                title: "تأكدي كلمة السر",
-                                icon: const Icon(Icons.vpn_key_outlined),
-                                suffixIcon: IconButton(
-                                    onPressed: () {},
-                                    icon:
-                                        const Icon(Icons.remove_red_eye_outlined)),
-                              ),
-                              const SizedBox(height: 24),
-                              state is SendAuthanticationError ? Padding(
-                                padding: const EdgeInsets.only(bottom: 24),
-                                child: Text(state.error),
-                              ) : SizedBox(),
-                              DefaultMaterialButton(
-                                lodingCondition: state is SendAuthanticationLoading,
-                                  errorCondition: state is SendAuthanticationError,
-                                  succsessCondition: state is SendAuthanticationSuccsess,
-                                  borderRadius: 8,
-                                  text: "انشاء حساب",
-                                  onPressed: () {
-                                    if (AuthanticationCubit
-                                        .formKey.currentState
-                                        !.validate()) {
-                                      cubit.createAccount(CreateAccountModel(
-                                          email: AuthanticationCubit
-                                              .emailController.text,
-                                          name: AuthanticationCubit
-                                              .nameController.text,
-                                          number: AuthanticationCubit
-                                              .phoneController.text,
-                                          password: AuthanticationCubit
-                                              .passwordController.text));
-                                    }
-                                  }),
-                              const SizedBox(height: 24),
-                              Text(
-                                'لدي  حساب؟',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(0xFF6C757D),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
+                                DefaultTextFormField(
+                                  maxLines: 1,
+                                  obscureText: true,
+                                  validator:
+                                      AuthanticationCubit.rePasswordValidator,
+                                  controller:
+                                      AuthanticationCubit.rePasswordController,
+                                  title: "تأكدي كلمة السر",
+                                  icon: const Icon(Icons.vpn_key_outlined),
+                                  suffixIcon: IconButton(
+                                      onPressed: () {},
+                                      icon:
+                                          const Icon(Icons.remove_red_eye_outlined)),
                                 ),
-                              ),
-                              TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'تسجيل الدخول',
+                                const SizedBox(height: 24),
+                                state is CreateAccountError ? Padding(
+                                  padding: const EdgeInsets.only(bottom: 24),
+                                  child: Text(state.error,style: TextStyle(fontWeight: FontWeight.w500,color: Colors.red)),
+                                ) : SizedBox(),
+                                DefaultMaterialButton(
+                                  lodingCondition: state is CreateAccountLoading,
+                                    errorCondition: state is CreateAccountError,
+                                    succsessCondition: state is CreateAccountSuccsess,
+                                    borderRadius: 8,
+                                    text: "انشاء حساب",
+                                    onPressed: () {
+                                      if (AuthanticationCubit
+                                          .formKey.currentState
+                                          !.validate()) {
+                                        cubit.createAccount(CreateAccountModel(
+                                            email: AuthanticationCubit
+                                                .emailController.text,
+                                            name: AuthanticationCubit
+                                                .nameController.text,
+                                            number: AuthanticationCubit
+                                                .phoneController.text,
+                                            password: AuthanticationCubit
+                                                .passwordController.text));
+                                      }
+                                    }),
+                                const SizedBox(height: 24),
+                                Text(
+                                  'لدي  حساب؟',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: Color(0xFF131313),
+                                    color: Color(0xFF6C757D),
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w700,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                              )
-                            ],
+                                TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    'تسجيل الدخول',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(0xFF131313),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

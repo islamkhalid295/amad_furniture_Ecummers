@@ -11,6 +11,7 @@ class EndPoints {
 
 
   static const String SIGN_UP = "client/auth/signup";
+  static const String LOGIN = "client/auth/login";
 
 
 

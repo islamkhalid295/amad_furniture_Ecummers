@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 
 import '../../features/Authantication/data/data_sources/Authantication_rds.dart';
 import '../../features/Authantication/domain/repositories/Authantication_repo.dart';
+import '../../features/Authantication/domain/use_cases/login_uc.dart';
 import '../../features/Authantication/presentation/manager/authantication_cubit.dart';
 import '../../features/home_screen/presentation/widgets/FAQ_screen/data/data_sources/faq_rds.dart';
 import '../../features/home_screen/presentation/widgets/FAQ_screen/domain/repositories/faq_repo.dart';
@@ -33,6 +34,15 @@ import '../api/dio_consummer.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
+
+  // Features - Authantication
+  sl.registerFactory(() => AuthanticationCubit(createAccountUC: CreateAccountUC(authanticationRepo: sl()),loginUC: LoginUC(authanticationRepo: sl())));
+  sl.registerLazySingleton(() => CreateAccountUC(authanticationRepo: sl()));
+  sl.registerLazySingleton(() => LoginUC(authanticationRepo: sl()));
+  sl.registerLazySingleton<AuthanticationRepo>(
+          () => AuthanticationRepoImp(authanticationRDS: sl()));
+  sl.registerLazySingleton<AuthanticationRDS>(
+          () => AuthanticationRdsImp(client: sl()));
 
   // Features - Slider
 
@@ -77,14 +87,6 @@ Future<void> init() async {
   sl.registerLazySingleton<AboutUsRDS>(
           () => AboutUsRdsImp(client: sl()));
 
-  // Features - Authantication
-
-  sl.registerFactory(() => AuthanticationCubit(sl()));
-  sl.registerLazySingleton(() => CreateAccountUC(authanticationRepo: sl()));
-  sl.registerLazySingleton<AuthanticationRepo>(
-          () => AuthanticationRepoImp(authanticationRDS: sl()));
-  sl.registerLazySingleton<AuthanticationRDS>(
-          () => AuthanticationRdsImp(client: sl()));
 
   // sl.registerFactory(() => AuthanticationCubit(sl()));
   // sl.registerLazySingleton(() => CreateAccountUC(authanticationRepo: sl()));

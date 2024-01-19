@@ -2,10 +2,17 @@ abstract class AuthanticationState {}
 
 class AuthanticationInitial extends AuthanticationState {}
 
-class SendAuthanticationLoading extends AuthanticationState{}
-class SendAuthanticationSuccsess extends AuthanticationState{}
-class SendAuthanticationError extends AuthanticationState{
+class CreateAccountLoading extends AuthanticationState{}
+class CreateAccountSuccsess extends AuthanticationState{}
+class CreateAccountError extends AuthanticationState{
   final String error;
 
-  SendAuthanticationError({required this.error});
+  CreateAccountError({required this.error});
+}
+class LoginLoading extends AuthanticationState{}
+class LoginSuccsess extends AuthanticationState{}
+class LoginError extends AuthanticationState{
+  final String error;
+
+  LoginError({required this.error});
 }

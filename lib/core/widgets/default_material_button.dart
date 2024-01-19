@@ -23,10 +23,9 @@ final double? borderRadius;
           borderRadius: BorderRadius.circular(borderRadius!),
           ),
       child: lodingCondition
-          ? Center(
-          child: CircularProgressIndicator(
+          ? CircularProgressIndicator(
             color: ColorManager.myWhite,
-          ))
+          )
           : succsessCondition ? Icon(Icons.done_outline_outlined,color: ColorManager.myWhite,) :  errorCondition ? Icon(Icons.refresh,color: Colors.red,) : Text(
         text,
         textAlign: TextAlign.center,
