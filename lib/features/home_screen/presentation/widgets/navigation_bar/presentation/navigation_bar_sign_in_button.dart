@@ -1,9 +1,7 @@
+import 'package:amad_furniture/core/utils/routes_manager.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
-import 'package:amad_furniture/features/home_screen/presentation/manager/home_screen_cubit.dart';
-import 'package:amad_furniture/features/home_screen/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../../../core/utils/color_manager.dart';
 import '../../my_widget.dart';
 
@@ -15,7 +13,7 @@ class NavigationBarSignInButton extends StatelessWidget {
     return AuthanticationCubit.userModel?.name == null ? Container(
       decoration:  BoxDecoration(border: Border.all(color: ColorManager.myYellow),borderRadius:  BorderRadius.circular(10)),
       child: TextButton(
-        onPressed: ()=> context.go('/authentication/create_account'),
+        onPressed: ()=> context.go(RoutesManager.createAccountScreen),
        child: FittedBox(
         child: Text("تسجيل الدخول",style: TextStyle(
           color: Colors.black,

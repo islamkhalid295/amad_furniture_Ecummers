@@ -1,8 +1,5 @@
 import 'package:amad_furniture/core/utils/assets_manager.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/home_slider/presentation/manager/slider_cubit.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
 import '../../features/home_screen/presentation/widgets/home_slider/domain/models/slider_item_model.dart';
 import '../../features/home_screen/presentation/widgets/my_widget.dart';
 import 'color_manager.dart';
@@ -85,7 +82,7 @@ Widget mySlider(context, SliderItem sliderItem) => Stack(
                     borderRadius: BorderRadius.circular(20),
                     side: const BorderSide(
                         color: ColorManager.myBlack, style: BorderStyle.solid)),
-                child: const DefaultSelectableText(
+                child: const Text(
                   'تسوق الان',
                   textAlign: TextAlign.center,
                   style: TextStyle(

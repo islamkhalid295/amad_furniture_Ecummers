@@ -1,4 +1,5 @@
 import 'package:amad_furniture/core/utils/color_manager.dart';
+import 'package:amad_furniture/core/utils/routes_manager.dart';
 import 'package:amad_furniture/core/widgets/default_material_button.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_state.dart';
@@ -6,12 +7,10 @@ import 'package:amad_furniture/features/home_screen/presentation/widgets/contact
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../core/utils/assets_manager.dart';
 
-import '../../../core/utils/assets_manager.dart';
-import '../data/models/login_model.dart';
-
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class ForgetPasswordScreen extends StatelessWidget {
+  const ForgetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,32 +53,28 @@ class LoginScreen extends StatelessWidget {
                               AuthanticationCubit,
                               AuthanticationState>(
                             builder: (context, state) {
-                              if(state is LoginSuccsess){
-                                context.go('/');
+                              if(state is ForgetPasswordSuccsess){
+                                context.go(RoutesManager.verifyForgetPasswordScreen);
                               }
                               return Form(
-                                key: AuthanticationCubit.formKey,
+                                key: AuthanticationCubit.forgetPasswordFormKey,
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    SizedBox(
-                                      width: 167,
-                                      height: 27,
-                                      child: Text(
-                                        'تسجيل الدخول',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: ColorManager.myBlack,
-                                          fontSize: 22.80,
-                                          fontWeight: FontWeight.w700,
-                                        ),
+                                    Text(
+                                      'هل نسيت كلمة السر؟',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: ColorManager.myBlack,
+                                        fontSize: 22.80,
+                                        fontWeight: FontWeight.w700,
                                       ),
                                     ),
                                     const SizedBox(height: 16),
                                     Text(
-                                      'سجل الان',
+                                      'أحصل عليها الان',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: ColorManager.myBlack,
@@ -95,82 +90,24 @@ class LoginScreen extends StatelessWidget {
                                             .emailValidator,
                                         title: "البريد الإلكتروني",
                                         icon: Icon(Icons.email_outlined)),
-                                    DefaultTextFormField(
-                                      controller: AuthanticationCubit
-                                          .passwordController,
-                                      validator: AuthanticationCubit
-                                          .passwordValidator,
-                                      maxLines: 1,
-                                      title: "كلمة السر",
-                                      obscureText: AuthanticationCubit.isPassword3,
-                                      icon: Icon(
-                                        Icons.vpn_key_outlined,
-                                      ),
-                                      suffixIcon: IconButton(
-                                          onPressed: () {
-                                            cubit.showOrHidePassword3();
-                                          },
-                                          icon: AuthanticationCubit.isPassword3 ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined)),
-
-                                    ),
                                     const SizedBox(height: 10),
-                                    TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        'هل نسيت كلمه السر؟',
-                                        textAlign: TextAlign.right,
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 13,
-                                          fontFamily: 'Open Sans',
-                                          fontWeight: FontWeight.w400,
-                                          height: 0.12,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    state is LoginError ? Padding(
+                                    state is ForgetPasswordError ? Padding(
                                       padding: const EdgeInsets.only(bottom: 24),
                                       child: Text(state.error,style: TextStyle(fontWeight: FontWeight.w500,color: Colors.red)),
                                     ) : SizedBox(),
                                     DefaultMaterialButton(
-                                        lodingCondition: state is LoginLoading,
-                                        succsessCondition:  state is LoginSuccsess,
-                                        errorCondition:  state is LoginError,
+                                        lodingCondition: state is ForgetPasswordLoading,
+                                        succsessCondition:  state is ForgetPasswordSuccsess,
+                                        errorCondition:  state is ForgetPasswordError,
                                         minWidth: 200,
-                                        text: "تسجيل الدخول", onPressed: () {
+                                        text: "استرجاع", onPressed: () {
                                       if (AuthanticationCubit
-                                          .formKey.currentState
+                                          .forgetPasswordFormKey.currentState
                                       !.validate()) {
-                                        cubit.login(LoginModel(
-                                            email: AuthanticationCubit
-                                                .emailController.text,
-                                            password: AuthanticationCubit
-                                                .passwordController.text));
+                                        cubit.forgetPassword(AuthanticationCubit.emailController.text);
                                       }
                                     }),
-                                    const SizedBox(height: 24),
-                                    Text(
-                                      'ليس لديك حساب؟',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Color(0xFF6C757D),
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    TextButton(
-                                      onPressed: () => context.go('/authentication/create_account'),
-                                      child: Text(
-                                        'انشاء حساب',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Color(0xFF131313),
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-                                    )
+
                                   ],
                                 ),
                               );
@@ -236,7 +173,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       child: TextButton(
-                        onPressed: ()=> context.go('/'),
+                        onPressed: ()=> context.go(RoutesManager.homeScreen),
                         child: Text(
                           'تعرف علي المزيد',
                           style: TextStyle(

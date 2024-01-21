@@ -91,8 +91,8 @@ class AboutUsScreen extends StatelessWidget {
                         height: 250 * MediaQuery.of(context).size.height / 900,
                         child: BlocBuilder<AboutUsCubit, AboutUsState>(
                           builder: (context, state) {
-                            return  state is RetriveAboutUsLoading ? Center(child: CircularProgressIndicator()) :SelectableText(
-                               AboutUsCubit.aboutUsModel!.aboutProducts ?? "",
+                            return  state is RetriveAboutUsLoading ? Center(child: CircularProgressIndicator()) : SelectableText(
+                               AboutUsCubit.aboutUsModel?.aboutProducts ?? "",
                                 style: TextStyle(
                                   fontSize: 15 *
                                       MediaQuery.of(context).size.width /
@@ -197,85 +197,85 @@ class AboutUsScreen extends StatelessWidget {
                         ],
                       ),
                       const Spacer(),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const DefaultSelectableText(
-                            'تواصل معانا',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 26,
-                              fontFamily: 'Almarai',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 60,
-                          ),
-                          Stack(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width < 1010
-                                    ? 436 *
-                                        MediaQuery.of(context).size.width /
-                                        1010
-                                    : 436,
-                                height: 48,
-                                decoration: ShapeDecoration(
-                                  color: Colors.white,
-                                  shape: RoundedRectangleBorder(
-                                    side: const BorderSide(
-                                      width: 1,
-                                      color: Color(0xFF959595),
-                                    ),
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 150),
-                                  child: TextFormField(
-                                    textAlign: TextAlign.start,
-                                    // textDirection: TextDirection.ltr,
-                                    decoration: InputDecoration(
-                                      hintText: "ادخل البريد الالكتروني",
-                                      border: InputBorder.none,
-                                      hintStyle: TextStyle(
-                                        color: Colors.black
-                                            .withOpacity(0.27000001072883606),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              MaterialButton(
-                                onPressed: () {},
-                                color: ColorManager.myBlack,
-                                minWidth: 140,
-                                height: 55,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                    side: const BorderSide(
-                                        color: ColorManager.myBlack,
-                                        style: BorderStyle.solid)),
-                                child: const DefaultSelectableText(
-                                  'ارسال',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 17.59,
-                                    fontFamily: 'Almarai',
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      const Spacer(),
+                      // Column(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                      //   children: [
+                      //     const DefaultSelectableText(
+                      //       'تواصل معانا',
+                      //       style: TextStyle(
+                      //         color: Colors.black,
+                      //         fontSize: 26,
+                      //         fontFamily: 'Almarai',
+                      //         fontWeight: FontWeight.w400,
+                      //       ),
+                      //     ),
+                      //     const SizedBox(
+                      //       height: 60,
+                      //     ),
+                      //     Stack(
+                      //       children: [
+                      //         Container(
+                      //           width: MediaQuery.of(context).size.width < 1010
+                      //               ? 436 *
+                      //                   MediaQuery.of(context).size.width /
+                      //                   1010
+                      //               : 436,
+                      //           height: 48,
+                      //           decoration: ShapeDecoration(
+                      //             color: Colors.white,
+                      //             shape: RoundedRectangleBorder(
+                      //               side: const BorderSide(
+                      //                 width: 1,
+                      //                 color: Color(0xFF959595),
+                      //               ),
+                      //               borderRadius: BorderRadius.circular(20),
+                      //             ),
+                      //           ),
+                      //           child: Padding(
+                      //             padding: const EdgeInsets.only(right: 150),
+                      //             child: TextFormField(
+                      //               textAlign: TextAlign.start,
+                      //               // textDirection: TextDirection.ltr,
+                      //               decoration: InputDecoration(
+                      //                 hintText: "ادخل البريد الالكتروني",
+                      //                 border: InputBorder.none,
+                      //                 hintStyle: TextStyle(
+                      //                   color: Colors.black
+                      //                       .withOpacity(0.27000001072883606),
+                      //                   fontSize: 16,
+                      //                   fontWeight: FontWeight.w500,
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         MaterialButton(
+                      //           onPressed: () {},
+                      //           color: ColorManager.myBlack,
+                      //           minWidth: 140,
+                      //           height: 55,
+                      //           shape: RoundedRectangleBorder(
+                      //               borderRadius: BorderRadius.circular(25),
+                      //               side: const BorderSide(
+                      //                   color: ColorManager.myBlack,
+                      //                   style: BorderStyle.solid)),
+                      //           child: const DefaultSelectableText(
+                      //             'ارسال',
+                      //             textAlign: TextAlign.center,
+                      //             style: TextStyle(
+                      //               color: Colors.white,
+                      //               fontSize: 17.59,
+                      //               fontFamily: 'Almarai',
+                      //               fontWeight: FontWeight.w700,
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ],
+                      // ),
+                      // const Spacer(),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.end,

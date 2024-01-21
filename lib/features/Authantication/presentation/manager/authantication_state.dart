@@ -17,3 +17,19 @@ class LoginError extends AuthanticationState{
 
   LoginError({required this.error});
 }
+
+class ForgetPasswordLoading extends AuthanticationState{}
+class ForgetPasswordSuccsess extends AuthanticationState{}
+class ForgetPasswordError extends AuthanticationState{
+  final String error;
+
+  ForgetPasswordError({required this.error});
+}
+
+class VerifyForgetPasswordLoading extends AuthanticationState{}
+class VerifyForgetPasswordSuccsess extends AuthanticationState{}
+class VerifyForgetPasswordError extends AuthanticationState{
+  final String error;
+
+  VerifyForgetPasswordError({required this.error});
+}

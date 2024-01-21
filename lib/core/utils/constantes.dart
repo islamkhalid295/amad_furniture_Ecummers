@@ -4,7 +4,7 @@ import '../../features/home_screen/presentation/widgets/categories_screen/data/m
 
 const double yellowBannarHeight = 40;
 const double tabBarHeight = 72;
-
+const int verificationCodeLength = 6;
 
 
 

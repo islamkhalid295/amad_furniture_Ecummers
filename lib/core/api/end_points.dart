@@ -12,6 +12,8 @@ class EndPoints {
 
   static const String SIGN_UP = "client/auth/signup";
   static const String LOGIN = "client/auth/login";
+  static const String FORGOT_PASSWORD = "client/auth/forgotpassword";
+  static const String VERIFY_FORGOT_PASSWORD = "client/auth/verifypassword";
 
 
 
