@@ -18,7 +18,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:amad_furniture/core/utils/locator.dart'as di;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
+import 'core/storage/flutter_secure_storage.dart';
 import 'core/utils/bloc_observer.dart';
 import 'core/utils/locator.dart';
 import 'features/Authantication/presentation/pages/create_account_screen.dart';
@@ -29,6 +31,9 @@ import 'features/home_screen/presentation/widgets/categories_screen/presentation
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  // var storage =  FlutterSecureStorageCnsummer(FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true,)));
+  // var token = storage.read('token');
+
   Bloc.observer = const AppBlocObserver();
   await di.init();
   runApp(MyApp());
@@ -64,7 +69,7 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: RoutesManager.createAccountScreen,
         builder: (context, state) => BlocProvider(
-          create: (context) =>/*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/AuthanticationCubit(verifyForgetPasswordUC: VerifyForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),forgetPasswordUC: ForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))) ),createAccountUC: CreateAccountUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),loginUC: LoginUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))))),
+          create: (context) =>/*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/AuthanticationCubit(storage: FlutterSecureStorageCnsummer(FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true,))),verifyForgetPasswordUC: VerifyForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),forgetPasswordUC: ForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))) ),createAccountUC: CreateAccountUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),loginUC: LoginUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))))),
           child: Directionality(textDirection: TextDirection.rtl,
           child: CreateAccountScreen()),
 ),
@@ -72,7 +77,7 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: RoutesManager.loginScreen,
         builder: (context, state) => BlocProvider(
-          create: (context) => AuthanticationCubit(verifyForgetPasswordUC: VerifyForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),forgetPasswordUC: ForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))) ),createAccountUC: CreateAccountUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),loginUC: LoginUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))))) /*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/,
+          create: (context) => AuthanticationCubit(storage: FlutterSecureStorageCnsummer(FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true,))),verifyForgetPasswordUC: VerifyForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),forgetPasswordUC: ForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))) ),createAccountUC: CreateAccountUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),loginUC: LoginUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))))) /*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/,
           child: Directionality(textDirection: TextDirection.rtl,
           child: LoginScreen()),
 ),
@@ -80,7 +85,7 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: RoutesManager.forgetPasswordScreen /*'/authentication/forget_password'*/,
         builder: (context, state) => BlocProvider(
-          create: (context) => AuthanticationCubit(verifyForgetPasswordUC: VerifyForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),forgetPasswordUC: ForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))) ),createAccountUC: CreateAccountUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),loginUC: LoginUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))))) /*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/,
+          create: (context) => AuthanticationCubit(storage: FlutterSecureStorageCnsummer(FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true,))),verifyForgetPasswordUC: VerifyForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),forgetPasswordUC: ForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))) ),createAccountUC: CreateAccountUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),loginUC: LoginUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))))) /*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/,
           child: Directionality(textDirection: TextDirection.rtl,
           child: ForgetPasswordScreen()),
 ),
@@ -88,7 +93,7 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: RoutesManager.verifyForgetPasswordScreen /*'/authentication/forget_password'*/,
         builder: (context, state) => BlocProvider(
-          create: (context) => AuthanticationCubit(verifyForgetPasswordUC: VerifyForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),forgetPasswordUC: ForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))) ),createAccountUC: CreateAccountUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),loginUC: LoginUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))))) /*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/,
+          create: (context) => AuthanticationCubit(storage: FlutterSecureStorageCnsummer(FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true,))),verifyForgetPasswordUC: VerifyForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),forgetPasswordUC: ForgetPasswordUC(authanticationRepo:AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))) ),createAccountUC: CreateAccountUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio())))),loginUC: LoginUC(authanticationRepo: AuthanticationRepoImp(authanticationRDS: AuthanticationRdsImp(client: DioConsumer(client: Dio()))))) /*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/,
           child: Directionality(textDirection: TextDirection.rtl,
           child: VerifyForgetPasswordScreen()),
 ),

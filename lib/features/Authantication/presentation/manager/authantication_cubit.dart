@@ -1,3 +1,4 @@
+import 'package:amad_furniture/core/storage/flutter_secure_storage.dart';
 import 'package:amad_furniture/features/Authantication/data/models/login_model.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/create_account_uc.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/forget_password_uc.dart';
@@ -6,6 +7,7 @@ import 'package:amad_furniture/features/Authantication/domain/use_cases/verify_f
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../../../core/utils/constantes.dart';
 import '../../data/models/create_account_model.dart';
@@ -20,8 +22,9 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
   final VerifyForgetPasswordUC verifyForgetPasswordUC ;
 
 
-  AuthanticationCubit( {required this.verifyForgetPasswordUC,required this.forgetPasswordUC, required this.createAccountUC, required this.loginUC})
+  AuthanticationCubit({required this.storage,required this.verifyForgetPasswordUC,required this.forgetPasswordUC, required this.createAccountUC, required this.loginUC})
       : super(AuthanticationInitial());
+  final FlutterSecureStorageCnsummer storage;
   static UserModel? userModel;
   static String? message;
   static var createAccountFormKey = GlobalKey<FormState>();
@@ -114,6 +117,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
     emit(LoginLoading());
     try {
       userModel = await loginUC.call(loginModel);
+storage.setToken(userModel?.token);
       emit(LoginSuccsess());
     } on DioException catch (e) {
       print("error : ${e.response?.data["message"]}");

@@ -1,8 +1,10 @@
+import 'package:amad_furniture/core/storage/flutter_secure_storage.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/create_account_uc.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/forget_password_uc.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/verify_forget_password_uc.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/domain/use_cases/about_us_uc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 
 
@@ -36,9 +38,11 @@ import '../api/dio_consummer.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-
+  AndroidOptions _getAndroidOptions() => const AndroidOptions(
+    encryptedSharedPreferences: true,
+  );
   // Features - Authantication
-  sl.registerFactory(() => AuthanticationCubit(forgetPasswordUC: ForgetPasswordUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC(authanticationRepo: sl()),loginUC: LoginUC(authanticationRepo: sl()), verifyForgetPasswordUC: VerifyForgetPasswordUC(authanticationRepo: sl())));
+  sl.registerFactory(() => AuthanticationCubit(storage: FlutterSecureStorageCnsummer(FlutterSecureStorage(aOptions: _getAndroidOptions())),forgetPasswordUC: ForgetPasswordUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC(authanticationRepo: sl()),loginUC: LoginUC(authanticationRepo: sl()), verifyForgetPasswordUC: VerifyForgetPasswordUC(authanticationRepo: sl())));
   sl.registerLazySingleton(() => CreateAccountUC(authanticationRepo: sl()));
   sl.registerLazySingleton(() => LoginUC(authanticationRepo: sl()));
   sl.registerLazySingleton<AuthanticationRepo>(
