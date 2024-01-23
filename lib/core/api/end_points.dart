@@ -15,7 +15,10 @@ class EndPoints {
   static const String FORGOT_PASSWORD = "client/auth/forgotpassword";
   static const String VERIFY_FORGOT_PASSWORD = "client/auth/verifypassword";
 
-
+  static const String GET_PRODUCT= "client/products/getproduct/";
+  static const String GET_PRODUCTS= "client/products/getproducts/";
+  static const String GET_PRODUCTS_BY_CAT= "client/products/getproductsbycat/";
+  static const String GET_PRODUCTS_BY_SUB_CAT= "client/products/getproductsbysubcat/";
 
   static const String ANY_WRONG_ROUTE = "any_wrong_route";
 

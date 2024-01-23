@@ -6,9 +6,10 @@ import '../../../../core/utils/color_manager.dart';
 import '../../../../core/utils/constantes.dart';
 
 class DefaultSelectableText extends StatelessWidget {
-  const DefaultSelectableText(this.text,{super.key, this.style, this.textAlign, });
+  const DefaultSelectableText(this.text,{super.key, this.style, this.textAlign, this.maxLines, });
 final String text;
 final TextStyle? style;
+final int? maxLines;
 final TextAlign? textAlign;
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,8 @@ final TextAlign? textAlign;
         text,
       style: style,
       textAlign: textAlign,
+      maxLines: maxLines,
+
     );
   }
 }

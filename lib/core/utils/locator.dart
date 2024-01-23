@@ -61,8 +61,8 @@ Future<void> init() async {
 
 
   // Features - Categories
-  sl.registerFactory(() => CategoriesCubit(sl()));
-  sl.registerLazySingleton(() => RetriveCategoriesUC(sliderRepo: sl()));
+  sl.registerFactory(() => CategoriesCubit( sl()));
+  // sl.registerLazySingleton(() => RetriveCategoriesUC(sl()));
   sl.registerLazySingleton<CategoriesRepo>(
           () => CategoriesRepoImp(categoriesRDS:  sl()));
   sl.registerLazySingleton<CategoriesRDS>(

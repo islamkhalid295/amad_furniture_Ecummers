@@ -1,5 +1,8 @@
 class RoutesManager {
   static String homeScreen = "/";
+
+  static String productsScreen = '/sad' /*"/products"*/;
+
   static String createAccountScreen = "/authentication/create_account";
   static String loginScreen = "/authentication/login";
   static String forgetPasswordScreen = "/authentication/forget_password";

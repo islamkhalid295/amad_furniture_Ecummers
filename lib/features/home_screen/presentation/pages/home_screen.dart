@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   int _getSectionIndexFromScrollOffset(double offset, double sectionHeight) {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < HomeScreenCubit.sectionsNumber; i++) {
       if (offset <= (sectionHeight * (4 / 5)) * (i + 1)) {
         return i;
       }
