@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../utils/color_manager.dart';
 
 class DefaultMaterialButton extends StatelessWidget {
-  const DefaultMaterialButton({super.key, required this.onPressed, this.lodingCondition = false, this.succsessCondition = false, this.errorCondition = false, required this.text, this.height = 45, this.minWidth = 310, this.borderRadius = 25});
+  const DefaultMaterialButton({super.key, required this.onPressed, this.lodingCondition = false, this.succsessCondition = false, this.errorCondition = false, required this.text, this.height = 45, this.minWidth = 310, this.borderRadius = 25, this.color, this.textColor });
 final VoidCallback onPressed;
 final bool lodingCondition;
 final bool succsessCondition;
@@ -12,11 +12,13 @@ final String text;
 final double height;
 final double? minWidth;
 final double? borderRadius;
+final Color? color ;
+final Color? textColor ;
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: onPressed,
-      color: ColorManager.myBlack,
+      color: color ?? ColorManager.myBlack,
       height: height,
       minWidth: minWidth,
       shape: RoundedRectangleBorder(
@@ -31,7 +33,7 @@ final double? borderRadius;
                     text,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-            color: Colors.white,
+            color: textColor ?? ColorManager.myWhite,
             fontSize: 17.59,
             fontFamily: 'Almarai',
             fontWeight: FontWeight.w700,

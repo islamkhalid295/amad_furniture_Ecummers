@@ -4,7 +4,8 @@ abstract class StorageConsumer {
   Future<Map<String, String>> readAll();
   Future<void> delete(String key);
   Future<void> deleteAll();
-  Future<void> setToken(String token);
+  Future<void> setToken(String? token);
   //remove token
   Future<void> deleteToken();
+  Future<String?> getToken();
 }

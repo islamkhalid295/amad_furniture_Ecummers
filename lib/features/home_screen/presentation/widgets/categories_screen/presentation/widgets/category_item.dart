@@ -1,9 +1,7 @@
-import 'package:amad_furniture/core/utils/constantes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../../../../core/utils/color_manager.dart';
-import '../../../my_widget.dart';
+import '../../../../../../../core/utils/my_widget.dart';
 
 class CategoryItem extends StatelessWidget {
   const CategoryItem({super.key, required this.height, required this.name, required this.imageUrl, this.onTap});

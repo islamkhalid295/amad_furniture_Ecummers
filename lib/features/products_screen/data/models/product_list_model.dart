@@ -28,6 +28,7 @@ class Product {
   String? price = "السعر غير متاح";
   String? discount ="0";
   int? availableAmount = 0;
+  bool inCart = false;
 
   Product(
       {required this.id,

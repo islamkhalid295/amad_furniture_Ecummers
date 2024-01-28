@@ -2,15 +2,22 @@ import 'package:amad_furniture/core/storage/flutter_secure_storage.dart';
 import 'package:amad_furniture/features/Authantication/data/models/login_model.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/create_account_uc.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/forget_password_uc.dart';
+import 'package:amad_furniture/features/Authantication/domain/use_cases/get_user_uc.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/login_uc.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/verify_forget_password_uc.dart';
+import 'package:amad_furniture/features/cart_screen/presentation/manager/cart_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/storage/storage_consummer.dart';
 import '../../../../core/utils/constantes.dart';
+import '../../../../core/utils/locator.dart';
+import '../../../../core/utils/routes_manager.dart';
 import '../../data/models/create_account_model.dart';
+import '../../data/models/user.dart';
 import '../../data/models/user_model.dart';
 import '../../data/models/verifyForgetPasswordModel.dart';
 import 'authantication_state.dart';
@@ -20,12 +27,14 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
   final LoginUC loginUC;
   final ForgetPasswordUC forgetPasswordUC;
   final VerifyForgetPasswordUC verifyForgetPasswordUC ;
+  final GetUserUC getUserUC ;
 
 
-  AuthanticationCubit({required this.storage,required this.verifyForgetPasswordUC,required this.forgetPasswordUC, required this.createAccountUC, required this.loginUC})
+  AuthanticationCubit( {required this.getUserUC,required this.verifyForgetPasswordUC,required this.forgetPasswordUC, required this.createAccountUC, required this.loginUC})
       : super(AuthanticationInitial());
-  final FlutterSecureStorageCnsummer storage;
+  static StorageConsumer? storage ;
   static UserModel? userModel;
+  static UserData? userData;
   static String? message;
   static var createAccountFormKey = GlobalKey<FormState>();
   static var forgetPasswordFormKey = GlobalKey<FormState>();
@@ -102,6 +111,10 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
 
   static AuthanticationCubit get(context) => BlocProvider.of(context);
 
+  static void init(){
+    storage = FlutterSecureStorageCnsummer(FlutterSecureStorage());
+  }
+
   void createAccount(CreateAccountModel createAccountModel) async {
     emit(CreateAccountLoading());
     try {
@@ -113,12 +126,14 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
     }
   }
 
-  void login(LoginModel loginModel) async {
+  void login(LoginModel loginModel,BuildContext context) async {
     emit(LoginLoading());
     try {
       userModel = await loginUC.call(loginModel);
-storage.setToken(userModel?.token);
+      storage?.setToken(userModel?.token);
+      token = userModel?.token;
       emit(LoginSuccsess());
+      context.go(RoutesManager.homeScreen);
     } on DioException catch (e) {
       print("error : ${e.response?.data["message"]}");
       emit(LoginError(error: e.response?.data["message"]));
@@ -161,4 +176,37 @@ storage.setToken(userModel?.token);
     isPassword4 = !isPassword4;
     emit(changePasswordState());
   }
+  void getToken(){
+    emit(GetTokenLoading());
+    try {
+      storage?.getToken().then((value) {
+        token = value.toString();
+        emit(GetTokenSuccsess());
+if(token != "null") {
+          getUser(token!);
+        }
+      });
+    }catch (e){
+      emit(GetTokenError());
+      print(e.toString());
+    }
+  }
+
+  void getUser(String token) {
+    emit(GetUserLoading());
+    try {
+      getUserUC.call(token).then((value) {
+        userData = value;
+        print(value.toString());
+        userModel = UserModel(email: value.user?.email,
+            name: value.user?.name,
+            token: token,
+            number: value.user?.number);
+        emit(GetUserSuccsess());
+      });
+    }catch (e){
+      emit(GetUserError(e.toString()));
+    }
+  }
 }
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSXNsYW0gS2hhbGlkIiwiZW1haWwiOiJpc2xhbWtoYWxpZDI5NUBnbWFpbC5jb20iLCJudW1iZXIiOiIrMjAxMDkxODMyODI5Iiwicm9sZSI6ImNsaWVudCIsImlhdCI6MTcwNjMwNjg4NX0.5sKWoy5im1TUPLmIka4tPw1x5QbiXZc2o74qPMW0FBY

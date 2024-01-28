@@ -22,54 +22,43 @@ class DioConsumer implements ApiConsumer {
   }
 
   @override
-  Future delete(String path, {Map<String, dynamic>? queryParameters}) async {
-    try {
+  Future delete(String path, {Map<String, dynamic>? queryParameters,Map<String, dynamic>? headers}) async {
+
       final Response response =
-      await client.delete(path, queryParameters: queryParameters);
+      await client.delete(path, queryParameters: queryParameters,options:Options(headers: headers) );
       return response.data;
-    } on DioException catch (e) {
-      _errorHandler(e);
-    }
+
   }
 
   @override
-  Future get(String path, {Map<String, dynamic>? queryParameters}) async {
-    try {
+  Future get(String path, {Map<String, dynamic>? queryParameters,Map<String, dynamic>? headers}) async {
       final Response response =
-      await client.get(path, queryParameters: queryParameters);
+      await client.get(path, queryParameters: queryParameters,options:Options(headers: headers));
       return response.data;
-    } on DioException catch (e) {
-      _errorHandler(e);
-      // if (e.response?.statusCode == StatusCode.unauthorized) {
-      //   throw const UnauthorizedException("Unauthorized action");
-      // } else {
-      //   throw const SocketException("No internet connection");
-      // }
-    }
   }
 
   @override
   Future patch(String path,
-      {Map<String, dynamic>? queryParameters, body}) async {
+      {Map<String, dynamic>? queryParameters, body,Map<String, dynamic>? headers}) async {
     final Response response =
-    await client.patch(path, queryParameters: queryParameters, data: body);
+    await client.patch(path, queryParameters: queryParameters, data: body,options:Options(headers: headers));
     return response.data;
   }
 
   @override
   Future post(String path,
-      {Map<String, dynamic>? queryParameters, body}) async {
+      {Map<String, dynamic>? queryParameters, body,Map<String, dynamic>? headers}) async {
 
       final Response response =
-      await client.post(path, queryParameters: queryParameters, data: body);
+      await client.post(path, queryParameters: queryParameters, data: body,options:Options(headers: headers));
       return response.data;
 
   }
 
   @override
-  Future put(String path, {Map<String, dynamic>? queryParameters, body}) async {
+  Future put(String path, {Map<String, dynamic>? queryParameters, body,Map<String, dynamic>? headers}) async {
     final Response response =
-    await client.put(path, queryParameters: queryParameters, data: body);
+    await client.put(path, queryParameters: queryParameters, data: body,options:Options(headers: headers));
     return response.data;
   }
 

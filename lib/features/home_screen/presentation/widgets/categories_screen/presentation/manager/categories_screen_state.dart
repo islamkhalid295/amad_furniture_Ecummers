@@ -24,3 +24,7 @@ class GetProductsByCategoryError extends CategoriesState{}
 class GetProductsBySubCategoryLoading extends CategoriesState{}
 class GetProductsBySubCategorySuccsess extends CategoriesState{}
 class GetProductsBySubCategoryError extends CategoriesState{}
+
+class AddProductToCartSuccsess extends CategoriesState{}
+
+class RemoveProductFromCartSuccsess extends CategoriesState{}

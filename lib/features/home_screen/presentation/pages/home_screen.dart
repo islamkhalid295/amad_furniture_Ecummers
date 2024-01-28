@@ -1,10 +1,12 @@
 import 'package:amad_furniture/core/utils/color_manager.dart';
+import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
 import 'package:amad_furniture/features/home_screen/presentation/manager/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../../../../core/utils/constantes.dart';
-import '../widgets/my_widget.dart';
+import '../../../../core/utils/my_widget.dart';
 import '../widgets/navigation_bar/presentation/navigation_bar_sign_in_button.dart';
 import '../widgets/navigation_bar/presentation/shop_cart_icon.dart';
 
@@ -51,6 +53,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    AuthanticationCubit authanticationCubit = BlocProvider.of(context);
+    if(token == null)
+      {
+        authanticationCubit.getToken();
+      }
     return Directionality(
       textDirection: TextDirection.rtl,
       child: DefaultTabController(
@@ -182,11 +189,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   fontWeight: FontWeight.w700,
                 ),
                 indicatorSize: TabBarIndicatorSize.label,
-                dividerHeight: 0,
+                dividerHeight: 1,
                 labelPadding: EdgeInsets.symmetric(
                     horizontal: 40 * MediaQuery.of(context).size.width / 1440),
                 isScrollable: true,
-
               ),
               actions: [
                 SizedBox(

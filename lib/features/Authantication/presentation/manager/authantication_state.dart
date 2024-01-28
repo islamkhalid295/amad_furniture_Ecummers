@@ -33,3 +33,16 @@ class VerifyForgetPasswordError extends AuthanticationState{
 
   VerifyForgetPasswordError({required this.error});
 }
+
+
+class GetTokenLoading extends AuthanticationState{}
+class GetTokenSuccsess extends AuthanticationState{}
+class GetTokenError extends AuthanticationState{}
+
+class GetUserLoading extends AuthanticationState{}
+class GetUserSuccsess extends AuthanticationState{}
+class GetUserError extends AuthanticationState{
+  final String error;
+
+  GetUserError(this.error);
+}

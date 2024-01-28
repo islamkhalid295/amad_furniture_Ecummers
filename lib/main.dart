@@ -6,13 +6,15 @@ import 'package:amad_furniture/features/Authantication/data/data_sources/Authant
 import 'package:amad_furniture/features/Authantication/domain/repositories/authantication_repo.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/create_account_uc.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/forget_password_uc.dart';
+import 'package:amad_furniture/features/Authantication/domain/use_cases/get_user_uc.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/login_uc.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/verify_forget_password_uc.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
 import 'package:amad_furniture/features/Authantication/presentation/pages/forget_password_screen.dart';
 import 'package:amad_furniture/features/Authantication/presentation/pages/login_screen.dart';
+import 'package:amad_furniture/features/cart_screen/presentation/cart_screen.dart';
+import 'package:amad_furniture/features/cart_screen/presentation/manager/cart_cubit.dart';
 import 'package:amad_furniture/features/home_screen/presentation/pages/home_screen.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/FAQ_screen/presentation/manager/faq_cubit.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/presentation/manager/about_us_screen_cubit.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/home_slider/presentation/manager/slider_cubit.dart';
 import 'package:dio/dio.dart';
@@ -23,16 +25,18 @@ import 'package:go_router/go_router.dart';
 
 import 'core/storage/flutter_secure_storage.dart';
 import 'core/utils/bloc_observer.dart';
+import 'core/utils/constantes.dart';
 import 'core/utils/locator.dart';
 import 'features/Authantication/presentation/pages/create_account_screen.dart';
 import 'features/Authantication/presentation/pages/verify_forget_password_screen.dart';
+import 'features/home_screen/presentation/widgets/FAQ_screen/presentation/manager/faq_cubit.dart';
 import 'features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
+import 'features/products_screen/presentation/product_screen.dart';
 import 'features/products_screen/presentation/products_screen.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // var storage =  FlutterSecureStorageCnsummer(FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true,)));
-  // var token = storage.read('token');
+AuthanticationCubit.init();
 
   Bloc.observer = const AppBlocObserver();
   await di.init();
@@ -60,6 +64,34 @@ class MyApp extends StatelessWidget {
             BlocProvider<AboutUsCubit>(
               create: (context) => AboutUsCubit(sl())..retriveAboutUs(),
             ),
+            BlocProvider<CartCubit>(
+              create: (context) => CartCubit(sl()),
+            ),
+            BlocProvider<AuthanticationCubit>(
+              create: (context) => AuthanticationCubit(
+                  getUserUC: GetUserUC(authanticationRepo: AuthanticationRepoImp(
+                      authanticationRDS: AuthanticationRdsImp(
+                          client: DioConsumer(client: Dio())))),
+                  verifyForgetPasswordUC: VerifyForgetPasswordUC(
+                      authanticationRepo: AuthanticationRepoImp(
+                          authanticationRDS: AuthanticationRdsImp(
+                              client: DioConsumer(client: Dio())))),
+                  forgetPasswordUC: ForgetPasswordUC(
+                      authanticationRepo:
+                      AuthanticationRepoImp(
+                          authanticationRDS:
+                          AuthanticationRdsImp(
+                              client: DioConsumer(client: Dio())))),
+                  createAccountUC: CreateAccountUC(
+                      authanticationRepo:
+                      AuthanticationRepoImp(
+                          authanticationRDS:
+                          AuthanticationRdsImp(
+                              client: DioConsumer(client: Dio())))),
+                  loginUC: LoginUC(
+                      authanticationRepo: AuthanticationRepoImp(
+                          authanticationRDS: AuthanticationRdsImp(
+                              client: DioConsumer(client: Dio()))))),),
           ],
           child: Directionality(
               textDirection: TextDirection.rtl, child: HomeScreen()),
@@ -67,10 +99,95 @@ class MyApp extends StatelessWidget {
       ),
       GoRoute(
         path: RoutesManager.productsScreen,
-        builder: (context, state) => BlocProvider(
-  create: (context) => sl<CategoriesCubit>()..getProducts()..retriveCategories(),
+        builder: (context, state) => MultiBlocProvider(
+  providers: [
+    BlocProvider(
+  create: (context) => sl<CategoriesCubit>(),
+),
+    BlocProvider(
+      create: (context) => CartCubit(sl()),
+    ),
+    BlocProvider<AuthanticationCubit>(
+      create: (context) => AuthanticationCubit(
+          getUserUC: GetUserUC(authanticationRepo: AuthanticationRepoImp(
+              authanticationRDS: AuthanticationRdsImp(
+                  client: DioConsumer(client: Dio())))),
+          verifyForgetPasswordUC: VerifyForgetPasswordUC(
+              authanticationRepo: AuthanticationRepoImp(
+                  authanticationRDS: AuthanticationRdsImp(
+                      client: DioConsumer(client: Dio())))),
+          forgetPasswordUC: ForgetPasswordUC(
+              authanticationRepo:
+              AuthanticationRepoImp(
+                  authanticationRDS:
+                  AuthanticationRdsImp(
+                      client: DioConsumer(client: Dio())))),
+          createAccountUC: CreateAccountUC(
+              authanticationRepo:
+              AuthanticationRepoImp(
+                  authanticationRDS:
+                  AuthanticationRdsImp(
+                      client: DioConsumer(client: Dio())))),
+          loginUC: LoginUC(
+              authanticationRepo: AuthanticationRepoImp(
+                  authanticationRDS: AuthanticationRdsImp(
+                      client: DioConsumer(client: Dio()))))),),
+  ],
   child: Directionality(textDirection: TextDirection.rtl,child: ProductsScreen()),
 ),
+      ),
+      GoRoute(
+        name: RoutesManager.productScreen,
+        path: '${RoutesManager.productScreen}/:productId',
+        builder: (context, state) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => CartCubit(sl()),
+              ),
+              BlocProvider(
+                create: (context) => CategoriesCubit(sl())
+                  /*..getProduct(CategoriesCubit.selectedProductID ?? "")*/,
+              ),
+              BlocProvider<AuthanticationCubit>(
+                create: (context) => AuthanticationCubit(
+                    getUserUC: GetUserUC(authanticationRepo: AuthanticationRepoImp(
+                        authanticationRDS: AuthanticationRdsImp(
+                            client: DioConsumer(client: Dio())))),
+                    verifyForgetPasswordUC: VerifyForgetPasswordUC(
+                        authanticationRepo: AuthanticationRepoImp(
+                            authanticationRDS: AuthanticationRdsImp(
+                                client: DioConsumer(client: Dio())))),
+                    forgetPasswordUC: ForgetPasswordUC(
+                        authanticationRepo:
+                        AuthanticationRepoImp(
+                            authanticationRDS:
+                            AuthanticationRdsImp(
+                                client: DioConsumer(client: Dio())))),
+                    createAccountUC: CreateAccountUC(
+                        authanticationRepo:
+                        AuthanticationRepoImp(
+                            authanticationRDS:
+                            AuthanticationRdsImp(
+                                client: DioConsumer(client: Dio())))),
+                    loginUC: LoginUC(
+                        authanticationRepo: AuthanticationRepoImp(
+                            authanticationRDS: AuthanticationRdsImp(
+                                client: DioConsumer(client: Dio()))))),),
+            ],
+            child: Directionality(textDirection: TextDirection.rtl,child: ProductScreen(productId: state.pathParameters['productId']!))),
+      ),
+      GoRoute(
+        path: RoutesManager.cartScreen,
+        builder: (context, state) => MultiBlocProvider(
+            providers: [
+              ///TODO
+
+              BlocProvider(
+                create: (context) => CartCubit(sl()),
+              ),
+            ],
+            child: Directionality(textDirection: TextDirection.rtl,child: Directionality(textDirection: TextDirection.rtl,
+            child: CartScreen()))),
       ),
       GoRoute(
         path: RoutesManager.createAccountScreen,
@@ -78,11 +195,9 @@ class MyApp extends StatelessWidget {
           create:
               (context) => /*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/
                   AuthanticationCubit(
-                      storage: FlutterSecureStorageCnsummer(
-                          FlutterSecureStorage(
-                              aOptions: AndroidOptions(
-                        encryptedSharedPreferences: true,
-                      ))),
+                    getUserUC: GetUserUC(authanticationRepo: AuthanticationRepoImp(
+                        authanticationRDS: AuthanticationRdsImp(
+                            client: DioConsumer(client: Dio())))),
                       verifyForgetPasswordUC: VerifyForgetPasswordUC(
                           authanticationRepo: AuthanticationRepoImp(
                               authanticationRDS: AuthanticationRdsImp(
@@ -110,11 +225,9 @@ class MyApp extends StatelessWidget {
       GoRoute(
         path: RoutesManager.loginScreen,
         builder: (context, state) => BlocProvider(
-          create: (context) => AuthanticationCubit(
-              storage: FlutterSecureStorageCnsummer(FlutterSecureStorage(
-                  aOptions: AndroidOptions(
-                encryptedSharedPreferences: true,
-              ))),
+          create: (context) => AuthanticationCubit(getUserUC: GetUserUC(authanticationRepo: AuthanticationRepoImp(
+              authanticationRDS: AuthanticationRdsImp(
+                  client: DioConsumer(client: Dio())))),
               verifyForgetPasswordUC: VerifyForgetPasswordUC(
                   authanticationRepo: AuthanticationRepoImp(
                       authanticationRDS: AuthanticationRdsImp(
@@ -141,11 +254,9 @@ class MyApp extends StatelessWidget {
         path: RoutesManager
             .forgetPasswordScreen /*'/authentication/forget_password'*/,
         builder: (context, state) => BlocProvider(
-          create: (context) => AuthanticationCubit(
-              storage: FlutterSecureStorageCnsummer(FlutterSecureStorage(
-                  aOptions: AndroidOptions(
-                encryptedSharedPreferences: true,
-              ))),
+          create: (context) => AuthanticationCubit(getUserUC: GetUserUC(authanticationRepo: AuthanticationRepoImp(
+              authanticationRDS: AuthanticationRdsImp(
+                  client: DioConsumer(client: Dio())))),
               verifyForgetPasswordUC: VerifyForgetPasswordUC(
                   authanticationRepo: AuthanticationRepoImp(
                       authanticationRDS: AuthanticationRdsImp(
@@ -173,10 +284,9 @@ class MyApp extends StatelessWidget {
             .verifyForgetPasswordScreen /*'/authentication/forget_password'*/,
         builder: (context, state) => BlocProvider(
           create: (context) => AuthanticationCubit(
-              storage: FlutterSecureStorageCnsummer(FlutterSecureStorage(
-                  aOptions: AndroidOptions(
-                encryptedSharedPreferences: true,
-              ))),
+              getUserUC: GetUserUC(authanticationRepo: AuthanticationRepoImp(
+                  authanticationRDS: AuthanticationRdsImp(
+                      client: DioConsumer(client: Dio())))),
               verifyForgetPasswordUC: VerifyForgetPasswordUC(
                   authanticationRepo: AuthanticationRepoImp(
                       authanticationRDS: AuthanticationRdsImp(

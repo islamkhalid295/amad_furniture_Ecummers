@@ -1,3 +1,4 @@
+import 'package:amad_furniture/core/utils/constantes.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/presentation/about_us_screen.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/categories_screen/presentation/pages/catrgories_screen.dart';
 import 'package:bloc/bloc.dart';
@@ -16,7 +17,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
   static  int sectionsNumber = homeScreenSections.length;
 
-  static final bool isLogedIn = false; // make it true
+  static final bool isLogedIn = token != null; // make it true
   static final String userName = "إسلام خالد";
 
   static List<Widget> homeScreenSections = [

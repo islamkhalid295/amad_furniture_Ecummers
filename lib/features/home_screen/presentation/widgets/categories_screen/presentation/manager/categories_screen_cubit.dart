@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../../../../core/utils/locator.dart';
+import '../../../../../../products_screen/data/models/product_info_model.dart';
 import '../../../../../../products_screen/data/models/product_list_model.dart';
 import '../../data/models/categories_model.dart';
 import '../../domain/repositories/categories_repo.dart';
@@ -17,8 +18,14 @@ class CategoriesCubit extends Cubit<CategoriesState> {
   CategoriesCubit(this.categoriesRepo) : super(CategoriesInitial());
  static CategoriesList? categoriesList;
  static ProductsListModel? productsListModel;
+  static ProductInfo? productInfo;
+  static String? selectedProductID;
   static CarouselController carouselController = CarouselController();
   static String imageOnErrorLodingImage = 'https://amadapp.s3.us-east-1.amazonaws.com/slider1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAS7PIC43H34F6W55W%2F20240112%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240112T130655Z&X-Amz-Expires=14400&X-Amz-Signature=a79d24d8198fa15e94408bc0fc6b91e7aeaf0616e843df08074057946f8365d1&X-Amz-SignedHeaders=host&x-id=GetObject';
+static String currentCategoryName = "الكل";
+static bool categoryLoaded = false;
+static bool poductsLoaded = false;
+
 
   void retriveCategories ()async
   {
@@ -31,14 +38,13 @@ class CategoriesCubit extends Cubit<CategoriesState> {
       emit(RetriveCategoriesError());
     }
   }
-  Future<Product> getProduct(String id)async
+  Future<void> getProduct(String id)async
   {
     emit(GetProductLoading());
     try {
-      Product product = await categoriesRepo.getProduct(id);
-      print(product);
+      productInfo = await categoriesRepo.getProduct(id);
+      print(productInfo);
       emit(GetProductSuccsess());
-      return product;
     }catch(e){
       emit(GetProductError());
       rethrow;
@@ -89,5 +95,6 @@ class CategoriesCubit extends Cubit<CategoriesState> {
 
     }
   }
+
 
 }

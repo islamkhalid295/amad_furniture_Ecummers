@@ -1,12 +1,13 @@
 import 'package:amad_furniture/core/api/api_consummer.dart';
 import 'package:amad_furniture/core/api/end_points.dart';
+import 'package:amad_furniture/features/products_screen/data/models/product_info_model.dart';
 import 'package:amad_furniture/features/products_screen/data/models/product_list_model.dart';
 
 import '../models/categories_model.dart';
 
 abstract class CategoriesRDS {
   Future<CategoriesList> retriveCategories ();
-  Future<Product> getProduct(String id);
+  Future<ProductInfo?> getProduct(String id);
   Future<ProductsListModel> getProducts ();
   Future<ProductsListModel> getProductsByCategory (String categoryID);
   Future<ProductsListModel> getProductsBySubCategory (String categoryID,String subCategoryID);
@@ -28,10 +29,11 @@ class CategoriesRdsImp implements CategoriesRDS{
   }
 
   @override
-  Future<Product> getProduct(String id) async{
+  Future<ProductInfo?> getProduct(String id) async{
     final response =
         await client.get("${EndPoints.BASE_URL + EndPoints.GET_PRODUCT + id}");
-    Product product = Product.fromJson(response);
+    ProductInfoModel productInfoModel = ProductInfoModel.fromJson(response);
+    ProductInfo? product = productInfoModel.product;
     print(product);
     return product;
   }

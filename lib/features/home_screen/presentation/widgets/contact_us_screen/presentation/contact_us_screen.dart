@@ -1,17 +1,12 @@
-import 'package:amad_furniture/core/api/api_consummer.dart';
 import 'package:amad_furniture/core/utils/color_manager.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/data/data_sources/contact_us_rds.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/data/models/contatct_us_model.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/domain/repositories/contact_us_repo.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/domain/use_cases/send_contact_info_uc.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/presentation/manager/contact_us_cubit.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/presentation/widgets/default_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../../../../core/utils/constantes.dart';
 import '../../../../../../core/utils/locator.dart';
+import '../../../../../../core/utils/my_widget.dart';
 import 'manager/contact_us_state.dart';
 
 class ContactUsScreen extends StatelessWidget {

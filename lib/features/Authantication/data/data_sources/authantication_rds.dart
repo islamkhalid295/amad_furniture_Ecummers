@@ -3,6 +3,7 @@ import 'package:amad_furniture/core/api/end_points.dart';
 import 'package:amad_furniture/features/Authantication/data/models/user_model.dart';
 import '../models/create_account_model.dart';
 import '../models/login_model.dart';
+import '../models/user.dart';
 import '../models/verifyForgetPasswordModel.dart';
 
 abstract class AuthanticationRDS {
@@ -10,6 +11,7 @@ abstract class AuthanticationRDS {
   Future<UserModel> login(LoginModel loginModel);
   Future<String> forgetPassword(String email);
   Future<String> verifyForgotPassword(VerifyForgetPasswordModel model);
+  Future<UserData> getUser(String token);
 }
 
 class AuthanticationRdsImp implements AuthanticationRDS {
@@ -53,5 +55,22 @@ class AuthanticationRdsImp implements AuthanticationRDS {
         },
       );
       return response["message"];
+  }
+
+  @override
+  Future<UserData> getUser(String token) async{
+    try {
+      final response = await client.get(
+          "${EndPoints.BASE_URL + EndPoints.GET_USER}",
+          headers: {
+            "Authorization": "Bearer ${token}",
+          }
+      );
+      return UserData.fromJson(response);
+
+    }catch (e){
+      print(e);
+      rethrow;
+    }
   }
 }

@@ -1,3 +1,4 @@
+import '../../../../../../products_screen/data/models/product_info_model.dart';
 import '../../../../../../products_screen/data/models/product_list_model.dart';
 import '../../data/data_sources/categories_rds.dart';
 import '../../data/models/categories_model.dart';
@@ -5,7 +6,7 @@ import '../../data/models/categories_model.dart';
 abstract class CategoriesRepo {
   Future<CategoriesList> retriveCategories();
 
-  Future<Product> getProduct(String id);
+  Future<ProductInfo?> getProduct(String id);
 
   Future<ProductsListModel> getProducts();
 
@@ -26,7 +27,7 @@ class CategoriesRepoImp implements CategoriesRepo {
   }
 
   @override
-  Future<Product> getProduct(String id) async {
+  Future<ProductInfo?> getProduct(String id) async {
     return await categoriesRDS.getProduct(id);
   }
 

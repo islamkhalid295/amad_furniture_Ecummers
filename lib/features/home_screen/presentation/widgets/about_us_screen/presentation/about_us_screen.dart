@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/constantes.dart';
-import '../../my_widget.dart';
+import '../../../../../../core/utils/my_widget.dart';
 
 class AboutUsScreen extends StatelessWidget {
   const AboutUsScreen({super.key});

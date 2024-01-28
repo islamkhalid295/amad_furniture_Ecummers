@@ -9,7 +9,7 @@ class FlutterSecureStorageCnsummer implements StorageConsumer{
   // AndroidOptions _getAndroidOptions() => const AndroidOptions(
   //   encryptedSharedPreferences: true,
   // );
-  final FlutterSecureStorage storage  ;
+   final FlutterSecureStorage storage  ;
 
   @override
   Future<void> write(String key, value)  async{
@@ -29,9 +29,8 @@ class FlutterSecureStorageCnsummer implements StorageConsumer{
   }
 
   @override
-  Future read(String key) async{
+  Future<String?> read(String key) async{
         return await storage.read(key: key,);
-
   }
 
   @override
@@ -48,5 +47,10 @@ class FlutterSecureStorageCnsummer implements StorageConsumer{
   @override
   Future<void> deleteToken() async {
     storage.delete(key: 'token');
+  }
+
+  @override
+  Future<String?> getToken() {
+    return storage.read(key: 'token');
   }
 }

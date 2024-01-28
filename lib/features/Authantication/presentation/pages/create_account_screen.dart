@@ -4,12 +4,12 @@ import 'package:amad_furniture/core/widgets/default_material_button.dart';
 import 'package:amad_furniture/features/Authantication/data/models/create_account_model.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_state.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/presentation/widgets/default_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/assets_manager.dart';
+import '../../../../core/utils/my_widget.dart';
 
 
 class CreateAccountScreen extends StatelessWidget {
@@ -120,7 +120,7 @@ class CreateAccountScreen extends StatelessWidget {
                                             cubit.showOrHidePassword1();
                                           },
                                           icon:
-                                               AuthanticationCubit.isPassword1 ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined)),
+                                               AuthanticationCubit.isPassword1 ? Icon(Icons.visibility_outlined,color: ColorManager.myGray) : Icon(Icons.visibility_off_outlined,color: ColorManager.myGray)),
                                     ),
                                     DefaultTextFormField(
                                       maxLines: 1,
@@ -130,13 +130,13 @@ class CreateAccountScreen extends StatelessWidget {
                                       controller:
                                           AuthanticationCubit.rePasswordController,
                                       title: "تأكيد كلمة السر",
-                                      icon: const Icon(Icons.vpn_key_outlined),
+                                      icon: const Icon(Icons.vpn_key_outlined,color: ColorManager.myGray),
                                       suffixIcon: IconButton(
                                           onPressed: () {
                                             cubit.showOrHidePassword2();
                                           },
                                           icon:
-                                          AuthanticationCubit.isPassword2 ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined)),
+                                          AuthanticationCubit.isPassword2 ? Icon(Icons.visibility_outlined,color: ColorManager.myGray) : Icon(Icons.visibility_off_outlined,color: ColorManager.myGray)),
 
                                     ),
                                     const SizedBox(height: 24),

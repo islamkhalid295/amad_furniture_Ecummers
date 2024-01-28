@@ -4,11 +4,11 @@ import 'package:amad_furniture/core/widgets/default_material_button.dart';
 import 'package:amad_furniture/features/Authantication/data/models/verifyForgetPasswordModel.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_state.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/presentation/widgets/default_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/utils/assets_manager.dart';
+import '../../../../core/utils/my_widget.dart';
 
 class VerifyForgetPasswordScreen extends StatelessWidget {
   const VerifyForgetPasswordScreen({super.key});
@@ -99,7 +99,7 @@ class VerifyForgetPasswordScreen extends StatelessWidget {
                                               cubit.showOrHideNewPassword();
                                             },
                                             icon:
-                                            AuthanticationCubit.isPassword4 ? Icon(Icons.visibility_outlined) : Icon(Icons.visibility_off_outlined)),
+                                            AuthanticationCubit.isPassword4 ? Icon(Icons.visibility_outlined,color: ColorManager.myGray) : Icon(Icons.visibility_off_outlined,color: ColorManager.myGray)),
                                         controller: AuthanticationCubit
                                             .newPasswordController,
                                         validator: AuthanticationCubit

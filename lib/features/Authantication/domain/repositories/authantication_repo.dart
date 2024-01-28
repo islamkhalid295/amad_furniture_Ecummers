@@ -4,6 +4,7 @@
 import '../../data/data_sources/Authantication_rds.dart';
 import '../../data/models/create_account_model.dart';
 import '../../data/models/login_model.dart';
+import '../../data/models/user.dart';
 import '../../data/models/user_model.dart';
 import '../../data/models/verifyForgetPasswordModel.dart';
 
@@ -12,6 +13,7 @@ abstract class AuthanticationRepo {
   Future<UserModel> login(LoginModel loginModel);
   Future<String> forgetPassword(String email);
   Future<String> verifyForgotPassword(VerifyForgetPasswordModel model);
+  Future<UserData> getUser(String token);
 }
 
 class AuthanticationRepoImp implements AuthanticationRepo{
@@ -33,6 +35,10 @@ class AuthanticationRepoImp implements AuthanticationRepo{
   @override
   Future<String> verifyForgotPassword(VerifyForgetPasswordModel model) async {
     return await authanticationRDS.verifyForgotPassword(VerifyForgetPasswordModel(token: model.token,newPassword: model.newPassword));
+  }
 
+  @override
+  Future<UserData> getUser(String token) async{
+    return await authanticationRDS.getUser(token) ;
   }
 }

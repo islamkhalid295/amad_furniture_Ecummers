@@ -18,6 +18,7 @@ class CategoryTitleItem extends StatelessWidget {
 
       title: InkWell(child: Text(title),onTap: (){
         cubit.getProductsByCategory(CategoriesCubit.categoriesList!.categories![index].id);
+        CategoriesCubit.currentCategoryName = title;
       }),
       children:
           CategoriesCubit.categoriesList!.categories![index].subcategories!

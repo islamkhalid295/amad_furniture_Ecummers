@@ -1,8 +1,256 @@
 import 'package:amad_furniture/core/utils/assets_manager.dart';
+import 'package:amad_furniture/core/utils/routes_manager.dart';
+import 'package:amad_furniture/features/products_screen/data/models/product_info_model.dart';
+import 'package:bloc/src/cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../features/home_screen/presentation/widgets/home_slider/domain/models/slider_item_model.dart';
-import '../../features/home_screen/presentation/widgets/my_widget.dart';
+import '../../features/home_screen/presentation/widgets/navigation_bar/presentation/navigation_bar_sign_in_button.dart';
+import '../../features/home_screen/presentation/widgets/navigation_bar/presentation/shop_cart_icon.dart';
 import 'color_manager.dart';
+import 'package:flutter/cupertino.dart';
+
+import 'constantes.dart';
+
+class CartProductItem extends StatelessWidget {
+  const CartProductItem({super.key, required this.amountController});
+final TextEditingController amountController;
+  @override
+  Widget build(BuildContext context) {
+    return                     Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        children: [
+          Expanded(child: Image.asset("assets/images/minimalist-olive-oil-bottle-glass.jpg",height: cartProductImageSize,width: cartProductImageSize,)),
+          Expanded(
+            child: Text(
+              'السعررررررررررررررررررر',
+              style: TextStyle(
+                color: Color(0xFF242424),
+                fontSize: 16,
+                fontFamily: 'Almarai',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              'السعرsssssssssssssssssssss',
+              style: TextStyle(
+                color: Color(0xFF242424),
+                fontSize: 16,
+                fontFamily: 'Almarai',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                DefaultSelectableText(
+                  'الكميه',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15.38,
+                    fontFamily: 'Almarai',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                DefaultTextFormField(
+                  controller: amountController,
+                  width: 60,
+                  textAlign: TextAlign.center,
+                  paddingRight: 0,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 50),
+            child: Container(
+              height: cartProductImageSize,
+              decoration: ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    width: 1,
+                    strokeAlign: BorderSide.strokeAlignCenter,
+                    color: Colors.black.withOpacity(0.3199999928474426),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              'السعر',
+              style: TextStyle(
+                color: Color(0xFF242424),
+                fontSize: 16,
+                fontFamily: 'Almarai',
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+        ],
+      ),
+    )
+    ;
+  }
+}
+
+
+class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget{
+
+
+  const DefaultAppBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      elevation: 2,
+      toolbarHeight: tabBarHeight,
+      backgroundColor: ColorManager.myWhite,
+      leading: Padding(
+        padding: EdgeInsets.only(
+            right: (90 * MediaQuery.of(context).size.width / 1235)),
+        child: Image.asset("assets/icons/Link → logo.png.png"),
+      ),
+      leadingWidth: MediaQuery.of(context).size.width < 800
+          ? 200 * MediaQuery.of(context).size.width / 800
+          : 200,
+      title: DefaultTextButton(
+          onPressed: () {
+            context.go(RoutesManager.homeScreen);
+          },
+          title: "الرئيسية"),
+      titleSpacing: 100,
+      actions: [
+        SizedBox(
+          width: 30 * MediaQuery.of(context).size.width / 1440,
+        ),
+        ShopCart(),
+        SizedBox(
+          width: 30 * MediaQuery.of(context).size.width / 1440,
+        ),
+        NavigationBarSignInButton(),
+        SizedBox(
+          width: 20,
+        ),
+      ],
+    );
+  }
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize =>Size(double.infinity, tabBarHeight);
+}
+
+class DefaultSelectableText extends StatelessWidget {
+  const DefaultSelectableText(this.text,{super.key, this.style, this.textAlign, this.maxLines, this.onTap, });
+  final String text;
+  final TextStyle? style;
+  final int? maxLines;
+  final TextAlign? textAlign;
+  final GestureTapCallback? onTap;
+  @override
+  Widget build(BuildContext context) {
+    return SelectableText(
+      text,
+      style: style,
+      textAlign: textAlign,
+      maxLines: maxLines,
+      onTap: onTap,
+    );
+  }
+}
+
+class DefaultTextButton extends StatelessWidget {
+  const DefaultTextButton({super.key, required this.title, this.onPressed});
+  final String title;
+  final VoidCallback? onPressed;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration:  BoxDecoration(border: Border.all(color: ColorManager.myYellow),borderRadius:  BorderRadius.circular(10)),
+      child: TextButton(
+          onPressed: onPressed,
+          child: FittedBox(
+            child: Text(title,style: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+              fontFamily: 'Almarai',
+              fontWeight: FontWeight.w700,
+            ),),
+          )),
+    );
+  }
+}
+
+class DefaultTextFormField extends StatelessWidget {
+
+  const DefaultTextFormField({super.key, this.title, this.hintText, this.icon, this.suffixIcon, this.maxLines, this.width, this.height, this.boxShape, this.validator, this.controller, this.obscureText, this.textAlign = TextAlign.start, this.paddingRight = 10.0, this.keyboardType, this.onFieldSubmitted});
+  final String? title;
+  final String? hintText;
+  final Icon? icon;
+  final Widget? suffixIcon;
+  final int? maxLines;
+  final double? width;
+  final double? height;
+  final BoxShape? boxShape;
+  final bool? obscureText;
+  final TextEditingController? controller;
+  final FormFieldValidator<String>? validator;
+  final double paddingRight;
+final TextAlign textAlign;
+  final TextInputType? keyboardType;
+  final ValueChanged<String>? onFieldSubmitted;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Container(
+        width: width ?? 300,
+        height: height,
+        decoration: BoxDecoration(
+          color: ColorManager.myWhite,
+          border: Border.all(color: ColorManager.myGrayLiteMore,),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding:  EdgeInsets.only(right: paddingRight),
+          child: TextFormField(
+            onFieldSubmitted: onFieldSubmitted,
+            keyboardType: keyboardType,
+            textAlign: textAlign,
+            obscureText: obscureText ?? false,
+            controller: controller,
+            validator: validator /*(value) {
+              if (value!.isEmpty) {
+                return 'name can\'t be empty';
+              } else {
+                return null;
+              }
+            }*/,
+            decoration: InputDecoration(
+              errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+              hintStyle: TextStyle(
+                  fontSize: 14, color: ColorManager.myGray),
+              border: InputBorder.none,
+              hintText: title,
+
+              suffixIcon: suffixIcon,
+            ),
+            maxLines: maxLines,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 
 Widget mySlider(context, SliderItem sliderItem) => Stack(
       fit: StackFit.expand,
