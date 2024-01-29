@@ -279,7 +279,7 @@ String productId;
                                     builder: (context, state) {
                                       CartCubit cartCubit =
                                           BlocProvider.of(context);
-
+                                      inCart = CartCubit.cart?.contains(CategoriesCubit.productInfo) ?? false;
                                       return Column(
                                         children: [
                                           state is AddAmountOfProductToCartError ? Text(state.error,style: TextStyle(color: Colors.red),):const SizedBox(),
