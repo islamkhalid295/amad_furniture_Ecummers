@@ -34,14 +34,14 @@ class ShopCart extends StatelessWidget {
                 state is GetCartLoading  ? CircleAvatar(
                   child: CircularProgressIndicator(color: ColorManager.myYellow,),
                   backgroundColor: Colors.red,
-                  radius: 10,) : CartCubit.cart.isNotEmpty ? CircleAvatar(
+                  radius: 10,) : CartCubit.cart != null ? CartCubit.cart!.isNotEmpty ? CircleAvatar(
                   child: DefaultSelectableText(
-                    CartCubit.cart.length.toString(),
+                    CartCubit.cart!.length.toString(),
                     style: TextStyle(color: ColorManager.myWhite),
                   ),
                   backgroundColor: Colors.red,
                   radius: 10,
-                ) : SizedBox(),
+                ) : SizedBox() : SizedBox(),
               ],
             );
           },

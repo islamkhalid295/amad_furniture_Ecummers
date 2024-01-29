@@ -13,6 +13,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/utils/constantes.dart';
 import '../../../core/utils/my_widget.dart';
 import '../../Authantication/presentation/manager/authantication_cubit.dart';
+import '../../cart_screen/presentation/manager/cart_cubit.dart';
 import '../../home_screen/presentation/widgets/navigation_bar/presentation/navigation_bar_sign_in_button.dart';
 import '../../home_screen/presentation/widgets/navigation_bar/presentation/shop_cart_icon.dart';
 
@@ -22,9 +23,12 @@ class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthanticationCubit authanticationCubit = BlocProvider.of(context);
-    if(token == null)
-    {
+    CartCubit cartCubit = BlocProvider.of(context);
+    if (token == null) {
       authanticationCubit.getToken();
+    }
+    if (CartCubit.cart == null) {
+      cartCubit.getCart();
     }
     return Scaffold(
         appBar: DefaultAppBar(),

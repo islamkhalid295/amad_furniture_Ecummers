@@ -13,12 +13,12 @@ part 'cart_state.dart';
 class CartCubit extends Cubit<CartState> {
   CartCubit(this.cartRepo) : super(CartInitial());
  final CartRepo cartRepo;
-  static List<ProductInfo> cart = [];
+  static List<ProductInfo>? cart ;
 
 
   void removeProductFromLocalCart (ProductInfo product)
   {
-    cart.remove(product);
+    cart?.remove(product);
     emit(RemoveProductFromLocalCartSuccsess());
   }
 
@@ -26,7 +26,7 @@ class CartCubit extends Cubit<CartState> {
     emit(AddAmountOfProductToCartLoading());
     try {
       String message = await cartRepo.addAmountOfProductToCart(productAmountModel);
-      cart.add(CategoriesCubit.productInfo!);
+      cart?.add(CategoriesCubit.productInfo!);
       emit(AddAmountOfProductToCartSuccess());
       return message;
     }on DioException catch (e) {
@@ -39,7 +39,7 @@ class CartCubit extends Cubit<CartState> {
     emit(DeleteAmountOfProductToCartLoading());
     try {
       String message = await cartRepo.deleteAmountOfProductToCart(productAmountModel);
-      cart.remove(CategoriesCubit.productInfo!);
+      cart?.remove(CategoriesCubit.productInfo!);
       emit(DeleteAmountOfProductToCartSuccess());
       return message;
     }on DioException catch (e) {

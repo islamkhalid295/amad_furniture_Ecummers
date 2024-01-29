@@ -15,7 +15,7 @@ import '../../Authantication/presentation/manager/authantication_cubit.dart';
 import '../../cart_screen/presentation/manager/cart_cubit.dart';
 
 class ProductScreen extends StatelessWidget {
-  bool inCart = CartCubit.cart.contains(CategoriesCubit.productInfo);
+  bool inCart = CartCubit.cart?.contains(CategoriesCubit.productInfo) ?? false;
 TextEditingController amountController = TextEditingController(text: "1");
 String productId;
   // List<String> arrayImages = const [
@@ -51,8 +51,12 @@ String productId;
   Widget build(BuildContext context) {
     AuthanticationCubit authanticationCubit = BlocProvider.of(context);
     CategoriesCubit categoriesCubit = BlocProvider.of(context);
+    CartCubit cartCubit = BlocProvider.of(context);
     if (token == null) {
       authanticationCubit.getToken();
+    }
+    if (CartCubit.cart == null) {
+      cartCubit.getCart();
     }
     categoriesCubit.getProduct(productId);
     return Scaffold(
@@ -275,8 +279,7 @@ String productId;
                                     builder: (context, state) {
                                       CartCubit cartCubit =
                                           BlocProvider.of(context);
-                                      inCart = CartCubit.cart.contains(
-                                          CategoriesCubit.productInfo);
+
                                       return Column(
                                         children: [
                                           state is AddAmountOfProductToCartError ? Text(state.error,style: TextStyle(color: Colors.red),):const SizedBox(),
@@ -293,7 +296,7 @@ String productId;
                                                             productAmountModel: ProductAmountModel(
                                                                 id: CategoriesCubit.productInfo!.id,
                                                                 amount: int.parse(amountController.text)));
-                                                        print(CartCubit.cart.length);
+                                                        print(CartCubit.cart?.length);
 
                                                         // inCart = !inCart;
                                                       } else if (inCart) {
@@ -303,7 +306,7 @@ String productId;
                                                             productAmountModel: ProductAmountModel(
                                                                 id: CategoriesCubit.productInfo!.id,
                                                                 amount: int.parse(amountController.text)));
-                                                        print(CartCubit.cart.length);
+                                                        print(CartCubit.cart?.length);
                                                       }
                                                     } else context.go(RoutesManager.loginScreen);
                                                   },
