@@ -8,7 +8,10 @@ import '../models/product_amount_model.dart';
 abstract class CartRDS {
   Future<String> addAmountOfProductToCart(
       ProductAmountModel productAmountModel);
+  Future<String> deleteAmountOfProductToCart(
+      ProductAmountModel productAmountModel);
   Future<dynamic> getCart();
+
 }
 
 class CartRdsImp implements CartRDS {
@@ -23,6 +26,22 @@ class CartRdsImp implements CartRDS {
     try {
       final response = await client.post(
           "${EndPoints.BASE_URL + EndPoints.ADD_PRODUCT_TO_CART}",
+          body: productAmountModel.toJson(),
+          headers: {
+            "Authorization": "Bearer ${token}",
+          });
+      return response["message"];
+
+    }catch (e){
+      rethrow;
+    }
+  }
+
+  Future<String> deleteAmountOfProductToCart(
+      ProductAmountModel productAmountModel) async {
+    try {
+      final response = await client.delete(
+          "${EndPoints.BASE_URL + EndPoints.DELETE_PRODUCT_FROM_CART}",
           body: productAmountModel.toJson(),
           headers: {
             "Authorization": "Bearer ${token}",

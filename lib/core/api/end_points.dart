@@ -25,7 +25,7 @@ class EndPoints {
 
 
   static const String ADD_PRODUCT_TO_CART = "client/authcart/addproduct";
-  static const String DELETE_PRODUCT_FROM_CART = "client/authcart/deleteprod";
+  static const String DELETE_PRODUCT_FROM_CART = "client/authcart/deleteproduct";
   static const String GET_CART = "client/authcart/getcart";
   static const String CLEAR_CART = "client/authcart/clearcart";
   static const String ADD_PROMOCODE = "client/authcart/addpromocode";

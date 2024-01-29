@@ -3,6 +3,6 @@ abstract class ApiConsumer {
   Future<dynamic> post(String path, {Map<String, dynamic>? queryParameters, dynamic body,Map<String, dynamic>? headers});
   Future<dynamic> put(String path, {Map<String, dynamic>? queryParameters, dynamic body,Map<String, dynamic>? headers});
   Future<dynamic> patch(String path, {Map<String, dynamic>? queryParameters, dynamic body,Map<String, dynamic>? headers});
-  Future<dynamic> delete(String path, {Map<String, dynamic>? queryParameters,Map<String, dynamic>? headers});
+  Future<dynamic> delete(String path, {Map<String, dynamic>? queryParameters, dynamic body,Map<String, dynamic>? headers});
   void setToken();
 }

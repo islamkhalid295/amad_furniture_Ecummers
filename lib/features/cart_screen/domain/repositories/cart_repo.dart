@@ -4,6 +4,8 @@ import '../../data/models/product_amount_model.dart';
 abstract class CartRepo {
   Future<String> addAmountOfProductToCart(ProductAmountModel productAmountModel);
   Future<dynamic> getCart();
+  Future<String> deleteAmountOfProductToCart(
+      ProductAmountModel productAmountModel);
 }
 
 class CartRepoImp implements CartRepo{
@@ -13,6 +15,9 @@ class CartRepoImp implements CartRepo{
   @override
   Future<String> addAmountOfProductToCart(ProductAmountModel productAmountModel) async {
     return await cartRDS.addAmountOfProductToCart(productAmountModel);
+  }
+  Future<String> deleteAmountOfProductToCart(ProductAmountModel productAmountModel) async {
+    return await cartRDS.deleteAmountOfProductToCart(productAmountModel);
   }
 
   @override

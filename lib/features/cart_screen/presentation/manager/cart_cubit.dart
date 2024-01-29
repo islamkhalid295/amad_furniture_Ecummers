@@ -1,3 +1,4 @@
+import 'package:amad_furniture/core/utils/constantes.dart';
 import 'package:amad_furniture/features/cart_screen/data/models/cart_model.dart';
 import 'package:amad_furniture/features/cart_screen/domain/repositories/cart_repo.dart';
 import 'package:bloc/bloc.dart';
@@ -14,21 +15,18 @@ class CartCubit extends Cubit<CartState> {
  final CartRepo cartRepo;
   static List<ProductInfo> cart = [];
 
-  void addProductToLocalCart (ProductInfo product){
-    cart.add(product);
-  }
 
   void removeProductFromLocalCart (ProductInfo product)
   {
     cart.remove(product);
+    emit(RemoveProductFromLocalCartSuccsess());
   }
 
   Future<String> addAmountOfProductToCart ({required ProductAmountModel productAmountModel}) async {
     emit(AddAmountOfProductToCartLoading());
     try {
       String message = await cartRepo.addAmountOfProductToCart(productAmountModel);
-      addProductToLocalCart(
-          CategoriesCubit.productInfo!);
+      cart.add(CategoriesCubit.productInfo!);
       emit(AddAmountOfProductToCartSuccess());
       return message;
     }on DioException catch (e) {
@@ -36,16 +34,35 @@ class CartCubit extends Cubit<CartState> {
       return e.response?.data['message'];
     }
   }
-  CartModel? cartModel;
-  Future<void> getCart() async {
-    emit(GetCartLoading());
-    try {
-      var response = await cartRepo.getCart();
-      cartModel = CartModel.fromJson(response);
-      emit(GetCartSuccess());
 
+  Future<String> deleteAmountOfProductToCart ({required ProductAmountModel productAmountModel}) async {
+    emit(DeleteAmountOfProductToCartLoading());
+    try {
+      String message = await cartRepo.deleteAmountOfProductToCart(productAmountModel);
+      cart.remove(CategoriesCubit.productInfo!);
+      emit(DeleteAmountOfProductToCartSuccess());
+      return message;
     }on DioException catch (e) {
-      emit(GetCartError(e.response?.data['message']));
+      emit(DeleteAmountOfProductToCartError(e.response?.data['message']));
+      return e.response?.data['message'];
+    }
+  }
+
+
+  static CartModel? cartModel;
+   Future<void> getCart() async {
+     if (token != null && token != 'null'){
+      emit(GetCartLoading());
+      try {
+        var response = await cartRepo.getCart();
+        cartModel = CartModel.fromJson(response);
+        cart = cartModel!.cart!.products!
+            .map((e) => ProductInfo(id: e.id))
+            .toList();
+        emit(GetCartSuccess());
+      } on DioException catch (e) {
+        emit(GetCartError(e.response?.data['message']));
+      }
     }
   }
 }

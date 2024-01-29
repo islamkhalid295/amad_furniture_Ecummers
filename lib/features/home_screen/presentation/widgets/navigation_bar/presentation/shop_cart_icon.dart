@@ -1,12 +1,14 @@
+import 'package:amad_furniture/core/utils/constantes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../core/utils/color_manager.dart';
+import '../../../../../../core/utils/locator.dart';
 import '../../../../../../core/utils/my_widget.dart';
 import '../../../../../cart_screen/presentation/manager/cart_cubit.dart';
 
 class ShopCart extends StatelessWidget {
-  const ShopCart( {super.key});
+  const ShopCart({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +18,11 @@ class ShopCart extends StatelessWidget {
             borderRadius: BorderRadius.circular(10)),
         child: BlocBuilder<CartCubit, CartState>(
           builder: (context, state) {
+            CartCubit cartCubit = BlocProvider.of(context);
+            // if ((token != null && token != 'null') && CartCubit.cart.isEmpty &&
+            //     state is! GetCartLoading) {
+            //   cartCubit.getCart();
+            // }
             return Stack(
               children: [
                 IconButton(
@@ -24,7 +31,10 @@ class ShopCart extends StatelessWidget {
                       CupertinoIcons.cart,
                       size: 30,
                     )),
-                CartCubit.cart.isNotEmpty ? CircleAvatar(
+                state is GetCartLoading  ? CircleAvatar(
+                  child: CircularProgressIndicator(color: ColorManager.myYellow,),
+                  backgroundColor: Colors.red,
+                  radius: 10,) : CartCubit.cart.isNotEmpty ? CircleAvatar(
                   child: DefaultSelectableText(
                     CartCubit.cart.length.toString(),
                     style: TextStyle(color: ColorManager.myWhite),

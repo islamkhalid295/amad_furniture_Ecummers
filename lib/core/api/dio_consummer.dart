@@ -22,10 +22,10 @@ class DioConsumer implements ApiConsumer {
   }
 
   @override
-  Future delete(String path, {Map<String, dynamic>? queryParameters,Map<String, dynamic>? headers}) async {
+  Future delete(String path, {Map<String, dynamic>? queryParameters,dynamic body,Map<String, dynamic>? headers}) async {
 
       final Response response =
-      await client.delete(path, queryParameters: queryParameters,options:Options(headers: headers) );
+      await client.delete(path, queryParameters: queryParameters,data: body,options:Options(headers: headers) );
       return response.data;
 
   }

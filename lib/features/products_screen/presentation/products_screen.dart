@@ -27,66 +27,7 @@ class ProductsScreen extends StatelessWidget {
       authanticationCubit.getToken();
     }
     return Scaffold(
-        appBar: AppBar(
-          elevation: 2,
-          toolbarHeight: tabBarHeight,
-          backgroundColor: ColorManager.myWhite,
-          leading: Padding(
-            padding: EdgeInsets.only(
-                right: (90 * MediaQuery.of(context).size.width / 1235)),
-            child: Image.asset("assets/icons/Link → logo.png.png"),
-          ),
-          leadingWidth: MediaQuery.of(context).size.width < 800
-              ? 200 * MediaQuery.of(context).size.width / 800
-              : 200,
-          title: DefaultTextButton(onPressed: (){context.go(RoutesManager.homeScreen);}, title: "الرئيسية"),
-
-          titleSpacing: 100,
-          // title: TabBar(
-          //   controller: _tabController,
-          //   onTap: (index) {
-          //     _scrollController.scrollToIndex(index,
-          //         preferPosition: AutoScrollPosition.begin);
-          //     _onSectionChange(index);
-          //   },
-          //   tabs: HomeScreenCubit.tabBarTabs,
-          //   indicatorColor: ColorManager.myYellow,
-          //   labelStyle: const TextStyle(
-          //     color: Colors.black,
-          //     fontSize: 16,
-          //     fontFamily: 'Almarai',
-          //     fontWeight: FontWeight.w700,
-          //   ),
-          //   indicatorSize: TabBarIndicatorSize.label,
-          //   dividerHeight: 0,
-          //   labelPadding: EdgeInsets.symmetric(
-          //       horizontal: 40 * MediaQuery.of(context).size.width / 1440),
-          //   isScrollable: true,
-          //
-          // ),
-          actions: [
-            SizedBox(
-              width: 30 * MediaQuery.of(context).size.width / 1440,
-            ),
-            ShopCart(),
-            SizedBox(
-              width: 30 * MediaQuery.of(context).size.width / 1440,
-            ),
-            NavigationBarSignInButton(),
-            // Container(
-            //   decoration: BoxDecoration(border: Border.all(color: ColorManager.myYellow),borderRadius: BorderRadius.circular(10)),
-            //   child: TextButton(onPressed: ()=> context.go('/authentication/create_account'), child: Text("تسجيل الدخول",style: TextStyle(
-            //     color: Colors.black,
-            //     fontSize: 16,
-            //     fontFamily: 'Almarai',
-            //     fontWeight: FontWeight.w700,
-            //   ),)),
-            // ),
-            SizedBox(
-              width: 20,
-            ),
-          ],
-        ),
+        appBar: DefaultAppBar(),
         body: BlocBuilder<CategoriesCubit, CategoriesState>(
           builder: (context, state) {
             CategoriesCubit cubit = BlocProvider.of(context);

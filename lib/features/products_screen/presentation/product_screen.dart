@@ -15,7 +15,7 @@ import '../../Authantication/presentation/manager/authantication_cubit.dart';
 import '../../cart_screen/presentation/manager/cart_cubit.dart';
 
 class ProductScreen extends StatelessWidget {
-  bool inCart = CartCubit.cart.contains(CategoriesCubit.productInfo?.id);
+  bool inCart = CartCubit.cart.contains(CategoriesCubit.productInfo);
 TextEditingController amountController = TextEditingController(text: "1");
 String productId;
   // List<String> arrayImages = const [
@@ -285,25 +285,28 @@ String productId;
                                             borderRadius: 10,
                                             color: inCart ? ColorManager.myYellow : null,
                                             textColor: inCart ? ColorManager.myBlack : null,
-                                            text: inCart ? "تمت الإضافة" : "اضافة الي العربة",
+                                            text: token == "null" ? "تسجيل الدخول اولا" : inCart ? "تمت الإضافة" : "اضافة الي العربة",
                                             onPressed: () {
-                                              if (!inCart) {
-                                                cartCubit.addAmountOfProductToCart(
-                                                    productAmountModel:
-                                                        ProductAmountModel(
-                                                            id: CategoriesCubit
-                                                                .productInfo!.id,
-                                                            amount: int.parse(amountController.text)));
-                                                // inCart = !inCart;
-                                              } else if (inCart) {
-                                                print("remove");
-                                                // inCart = !inCart;
-                                                cartCubit
-                                                    .removeProductFromLocalCart(
-                                                        CategoriesCubit
-                                                            .productInfo!);
-                                              }
-                                            },
+                                               if (token != "null"){
+                                                      if (!inCart) {
+                                                        cartCubit.addAmountOfProductToCart(
+                                                            productAmountModel: ProductAmountModel(
+                                                                id: CategoriesCubit.productInfo!.id,
+                                                                amount: int.parse(amountController.text)));
+                                                        print(CartCubit.cart.length);
+
+                                                        // inCart = !inCart;
+                                                      } else if (inCart) {
+                                                        print("remove");
+                                                        // inCart = !inCart;
+                                                        cartCubit.deleteAmountOfProductToCart(
+                                                            productAmountModel: ProductAmountModel(
+                                                                id: CategoriesCubit.productInfo!.id,
+                                                                amount: int.parse(amountController.text)));
+                                                        print(CartCubit.cart.length);
+                                                      }
+                                                    } else context.go(RoutesManager.loginScreen);
+                                                  },
                                             lodingCondition: state is AddAmountOfProductToCartLoading,
                                             errorCondition: state is AddAmountOfProductToCartError,
                                           ),

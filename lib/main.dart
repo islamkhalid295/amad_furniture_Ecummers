@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
               create: (context) => AboutUsCubit(sl())..retriveAboutUs(),
             ),
             BlocProvider<CartCubit>(
-              create: (context) => CartCubit(sl()),
+              create: (context) => CartCubit(sl())..getCart(),
             ),
             BlocProvider<AuthanticationCubit>(
               create: (context) => AuthanticationCubit(
@@ -104,7 +104,7 @@ class MyApp extends StatelessWidget {
     BlocProvider(
   create: (context) => sl<CategoriesCubit>(),
 ),
-    BlocProvider(
+    BlocProvider<CartCubit>(
       create: (context) => CartCubit(sl()),
     ),
     BlocProvider<AuthanticationCubit>(

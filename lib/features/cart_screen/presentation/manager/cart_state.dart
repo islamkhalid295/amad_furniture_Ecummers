@@ -12,6 +12,15 @@ class AddAmountOfProductToCartError extends CartState {
 
   AddAmountOfProductToCartError(this.error);
 }
+
+class DeleteAmountOfProductToCartLoading extends CartState {}
+class DeleteAmountOfProductToCartSuccess extends CartState {}
+class DeleteAmountOfProductToCartError extends CartState {
+  final String error;
+
+  DeleteAmountOfProductToCartError(this.error);
+}
+
 class GetCartLoading extends CartState {}
 class GetCartSuccess extends CartState {}
 class GetCartError extends CartState {
