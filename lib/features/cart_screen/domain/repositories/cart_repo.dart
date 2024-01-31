@@ -1,4 +1,5 @@
 import '../../data/data_sources/Cart_rds.dart';
+import '../../data/models/order_data.dart';
 import '../../data/models/product_amount_model.dart';
 import '../../data/models/promocode_model.dart';
 
@@ -11,6 +12,7 @@ abstract class CartRepo {
   Future<dynamic> getCitiesDeliveryPrices();
   Future<String> addPromoCodeToCart(PromoCodeModel promoCodeModel);
   Future<String> deletePromoCodeFromCart(PromoCodeModel promoCodeModel);
+  Future<String> orderTheCart (OrderData orderData);
 }
 
 class CartRepoImp implements CartRepo{
@@ -41,5 +43,10 @@ class CartRepoImp implements CartRepo{
   @override
   Future<dynamic> getCitiesDeliveryPrices() async{
     return await cartRDS.getCitiesDeliveryPrices();
+  }
+
+  @override
+  Future<String> orderTheCart (OrderData orderData)  async {
+    return await cartRDS.orderTheCart(orderData);
   }
 }

@@ -24,7 +24,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     height: 150,
-                    decoration: ShapeDecoration(
+                    decoration: const ShapeDecoration(
                       color: Color(0xFFDADADA),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(
@@ -63,7 +63,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'هل نسيت كلمة السر؟',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -73,7 +73,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 16),
-                                    Text(
+                                    const Text(
                                       'أحصل عليها الان',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -89,12 +89,12 @@ class ForgetPasswordScreen extends StatelessWidget {
                                         validator: AuthanticationCubit
                                             .emailValidator,
                                         title: "البريد الإلكتروني",
-                                        icon: Icon(Icons.email_outlined)),
+                                        icon: const Icon(Icons.email_outlined)),
                                     const SizedBox(height: 10),
                                     state is ForgetPasswordError ? Padding(
                                       padding: const EdgeInsets.only(bottom: 24),
-                                      child: Text(state.error,style: TextStyle(fontWeight: FontWeight.w500,color: Colors.red)),
-                                    ) : SizedBox(),
+                                      child: Text(state.error,style: const TextStyle(fontWeight: FontWeight.w500,color: Colors.red)),
+                                    ) : const SizedBox(),
                                     DefaultMaterialButton(
                                         lodingCondition: state is ForgetPasswordLoading,
                                         succsessCondition:  state is ForgetPasswordSuccsess,
@@ -124,7 +124,7 @@ class ForgetPasswordScreen extends StatelessWidget {
               .size
               .width < 700 ? Container() : Expanded(
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment(0, -0.5),
                   end: Alignment(0, 1.6),
@@ -141,7 +141,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'منتجات للعنايه بالشعر',
                       textAlign: TextAlign.right,
                       style: TextStyle(
@@ -150,7 +150,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 444,
                       child: Text(
                         textAlign: TextAlign.right,
@@ -174,7 +174,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                       ),
                       child: TextButton(
                         onPressed: ()=> context.go(RoutesManager.homeScreen),
-                        child: Text(
+                        child: const Text(
                           'تعرف علي المزيد',
                           style: TextStyle(
                             color: Colors.white,

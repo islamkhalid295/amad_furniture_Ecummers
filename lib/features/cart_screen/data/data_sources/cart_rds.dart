@@ -1,5 +1,6 @@
 import 'package:amad_furniture/core/api/api_consummer.dart';
 import 'package:amad_furniture/core/api/end_points.dart';
+import 'package:amad_furniture/features/cart_screen/data/models/order_data.dart';
 import 'package:amad_furniture/features/cart_screen/data/models/promocode_model.dart';
 import 'package:dio/dio.dart';
 
@@ -15,6 +16,7 @@ abstract class CartRDS {
   Future<dynamic> getCitiesDeliveryPrices();
   Future<String> addPromoCodeToCart(PromoCodeModel promoCodeModel);
   Future<String> deletePromoCodeFromCart(PromoCodeModel promoCodeModel);
+  Future<String> orderTheCart (OrderData orderData);
 }
 
 class CartRdsImp implements CartRDS {
@@ -114,6 +116,21 @@ class CartRdsImp implements CartRDS {
       return response;
     }on DioException catch (e){
       print(e.response?.data['message']);
+      rethrow;
+    }
+  }
+  @override
+  Future<String> orderTheCart (OrderData orderData) async {
+    try {
+      final response = await client.post(
+          "${EndPoints.BASE_URL + EndPoints.ORDER_CART}",
+          body: orderData.toJson(),
+          headers: {
+            "Authorization": "Bearer ${token}",
+          });
+      return response["message"];
+
+    }catch (e){
       rethrow;
     }
   }

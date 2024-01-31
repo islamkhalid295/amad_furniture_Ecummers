@@ -12,6 +12,13 @@ class AddAmountOfProductToCartError extends CartState {
 
   AddAmountOfProductToCartError(this.error);
 }
+class OrderTheCartLoading extends CartState {}
+class OrderTheCartSuccess extends CartState {}
+class OrderTheCartError extends CartState {
+  final String error;
+
+  OrderTheCartError(this.error);
+}
 
 class AddClientPromoCodeToCartLoading extends CartState {}
 class AddClientPromoCodeToCartSuccess extends CartState {}

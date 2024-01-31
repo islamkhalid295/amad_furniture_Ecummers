@@ -1,14 +1,11 @@
-import 'package:amad_furniture/core/use_case/use_case.dart';
 import 'package:bloc/bloc.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:meta/meta.dart';
 
-import '../../../../../../../core/utils/locator.dart';
 import '../../../../../../products_screen/data/models/product_info_model.dart';
 import '../../../../../../products_screen/data/models/product_list_model.dart';
 import '../../data/models/categories_model.dart';
 import '../../domain/repositories/categories_repo.dart';
-import '../../domain/use_cases/retrive_categories_uc.dart';
 
 part 'categories_screen_state.dart';
 

@@ -1,24 +1,69 @@
 import 'package:amad_furniture/core/utils/color_manager.dart';
 import 'package:amad_furniture/core/utils/my_widget.dart';
 import 'package:amad_furniture/core/widgets/default_material_button.dart';
+import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
+import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_state.dart';
+import 'package:amad_furniture/features/cart_screen/data/models/order_data.dart';
 import 'package:amad_furniture/features/cart_screen/presentation/manager/cart_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../core/utils/constantes.dart';
+import '../../../core/utils/routes_manager.dart';
 
 class OrderScreen extends StatelessWidget {
-  const OrderScreen({super.key});
+   OrderScreen({super.key});
+late  TextEditingController firstNameController = TextEditingController(text: AuthanticationCubit.userModel?.name);
+final TextEditingController secondNameController = TextEditingController();
+late  TextEditingController phoneController = TextEditingController(text: AuthanticationCubit.userData?.user?.number);
+final TextEditingController anotherPhoneController = TextEditingController();
+   late  TextEditingController emailController = TextEditingController(text: AuthanticationCubit.userData?.user?.email);
+   final TextEditingController governorateController = TextEditingController();
+   final TextEditingController addressController = TextEditingController();
+   late String orderError="";
+
 
   @override
   Widget build(BuildContext context) {
+    CartCubit cubit = BlocProvider.of(context);
+    AuthanticationCubit authanticationCubit = BlocProvider.of(context);
+    if (token == null) {
+      authanticationCubit.getToken();
+    }
+    if (token != null && CartCubit.cartModel == null) {
+      cubit.getCart();
+    }
     return Scaffold(
-      appBar: DefaultAppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 65,vertical: 30),
-        child: SingleChildScrollView(
+      appBar: const DefaultAppBar(),
+      body: BlocBuilder<AuthanticationCubit, AuthanticationState>(
+  builder: (context, state) {
+    if (token == 'null' || token == null) {
+      return Center(
+          child: AlertDialog(
+            title: const Text('خطأ'),
+            content: const Text('يجب تسجيل الدخول اولاً'),
+            actions: [
+              TextButton(
+                onPressed: () => context.go(RoutesManager.loginScreen),
+                child: const Text('تسجيل الدخول'),
+              ),
+            ],
+          ));
+    }
+    if (state is GetUserSuccsess){
+      firstNameController = TextEditingController(text: AuthanticationCubit.userModel?.name);
+      phoneController = TextEditingController(text: AuthanticationCubit.userData?.user?.number);
+      emailController = TextEditingController(text: AuthanticationCubit.userData?.user?.email);
+    }
+
+    return SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 65,vertical: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              DefaultSelectableText(
+              const DefaultSelectableText(
                 'تأكيد الطلب',
                 textAlign: TextAlign.right,
                 style: TextStyle(
@@ -34,14 +79,14 @@ class OrderScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(12),
                     color: ColorManager.orderBackgroundColor,
-          
+
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 40 , vertical: 25),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'بيانات الدفع',
                           textAlign: TextAlign.right,
                           style: TextStyle(
@@ -51,7 +96,7 @@ class OrderScreen extends StatelessWidget {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        Text(
+                        const Text(
                           'وسائل الدفع',
                           textAlign: TextAlign.right,
                           style: TextStyle(
@@ -64,7 +109,7 @@ class OrderScreen extends StatelessWidget {
                     ListTile(
                       title: const Text('الدفع عند الأستلام'),
                       leading: Radio<String>(
-activeColor: ColorManager.myYellow,
+          activeColor: ColorManager.myYellow,
 
                         value: "cash",
                         groupValue: "cash",
@@ -75,64 +120,84 @@ activeColor: ColorManager.myYellow,
                         },
                       ),
                     ),
-                        Form(
-                          key: CartCubit.formKey,
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  // DefaultTextFormField(
-                                  //   title: 'الاسم الاول',
-                                  //   backgroundColor: ColorManager.orderBackgroundColor,
-                                  //   s
-                                  // ),
-                                  Expanded(child: OrderTextFormField(hintText: 'الاسم الاول',
-                                  validator:  CartCubit.nameValidator,)),
-                                  SizedBox(width: 40,),
-                                  Expanded(child: OrderTextFormField(hintText: 'الاسم الثاني',
-                                  validator: CartCubit.nameValidator,)),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(child: OrderTextFormField(hintText: 'رقم الهاتف',
-                                  validator: CartCubit.phoneValidator,)),
-                                  SizedBox(width: 40,),
-                                  Expanded(child: OrderTextFormField(hintText: 'رقم اخر' ,validator: CartCubit.phoneValidator)),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(child: OrderTextFormField(hintText: 'البريد الإلكتروني',validator: CartCubit.emailValidator,)),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(child: OrderTextFormField(hintText: 'المحافظة',validator: CartCubit.nameValidator,)),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(child: OrderTextFormField(hintText: 'العنوان',validator: CartCubit.nameValidator,)),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                        state is GetUserLoading || AuthanticationCubit.userData == null ? const Center(child: CircularProgressIndicator()) : Form(
+                                    key: CartCubit.formKey,
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            // DefaultTextFormField(
+                                            //   title: 'الاسم الاول',
+                                            //   backgroundColor: ColorManager.orderBackgroundColor,
+                                            //   s
+                                            // ),
+                                            Expanded(child:
+                                            OrderTextFormField(
+                                              hintText: 'الاسم الاول',
+                                            validator:  CartCubit.nameValidator,
+                                              controller: firstNameController,
+                                            )),
+                                            const SizedBox(width: 40,),
+                                            Expanded(child: OrderTextFormField(hintText: 'الاسم الثاني',
+                                            validator: CartCubit.nameValidator,
+                                            controller: secondNameController,)),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(child: OrderTextFormField(hintText: 'رقم الهاتف',
+                                            validator: CartCubit.phoneValidator,
+                                            controller: phoneController,)),
+                                            const SizedBox(width: 40,),
+                                            Expanded(child: OrderTextFormField(hintText: 'رقم اخر' ,validator: CartCubit.phoneValidator,controller: anotherPhoneController,)),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(child: OrderTextFormField(
+                                              hintText: 'البريد الإلكتروني',
+                                              validator: CartCubit.emailValidator,
+                                            controller: emailController,)),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(child: OrderTextFormField(hintText: 'المحافظة',
+                                              validator: CartCubit.nameValidator,
+                                            controller: governorateController,)),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(child: OrderTextFormField(hintText: 'العنوان',
+                                              validator: CartCubit.nameValidator,
+                                            controller: addressController,)),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                       ],
                     ),
                   ),
                 ),
               ),
-              Center(child: DefaultMaterialButton(onPressed: (){
+              BlocBuilder<CartCubit,CartState>(builder: (context, state) {
+                return state is OrderTheCartError ? Center(child: DefaultSelectableText(orderError,style: const TextStyle(color: Colors.red),),) : const SizedBox();
+
+              },),
+              Center(child: DefaultMaterialButton(onPressed: ()async{
                 if(CartCubit.formKey.currentState!.validate()){
+                   orderError = await cubit.orderTheCart(orderData: OrderData(deliveryDestination: DeliveryDestination(additionalInfo: "",apartment: "",buildingNumber: "5",city: "cairo",district: ""),paymentMethod: "cash"));
                   print("تم الطلب");
                 }
               }, text: 'اتمام الطلب'))
             ],
           ),
         ),
-      ),
+      );
+  },
+),
     );
   }
 }

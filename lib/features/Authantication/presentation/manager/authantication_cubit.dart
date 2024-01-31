@@ -5,7 +5,6 @@ import 'package:amad_furniture/features/Authantication/domain/use_cases/forget_p
 import 'package:amad_furniture/features/Authantication/domain/use_cases/get_user_uc.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/login_uc.dart';
 import 'package:amad_furniture/features/Authantication/domain/use_cases/verify_forget_password_uc.dart';
-import 'package:amad_furniture/features/cart_screen/presentation/manager/cart_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +13,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/storage/storage_consummer.dart';
 import '../../../../core/utils/constantes.dart';
-import '../../../../core/utils/locator.dart';
 import '../../../../core/utils/routes_manager.dart';
 import '../../data/models/create_account_model.dart';
 import '../../data/models/user.dart';
@@ -108,7 +106,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
     if (value!.isEmpty) {
       return 'يجب ادخال كود التفعيل';
     } else if (value.length != verificationCodeLength) {
-      return 'كود التفعيل مكون من ${verificationCodeLength} احرف';
+      return 'كود التفعيل مكون من $verificationCodeLength احرف';
     } else {
       return null;
     }
@@ -117,7 +115,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
   static AuthanticationCubit get(context) => BlocProvider.of(context);
 
   static void init() {
-    storage = FlutterSecureStorageCnsummer(FlutterSecureStorage());
+    storage = FlutterSecureStorageCnsummer(const FlutterSecureStorage());
   }
 
   void createAccount(CreateAccountModel createAccountModel) async {
@@ -187,7 +185,6 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
     emit(changePasswordState());
   }
 
-  CartCubit cartCubit = sl<CartCubit>();
 
   void getToken() {
     emit(GetTokenLoading());

@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
                               client: DioConsumer(client: Dio()))))),
             ),
           ],
-          child: Directionality(
+          child: const Directionality(
               textDirection: TextDirection.rtl, child: HomeScreen()),
         ),
       ),
@@ -128,7 +128,7 @@ class MyApp extends StatelessWidget {
                               client: DioConsumer(client: Dio()))))),
             ),
           ],
-          child: Directionality(
+          child: const Directionality(
               textDirection: TextDirection.rtl, child: ProductsScreen()),
         ),
       ),
@@ -218,9 +218,7 @@ class MyApp extends StatelessWidget {
             providers: [
               ///TODO
               BlocProvider(
-                create:
-                    (context) => /*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/
-                        AuthanticationCubit(
+                create: (context) => /*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/AuthanticationCubit(
                             getUserUC: GetUserUC(
                                 authanticationRepo: AuthanticationRepoImp(
                                     authanticationRDS: AuthanticationRdsImp(
@@ -277,7 +275,7 @@ class MyApp extends StatelessWidget {
                           authanticationRepo: AuthanticationRepoImp(
                               authanticationRDS: AuthanticationRdsImp(
                                   client: DioConsumer(client: Dio()))))),
-          child: Directionality(
+          child: const Directionality(
               textDirection: TextDirection.rtl, child: CreateAccountScreen()),
         ),
       ),
@@ -307,7 +305,7 @@ class MyApp extends StatelessWidget {
                           client: DioConsumer(
                               client:
                                   Dio()))))) /*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/,
-          child: Directionality(
+          child: const Directionality(
               textDirection: TextDirection.rtl, child: LoginScreen()),
         ),
       ),
@@ -338,7 +336,7 @@ class MyApp extends StatelessWidget {
                           client: DioConsumer(
                               client:
                                   Dio()))))) /*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/,
-          child: Directionality(
+          child: const Directionality(
               textDirection: TextDirection.rtl, child: ForgetPasswordScreen()),
         ),
       ),
@@ -369,7 +367,7 @@ class MyApp extends StatelessWidget {
                           client: DioConsumer(
                               client:
                                   Dio()))))) /*AuthanticationCubit(loginUC: LoginUC(authanticationRepo: sl()),createAccountUC: CreateAccountUC (authanticationRepo:sl()))*/,
-          child: Directionality(
+          child: const Directionality(
               textDirection: TextDirection.rtl,
               child: VerifyForgetPasswordScreen()),
         ),

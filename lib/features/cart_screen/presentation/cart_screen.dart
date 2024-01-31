@@ -30,7 +30,7 @@ class CartScreen extends StatelessWidget {
     if (CartCubit.cities == null) {
       cubit.getCitiesDeliveryPrices();
     }
-    if (token != null && CartCubit.cartModel == null) {
+    if (token != null ) {
       cubit.getCart().then((value) {
         totalPrice = (CartCubit.cartModel?.cart?.totalPrice) ?? -999;
       });
@@ -110,7 +110,7 @@ class CartScreen extends StatelessWidget {
           //   CategoriesCubit.categoryLoaded = true;
           //   cubit.retriveCategories();
           // }
-          if (state is GetTokenError) {
+          if (token == 'null' || token == null) {
             return Center(
                 child: AlertDialog(
               title: Text('خطأ'),
@@ -374,7 +374,7 @@ class CartScreen extends StatelessWidget {
                                   child: Center(
                                     child: Container(
                                       alignment: Alignment.centerRight,
-                                      child: state is GetCitiesDeliveryPricesSuccess ||
+                                      child: state is GetCitiesDeliveryPricesLoading ||
                                               CartCubit.cities == null
                                           ? Center(
                                               child:
