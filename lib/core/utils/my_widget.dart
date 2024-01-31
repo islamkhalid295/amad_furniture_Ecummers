@@ -1,31 +1,58 @@
 import 'package:amad_furniture/core/utils/assets_manager.dart';
 import 'package:amad_furniture/core/utils/routes_manager.dart';
-import 'package:amad_furniture/features/products_screen/data/models/product_info_model.dart';
-import 'package:bloc/src/cubit.dart';
+import 'package:amad_furniture/features/cart_screen/data/models/cart_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/home_screen/presentation/widgets/home_slider/domain/models/slider_item_model.dart';
 import '../../features/home_screen/presentation/widgets/navigation_bar/presentation/navigation_bar_sign_in_button.dart';
 import '../../features/home_screen/presentation/widgets/navigation_bar/presentation/shop_cart_icon.dart';
 import 'color_manager.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'constantes.dart';
 
+class OrderTextFormField extends StatelessWidget {
+  const OrderTextFormField({super.key, this.hintText, this.width});
+final String? hintText;
+final double? width;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15.0),
+      child: Container(
+        child: TextFormField(
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(right: 20),
+            hintText: hintText,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.zero,
+                borderSide: BorderSide(color: ColorManager.myGray)
+            ),
+          ),
+        ),
+        width: width ?? 300,
+      ),
+    );
+
+  }
+}
+
+
 class CartProductItem extends StatelessWidget {
-  const CartProductItem({super.key, required this.amountController});
-final TextEditingController amountController;
+  CartProductItem( {required this.product,super.key, required this.amountController, });
+final Products product;
+  final TextEditingController amountController ;
+
   @override
   Widget build(BuildContext context) {
     return                     Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
         children: [
           Expanded(child: Image.asset("assets/images/minimalist-olive-oil-bottle-glass.jpg",height: cartProductImageSize,width: cartProductImageSize,)),
           Expanded(
-            child: Text(
-              'السعررررررررررررررررررر',
-              style: TextStyle(
+            child: DefaultSelectableText(
+              product.name ?? "الاسم غير متوفر",
+              style: const TextStyle(
                 color: Color(0xFF242424),
                 fontSize: 16,
                 fontFamily: 'Almarai',
@@ -33,21 +60,26 @@ final TextEditingController amountController;
               ),
             ),
           ),
-          Expanded(
-            child: Text(
-              'السعرsssssssssssssssssssss',
-              style: TextStyle(
-                color: Color(0xFF242424),
-                fontSize: 16,
-                fontFamily: 'Almarai',
-                fontWeight: FontWeight.w400,
+           Expanded(
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: DefaultSelectableText(
+                ((product.discount ?? 0) <= 0 ? "ج.م" + "${product.price}"
+                    : "${((product.discount)! * double.parse(product.price ?? "0")).toStringAsFixed(2)} ج.م"),
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                  color: Color(0xFF242424),
+                  fontSize: 16,
+                  fontFamily: 'Almarai',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
           ),
           Expanded(
             child: Row(
               children: [
-                DefaultSelectableText(
+                const DefaultSelectableText(
                   'الكميه',
                   style: TextStyle(
                     color: Colors.black,
@@ -56,15 +88,30 @@ final TextEditingController amountController;
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 ),
-                DefaultTextFormField(
-                  controller: amountController,
+                Container(
                   width: 60,
-                  textAlign: TextAlign.center,
-                  paddingRight: 0,
+                  height: 40,
+                  color: ColorManager.myOffWhite,
+                  child: TextFormField(
+                    controller: amountController,
+                    textAlign: TextAlign.center,
+keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      fillColor: ColorManager.myOffWhite,
+                      border: InputBorder.none
+                    ),
+                  ),
                 ),
+                // DefaultTextFormField(
+                //
+                //   controller: amountController,
+                //   width: 60,
+                //   textAlign: TextAlign.center,
+                //   paddingRight: 0,
+                // ),
               ],
             ),
           ),
@@ -83,14 +130,18 @@ final TextEditingController amountController;
               ),
             ),
           ),
-          Expanded(
-            child: Text(
-              'السعر',
-              style: TextStyle(
-                color: Color(0xFF242424),
-                fontSize: 16,
-                fontFamily: 'Almarai',
-                fontWeight: FontWeight.w400,
+           Expanded(
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: DefaultSelectableText(
+                  product.totalPrice!.toStringAsFixed(2),
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                  color: Color(0xFF242424),
+                  fontSize: 16,
+                  fontFamily: 'Almarai',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
           ),
@@ -100,7 +151,6 @@ final TextEditingController amountController;
     ;
   }
 }
-
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget{
 
@@ -131,12 +181,12 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget{
         SizedBox(
           width: 30 * MediaQuery.of(context).size.width / 1440,
         ),
-        ShopCart(),
+        const ShopCart(),
         SizedBox(
           width: 30 * MediaQuery.of(context).size.width / 1440,
         ),
-        NavigationBarSignInButton(),
-        SizedBox(
+        const NavigationBarSignInButton(),
+        const SizedBox(
           width: 20,
         ),
       ],
@@ -145,7 +195,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget{
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize =>Size(double.infinity, tabBarHeight);
+  Size get preferredSize =>const Size(double.infinity, tabBarHeight);
 }
 
 class DefaultSelectableText extends StatelessWidget {
@@ -178,7 +228,7 @@ class DefaultTextButton extends StatelessWidget {
       child: TextButton(
           onPressed: onPressed,
           child: FittedBox(
-            child: Text(title,style: TextStyle(
+            child: Text(title,style: const TextStyle(
               color: Colors.black,
               fontSize: 16,
               fontFamily: 'Almarai',
@@ -191,7 +241,7 @@ class DefaultTextButton extends StatelessWidget {
 
 class DefaultTextFormField extends StatelessWidget {
 
-  const DefaultTextFormField({super.key, this.title, this.hintText, this.icon, this.suffixIcon, this.maxLines, this.width, this.height, this.boxShape, this.validator, this.controller, this.obscureText, this.textAlign = TextAlign.start, this.paddingRight = 10.0, this.keyboardType, this.onFieldSubmitted});
+  const DefaultTextFormField({super.key, this.title, this.hintText, this.icon, this.suffixIcon, this.maxLines, this.width, this.height, this.boxShape, this.validator, this.controller, this.obscureText, this.textAlign = TextAlign.start, this.paddingRight = 10.0, this.keyboardType, this.onFieldSubmitted, this.backgroundColor});
   final String? title;
   final String? hintText;
   final Icon? icon;
@@ -207,6 +257,7 @@ class DefaultTextFormField extends StatelessWidget {
 final TextAlign textAlign;
   final TextInputType? keyboardType;
   final ValueChanged<String>? onFieldSubmitted;
+  final Color? backgroundColor;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -215,7 +266,7 @@ final TextAlign textAlign;
         width: width ?? 300,
         height: height,
         decoration: BoxDecoration(
-          color: ColorManager.myWhite,
+          color: backgroundColor ?? ColorManager.myWhite,
           border: Border.all(color: ColorManager.myGrayLiteMore,),
           borderRadius: BorderRadius.circular(10),
         ),
@@ -235,8 +286,8 @@ final TextAlign textAlign;
               }
             }*/,
             decoration: InputDecoration(
-              errorBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-              hintStyle: TextStyle(
+              errorBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+              hintStyle: const TextStyle(
                   fontSize: 14, color: ColorManager.myGray),
               border: InputBorder.none,
               hintText: title,
@@ -286,7 +337,7 @@ Widget mySlider(context, SliderItem sliderItem) => Stack(
               DefaultSelectableText(
                 sliderItem.title ?? "",
                 textAlign: TextAlign.right,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 44,
                   fontFamily: 'Almarai',

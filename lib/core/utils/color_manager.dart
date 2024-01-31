@@ -6,6 +6,8 @@ class ColorManager {
   // static const Color secondary = Color(0xffFF9536);//#FF9536
   // static const Color tertiary = Color(0xff26C1FF);//#26C1FF
   static const Color myWhite = Color(0xffFFFFFF);//#FF9536
+  static const Color myOffWhite = Color(0xffF5F7FA);//#F5F7FA
+  static const Color orderBackgroundColor = Color(0x40dadada);//#DADADA42
   static const Color myGray = Color(0xff848484);//#848484
   static const Color myGrayLite = Color(0xffB5B4B4); //#B5B4B4
   static const Color myBlack = Color(0xff000000);

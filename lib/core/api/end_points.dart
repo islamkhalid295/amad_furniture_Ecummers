@@ -33,5 +33,7 @@ class EndPoints {
   static const String ORDER_CART = "client/authcart/ordercart";
   static const String GET_PREVIOUS_ORDERS = "client/authcart/getpreviousorders";
 
+  static const String GET_CITIES_DELIVERY_PRICES = "client/unauthcart/getcitydelivery";
+
 
 }

@@ -1,5 +1,6 @@
 import 'package:amad_furniture/core/utils/constantes.dart';
 import 'package:amad_furniture/features/cart_screen/data/models/cart_model.dart';
+import 'package:amad_furniture/features/cart_screen/data/models/city_model.dart';
 import 'package:amad_furniture/features/cart_screen/domain/repositories/cart_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
@@ -64,5 +65,19 @@ class CartCubit extends Cubit<CartState> {
         emit(GetCartError(e.response?.data['message']));
       }
     }
+  }
+static List<City>? cities;
+  Future<dynamic> getCitiesDeliveryPrices() async {
+
+      emit(GetCitiesDeliveryPricesLoading());
+      try {
+        var response = await cartRepo.getCitiesDeliveryPrices();
+        CityModel cityModel = CityModel.fromJson(response);
+        cities = cityModel.cities;
+        emit(GetCitiesDeliveryPricesSuccess());
+      } on DioException catch (e) {
+        emit(GetCitiesDeliveryPricesError(e.response?.data['message']));
+      }
+
   }
 }

@@ -28,6 +28,15 @@ class GetCartError extends CartState {
 
   GetCartError(this.error);
 }
+
+class GetCitiesDeliveryPricesLoading extends CartState {}
+class GetCitiesDeliveryPricesSuccess extends CartState {}
+class GetCitiesDeliveryPricesError extends CartState {
+  final String error;
+
+  GetCitiesDeliveryPricesError(this.error);
+}
+
 class AddProductToLocalCartSuccsess extends CartState{}
 
 class RemoveProductFromLocalCartSuccsess extends CartState{}

@@ -1,7 +1,9 @@
 import 'package:amad_furniture/core/utils/constantes.dart';
+import 'package:amad_furniture/core/utils/routes_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/locator.dart';
 import '../../../../../../core/utils/my_widget.dart';
@@ -18,7 +20,6 @@ class ShopCart extends StatelessWidget {
             borderRadius: BorderRadius.circular(10)),
         child: BlocBuilder<CartCubit, CartState>(
           builder: (context, state) {
-            CartCubit cartCubit = BlocProvider.of(context);
             // if ((token != null && token != 'null') && CartCubit.cart.isEmpty &&
             //     state is! GetCartLoading) {
             //   cartCubit.getCart();
@@ -26,7 +27,9 @@ class ShopCart extends StatelessWidget {
             return Stack(
               children: [
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.go(RoutesManager.cartScreen);
+                    },
                     icon: Icon(
                       CupertinoIcons.cart,
                       size: 30,

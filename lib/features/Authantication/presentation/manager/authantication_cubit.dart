@@ -26,13 +26,19 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
   final CreateAccountUC createAccountUC;
   final LoginUC loginUC;
   final ForgetPasswordUC forgetPasswordUC;
-  final VerifyForgetPasswordUC verifyForgetPasswordUC ;
-  final GetUserUC getUserUC ;
+  final VerifyForgetPasswordUC verifyForgetPasswordUC;
 
+  final GetUserUC getUserUC;
 
-  AuthanticationCubit( {required this.getUserUC,required this.verifyForgetPasswordUC,required this.forgetPasswordUC, required this.createAccountUC, required this.loginUC})
+  AuthanticationCubit(
+      {required this.getUserUC,
+      required this.verifyForgetPasswordUC,
+      required this.forgetPasswordUC,
+      required this.createAccountUC,
+      required this.loginUC})
       : super(AuthanticationInitial());
-  static StorageConsumer? storage ;
+  static StorageConsumer? storage;
+
   static UserModel? userModel;
   static UserData? userData;
   static String? message;
@@ -81,7 +87,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
   static FormFieldValidator<String> passwordValidator = (value) {
     if (value!.isEmpty) {
       return 'يجب دخال كلمة السر';
-    } else if (value.length<8) {
+    } else if (value.length < 8) {
       return 'كلمة السر يجب ان تكون 8 احرف علي الاقل';
     } else {
       return null;
@@ -92,7 +98,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
       return 'يجب دخال كلمة السر';
     } else if (passwordController.text != rePasswordController.text) {
       return 'يجب ان تكون كلمتي السر متطابقتان';
-    } else if (value.length<8) {
+    } else if (value.length < 8) {
       return 'كلمة السر يجب ان تكون 8 احرف علي الاقل';
     } else {
       return null;
@@ -108,10 +114,9 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
     }
   };
 
-
   static AuthanticationCubit get(context) => BlocProvider.of(context);
 
-  static void init(){
+  static void init() {
     storage = FlutterSecureStorageCnsummer(FlutterSecureStorage());
   }
 
@@ -126,7 +131,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
     }
   }
 
-  void login(LoginModel loginModel,BuildContext context) async {
+  void login(LoginModel loginModel, BuildContext context) async {
     emit(LoginLoading());
     try {
       userModel = await loginUC.call(loginModel);
@@ -139,6 +144,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
       emit(LoginError(error: e.response?.data["message"]));
     }
   }
+
   void forgetPassword(String email) async {
     emit(ForgetPasswordLoading());
     try {
@@ -149,6 +155,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
       emit(ForgetPasswordError(error: e.response?.data["message"]));
     }
   }
+
   void verifyForgetPassword(VerifyForgetPasswordModel model) async {
     emit(VerifyForgetPasswordLoading());
     try {
@@ -164,29 +171,35 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
     isPassword1 = !isPassword1;
     emit(changePasswordState());
   }
+
   void showOrHidePassword2() {
     isPassword2 = !isPassword2;
     emit(changePasswordState());
   }
+
   void showOrHidePassword3() {
     isPassword3 = !isPassword3;
     emit(changePasswordState());
   }
+
   void showOrHideNewPassword() {
     isPassword4 = !isPassword4;
     emit(changePasswordState());
   }
-  void getToken(){
+
+  CartCubit cartCubit = sl<CartCubit>();
+
+  void getToken() {
     emit(GetTokenLoading());
     try {
       storage?.getToken().then((value) {
         token = value.toString();
         emit(GetTokenSuccsess());
-if(token != "null") {
-          getUser(token!);
+        if (token != "null" && token != null) {
+          getUser(token??"");
         }
       });
-    }catch (e){
+    } catch (e) {
       emit(GetTokenError());
       print(e.toString());
     }
@@ -198,13 +211,14 @@ if(token != "null") {
       getUserUC.call(token).then((value) {
         userData = value;
         print(value.toString());
-        userModel = UserModel(email: value.user?.email,
+        userModel = UserModel(
+            email: value.user?.email,
             name: value.user?.name,
             token: token,
             number: value.user?.number);
         emit(GetUserSuccsess());
       });
-    }catch (e){
+    } catch (e) {
       emit(GetUserError(e.toString()));
     }
   }

@@ -11,6 +11,7 @@ abstract class CartRDS {
   Future<String> deleteAmountOfProductToCart(
       ProductAmountModel productAmountModel);
   Future<dynamic> getCart();
+  Future<dynamic> getCitiesDeliveryPrices();
 
 }
 
@@ -61,6 +62,19 @@ class CartRdsImp implements CartRDS {
           headers: {
             "Authorization": "Bearer ${token}",
           }
+      );
+      return response;
+    }on DioException catch (e){
+      print(e.response?.data['message']);
+      rethrow;
+    }
+  }
+
+  @override
+  Future<dynamic> getCitiesDeliveryPrices() async {
+    try {
+      final response = await client.get(
+          EndPoints.BASE_URL + EndPoints.GET_CITIES_DELIVERY_PRICES,
       );
       return response;
     }on DioException catch (e){

@@ -7,7 +7,7 @@ const double tabBarHeight = 72;
 const int verificationCodeLength = 6;
 const double productItemHeight = 340;
 const double productItemImageHeight = productItemHeight - 140;
-const double cartProductImageSize = 160;
+const double cartProductImageSize = 100;
 String? token;
 
 

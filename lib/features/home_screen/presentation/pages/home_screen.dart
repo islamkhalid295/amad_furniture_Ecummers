@@ -7,6 +7,7 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 
 import '../../../../core/utils/constantes.dart';
 import '../../../../core/utils/my_widget.dart';
+import '../../../cart_screen/presentation/manager/cart_cubit.dart';
 import '../widgets/navigation_bar/presentation/navigation_bar_sign_in_button.dart';
 import '../widgets/navigation_bar/presentation/shop_cart_icon.dart';
 
@@ -54,10 +55,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     AuthanticationCubit authanticationCubit = BlocProvider.of(context);
+    CartCubit cartCubit = BlocProvider.of(context);
+    if (CartCubit.cart == null) {
+      cartCubit.getCart();
+    }
     if(token == null)
       {
         authanticationCubit.getToken();
       }
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: DefaultTabController(
