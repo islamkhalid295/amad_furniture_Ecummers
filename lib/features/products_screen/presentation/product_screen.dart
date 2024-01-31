@@ -127,7 +127,7 @@ String productId;
                                                       0
                                                   ? "ج.م" +
                                                       "${CategoriesCubit.productInfo?.price}"
-                                                  : "${(double.parse(CategoriesCubit.productInfo?.discount ?? "0") * double.parse(CategoriesCubit.productInfo?.price ?? "0")).toStringAsFixed(2)} ج.م") ??
+                                                  : "${(double.parse(CategoriesCubit.productInfo?.price ?? "0") - double.parse(CategoriesCubit.productInfo?.discount ?? "0") * double.parse(CategoriesCubit.productInfo?.price ?? "0")).toStringAsFixed(2)} ج.م") ??
                                               "",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(

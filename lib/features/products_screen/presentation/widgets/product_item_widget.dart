@@ -103,11 +103,7 @@ class ProductItem extends StatelessWidget {
                     textDirection: TextDirection.ltr,
                     child: Expanded(
                       child: DefaultSelectableText(
-                        (double.parse(product.discount ?? "0") <= 0
-                            ? " ج.م${product.price}"
-                            : "${(double.parse(product.discount ?? "0") *
-                            double.parse(product.price ?? "0")).toStringAsFixed(
-                            2)} ج.م") ??
+                        (double.parse(product.discount ?? "0") <= 0 ? " ج.م${product.price}" : "${( double.parse(product.price ?? "0") - double.parse(product.discount ?? "0") * double.parse(product.price ?? "0") ).toStringAsFixed(2)} ج.م") ??
                             "",
                         style: const TextStyle(
                           color: ColorManager.myBlack,

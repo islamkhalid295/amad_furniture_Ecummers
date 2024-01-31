@@ -11,18 +11,23 @@ import 'color_manager.dart';
 import 'constantes.dart';
 
 class OrderTextFormField extends StatelessWidget {
-  const OrderTextFormField({super.key, this.hintText, this.width});
+  const OrderTextFormField({super.key, this.hintText, this.width, this.validator, this.controller});
 final String? hintText;
 final double? width;
+  final FormFieldValidator<String>? validator;
+  final TextEditingController? controller;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15.0),
       child: Container(
         child: TextFormField(
+          validator: validator,
+          controller: controller,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.only(right: 20),
-            hintText: hintText,
+            label: hintText != null ?Text(hintText!) : null,
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.zero,
                 borderSide: BorderSide(color: ColorManager.myGray)
@@ -65,7 +70,7 @@ final Products product;
               textDirection: TextDirection.ltr,
               child: DefaultSelectableText(
                 ((product.discount ?? 0) <= 0 ? "ج.م" + "${product.price}"
-                    : "${((product.discount)! * double.parse(product.price ?? "0")).toStringAsFixed(2)} ج.م"),
+                    : "${(double.parse(product.price ?? "0") - (product.discount)! * double.parse(product.price ?? "0")).toStringAsFixed(2)} ج.م"),
                 textAlign: TextAlign.end,
                 style: TextStyle(
                   color: Color(0xFF242424),

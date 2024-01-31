@@ -1,6 +1,7 @@
 import 'package:amad_furniture/core/utils/color_manager.dart';
 import 'package:amad_furniture/core/utils/my_widget.dart';
 import 'package:amad_furniture/core/widgets/default_material_button.dart';
+import 'package:amad_furniture/features/cart_screen/presentation/manager/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -63,6 +64,8 @@ class OrderScreen extends StatelessWidget {
                     ListTile(
                       title: const Text('الدفع عند الأستلام'),
                       leading: Radio<String>(
+activeColor: ColorManager.myYellow,
+
                         value: "cash",
                         groupValue: "cash",
                         onChanged: (String? value) {
@@ -72,51 +75,60 @@ class OrderScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                // DefaultTextFormField(
-                                //   title: 'الاسم الاول',
-                                //   backgroundColor: ColorManager.orderBackgroundColor,
-                                //   s
-                                // ),
-                                Expanded(child: OrderTextFormField(hintText: 'الاسم الاول')),
-                                SizedBox(width: 40,),
-                                Expanded(child: OrderTextFormField(hintText: 'الاسم الثاني')),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(child: OrderTextFormField(hintText: 'رقم الهاتف')),
-                                SizedBox(width: 40,),
-                                Expanded(child: OrderTextFormField(hintText: 'رقم اخر')),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(child: OrderTextFormField(hintText: 'البريد الإلكتروني')),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(child: OrderTextFormField(hintText: 'المحافظة')),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(child: OrderTextFormField(hintText: 'العنوان')),
-                              ],
-                            ),
-          
-                          ],
+                        Form(
+                          key: CartCubit.formKey,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  // DefaultTextFormField(
+                                  //   title: 'الاسم الاول',
+                                  //   backgroundColor: ColorManager.orderBackgroundColor,
+                                  //   s
+                                  // ),
+                                  Expanded(child: OrderTextFormField(hintText: 'الاسم الاول',
+                                  validator:  CartCubit.nameValidator,)),
+                                  SizedBox(width: 40,),
+                                  Expanded(child: OrderTextFormField(hintText: 'الاسم الثاني',
+                                  validator: CartCubit.nameValidator,)),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(child: OrderTextFormField(hintText: 'رقم الهاتف',
+                                  validator: CartCubit.phoneValidator,)),
+                                  SizedBox(width: 40,),
+                                  Expanded(child: OrderTextFormField(hintText: 'رقم اخر' ,validator: CartCubit.phoneValidator)),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(child: OrderTextFormField(hintText: 'البريد الإلكتروني',validator: CartCubit.emailValidator,)),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(child: OrderTextFormField(hintText: 'المحافظة',validator: CartCubit.nameValidator,)),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(child: OrderTextFormField(hintText: 'العنوان',validator: CartCubit.nameValidator,)),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
               ),
-              Center(child: DefaultMaterialButton(onPressed: (){}, text: 'اتمام الطلب'))
+              Center(child: DefaultMaterialButton(onPressed: (){
+                if(CartCubit.formKey.currentState!.validate()){
+                  print("تم الطلب");
+                }
+              }, text: 'اتمام الطلب'))
             ],
           ),
         ),
