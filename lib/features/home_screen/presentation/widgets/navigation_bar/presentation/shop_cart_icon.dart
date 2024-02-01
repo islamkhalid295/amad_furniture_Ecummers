@@ -1,11 +1,9 @@
-import 'package:amad_furniture/core/utils/constantes.dart';
 import 'package:amad_furniture/core/utils/routes_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../../core/utils/color_manager.dart';
-import '../../../../../../core/utils/locator.dart';
 import '../../../../../../core/utils/my_widget.dart';
 import '../../../../../cart_screen/presentation/manager/cart_cubit.dart';
 
@@ -30,21 +28,21 @@ class ShopCart extends StatelessWidget {
                     onPressed: () {
                       context.go(RoutesManager.cartScreen);
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       CupertinoIcons.cart,
                       size: 30,
                     )),
-                state is GetCartLoading  ? CircleAvatar(
-                  child: CircularProgressIndicator(color: ColorManager.myYellow,),
-                  backgroundColor: Colors.red,
-                  radius: 10,) : CartCubit.cart != null ? CartCubit.cart!.isNotEmpty ? CircleAvatar(
-                  child: DefaultSelectableText(
-                    CartCubit.cart!.length.toString(),
-                    style: TextStyle(color: ColorManager.myWhite),
-                  ),
+                state is GetCartLoading  ? const CircleAvatar(
                   backgroundColor: Colors.red,
                   radius: 10,
-                ) : SizedBox() : SizedBox(),
+                  child: CircularProgressIndicator(color: ColorManager.myYellow,),) : CartCubit.cart != null ? CartCubit.cart!.isNotEmpty ? CircleAvatar(
+                  backgroundColor: Colors.red,
+                  radius: 10,
+                  child: Text(
+                    CartCubit.cartModel!.cart!.products!.length.toString(),
+                    style: const TextStyle(color: ColorManager.myWhite),
+                  ),
+                ) : const SizedBox() : const SizedBox(),
               ],
             );
           },

@@ -15,7 +15,7 @@ class DefaultMaterialButton extends StatelessWidget {
       this.borderRadius = 25,
       this.color,
       this.textColor,
-      this.borderColor});
+      this.borderColor, this.fontSize});
 
   final VoidCallback onPressed;
   final bool lodingCondition;
@@ -25,6 +25,7 @@ class DefaultMaterialButton extends StatelessWidget {
   final double height;
   final double? minWidth;
   final double? borderRadius;
+  final double? fontSize;
   final Color? color;
 
   final Color? textColor;
@@ -62,7 +63,7 @@ class DefaultMaterialButton extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: textColor ?? ColorManager.myWhite,
-                          fontSize: 17.59,
+                          fontSize: fontSize ?? 17.59,
                           fontFamily: 'Almarai',
                           fontWeight: FontWeight.w700,
                         ),

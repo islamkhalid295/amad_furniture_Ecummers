@@ -16,9 +16,9 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CategoriesCubit, CategoriesState>(
       builder: (context, state) {
-        CategoriesCubit cubit = BlocProvider.of(context);
+        // CategoriesCubit cubit = BlocProvider.of(context);
         if (state is RetriveCategoriesSuccsess &&
-            CategoriesCubit.categoriesList!.categories!.isEmpty)
+            CategoriesCubit.categoriesList!.categories!.isEmpty) {
           return Container(
               height: getSectionHeight(context),
               child: Center(
@@ -29,7 +29,7 @@ class CategoriesScreen extends StatelessWidget {
                 ),
                 height: 300,
                 width: 300,
-                child: Column(
+                child: const Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -44,6 +44,7 @@ class CategoriesScreen extends StatelessWidget {
                   ],
                 ),
               )));
+        }
         return Container(
           width: double.infinity,
           height: getSectionHeight(context),
@@ -52,10 +53,10 @@ class CategoriesScreen extends StatelessWidget {
             child: state is RetriveCategoriesLoading
                 ? Container(
                     height: getSectionHeight(context),
-                    child: Center(child: CircularProgressIndicator()))
+                    child: const Center(child: CircularProgressIndicator()))
                 : MasonryGridView.count(
                     crossAxisCount: 5,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount:
                         CategoriesCubit.categoriesList?.categories?.length,
                     itemBuilder: (context, index) {

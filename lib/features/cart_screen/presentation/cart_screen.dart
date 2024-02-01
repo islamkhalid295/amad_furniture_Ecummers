@@ -30,7 +30,7 @@ class CartScreen extends StatelessWidget {
     if (CartCubit.cities == null) {
       cubit.getCitiesDeliveryPrices();
     }
-    if (token != null ) {
+    if (token != null && CartCubit.cartModel == null) {
       cubit.getCart().then((value) {
         totalPrice = (CartCubit.cartModel?.cart?.totalPrice) ?? -999;
       });
@@ -110,21 +110,21 @@ class CartScreen extends StatelessWidget {
           //   CategoriesCubit.categoryLoaded = true;
           //   cubit.retriveCategories();
           // }
-          if (token == 'null' || token == null) {
+          if ((token == 'null' || token == null)&& state is !GetTokenLoading) {
             return Center(
                 child: AlertDialog(
-              title: Text('خطأ'),
-              content: Text('يجب تسجيل الدخول اولاً'),
+              title: const Text('خطأ'),
+              content: const Text('يجب تسجيل الدخول اولاً'),
               actions: [
                 TextButton(
                   onPressed: () => context.go(RoutesManager.loginScreen),
-                  child: Text('تسجيل الدخول'),
+                  child: const Text('تسجيل الدخول'),
                 ),
               ],
             ));
           }
           return state is! GetCartSuccess && CartCubit.cartModel == null
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : Padding(
@@ -358,7 +358,7 @@ class CartScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 30),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   child: DefaultSelectableText(
                                     textAlign: TextAlign.center,
                                     'التوصيل',
@@ -376,7 +376,7 @@ class CartScreen extends StatelessWidget {
                                       alignment: Alignment.centerRight,
                                       child: state is GetCitiesDeliveryPricesLoading ||
                                               CartCubit.cities == null
-                                          ? Center(
+                                          ? const Center(
                                               child:
                                                   CircularProgressIndicator())
                                           : DropdownMenu<City>(
@@ -436,9 +436,9 @@ class CartScreen extends StatelessWidget {
                                 Expanded(
                                   child: Column(
                                     children: [
-                                      DefaultSelectableText(
+                                      const DefaultSelectableText(
                                         "المبلغ شامل التوصيل",
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           color: Color(0xFF242424),
                                           fontSize: 16,
                                           fontFamily: 'Almarai',
@@ -485,7 +485,7 @@ class CartScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 30),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   child: DefaultSelectableText(
                                     textAlign: TextAlign.center,
                                     'اكود الخصم',
@@ -502,7 +502,7 @@ class CartScreen extends StatelessWidget {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      state is AddClientPromoCodeToCartError ? DefaultSelectableText(couponError,style: TextStyle(color: Colors.red),): SizedBox(),
+                                      state is AddClientPromoCodeToCartError ? DefaultSelectableText(couponError,style: const TextStyle(color: Colors.red),): const SizedBox(),
                                       Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
@@ -516,7 +516,7 @@ class CartScreen extends StatelessWidget {
                                                   top: 10.0, bottom: 4),
                                               child: TextFormField(
                                                 controller: CartCubit.clientCoponController,
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   border: InputBorder.none,
                                                   hintText: 'كوبون العميل',
                                                 ),
@@ -571,11 +571,11 @@ class CartScreen extends StatelessWidget {
                                                 textAlign: TextAlign.center,
                                               ),
                                             ),
-                                          ):SizedBox(),
+                                          ):const SizedBox(),
                                           
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 12,
                                       ),
                                       Row(
@@ -596,7 +596,7 @@ class CartScreen extends StatelessWidget {
                                                   top: 10.0, bottom: 4),
                                               child: TextFormField(
                                                 controller: CartCubit.sellerCoponController,
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   border: InputBorder.none,
                                                   hintText: 'كوبون التاجر',
                                                 ),
@@ -651,11 +651,11 @@ class CartScreen extends StatelessWidget {
                                                 textAlign: TextAlign.center,
                                               ),
                                             ),
-                                          ):SizedBox(),
+                                          ):const SizedBox(),
 
                                         ],
                                       ),
-                                      state is AddSellerPromoCodeToCartError ? DefaultSelectableText(couponError,style: TextStyle(color: Colors.red),): SizedBox(),
+                                      state is AddSellerPromoCodeToCartError ? DefaultSelectableText(couponError,style: const TextStyle(color: Colors.red),): const SizedBox(),
 
                                     ],
                                   ),
@@ -663,9 +663,9 @@ class CartScreen extends StatelessWidget {
                                 Expanded(
                                   child: Column(
                                     children: [
-                                      DefaultSelectableText(
+                                      const DefaultSelectableText(
                                         "بعد الخصم",
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           color: Color(0xFF242424),
                                           fontSize: 16,
                                           fontFamily: 'Almarai',
@@ -715,7 +715,7 @@ class CartScreen extends StatelessWidget {
                                       1440,
                                   height: 60,
                                   borderRadius: 18),
-                              SizedBox(
+                              const SizedBox(
                                 width: 30,
                               ),
                               DefaultMaterialButton(

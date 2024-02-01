@@ -1,20 +1,11 @@
 import 'package:amad_furniture/core/utils/routes_manager.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_state.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../../../core/api/dio_consummer.dart';
 import '../../../../../../core/utils/color_manager.dart';
 import '../../../../../../core/utils/my_widget.dart';
-import '../../../../../Authantication/data/data_sources/Authantication_rds.dart';
-import '../../../../../Authantication/domain/repositories/Authantication_repo.dart';
-import '../../../../../Authantication/domain/use_cases/create_account_uc.dart';
-import '../../../../../Authantication/domain/use_cases/forget_password_uc.dart';
-import '../../../../../Authantication/domain/use_cases/get_user_uc.dart';
-import '../../../../../Authantication/domain/use_cases/login_uc.dart';
-import '../../../../../Authantication/domain/use_cases/verify_forget_password_uc.dart';
 
 class NavigationBarSignInButton extends StatelessWidget {
   const NavigationBarSignInButton({super.key});
@@ -35,20 +26,20 @@ class NavigationBarSignInButton extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
 
                   children: [
-                    DefaultSelectableText("مرحباً", style: TextStyle(
+                    const DefaultSelectableText("مرحباً", style: TextStyle(
                         color: ColorManager.myGrayLite,
                         fontWeight: FontWeight.bold)),
-                    SizedBox(width: 10,),
+                    const SizedBox(width: 10,),
                     DefaultSelectableText(
                         AuthanticationCubit.userModel?.name ?? "",
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),
               ),
             );
           }
           else if (state is GetUserLoading) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
           else {
             return DefaultTextButton(title: "تسجيل الدخول",

@@ -1,5 +1,4 @@
 import 'package:amad_furniture/core/utils/color_manager.dart';
-import 'package:amad_furniture/core/utils/routes_manager.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
 import 'package:amad_furniture/features/products_screen/data/models/product_list_model.dart';
 import 'package:amad_furniture/features/products_screen/presentation/widgets/category_item_title_widget.dart';
@@ -8,14 +7,11 @@ import 'package:amad_furniture/features/products_screen/presentation/widgets/sub
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../core/utils/constantes.dart';
 import '../../../core/utils/my_widget.dart';
 import '../../Authantication/presentation/manager/authantication_cubit.dart';
 import '../../cart_screen/presentation/manager/cart_cubit.dart';
-import '../../home_screen/presentation/widgets/navigation_bar/presentation/navigation_bar_sign_in_button.dart';
-import '../../home_screen/presentation/widgets/navigation_bar/presentation/shop_cart_icon.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
@@ -31,7 +27,7 @@ class ProductsScreen extends StatelessWidget {
       cartCubit.getCart();
     }
     return Scaffold(
-        appBar: DefaultAppBar(),
+        appBar: const DefaultAppBar(),
         body: BlocBuilder<CategoriesCubit, CategoriesState>(
           builder: (context, state) {
             CategoriesCubit cubit = BlocProvider.of(context);
@@ -47,15 +43,15 @@ class ProductsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       border: Border(
                           left: BorderSide(color: ColorManager.myGrayLite))),
                   width: 250,
                   child: Column(children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
-                    DefaultSelectableText(
+                    const DefaultSelectableText(
                       "الأقسام",
                       style:
                           TextStyle(fontWeight: FontWeight.w500, fontSize: 25),
@@ -68,7 +64,7 @@ class ProductsScreen extends StatelessWidget {
                         }),
                     state is RetriveCategoriesLoading ||
                             CategoriesCubit.categoriesList == null
-                        ? Center(child: CircularProgressIndicator())
+                        ? const Center(child: CircularProgressIndicator())
                         : Expanded(
                             child: ListView.builder(
                             itemCount: CategoriesCubit
@@ -86,14 +82,14 @@ class ProductsScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(15),
                     child: Container(
                       child: CategoriesCubit.productsListModel == null
-                          ? Center(child: CircularProgressIndicator())
+                          ? const Center(child: CircularProgressIndicator())
                           : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 8.0),
                                   child: DefaultSelectableText(CategoriesCubit.currentCategoryName,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 24,
                                       fontWeight: FontWeight.w400,

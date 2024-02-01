@@ -1,4 +1,5 @@
 import 'package:amad_furniture/core/widgets/default_material_button.dart';
+import 'package:amad_furniture/features/cart_screen/data/models/cart_model.dart';
 import 'package:amad_furniture/features/cart_screen/data/models/product_amount_model.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
 import 'package:flexi_productimage_slider/flexi_productimage_slider.dart';
@@ -15,9 +16,12 @@ import '../../Authantication/presentation/manager/authantication_cubit.dart';
 import '../../cart_screen/presentation/manager/cart_cubit.dart';
 
 class ProductScreen extends StatelessWidget {
-  bool inCart = CartCubit.cart?.contains(CategoriesCubit.productInfo) ?? false;
+  // bool inCart = CartCubit.cart?.contains(CategoriesCubit.productInfo) ?? false;
+
 TextEditingController amountController = TextEditingController(text: "1");
 String productId;
+late bool inCart ;
+
   // List<String> arrayImages = const [
   //   "https://i.ibb.co/ZLFHX3F/1.png",
   //   "https://i.ibb.co/JKJvs5S/2.png",
@@ -60,7 +64,7 @@ String productId;
     }
     categoriesCubit.getProduct(productId);
     return Scaffold(
-      appBar: DefaultAppBar(),
+      appBar: const DefaultAppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 40),
         child: BlocBuilder<CategoriesCubit, CategoriesState>(
@@ -70,18 +74,18 @@ String productId;
                 ? Center(
                     child: state is GetProductError
                         ? AlertDialog(
-                            title: Text('خطأ'),
+                            title: const Text('خطأ'),
                             content:
-                                Text('لا يمكن عرض هذا المنتج في الوقت الحالي'),
+                                const Text('لا يمكن عرض هذا المنتج في الوقت الحالي'),
                             actions: [
                               TextButton(
                                 onPressed: () =>
                                     context.go(RoutesManager.productsScreen),
-                                child: Text('العودة'),
+                                child: const Text('العودة'),
                               ),
                             ],
                           )
-                        : CircularProgressIndicator())
+                        : const CircularProgressIndicator())
                 : Row(
                     children: [
                       Expanded(
@@ -101,14 +105,14 @@ String productId;
                               ),
                               DefaultSelectableText(
                                 CategoriesCubit.productInfo?.name ?? "",
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 36,
                                   fontFamily: 'Almarai',
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               SizedBox(
@@ -127,10 +131,9 @@ String productId;
                                                       0
                                                   ? "ج.م" +
                                                       "${CategoriesCubit.productInfo?.price}"
-                                                  : "${(double.parse(CategoriesCubit.productInfo?.price ?? "0") - double.parse(CategoriesCubit.productInfo?.discount ?? "0") * double.parse(CategoriesCubit.productInfo?.price ?? "0")).toStringAsFixed(2)} ج.م") ??
-                                              "",
+                                                  : "${(double.parse(CategoriesCubit.productInfo?.price ?? "0") - double.parse(CategoriesCubit.productInfo?.discount ?? "0") * double.parse(CategoriesCubit.productInfo?.price ?? "0")).toStringAsFixed(2)} ج.م"),
                                           textAlign: TextAlign.center,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.black,
                                             fontSize: 26,
                                             fontFamily: 'Almarai',
@@ -144,7 +147,7 @@ String productId;
                                                     .productInfo?.discount ??
                                                 "1") >
                                             0
-                                        ? DefaultSelectableText(
+                                        ? const DefaultSelectableText(
                                             "-",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
@@ -168,11 +171,10 @@ String productId;
                                                         TextDirection.ltr,
                                                     child:
                                                         DefaultSelectableText(
-                                                      "${CategoriesCubit.productInfo?.price} ج.م" ??
-                                                          "السعر غير متوفر",
+                                                      "${CategoriesCubit.productInfo?.price} ج.م",
                                                       textAlign:
                                                           TextAlign.center,
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 24,
                                                           fontFamily: 'Almarai',
@@ -197,16 +199,16 @@ String productId;
                                         Container(
                                           width: 20,
                                           height: 20,
-                                          decoration: ShapeDecoration(
+                                          decoration: const ShapeDecoration(
                                             color: Color(0xFF06BD4F),
                                             shape: OvalBorder(),
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
+                                        const Padding(
+                                          padding: EdgeInsets.symmetric(
                                               vertical: 30),
                                           child: DefaultSelectableText(
                                             'متوفر',
@@ -226,16 +228,16 @@ String productId;
                                         Container(
                                           width: 20,
                                           height: 20,
-                                          decoration: ShapeDecoration(
+                                          decoration: const ShapeDecoration(
                                             color: Colors.red,
                                             shape: OvalBorder(),
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
+                                        const Padding(
+                                          padding: EdgeInsets.symmetric(
                                               vertical: 30),
                                           child: DefaultSelectableText(
                                             'غير متوفر',
@@ -252,7 +254,7 @@ String productId;
                                     ),
                               (CategoriesCubit.productInfo?.availableAmount ?? 0) > 0 ? Row(
                                 children: [
-                                  DefaultSelectableText(
+                                  const DefaultSelectableText(
                                     'الكميه',
                                     style: TextStyle(
                                       color: Colors.black,
@@ -261,7 +263,7 @@ String productId;
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 30,
                                   ),
                                   DefaultTextFormField(
@@ -272,17 +274,18 @@ String productId;
                                     paddingRight: 0,
 
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 30,
                                   ),
                                   BlocBuilder<CartCubit, CartState>(
                                     builder: (context, state) {
                                       CartCubit cartCubit =
                                           BlocProvider.of(context);
-                                      inCart = CartCubit.cart?.contains(CategoriesCubit.productInfo) ?? false;
+                                      inCart = CartCubit.cartModel?.cart?.products?.contains(Products(id: productId)) ?? false;
+                                      // inCart = CartCubit.cart?.contains(CategoriesCubit.productInfo) ?? false;
                                       return Column(
                                         children: [
-                                          state is AddAmountOfProductToCartError ? Text(state.error,style: TextStyle(color: Colors.red),):const SizedBox(),
+                                          state is AddAmountOfProductToCartError ? Text(state.error,style: const TextStyle(color: Colors.red),):const SizedBox(),
                                           DefaultMaterialButton(
                                             minWidth: 300 * MediaQuery.of(context).size.width / 1400,
                                             borderRadius: 10,
@@ -302,23 +305,22 @@ String productId;
                                                       } else if (inCart) {
                                                         print("remove");
                                                         // inCart = !inCart;
-                                                        cartCubit.deleteAmountOfProductToCart(
+                                                        cartCubit.deleteAmountOfProductFromCart(
                                                             productAmountModel: ProductAmountModel(
                                                                 id: CategoriesCubit.productInfo!.id,
                                                                 amount: int.parse(amountController.text)));
-                                                        print(CartCubit.cart?.length);
                                                       }
                                                     } else context.go(RoutesManager.loginScreen);
                                                   },
-                                            lodingCondition: state is AddAmountOfProductToCartLoading,
-                                            errorCondition: state is AddAmountOfProductToCartError,
+                                            lodingCondition: state is AddAmountOfProductToCartLoading || state is DeleteAmountOfProductToCartLoading || state is GetCartLoading,
+                                            errorCondition: state is AddAmountOfProductToCartError || state is DeleteAmountOfProductToCartError || state is GetCartLoading,
                                           ),
                                         ],
                                       );
                                     },
                                   ),
                                 ],
-                              ) : SizedBox(),
+                              ) : const SizedBox(),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 35),
@@ -371,7 +373,7 @@ String productId;
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 child: Text(
                                   'هو عبارة عن دهن سائل غني بالأحماض الدهنية الأحادية غير المشبعة التي تمنحنا فوائد زيت الزيتون المتنوعة، ويتم استخلاصه من ثمرة الزيتون، حيث يتم الحصول على الزيت عن طريق عصرالزيتون الكامل. ويختلف تكوين زيت الزيتون باختلاف صنف الزيتون الذي يتم استخلاصه ',
                                   textAlign: TextAlign.center,
@@ -387,7 +389,7 @@ String productId;
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 15,
                       ),
                       Expanded(

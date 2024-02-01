@@ -6,7 +6,6 @@ import 'package:amad_furniture/features/cart_screen/domain/repositories/cart_rep
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import '../../../home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
 import '../../../products_screen/data/models/product_info_model.dart';
 import '../../data/models/product_amount_model.dart';
@@ -61,8 +60,8 @@ static TextEditingController sellerCoponController = TextEditingController();
     emit(AddAmountOfProductToCartLoading());
     try {
       String message = await cartRepo.addAmountOfProductToCart(productAmountModel);
-      cart?.add(CategoriesCubit.productInfo!);
       emit(AddAmountOfProductToCartSuccess());
+      getCart();
       return message;
     }on DioException catch (e) {
       emit(AddAmountOfProductToCartError(e.response?.data['message']));
@@ -70,12 +69,13 @@ static TextEditingController sellerCoponController = TextEditingController();
     }
   }
 
-  Future<String> deleteAmountOfProductToCart ({required ProductAmountModel productAmountModel}) async {
+  Future<String> deleteAmountOfProductFromCart ({required ProductAmountModel productAmountModel}) async {
     emit(DeleteAmountOfProductToCartLoading());
     try {
       String message = await cartRepo.deleteAmountOfProductFromCart(productAmountModel);
-      cart?.remove(CategoriesCubit.productInfo!);
+      // cart?.remove(CategoriesCubit.productInfo!);
       emit(DeleteAmountOfProductToCartSuccess());
+      getCart();
       return message;
     }on DioException catch (e) {
       emit(DeleteAmountOfProductToCartError(e.response?.data['message']));

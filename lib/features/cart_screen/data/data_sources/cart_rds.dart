@@ -30,10 +30,10 @@ class CartRdsImp implements CartRDS {
       ProductAmountModel productAmountModel) async {
     try {
       final response = await client.post(
-          "${EndPoints.BASE_URL + EndPoints.ADD_PRODUCT_TO_CART}",
+          EndPoints.BASE_URL + EndPoints.ADD_PRODUCT_TO_CART,
           body: productAmountModel.toJson(),
           headers: {
-            "Authorization": "Bearer ${token}",
+            "Authorization": "Bearer $token",
           });
       return response["message"];
 
@@ -47,10 +47,10 @@ class CartRdsImp implements CartRDS {
       ProductAmountModel productAmountModel) async {
     try {
       final response = await client.delete(
-          "${EndPoints.BASE_URL + EndPoints.DELETE_PRODUCT_FROM_CART}",
+          EndPoints.BASE_URL + EndPoints.DELETE_PRODUCT_FROM_CART,
           body: productAmountModel.toJson(),
           headers: {
-            "Authorization": "Bearer ${token}",
+            "Authorization": "Bearer $token",
           });
       return response["message"];
 
@@ -63,10 +63,10 @@ class CartRdsImp implements CartRDS {
   Future<String> addPromoCodeToCart (PromoCodeModel promoCodeModel) async {
     try {
       final response = await client.post(
-          "${EndPoints.BASE_URL + EndPoints.ADD_PROMOCODE}",
+          EndPoints.BASE_URL + EndPoints.ADD_PROMOCODE,
           body: promoCodeModel.toJson(),
           headers: {
-            "Authorization": "Bearer ${token}",
+            "Authorization": "Bearer $token",
           });
       return response["message"];
 
@@ -79,10 +79,10 @@ class CartRdsImp implements CartRDS {
   Future<String> deletePromoCodeFromCart(PromoCodeModel promoCodeModel) async {
     try {
       final response = await client.delete(
-          "${EndPoints.BASE_URL + EndPoints.DELETE_PROMOCODE}",
+          EndPoints.BASE_URL + EndPoints.DELETE_PROMOCODE,
           body: promoCodeModel.toJson(),
           headers: {
-            "Authorization": "Bearer ${token}",
+            "Authorization": "Bearer $token",
           });
       return response["message"];
 
@@ -97,7 +97,7 @@ class CartRdsImp implements CartRDS {
       final response = await client.get(
           EndPoints.BASE_URL + EndPoints.GET_CART,
           headers: {
-            "Authorization": "Bearer ${token}",
+            "Authorization": "Bearer $token",
           }
       );
       return response;
@@ -123,10 +123,10 @@ class CartRdsImp implements CartRDS {
   Future<String> orderTheCart (OrderData orderData) async {
     try {
       final response = await client.post(
-          "${EndPoints.BASE_URL + EndPoints.ORDER_CART}",
+          EndPoints.BASE_URL + EndPoints.ORDER_CART,
           body: orderData.toJson(),
           headers: {
-            "Authorization": "Bearer ${token}",
+            "Authorization": "Bearer $token",
           });
       return response["message"];
 

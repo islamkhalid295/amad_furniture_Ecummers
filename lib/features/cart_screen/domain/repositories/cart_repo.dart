@@ -23,6 +23,7 @@ class CartRepoImp implements CartRepo{
   Future<String> addAmountOfProductToCart(ProductAmountModel productAmountModel) async {
     return await cartRDS.addAmountOfProductToCart(productAmountModel);
   }
+  @override
   Future<String> deleteAmountOfProductFromCart(ProductAmountModel productAmountModel) async {
     return await cartRDS.deleteAmountOfProductFromCart(productAmountModel);
   }
@@ -31,6 +32,7 @@ class CartRepoImp implements CartRepo{
   Future<String> addPromoCodeToCart(PromoCodeModel promoCodeModel) async {
     return await cartRDS.addPromoCodeToCart(promoCodeModel);
   }
+  @override
   Future<String> deletePromoCodeFromCart(PromoCodeModel promoCodeModel) async {
     return await cartRDS.deletePromoCodeFromCart(promoCodeModel);
   }

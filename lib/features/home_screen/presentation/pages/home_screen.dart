@@ -19,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  final AutoScrollController _scrollController = AutoScrollController();
+ static final AutoScrollController _scrollController = AutoScrollController();
   late TabController _tabController;
   int currentSection = 0;
 
@@ -204,11 +204,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 SizedBox(
                   width: 30 * MediaQuery.of(context).size.width / 1440,
                 ),
-                ShopCart(),
+                const ShopCart(),
                 SizedBox(
                   width: 30 * MediaQuery.of(context).size.width / 1440,
                 ),
-                NavigationBarSignInButton(),
+                const NavigationBarSignInButton(),
                 // Container(
                 //   decoration: BoxDecoration(border: Border.all(color: ColorManager.myYellow),borderRadius: BorderRadius.circular(10)),
                 //   child: TextButton(onPressed: ()=> context.go('/authentication/create_account'), child: Text("تسجيل الدخول",style: TextStyle(
@@ -218,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 //     fontWeight: FontWeight.w700,
                 //   ),)),
                 // ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
               ],

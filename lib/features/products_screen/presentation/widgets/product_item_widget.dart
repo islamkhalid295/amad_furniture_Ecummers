@@ -4,7 +4,6 @@ import 'package:amad_furniture/features/home_screen/presentation/widgets/categor
 import 'package:amad_furniture/features/products_screen/data/models/product_list_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/color_manager.dart';
@@ -21,7 +20,7 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CategoriesCubit cubit = BlocProvider.of(context);
+    // CategoriesCubit cubit = BlocProvider.of(context);
     return Padding(
       padding: const EdgeInsets.all(15),
       child: InkWell(
@@ -98,13 +97,14 @@ class ProductItem extends StatelessWidget {
                 height: 10,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Directionality(
                     textDirection: TextDirection.ltr,
                     child: Expanded(
                       child: DefaultSelectableText(
-                        (double.parse(product.discount ?? "0") <= 0 ? " ج.م${product.price}" : "${( double.parse(product.price ?? "0") - double.parse(product.discount ?? "0") * double.parse(product.price ?? "0") ).toStringAsFixed(2)} ج.م") ??
-                            "",
+                        (double.parse(product.discount ?? "0") <= 0 ? " ج.م${product.price}" : "${( double.parse(product.price ?? "0") - double.parse(product.discount ?? "0") * double.parse(product.price ?? "0") ).toStringAsFixed(2)} ج.م")
+                            ,
                         style: const TextStyle(
                           color: ColorManager.myBlack,
                           fontSize: 20,
@@ -116,7 +116,6 @@ class ProductItem extends StatelessWidget {
                     ),
                   ),
                 ],
-                mainAxisAlignment: MainAxisAlignment.end,
               ),
               double.parse(product.discount ?? "1") > 0
                   ? Expanded(
