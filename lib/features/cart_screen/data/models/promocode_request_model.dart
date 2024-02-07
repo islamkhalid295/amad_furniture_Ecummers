@@ -1,10 +1,10 @@
-class PromoCodeModel {
+class PromoCodeRequestModel {
   String? promocode;
   String? type;
 
-  PromoCodeModel({this.promocode, this.type});
+  PromoCodeRequestModel({this.promocode, this.type});
 
-  PromoCodeModel.fromJson(Map<String, dynamic> json) {
+  PromoCodeRequestModel.fromJson(Map<String, dynamic> json) {
     promocode = json['promocode'];
     type = json['type'];
   }

@@ -49,7 +49,8 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
   static bool isPassword3 = true;
   static bool isPassword4 = true;
   static TextEditingController emailController = TextEditingController();
-  static TextEditingController nameController = TextEditingController();
+  static TextEditingController firstNameController = TextEditingController();
+  static TextEditingController secondNameController = TextEditingController();
   static TextEditingController phoneController = TextEditingController();
   static TextEditingController passwordController = TextEditingController();
   static TextEditingController rePasswordController = TextEditingController();
@@ -136,6 +137,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
       storage?.setToken(userModel?.token);
       token = userModel?.token;
       emit(LoginSuccsess());
+      passwordController.text="";
       context.go(RoutesManager.homeScreen);
     } on DioException catch (e) {
       print("error : ${e.response?.data["message"]}");
@@ -218,6 +220,13 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
     } catch (e) {
       emit(GetUserError(e.toString()));
     }
+  }
+  void logout (){
+    storage?.deleteToken();
+    token = null;
+    userData = null;
+    userModel = null;
+    emit(LogoutState());
   }
 }
 //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSXNsYW0gS2hhbGlkIiwiZW1haWwiOiJpc2xhbWtoYWxpZDI5NUBnbWFpbC5jb20iLCJudW1iZXIiOiIrMjAxMDkxODMyODI5Iiwicm9sZSI6ImNsaWVudCIsImlhdCI6MTcwNjMwNjg4NX0.5sKWoy5im1TUPLmIka4tPw1x5QbiXZc2o74qPMW0FBY

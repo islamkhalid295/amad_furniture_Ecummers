@@ -1,5 +1,3 @@
-import 'package:equatable/equatable.dart';
-
 class CartModel {
   Cart? cart;
 
@@ -20,8 +18,8 @@ class CartModel {
 
 class Cart {
   String? email;
-  String? clientPromocode;
-  String? sellerPromocode;
+  ClientPromocode? clientPromocode;
+  SellerPromocode? sellerPromocode;
   List<Products>? products;
   double? totalPrice;
   double? totalPriceAfterPromocodes;
@@ -36,8 +34,12 @@ class Cart {
 
   Cart.fromJson(Map<String, dynamic> json) {
     email = json['email'];
-    clientPromocode = json['client_promocode'];
-    sellerPromocode = json['seller_promocode'];
+    clientPromocode = json['client_promocode'] != null
+        ? new ClientPromocode.fromJson(json['client_promocode'])
+        : null;
+    sellerPromocode = json['seller_promocode'] != null
+        ? new SellerPromocode.fromJson(json['seller_promocode'])
+        : null;
     if (json['products'] != null) {
       products = <Products>[];
       json['products'].forEach((v) {
@@ -51,8 +53,12 @@ class Cart {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['email'] = this.email;
-    data['client_promocode'] = this.clientPromocode;
-    data['seller_promocode'] = this.sellerPromocode;
+    if (this.clientPromocode != null) {
+      data['client_promocode'] = this.clientPromocode!.toJson();
+    }
+    if (this.sellerPromocode != null) {
+      data['seller_promocode'] = this.sellerPromocode!.toJson();
+    }
     if (this.products != null) {
       data['products'] = this.products!.map((v) => v.toJson()).toList();
     }
@@ -62,14 +68,58 @@ class Cart {
   }
 }
 
-class Products extends Equatable {
+class ClientPromocode {
+  String? promocode;
+  String? type;
+  String? value;
+
+  ClientPromocode({this.promocode, this.type, this.value});
+
+  ClientPromocode.fromJson(Map<String, dynamic> json) {
+    promocode = json['promocode'];
+    type = json['type'];
+    value = json['value'].toString();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['promocode'] = this.promocode;
+    data['type'] = this.type;
+    data['value'] = this.value;
+    return data;
+  }
+}
+
+class SellerPromocode {
+  String? promocode;
+  String? type;
+  String? value;
+
+  SellerPromocode({this.promocode, this.type, this.value});
+
+  SellerPromocode.fromJson(Map<String, dynamic> json) {
+    promocode = json['promocode'];
+    type = json['type'];
+    value = json['value'].toString();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['promocode'] = this.promocode;
+    data['type'] = this.type;
+    data['value'] = this.value;
+    return data;
+  }
+}
+
+class Products {
   String? id;
   String? name;
   int? amount;
   String? image;
-  double? discount;
+  int? discount;
   String? price;
-  double? totalPrice;
+  int? totalPrice;
 
   Products(
       {this.id,
@@ -101,8 +151,4 @@ class Products extends Equatable {
     data['total_price'] = this.totalPrice;
     return data;
   }
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => [id];
 }

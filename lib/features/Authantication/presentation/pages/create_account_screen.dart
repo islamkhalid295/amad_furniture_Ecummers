@@ -83,13 +83,32 @@ class CreateAccountScreen extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(height: 24),
-                                    DefaultTextFormField(
-                                        validator:
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        DefaultTextFormField(
+                                          width: 140,
+                                            validator:
                                             AuthanticationCubit.nameValidator,
-                                        controller:
-                                            AuthanticationCubit.nameController,
-                                        title: "اسم المستخدم",
-                                        icon: Icon(Icons.person_outline)),
+                                            controller:
+                                            AuthanticationCubit.firstNameController,
+                                            title: "الاسم الاول",
+                                            icon: Icon(Icons.person_outline)),
+                                        SizedBox(width: 20,),
+                                        DefaultTextFormField(
+                                          onFieldSubmitted: (value) {
+                                            print(AuthanticationCubit.firstNameController.text + " " + AuthanticationCubit.secondNameController.text);
+                                          },
+                                            maxLines: 1,
+                                          width: 140,
+                                            // validator:
+                                            //     AuthanticationCubit.nameValidator,
+                                            controller:
+                                                AuthanticationCubit.secondNameController,
+                                            title: "الاسم الاخير",
+                                            icon: Icon(Icons.person_outline)),
+                                      ],
+                                    ),
                                     DefaultTextFormField(
                                         validator:
                                             AuthanticationCubit.emailValidator,
@@ -158,7 +177,7 @@ class CreateAccountScreen extends StatelessWidget {
                                                 email: AuthanticationCubit
                                                     .emailController.text,
                                                 name: AuthanticationCubit
-                                                    .nameController.text,
+                                                    .firstNameController.text + " " + AuthanticationCubit.secondNameController.text,
                                                 number: AuthanticationCubit
                                                     .phoneController.text,
                                                 password: AuthanticationCubit

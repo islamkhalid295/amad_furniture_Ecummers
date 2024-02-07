@@ -16,6 +16,9 @@ import '../../features/Authantication/presentation/manager/authantication_cubit.
 import '../../features/cart_screen/data/data_sources/Cart_rds.dart';
 import '../../features/cart_screen/domain/repositories/cart_repo.dart';
 import '../../features/cart_screen/presentation/manager/cart_cubit.dart';
+import '../../features/home_screen/data/data_sources/basic_page_data_rds.dart';
+import '../../features/home_screen/domain/repositories/basic_page_data_repo.dart';
+import '../../features/home_screen/presentation/manager/basic_data_cubit.dart';
 import '../../features/home_screen/presentation/widgets/FAQ_screen/data/data_sources/faq_rds.dart';
 import '../../features/home_screen/presentation/widgets/FAQ_screen/domain/repositories/faq_repo.dart';
 import '../../features/home_screen/presentation/widgets/FAQ_screen/domain/use_cases/retrive_faq_uc.dart';
@@ -107,6 +110,14 @@ Future<void> init() async {
           () => CartRepoImp(cartRDS:  sl()));
   sl.registerLazySingleton<CartRDS>(
           () => CartRdsImp(client: sl()));
+
+  // Features - BasicData
+  sl.registerFactory(() => BasicDataCubit(sl()));
+  // sl.registerLazySingleton(() => RetriveBasicDataUC(aboutUsRepo: sl()));
+  sl.registerLazySingleton<BasicDataRepo>(
+          () => BasicDataRepoImp(basicDataRDS: sl()));
+  sl.registerLazySingleton<BasicDataRDS>(
+          () => BasicDataRdsImp(client: sl()));
 
 
   // sl.registerFactory(() => AuthanticationCubit(sl()));

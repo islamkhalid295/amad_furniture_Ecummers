@@ -159,8 +159,8 @@ class LoginScreen extends StatelessWidget {
                                     lodingCondition: state is LoginLoading,
                                     succsessCondition: state is LoginSuccsess,
                                     errorCondition: state is LoginError,
-                                    minWidth: 200,
                                     text: "تسجيل الدخول",
+                                    borderRadius: 8,
                                     onPressed: () {
                                       if (AuthanticationCubit
                                           .formKey.currentState!

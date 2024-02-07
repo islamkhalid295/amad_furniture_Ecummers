@@ -54,8 +54,46 @@ class CategoriesScreen extends StatelessWidget {
                 ? Container(
                     height: getSectionHeight(context),
                     child: const Center(child: CircularProgressIndicator()))
-                : MasonryGridView.count(
-                    crossAxisCount: 5,
+                : GridView.custom(
+              gridDelegate: SliverWovenGridDelegate.count(
+                crossAxisCount: 5,
+                mainAxisSpacing: 3,
+                crossAxisSpacing: 4,
+                pattern: [
+                  WovenGridTile(1),
+                  // WovenGridTile(
+                  //   5 / 7,
+                  //   crossAxisRatio: 0.9,
+                  //   alignment: AlignmentDirectional.centerEnd,
+                  // ),
+                ],
+              ),
+              childrenDelegate: SliverChildBuilderDelegate(
+                childCount: 15,
+                    (context, index) => CategoryItem(
+                      onTap: () {
+                        CategoriesCubit.currentCategoryName = CategoriesCubit
+                            .categoriesList?.categories?[1].name ??
+                            "";
+                        context.goNamed(RoutesManager.productsScreen,
+                            pathParameters: {'categoryId': CategoriesCubit
+                                .categoriesList?.categories?[1].id ??
+                                "",});
+                        // cubit.getProductsByCategory(CategoriesCubit.categoriesList?.categories?[index].id);
+                      },
+                      height: 250,
+                      imageUrl: CategoriesCubit
+                          .categoriesList?.categories?[1].imageUrl ??
+                          "",
+                      name: CategoriesCubit
+                          .categoriesList?.categories?[1].name ??
+                          "",
+                    ),
+              ),
+            )
+            /*MasonryGridView.count(
+                    crossAxisCount: 6,
+
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount:
                         CategoriesCubit.categoriesList?.categories?.length,
@@ -65,7 +103,7 @@ class CategoriesScreen extends StatelessWidget {
                           context.go(RoutesManager.productsScreen);
                           // cubit.getProductsByCategory(CategoriesCubit.categoriesList?.categories?[index].id);
                         },
-                        height: (index % 4 + 2) * 100,
+                        height: (index % 5 + 1) * 100,
                         imageUrl: CategoriesCubit
                                 .categoriesList?.categories?[index].imageUrl ??
                             "",
@@ -74,7 +112,7 @@ class CategoriesScreen extends StatelessWidget {
                             "",
                       );
                     },
-                  ),
+                  )*/,
           ),
         );
       },

@@ -3,7 +3,7 @@ import 'package:amad_furniture/core/utils/my_widget.dart';
 import 'package:amad_furniture/core/widgets/default_material_button.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_state.dart';
-import 'package:amad_furniture/features/cart_screen/data/models/order_data.dart';
+import 'package:amad_furniture/features/cart_screen/data/models/order_the_cart_model.dart';
 import 'package:amad_furniture/features/cart_screen/presentation/manager/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,8 +14,8 @@ import '../../../core/utils/routes_manager.dart';
 
 class OrderScreen extends StatelessWidget {
    OrderScreen({super.key});
-late  TextEditingController firstNameController = TextEditingController(text: AuthanticationCubit.userModel?.name);
-final TextEditingController secondNameController = TextEditingController();
+late  TextEditingController firstNameController = TextEditingController(text: AuthanticationCubit.userModel?.firstName);
+late TextEditingController secondNameController = TextEditingController(text: AuthanticationCubit.userModel?.secondName);
 late  TextEditingController phoneController = TextEditingController(text: AuthanticationCubit.userData?.user?.number);
 final TextEditingController anotherPhoneController = TextEditingController();
    late  TextEditingController emailController = TextEditingController(text: AuthanticationCubit.userData?.user?.email);
@@ -52,9 +52,11 @@ final TextEditingController anotherPhoneController = TextEditingController();
           ));
     }
     if (state is GetUserSuccsess){
-      firstNameController = TextEditingController(text: AuthanticationCubit.userModel?.name);
-      phoneController = TextEditingController(text: AuthanticationCubit.userData?.user?.number);
-      emailController = TextEditingController(text: AuthanticationCubit.userData?.user?.email);
+      firstNameController = TextEditingController(text: AuthanticationCubit.userModel?.firstName);
+      secondNameController = TextEditingController(text: AuthanticationCubit.userModel?.secondName);
+
+      phoneController = TextEditingController(text: AuthanticationCubit.userModel?.number);
+      emailController = TextEditingController(text: AuthanticationCubit.userModel?.email);
     }
 
     return SingleChildScrollView(
@@ -120,7 +122,7 @@ final TextEditingController anotherPhoneController = TextEditingController();
                         },
                       ),
                     ),
-                        state is GetUserLoading || AuthanticationCubit.userData == null ? const Center(child: CircularProgressIndicator()) : Form(
+                        state is GetUserLoading || AuthanticationCubit.userModel == null ? const Center(child: CircularProgressIndicator()) : Form(
                                     key: CartCubit.formKey,
                                     child: Column(
                                       children: [
@@ -162,18 +164,19 @@ final TextEditingController anotherPhoneController = TextEditingController();
                                         ),
                                         Row(
                                           children: [
-                                            Expanded(child: OrderTextFormField(hintText: 'المحافظة',
-                                              validator: CartCubit.nameValidator,
-                                            controller: governorateController,)),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
                                             Expanded(child: OrderTextFormField(hintText: 'العنوان',
                                               validator: CartCubit.nameValidator,
                                             controller: addressController,)),
                                           ],
                                         ),
+                                        Row(
+                                          children: [
+                                            Expanded(child: OrderTextFormField(hintText: 'اقرب علامة مميزة',
+                                              validator: CartCubit.nameValidator,
+                                              controller: governorateController,)),
+                                          ],
+                                        ),
+
                                       ],
                                     ),
                                   ),
@@ -186,9 +189,13 @@ final TextEditingController anotherPhoneController = TextEditingController();
                 return state is OrderTheCartError ? Center(child: DefaultSelectableText(orderError,style: const TextStyle(color: Colors.red),),) : const SizedBox();
 
               },),
-              Center(child: DefaultMaterialButton(onPressed: ()async{
+              Center(child: DefaultMaterialButton(
+                lodingCondition: state is OrderTheCartLoading,
+                  succsessCondition: state is OrderTheCartSuccess,
+                  errorCondition:  state is OrderTheCartError,
+                  onPressed: ()async{
                 if(CartCubit.formKey.currentState!.validate()){
-                   orderError = await cubit.orderTheCart(orderData: OrderData(deliveryDestination: DeliveryDestination(additionalInfo: "",apartment: "",buildingNumber: "5",city: "cairo",district: ""),paymentMethod: "cash"));
+                   orderError = await cubit.orderTheCart(orderTheCartModel: OrderTheCartModel(paymentMethod: paymentMethod,city: CartCubit.selectedCity?.id,destination: addressController.text,lastName: secondNameController.text,secondNumber: anotherPhoneController.text));
                   print("تم الطلب");
                 }
               }, text: 'اتمام الطلب'))

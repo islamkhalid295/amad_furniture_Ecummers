@@ -25,8 +25,16 @@ class ProductItem extends StatelessWidget {
       padding: const EdgeInsets.all(15),
       child: InkWell(
         onTap: (){
-          context.goNamed(RoutesManager.productScreen,pathParameters: {'productId' : product.id??""});
-          CategoriesCubit.selectedProductID = product.id;
+          if(product.id != null) {
+            context.goNamed(RoutesManager.productScreen,
+                pathParameters: {'productId': product.id ?? ""});
+            CategoriesCubit.selectedProductID = product.id;
+          }else{
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text("تعذر ايجاد المنتج",style: TextStyle(color: ColorManager.myBlack),),
+              backgroundColor: ColorManager.myYellow,
+            ));
+          }
         },
         child: Container(
           height: productItemHeight,
@@ -40,7 +48,7 @@ class ProductItem extends StatelessWidget {
                     alignment: Alignment.center,
                     child: CachedNetworkImage(
                       imageUrl:
-                      "https://eaglespiritgourmet.com/wp-content/uploads/2023/12/minimalist-olive-oil-bottle-glass-600x600.webp" /*product.imageUrl?? ""*/,
+                      /*"https://eaglespiritgourmet.com/wp-content/uploads/2023/12/minimalist-olive-oil-bottle-glass-600x600.webp"*/ product.imageUrl?? "",
                       placeholder: (context, url) =>
                           const Center(child: CircularProgressIndicator()),
                       errorWidget: (context, url, error) {
@@ -52,7 +60,7 @@ class ProductItem extends StatelessWidget {
                       alignment: Alignment.center,
                     ),
                   ),
-                  (double.parse(product.discount ?? "1")) > 0 ? Center(
+                  (double.parse(product.discount ?? "0")) > 0 ? Center(
                     child: Container(
                       alignment: Alignment.bottomRight,
                       height: productItemImageHeight + 4,
@@ -117,7 +125,7 @@ class ProductItem extends StatelessWidget {
                   ),
                 ],
               ),
-              double.parse(product.discount ?? "1") > 0
+              double.parse(product.discount ?? "0") > 0
                   ? Expanded(
                 child: Row(
                   children: [
@@ -138,7 +146,7 @@ class ProductItem extends StatelessWidget {
                   ],
                 ),
               )
-                  : Container(),
+                  : Container(height: 38),
               const SizedBox(
                 height: 10,
               ),

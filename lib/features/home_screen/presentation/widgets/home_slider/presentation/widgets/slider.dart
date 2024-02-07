@@ -8,8 +8,8 @@ import '../../../../../../../core/utils/locator.dart';
 import '../manager/slider_cubit.dart';
 
 class HomeSlider extends StatelessWidget {
-  const HomeSlider({super.key});
-
+  const HomeSlider({super.key, this.onPressed});
+final VoidCallback? onPressed;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SliderCubit, SliderState>(
@@ -33,7 +33,7 @@ class HomeSlider extends StatelessWidget {
                         SliderCubit.sliderItemsList?.slider?.map((sliderItem) {
                       return Builder(
                         builder: (BuildContext context) {
-                          return mySlider(context, sliderItem);
+                          return mySlider(context, sliderItem,onPressed);
                         },
                       );
                     }).toList(),

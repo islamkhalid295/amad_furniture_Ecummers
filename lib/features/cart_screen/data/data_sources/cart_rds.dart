@@ -1,11 +1,12 @@
 import 'package:amad_furniture/core/api/api_consummer.dart';
 import 'package:amad_furniture/core/api/end_points.dart';
-import 'package:amad_furniture/features/cart_screen/data/models/order_data.dart';
-import 'package:amad_furniture/features/cart_screen/data/models/promocode_model.dart';
+import 'package:amad_furniture/features/cart_screen/data/models/promocode_response_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../core/utils/constantes.dart';
+import '../models/order_the_cart_model.dart';
 import '../models/product_amount_model.dart';
+import '../models/promocode_request_model.dart';
 
 abstract class CartRDS {
   Future<String> addAmountOfProductToCart(
@@ -14,9 +15,9 @@ abstract class CartRDS {
       ProductAmountModel productAmountModel);
   Future<dynamic> getCart();
   Future<dynamic> getCitiesDeliveryPrices();
-  Future<String> addPromoCodeToCart(PromoCodeModel promoCodeModel);
-  Future<String> deletePromoCodeFromCart(PromoCodeModel promoCodeModel);
-  Future<String> orderTheCart (OrderData orderData);
+  Future<PromoCodeResponseModel> addPromoCodeToCart(PromoCodeRequestModel promoCodeModel);
+  Future<String> deletePromoCodeFromCart(PromoCodeRequestModel promoCodeModel);
+  Future<String> orderTheCart (OrderTheCartModel orderTheCartModel);
 }
 
 class CartRdsImp implements CartRDS {
@@ -60,7 +61,7 @@ class CartRdsImp implements CartRDS {
   }
 
   @override
-  Future<String> addPromoCodeToCart (PromoCodeModel promoCodeModel) async {
+  Future<PromoCodeResponseModel> addPromoCodeToCart (PromoCodeRequestModel promoCodeModel) async {
     try {
       final response = await client.post(
           EndPoints.BASE_URL + EndPoints.ADD_PROMOCODE,
@@ -68,15 +69,14 @@ class CartRdsImp implements CartRDS {
           headers: {
             "Authorization": "Bearer $token",
           });
-      return response["message"];
-
+      return PromoCodeResponseModel.fromJson(response);
     }catch (e){
       rethrow;
     }
   }
 
   @override
-  Future<String> deletePromoCodeFromCart(PromoCodeModel promoCodeModel) async {
+  Future<String> deletePromoCodeFromCart(PromoCodeRequestModel promoCodeModel) async {
     try {
       final response = await client.delete(
           EndPoints.BASE_URL + EndPoints.DELETE_PROMOCODE,
@@ -120,11 +120,11 @@ class CartRdsImp implements CartRDS {
     }
   }
   @override
-  Future<String> orderTheCart (OrderData orderData) async {
+  Future<String> orderTheCart (OrderTheCartModel orderTheCartModel) async {
     try {
       final response = await client.post(
           EndPoints.BASE_URL + EndPoints.ORDER_CART,
-          body: orderData.toJson(),
+          body: orderTheCartModel.toJson(),
           headers: {
             "Authorization": "Bearer $token",
           });

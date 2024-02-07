@@ -15,6 +15,7 @@ import 'package:amad_furniture/features/Authantication/presentation/pages/login_
 import 'package:amad_furniture/features/cart_screen/presentation/cart_screen.dart';
 import 'package:amad_furniture/features/cart_screen/presentation/manager/cart_cubit.dart';
 import 'package:amad_furniture/features/cart_screen/presentation/order_screen.dart';
+import 'package:amad_furniture/features/home_screen/presentation/manager/basic_data_cubit.dart';
 import 'package:amad_furniture/features/home_screen/presentation/pages/home_screen.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/presentation/manager/about_us_screen_cubit.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/home_slider/presentation/manager/slider_cubit.dart';
@@ -66,6 +67,9 @@ class MyApp extends StatelessWidget {
             BlocProvider<CartCubit>(
               create: (context) => sl<CartCubit>(),
             ),
+            BlocProvider<BasicDataCubit>(
+              create: (context) => sl<BasicDataCubit>(),
+            ),
             BlocProvider<AuthanticationCubit>(
               create: (context) => AuthanticationCubit(
                   getUserUC: GetUserUC(
@@ -92,6 +96,45 @@ class MyApp extends StatelessWidget {
           ],
           child: const Directionality(
               textDirection: TextDirection.rtl, child: HomeScreen()),
+        ),
+      ),
+      GoRoute(
+        name: RoutesManager.productsScreen,
+        path: '${RoutesManager.productsScreen}/:categoryId',
+        builder: (context, state) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => sl<CategoriesCubit>(),
+            ),
+            BlocProvider<CartCubit>(
+              create: (context) => sl<CartCubit>(),
+            ),
+            BlocProvider<AuthanticationCubit>(
+              create: (context) => AuthanticationCubit(
+                  getUserUC: GetUserUC(
+                      authanticationRepo: AuthanticationRepoImp(
+                          authanticationRDS: AuthanticationRdsImp(
+                              client: DioConsumer(client: Dio())))),
+                  verifyForgetPasswordUC: VerifyForgetPasswordUC(
+                      authanticationRepo: AuthanticationRepoImp(
+                          authanticationRDS: AuthanticationRdsImp(
+                              client: DioConsumer(client: Dio())))),
+                  forgetPasswordUC: ForgetPasswordUC(
+                      authanticationRepo: AuthanticationRepoImp(
+                          authanticationRDS: AuthanticationRdsImp(
+                              client: DioConsumer(client: Dio())))),
+                  createAccountUC: CreateAccountUC(
+                      authanticationRepo: AuthanticationRepoImp(
+                          authanticationRDS: AuthanticationRdsImp(
+                              client: DioConsumer(client: Dio())))),
+                  loginUC: LoginUC(
+                      authanticationRepo: AuthanticationRepoImp(
+                          authanticationRDS: AuthanticationRdsImp(
+                              client: DioConsumer(client: Dio()))))),
+            ),
+          ],
+          child:  Directionality(
+              textDirection: TextDirection.rtl, child: ProductsScreen(categoryId: state.pathParameters['categoryId']!)),
         ),
       ),
       GoRoute(
@@ -128,8 +171,8 @@ class MyApp extends StatelessWidget {
                               client: DioConsumer(client: Dio()))))),
             ),
           ],
-          child: const Directionality(
-              textDirection: TextDirection.rtl, child: ProductsScreen()),
+          child:  Directionality(
+              textDirection: TextDirection.rtl, child: ProductsScreen(categoryId: null,)),
         ),
       ),
       GoRoute(

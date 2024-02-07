@@ -14,8 +14,8 @@ import '../../Authantication/presentation/manager/authantication_cubit.dart';
 import '../../cart_screen/presentation/manager/cart_cubit.dart';
 
 class ProductsScreen extends StatelessWidget {
-  const ProductsScreen({super.key});
-
+  const ProductsScreen({super.key, required this.categoryId});
+final String? categoryId;
   @override
   Widget build(BuildContext context) {
     AuthanticationCubit authanticationCubit = BlocProvider.of(context);
@@ -33,8 +33,12 @@ class ProductsScreen extends StatelessWidget {
             CategoriesCubit cubit = BlocProvider.of(context);
             if(CategoriesCubit.productsListModel == null && !CategoriesCubit.poductsLoaded){
               CategoriesCubit.poductsLoaded = true;
+              if(categoryId != null) {
               cubit.getProducts();
-            }
+            }else{
+                cubit.getProductsByCategory(categoryId);
+              }
+          }
             if(CategoriesCubit.categoriesList == null && !CategoriesCubit.categoryLoaded){
               CategoriesCubit.categoryLoaded = true;
               cubit.retriveCategories();
@@ -81,7 +85,7 @@ class ProductsScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: Container(
-                      child: CategoriesCubit.productsListModel == null
+                      child: CategoriesCubit.productsListModel == null || state is GetProductsLoading
                           ? const Center(child: CircularProgressIndicator())
                           : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

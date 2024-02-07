@@ -1,4 +1,5 @@
 import 'package:amad_furniture/core/utils/constantes.dart';
+import 'package:amad_furniture/features/home_screen/domain/repositories/basic_page_data_repo.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/presentation/about_us_screen.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/categories_screen/presentation/pages/catrgories_screen.dart';
 import 'package:bloc/bloc.dart';
@@ -12,7 +13,6 @@ part 'home_screen_state.dart';
 
 class HomeScreenCubit extends Cubit<HomeScreenState> {
   HomeScreenCubit() : super(HomeScreenInitial());
-
   late TabController tabController;
 
   static  int sectionsNumber = homeScreenSections.length;
@@ -34,6 +34,10 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       text: "رئيسية",
     ),
     Tab(
+      text: "من نحن",
+
+    ),
+    Tab(
       text: "تسوق",
     ),
     Tab(
@@ -44,9 +48,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
       text: "تواصل معنا",
     ),
-    Tab(
-      text: "عن منتجاتنا",
 
-    ),
   ];
+
 }

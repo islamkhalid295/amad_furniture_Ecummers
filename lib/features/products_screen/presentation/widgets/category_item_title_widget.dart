@@ -26,6 +26,7 @@ class CategoryTitleItem extends StatelessWidget {
                     title: e.name ?? "",
                     onPressed: (){
                      cubit.getProductsBySubCategory(CategoriesCubit.categoriesList!.categories![index].id??"65aba82125715658c6d165c3", e.id??"2");
+                     CategoriesCubit.currentCategoryName = e.name??"";
                     },
                   ))
               .toList(),

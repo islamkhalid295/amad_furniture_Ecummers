@@ -1,15 +1,15 @@
 import 'package:amad_furniture/core/utils/constantes.dart';
 import 'package:amad_furniture/features/cart_screen/data/models/cart_model.dart';
 import 'package:amad_furniture/features/cart_screen/data/models/city_model.dart';
-import 'package:amad_furniture/features/cart_screen/data/models/order_data.dart';
+import 'package:amad_furniture/features/cart_screen/data/models/order_the_cart_model.dart';
 import 'package:amad_furniture/features/cart_screen/domain/repositories/cart_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import '../../../home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
 import '../../../products_screen/data/models/product_info_model.dart';
 import '../../data/models/product_amount_model.dart';
-import '../../data/models/promocode_model.dart';
+import '../../data/models/promocode_request_model.dart';
+import '../../data/models/promocode_response_model.dart';
 
 part 'cart_state.dart';
 
@@ -19,6 +19,7 @@ class CartCubit extends Cubit<CartState> {
   static List<ProductInfo>? cart ;
   static var formKey = GlobalKey<FormState>();
   static String? cityDropDownMenuError;
+  static City? selectedCity;
   static TextEditingController cityDropDownMenuController = TextEditingController();
 static City? deliveryCity;
 static TextEditingController clientCoponController = TextEditingController();
@@ -83,33 +84,31 @@ static TextEditingController sellerCoponController = TextEditingController();
     }
   }
 
-  Future<String> addClientPromocodetoCart({required PromoCodeModel promoCodeModel}) async {
+  Future<void> addClientPromocodetoCart({required PromoCodeRequestModel promoCodeModel}) async {
     emit(AddClientPromoCodeToCartLoading());
     try {
-      String message = await cartRepo.addPromoCodeToCart(promoCodeModel);
+       await cartRepo.addPromoCodeToCart(promoCodeModel);
       emit(AddClientPromoCodeToCartSuccess());
       getCart();
-      return message;
+
     }on DioException catch (e) {
       emit(AddClientPromoCodeToCartError(e.response?.data['message']));
-      return e.response?.data['message'];
+
     }
   }
-  Future<String> addSellerPromocodetoCart({required PromoCodeModel promoCodeModel}) async {
+  Future<void> addSellerPromocodetoCart({required PromoCodeRequestModel promoCodeModel}) async {
     emit(AddSellerPromoCodeToCartLoading());
     try {
-      String message = await cartRepo.addPromoCodeToCart(promoCodeModel);
+       await cartRepo.addPromoCodeToCart(promoCodeModel);
       emit(AddSellerPromoCodeToCartSuccess());
       getCart();
 
-      return message;
     }on DioException catch (e) {
       emit(AddSellerPromoCodeToCartError(e.response?.data['message']));
-      return e.response?.data['message'];
     }
   }
 
-  Future<String> deleteClientPromocodeFromCart ({required PromoCodeModel promoCodeModel}) async {
+  Future<String> deleteClientPromocodeFromCart ({required PromoCodeRequestModel promoCodeModel}) async {
     emit(DeleteClientPromoCodeFromCartLoading());
     try {
       String message = await cartRepo.deletePromoCodeFromCart(promoCodeModel);
@@ -122,7 +121,7 @@ static TextEditingController sellerCoponController = TextEditingController();
       return e.response?.data['message'];
     }
   }
-  Future<String> deleteSellerPromocodeFromCart ({required PromoCodeModel promoCodeModel}) async {
+  Future<String> deleteSellerPromocodeFromCart ({required PromoCodeRequestModel promoCodeModel}) async {
     emit(DeleteSellerPromoCodeFromCartLoading());
     try {
       String message = await cartRepo.deletePromoCodeFromCart(promoCodeModel);
@@ -178,10 +177,10 @@ static List<City>? cities;
     emit(CitySelectedState());
   }
 
-  Future<String> orderTheCart ({required OrderData orderData}) async {
+  Future<String> orderTheCart ({required OrderTheCartModel orderTheCartModel}) async {
     emit(OrderTheCartLoading());
     try {
-      String message = await cartRepo.orderTheCart(orderData);
+      String message = await cartRepo.orderTheCart(orderTheCartModel);
       emit(OrderTheCartSuccess());
       return message;
     }on DioException catch (e) {
@@ -189,5 +188,7 @@ static List<City>? cities;
       return e.response?.data['message'];
     }
   }
-
+ void myTestState (){
+    emit(GetCartError("my"));
+}
 }

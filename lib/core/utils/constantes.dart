@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../features/home_screen/presentation/widgets/categories_screen/data/models/categories_model.dart';
 
-const double yellowBannarHeight = 40;
+const double yellowBannarHeight = 0 /*40*/;
 const double tabBarHeight = 72;
 const int verificationCodeLength = 6;
 const double productItemHeight = 340;
 const double productItemImageHeight = productItemHeight - 140;
 const double cartProductImageSize = 100;
+const double socialMediaIconsSize = 30;
+const double whatsAppIconsSize = 80;
 String? token;
+String paymentMethod = "cash";
 
 
 

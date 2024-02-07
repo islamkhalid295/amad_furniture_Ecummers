@@ -46,3 +46,5 @@ class GetUserError extends AuthanticationState{
 
   GetUserError(this.error);
 }
+
+class LogoutState extends AuthanticationState{}

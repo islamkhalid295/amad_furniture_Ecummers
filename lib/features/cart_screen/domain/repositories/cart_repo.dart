@@ -1,7 +1,8 @@
 import '../../data/data_sources/Cart_rds.dart';
-import '../../data/models/order_data.dart';
+import '../../data/models/order_the_cart_model.dart';
 import '../../data/models/product_amount_model.dart';
-import '../../data/models/promocode_model.dart';
+import '../../data/models/promocode_request_model.dart';
+import '../../data/models/promocode_response_model.dart';
 
 abstract class CartRepo {
   Future<String> addAmountOfProductToCart(ProductAmountModel productAmountModel);
@@ -10,9 +11,9 @@ abstract class CartRepo {
       ProductAmountModel productAmountModel);
   Future<dynamic> getCart();
   Future<dynamic> getCitiesDeliveryPrices();
-  Future<String> addPromoCodeToCart(PromoCodeModel promoCodeModel);
-  Future<String> deletePromoCodeFromCart(PromoCodeModel promoCodeModel);
-  Future<String> orderTheCart (OrderData orderData);
+  Future<PromoCodeResponseModel> addPromoCodeToCart(PromoCodeRequestModel promoCodeModel);
+  Future<String> deletePromoCodeFromCart(PromoCodeRequestModel promoCodeModel);
+  Future<String> orderTheCart (OrderTheCartModel orderTheCartModel);
 }
 
 class CartRepoImp implements CartRepo{
@@ -29,11 +30,11 @@ class CartRepoImp implements CartRepo{
   }
 
   @override
-  Future<String> addPromoCodeToCart(PromoCodeModel promoCodeModel) async {
+  Future<PromoCodeResponseModel> addPromoCodeToCart(PromoCodeRequestModel promoCodeModel) async {
     return await cartRDS.addPromoCodeToCart(promoCodeModel);
   }
   @override
-  Future<String> deletePromoCodeFromCart(PromoCodeModel promoCodeModel) async {
+  Future<String> deletePromoCodeFromCart(PromoCodeRequestModel promoCodeModel) async {
     return await cartRDS.deletePromoCodeFromCart(promoCodeModel);
   }
 
@@ -48,7 +49,7 @@ class CartRepoImp implements CartRepo{
   }
 
   @override
-  Future<String> orderTheCart (OrderData orderData)  async {
-    return await cartRDS.orderTheCart(orderData);
+  Future<String> orderTheCart (OrderTheCartModel orderTheCartModel)  async {
+    return await cartRDS.orderTheCart(orderTheCartModel);
   }
 }

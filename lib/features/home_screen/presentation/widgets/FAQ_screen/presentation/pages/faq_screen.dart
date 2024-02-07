@@ -70,48 +70,52 @@ class FaqScreen extends StatelessWidget {
                   flex: 1,
                   child: Padding(
                     padding: const EdgeInsets.all(30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: ColorManager.myYellow.withOpacity(0.3),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.question_answer_outlined,
-                                color: ColorManager.myYellow,
-                                size: 100 *
-                                    MediaQuery.of(context).size.width /
-                                    1000,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: ColorManager.myYellow.withOpacity(0.3),
                               ),
-                            )),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 30),
-                          child: SelectableText("الأسئلة الشائعة",
-                              style: TextStyle(
-                                  fontSize: 50 *
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(
+                                  Icons.question_answer_outlined,
+                                  color: ColorManager.myYellow,
+                                  size: 100 *
                                       MediaQuery.of(context).size.width /
-                                      1440 * MediaQuery.of(context).size.height /
-                                  1000,
-                                  fontWeight: FontWeight.w500)),
-                        ),
-                        SizedBox(
-                          height:
-                              300 * MediaQuery.of(context).size.height / 1000,
-                          width: 300 * MediaQuery.of(context).size.width / 1440,
-                          child: SelectableText(
-                              "قد تساعدك هذة الاسئلة في حل مشكلتك. \n فيحين لم تجد ما يساعدك فكل ماعليك هو التواصل معناوسنعمل علي حلها في اقرب وقت  ",
-                              style: TextStyle(
-                                fontSize: 20 *
-                                    MediaQuery.of(context).size.width /
-                                    1000 * MediaQuery.of(context).size.height /
-                                    1000,
+                                      1000 *
+                                      MediaQuery.of(context).size.height /
+                                      900,
+                                ),
                               )),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 30),
+                            child: SelectableText("الأسئلة الشائعة",
+                                style: TextStyle(
+                                    fontSize: 50 *
+                                        MediaQuery.of(context).size.width /
+                                        1440 * MediaQuery.of(context).size.height /
+                                    1000,
+                                    fontWeight: FontWeight.w500)),
+                          ),
+                          SizedBox(
+                            height:
+                                250 * MediaQuery.of(context).size.height / 800,
+                            width: 300 * MediaQuery.of(context).size.width / 1440,
+                            child: SelectableText(
+                                "قد تساعدك هذة الاسئلة في حل مشكلتك. \n فيحين لم تجد ما يساعدك فكل ماعليك هو التواصل معناوسنعمل علي حلها في اقرب وقت  ",
+                                style: TextStyle(
+                                  fontSize: 20 *
+                                      MediaQuery.of(context).size.width /
+                                      1000 * MediaQuery.of(context).size.height /
+                                      800,
+                                )),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 )

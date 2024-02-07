@@ -1,10 +1,10 @@
 class RoutesManager {
-  static String homeScreen = "/11";
+  static String homeScreen = "/";
 
   static String productsScreen = "/products";
   static String productScreen = "/product";
   static String cartScreen =  "/cart";
-  static String orderScreen = '/' /*"/order"*/;
+  static String orderScreen = "/order";
 
   static String createAccountScreen = "/authentication/create_account";
   static String loginScreen = "/authentication/login";

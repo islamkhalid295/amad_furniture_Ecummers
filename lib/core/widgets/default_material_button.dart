@@ -7,6 +7,7 @@ class DefaultMaterialButton extends StatelessWidget {
       {super.key,
       required this.onPressed,
       this.lodingCondition = false,
+      this.linearProgressIndicator = false,
       this.succsessCondition = false,
       this.errorCondition = false,
       required this.text,
@@ -19,6 +20,7 @@ class DefaultMaterialButton extends StatelessWidget {
 
   final VoidCallback onPressed;
   final bool lodingCondition;
+  final bool linearProgressIndicator;
   final bool succsessCondition;
   final bool errorCondition;
   final String text;
@@ -44,7 +46,7 @@ class DefaultMaterialButton extends StatelessWidget {
         side: borderColor != null ? BorderSide(color: borderColor!) : BorderSide.none,
       ),
       child: lodingCondition
-          ? CircularProgressIndicator(
+          ? linearProgressIndicator ? LinearProgressIndicator(color: ColorManager.myWhite,) : CircularProgressIndicator(
               color: ColorManager.myWhite,
             )
           : succsessCondition
