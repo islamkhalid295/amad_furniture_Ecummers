@@ -28,6 +28,7 @@ import 'core/utils/bloc_observer.dart';
 import 'core/utils/locator.dart';
 import 'features/Authantication/presentation/pages/create_account_screen.dart';
 import 'features/Authantication/presentation/pages/verify_forget_password_screen.dart';
+import 'features/cart_screen/presentation/order_summary_screen.dart';
 import 'features/home_screen/presentation/widgets/FAQ_screen/presentation/manager/faq_cubit.dart';
 import 'features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
 import 'features/products_screen/presentation/product_screen.dart';
@@ -215,6 +216,55 @@ class MyApp extends StatelessWidget {
                 textDirection: TextDirection.rtl,
                 child: ProductScreen(
                     productId: state.pathParameters['productId']!))),
+      ),
+      GoRoute(
+        name: RoutesManager.orderSummaryScreen,
+        path: '${RoutesManager.orderSummaryScreen}/:firstName/:secondName/:phone/:anotherPhone/:email/:landmark/:address',
+        builder: (context, state) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => sl<CartCubit>(),
+              ),
+              BlocProvider(
+                create: (context) => CategoriesCubit(
+                    sl()) /*..getProduct(CategoriesCubit.selectedProductID ?? "")*/,
+              ),
+              BlocProvider<AuthanticationCubit>(
+                create: (context) => AuthanticationCubit(
+                    getUserUC: GetUserUC(
+                        authanticationRepo: AuthanticationRepoImp(
+                            authanticationRDS: AuthanticationRdsImp(
+                                client: DioConsumer(client: Dio())))),
+                    verifyForgetPasswordUC: VerifyForgetPasswordUC(
+                        authanticationRepo: AuthanticationRepoImp(
+                            authanticationRDS: AuthanticationRdsImp(
+                                client: DioConsumer(client: Dio())))),
+                    forgetPasswordUC: ForgetPasswordUC(
+                        authanticationRepo: AuthanticationRepoImp(
+                            authanticationRDS: AuthanticationRdsImp(
+                                client: DioConsumer(client: Dio())))),
+                    createAccountUC: CreateAccountUC(
+                        authanticationRepo: AuthanticationRepoImp(
+                            authanticationRDS: AuthanticationRdsImp(
+                                client: DioConsumer(client: Dio())))),
+                    loginUC: LoginUC(
+                        authanticationRepo: AuthanticationRepoImp(
+                            authanticationRDS: AuthanticationRdsImp(
+                                client: DioConsumer(client: Dio()))))),
+              ),
+            ],
+            child: Directionality(
+                textDirection: TextDirection.rtl,
+                child: OrderSummaryScreen(
+                    firstName: state.pathParameters['firstName']!,
+                  secondName: state.pathParameters['secondName']!,
+                  phone: state.pathParameters['phone']!,
+                  anotherPhone: state.pathParameters['anotherPhone']!,
+                  email: state.pathParameters['email']!,
+                  landmark: state.pathParameters['landmark']!,
+                  address: state.pathParameters['address']!,
+                  delivery: state.pathParameters['delivery']!,
+                ))),
       ),
       GoRoute(
         path: RoutesManager.cartScreen,

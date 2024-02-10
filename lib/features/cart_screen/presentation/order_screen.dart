@@ -19,7 +19,7 @@ late TextEditingController secondNameController = TextEditingController(text: Au
 late  TextEditingController phoneController = TextEditingController(text: AuthanticationCubit.userData?.user?.number);
 final TextEditingController anotherPhoneController = TextEditingController();
    late  TextEditingController emailController = TextEditingController(text: AuthanticationCubit.userData?.user?.email);
-   final TextEditingController governorateController = TextEditingController();
+   final TextEditingController landmarkController = TextEditingController();
    final TextEditingController addressController = TextEditingController();
    late String orderError="";
 
@@ -51,7 +51,7 @@ final TextEditingController anotherPhoneController = TextEditingController();
             ],
           ));
     }
-    if (state is GetUserSuccsess){
+    if (AuthanticationCubit.userModel != null){
       firstNameController = TextEditingController(text: AuthanticationCubit.userModel?.firstName);
       secondNameController = TextEditingController(text: AuthanticationCubit.userModel?.secondName);
 
@@ -98,6 +98,23 @@ final TextEditingController anotherPhoneController = TextEditingController();
                             fontWeight: FontWeight.w700,
                           ),
                         ),
+                        Padding(
+                          padding:
+                          const EdgeInsets.symmetric(vertical: 15),
+                          child: Container(
+                            decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  width: 1,
+                                  strokeAlign:
+                                  BorderSide.strokeAlignCenter,
+                                  color: Colors.black
+                                      .withOpacity(0.3199999928474426),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                         const Text(
                           'وسائل الدفع',
                           textAlign: TextAlign.right,
@@ -122,6 +139,24 @@ final TextEditingController anotherPhoneController = TextEditingController();
                         },
                       ),
                     ),
+                        Padding(
+                          padding:
+                          const EdgeInsets.symmetric(vertical: 15),
+                          child: Container(
+                            decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  width: 1,
+                                  strokeAlign:
+                                  BorderSide.strokeAlignCenter,
+                                  color: Colors.black
+                                      .withOpacity(0.3199999928474426),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+
                         state is GetUserLoading || AuthanticationCubit.userModel == null ? const Center(child: CircularProgressIndicator()) : Form(
                                     key: CartCubit.formKey,
                                     child: Column(
@@ -173,7 +208,7 @@ final TextEditingController anotherPhoneController = TextEditingController();
                                           children: [
                                             Expanded(child: OrderTextFormField(hintText: 'اقرب علامة مميزة',
                                               validator: CartCubit.nameValidator,
-                                              controller: governorateController,)),
+                                              controller: landmarkController,)),
                                           ],
                                         ),
 
@@ -194,8 +229,20 @@ final TextEditingController anotherPhoneController = TextEditingController();
                   succsessCondition: state is OrderTheCartSuccess,
                   errorCondition:  state is OrderTheCartError,
                   onPressed: ()async{
+
                 if(CartCubit.formKey.currentState!.validate()){
-                   orderError = await cubit.orderTheCart(orderTheCartModel: OrderTheCartModel(paymentMethod: paymentMethod,city: CartCubit.selectedCity?.id,destination: addressController.text,lastName: secondNameController.text,secondNumber: anotherPhoneController.text));
+                  context.goNamed(RoutesManager.orderSummaryScreen,
+                      pathParameters: {
+                        'firstName': firstNameController.text,
+                        'secondName': secondNameController.text,
+                        'phone': phoneController.text,
+                        'anotherPhone': anotherPhoneController.text,
+                        'email': emailController.text,
+                        'landmark': landmarkController.text,
+                        'address': addressController.text,
+                        'delivery' : CartCubit.deliveryCity?.deliveryPrice ??"0",
+                      });
+                   // orderError = await cubit.orderTheCart(orderTheCartModel: OrderTheCartModel(paymentMethod: paymentMethod,city: CartCubit.deliveryCity?.id,destination: addressController.text,lastName: secondNameController.text,secondNumber: anotherPhoneController.text));
                   print("تم الطلب");
                 }
               }, text: 'اتمام الطلب'))

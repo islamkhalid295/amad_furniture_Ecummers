@@ -16,7 +16,7 @@ import '../data/models/promocode_request_model.dart';
 class CartScreen extends StatelessWidget {
   CartScreen({super.key});
 
-  late double totalPrice = 0;
+  double totalPrice = 0;
   String couponError = "";
   bool flag = true;
 
@@ -58,6 +58,7 @@ class CartScreen extends StatelessWidget {
             buildWhen: (previous, current) =>
                 current is GetCartSuccess ||
                 current is GetCartError ||
+                current is CitySelectedState ||
                 current is GetCartLoading,
             builder: (context, state) {
               // if(CategoriesCubit.productsListModel == null && !CategoriesCubit.poductsLoaded){
@@ -75,7 +76,7 @@ class CartScreen extends StatelessWidget {
                     color: Colors.red,
                   ),
                 );
-              } else if (state is GetCartSuccess) {
+              } else if (state is GetCartSuccess ||state is CitySelectedState) {
                 return CartCubit.cartModel!.cart!.products!.isEmpty
                     ? Container(
                         height: getSectionHeight(context),
@@ -393,18 +394,16 @@ class CartScreen extends StatelessWidget {
                                                                 .none),
                                                     onSelected: (City? city) {
                                                       if (city != null) {
-                                                        cubit.onCitySelected(
-                                                            city);
-                                                        CartCubit.selectedCity =
-                                                            city;
+                                                        CartCubit.deliveryCity = city;
                                                         totalPrice = (CartCubit
-                                                                .cartModel
-                                                                ?.cart
-                                                                ?.totalPrice)! +
+                                                            .cartModel
+                                                            ?.cart
+                                                            ?.totalPrice)! +
                                                             double.parse(CartCubit
-                                                                    .deliveryCity
-                                                                    ?.deliveryPrice ??
+                                                                .deliveryCity
+                                                                ?.deliveryPrice ??
                                                                 '0');
+                                                        cubit.onCitySelected(city);
                                                         CartCubit
                                                                 .cityDropDownMenuError =
                                                             null;

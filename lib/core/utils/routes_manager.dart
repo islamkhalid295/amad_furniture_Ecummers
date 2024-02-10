@@ -5,6 +5,7 @@ class RoutesManager {
   static String productScreen = "/product";
   static String cartScreen =  "/cart";
   static String orderScreen = "/order";
+  static String orderSummaryScreen = "/order_summary";
 
   static String createAccountScreen = "/authentication/create_account";
   static String loginScreen = "/authentication/login";

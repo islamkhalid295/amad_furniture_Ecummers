@@ -117,9 +117,9 @@ class Products {
   String? name;
   int? amount;
   String? image;
-  int? discount;
+  double? discount;
   String? price;
-  int? totalPrice;
+  double? totalPrice;
 
   Products(
       {this.id,

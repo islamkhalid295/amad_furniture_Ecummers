@@ -19,7 +19,6 @@ class CartCubit extends Cubit<CartState> {
   static List<ProductInfo>? cart ;
   static var formKey = GlobalKey<FormState>();
   static String? cityDropDownMenuError;
-  static City? selectedCity;
   static TextEditingController cityDropDownMenuController = TextEditingController();
 static City? deliveryCity;
 static TextEditingController clientCoponController = TextEditingController();

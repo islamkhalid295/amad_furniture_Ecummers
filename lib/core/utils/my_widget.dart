@@ -17,6 +17,8 @@ import '../widgets/default_material_button.dart';
 import 'color_manager.dart';
 import 'constantes.dart';
 
+
+
 class OrderTextFormField extends StatelessWidget {
   const OrderTextFormField(
       {super.key, this.hintText, this.width, this.validator, this.controller});
@@ -235,6 +237,157 @@ class CartProductItem extends StatelessWidget {
                                 ),
                               ],
                             ),
+                          ),
+
+                          // DefaultTextFormField(
+                          //
+                          //   controller: amountController,
+                          //   width: 60,
+                          //   textAlign: TextAlign.center,
+                          //   paddingRight: 0,
+                          // ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+            Container(
+              height: cartProductImageSize,
+              decoration: ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    width: 1,
+                    strokeAlign: BorderSide.strokeAlignCenter,
+                    color: Colors.black.withOpacity(0.3199999928474426),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: DefaultSelectableText(
+                  product.totalPrice!.toStringAsFixed(2),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Color(0xFF242424),
+                    fontSize: 16,
+                    fontFamily: 'Almarai',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+class CartProductSummaryItem extends StatelessWidget {
+  CartProductSummaryItem({
+    required this.product,
+    super.key,
+    required this.amountController,
+  });
+
+  final Products product;
+  final TextEditingController amountController;
+
+  @override
+  Widget build(BuildContext context) {
+    CartCubit cartCubit = BlocProvider.of(context);
+    return InkWell(
+      onTap: () {
+        context.goNamed(RoutesManager.productScreen,
+            pathParameters: {'productId': product.id ?? ""});
+        // CategoriesCubit.selectedProductID = product.id;
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        child: Row(
+          children: [
+            Expanded(
+                child: CachedNetworkImage(
+                  imageUrl:
+                  /*"https://eaglespiritgourmet.com/wp-content/uploads/2023/12/minimalist-olive-oil-bottle-glass-600x600.webp"*/ product.image?? "",
+                  placeholder: (context, url) =>
+                  const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) {
+                    return const Icon(Icons.error);
+                  },
+                  // fit: BoxFit.cover,
+                  height: cartProductImageSize,
+                  width: cartProductImageSize,
+                  alignment: Alignment.center,
+                ),),
+            Expanded(
+              child: DefaultSelectableText(
+                product.name ?? "الاسم غير متوفر",
+                style: const TextStyle(
+                  color: Color(0xFF242424),
+                  fontSize: 16,
+                  fontFamily: 'Almarai',
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            Expanded(
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: DefaultSelectableText(
+                  ((product.discount ?? 0) <= 0
+                      ? "ج.م" "${product.price}"
+                      : "${(double.parse(product.price ?? "0") - (product.discount)! * double.parse(product.price ?? "0")).toStringAsFixed(2)} ج.م"),
+                  textAlign: TextAlign.end,
+                  style: const TextStyle(
+                    color: Color(0xFF242424),
+                    fontSize: 16,
+                    fontFamily: 'Almarai',
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
+            BlocBuilder<CartCubit, CartState>(
+              builder: (context, state) {
+                return Expanded(
+                  child: Column(
+                    children: [
+                      state is AddAmountOfProductToCartError
+                          ? SizedBox(
+                              child: DefaultSelectableText(
+                                state.error,
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            )
+                          : SizedBox(),
+                      state is DeleteAmountOfProductToCartError
+                          ? SizedBox(
+                              child: DefaultSelectableText(
+                                state.error,
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            )
+                          : SizedBox(),
+                      Row(
+                        children: [
+                          const DefaultSelectableText(
+                            'الكميه',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15.38,
+                              fontFamily: 'Almarai',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                            child: DefaultSelectableText(amountController.text),
                           ),
 
                           // DefaultTextFormField(

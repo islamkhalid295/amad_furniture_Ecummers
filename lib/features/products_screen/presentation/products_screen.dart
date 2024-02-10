@@ -33,7 +33,7 @@ final String? categoryId;
             CategoriesCubit cubit = BlocProvider.of(context);
             if(CategoriesCubit.productsListModel == null && !CategoriesCubit.poductsLoaded){
               CategoriesCubit.poductsLoaded = true;
-              if(categoryId != null) {
+              if(categoryId == null) {
               cubit.getProducts();
             }else{
                 cubit.getProductsByCategory(categoryId);
