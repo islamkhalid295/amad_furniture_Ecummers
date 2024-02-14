@@ -20,7 +20,7 @@ class ProductScreen extends StatelessWidget {
 
 TextEditingController amountController = TextEditingController(text: "1");
 String productId;
-late bool inCart ;
+bool inCart= false;
 
   // List<String> arrayImages = const [
   //   "https://i.ibb.co/ZLFHX3F/1.png",
@@ -57,12 +57,17 @@ late bool inCart ;
     CategoriesCubit categoriesCubit = BlocProvider.of(context);
     CartCubit cartCubit = BlocProvider.of(context);
     if (token == null) {
-      authanticationCubit.getToken();
-    }
-    if (CartCubit.cart == null) {
+      authanticationCubit.getToken().then((value) {
+        if (CartCubit.cart == null) {
+          cartCubit.getCart();
+        }
+      });
+    } else if (CartCubit.cart == null && !cartCubit.cartLoading) {
       cartCubit.getCart();
     }
-    categoriesCubit.getProduct(productId);
+    if(!categoriesCubit.poductsLoading) {
+      categoriesCubit.getProduct(productId);
+    }
     return Scaffold(
       appBar: const DefaultAppBar(),
       body: Padding(
@@ -279,8 +284,8 @@ late bool inCart ;
                                   ),
                                   BlocBuilder<CartCubit, CartState>(
                                     builder: (context, state) {
-                                      CartCubit cartCubit =
-                                          BlocProvider.of(context);
+                                      // CartCubit cartCubit =
+                                      //     BlocProvider.of(context);
                                       inCart = CartCubit.cartModel?.cart?.products?.contains(Products(id: productId)) ?? false;
                                       // inCart = CartCubit.cart?.contains(CategoriesCubit.productInfo) ?? false;
                                       return Column(
@@ -291,7 +296,7 @@ late bool inCart ;
                                             borderRadius: 10,
                                             color: inCart ? ColorManager.myYellow : null,
                                             textColor: inCart ? ColorManager.myBlack : null,
-                                            text: token == "null" ? "تسجيل الدخول اولا" : inCart ? "تمت الإضافة" : "اضافة الي العربة",
+                                            text: token == "null" ? "تسجيل الدخول اولا" : inCart ? "ازالة من العربة" : "اضافة الي العربة",
                                             onPressed: () {
                                                if (token != "null"){
                                                       if (!inCart) {
@@ -308,7 +313,7 @@ late bool inCart ;
                                                         cartCubit.deleteAmountOfProductFromCart(
                                                             productAmountModel: ProductAmountModel(
                                                                 id: CategoriesCubit.productInfo!.id,
-                                                                amount: int.parse(amountController.text)));
+                                                                amount: CartCubit.cartModel?.cart?.products?.firstWhere((element) => element.id == productId).amount));
                                                       }
                                                     } else context.go(RoutesManager.loginScreen);
                                                   },

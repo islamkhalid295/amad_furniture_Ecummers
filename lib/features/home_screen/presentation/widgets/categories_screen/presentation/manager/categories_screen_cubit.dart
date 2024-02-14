@@ -22,6 +22,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
 static String currentCategoryName = "الكل";
 static bool categoryLoaded = false;
 static bool poductsLoaded = false;
+ bool poductsLoading = false;
 
 
   void retriveCategories ()async
@@ -37,10 +38,12 @@ static bool poductsLoaded = false;
   }
   Future<void> getProduct(String id)async
   {
+    poductsLoading = true;
     emit(GetProductLoading());
     try {
       productInfo = await categoriesRepo.getProduct(id);
       print(productInfo);
+      poductsLoading = false;
       emit(GetProductSuccsess());
     }catch(e){
       emit(GetProductError());

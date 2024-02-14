@@ -1,3 +1,5 @@
+import 'package:equatable/equatable.dart';
+
 class CartModel {
   Cart? cart;
 
@@ -112,7 +114,7 @@ class SellerPromocode {
   }
 }
 
-class Products {
+class Products extends Equatable{
   String? id;
   String? name;
   int? amount;
@@ -151,4 +153,7 @@ class Products {
     data['total_price'] = this.totalPrice;
     return data;
   }
+
+  @override
+  List<Object?> get props => [id];
 }

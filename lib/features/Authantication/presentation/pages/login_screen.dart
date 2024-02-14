@@ -88,6 +88,7 @@ class LoginScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 24),
                                 DefaultTextFormField(
+                                  keyboardType: TextInputType.emailAddress,
                                     controller:
                                         AuthanticationCubit.emailController,
                                     validator:

@@ -69,24 +69,25 @@ class CategoriesScreen extends StatelessWidget {
                 ],
               ),
               childrenDelegate: SliverChildBuilderDelegate(
-                childCount: 15,
+                childCount: CategoriesCubit
+                    .categoriesList?.categories?.length,
                     (context, index) => CategoryItem(
                       onTap: () {
                         CategoriesCubit.currentCategoryName = CategoriesCubit
-                            .categoriesList?.categories?[1].name ??
+                            .categoriesList?.categories?[index].name ??
                             "";
                         context.goNamed(RoutesManager.productsScreen,
                             pathParameters: {'categoryId': CategoriesCubit
-                                .categoriesList?.categories?[1].id ??
+                                .categoriesList?.categories?[index].id ??
                                 "",});
                         // cubit.getProductsByCategory(CategoriesCubit.categoriesList?.categories?[index].id);
                       },
                       height: 250,
                       imageUrl: CategoriesCubit
-                          .categoriesList?.categories?[1].imageUrl ??
+                          .categoriesList?.categories?[index].imageUrl ??
                           "",
                       name: CategoriesCubit
-                          .categoriesList?.categories?[1].name ??
+                          .categoriesList?.categories?[index].name ??
                           "",
                     ),
               ),

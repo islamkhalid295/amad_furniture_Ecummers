@@ -110,6 +110,7 @@ class CreateAccountScreen extends StatelessWidget {
                                       ],
                                     ),
                                     DefaultTextFormField(
+                                        keyboardType: TextInputType.emailAddress,
                                         validator:
                                             AuthanticationCubit.emailValidator,
                                         controller:

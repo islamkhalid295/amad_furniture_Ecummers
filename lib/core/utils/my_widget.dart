@@ -298,7 +298,7 @@ class CartProductSummaryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CartCubit cartCubit = BlocProvider.of(context);
+    // CartCubit cartCubit = BlocProvider.of(context);
     return InkWell(
       onTap: () {
         context.goNamed(RoutesManager.productScreen,
@@ -461,6 +461,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
           width: 400,
           child: Row(
             children: [
+              SizedBox(width: 70,),
               DefaultTextButton(
                   onPressed: () {
                     context.go(RoutesManager.homeScreen);
@@ -478,7 +479,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ),
-      titleSpacing: 100,
+      titleSpacing: 0,
       actions: [
         SizedBox(
           width: 30 * MediaQuery.of(context).size.width / 1440,
@@ -657,7 +658,7 @@ Widget mySlider(context, SliderItem sliderItem, VoidCallback? onPressed) => Stac
             print(error.toString());
             //return Icon(Icons.error);
             return CachedNetworkImage(
-              imageUrl: SliderCubit.imageOnErrorLodingImage ?? "",
+              imageUrl: SliderCubit.imageOnErrorLodingImage ,
               placeholder: (context, url) =>
                   Center(child: CircularProgressIndicator()),
               errorWidget: (context, url, error) {

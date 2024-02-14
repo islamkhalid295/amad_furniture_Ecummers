@@ -1,3 +1,5 @@
+
+
 import 'package:amad_furniture/core/api/dio_consummer.dart';
 import 'package:amad_furniture/core/utils/color_manager.dart';
 import 'package:amad_furniture/core/utils/locator.dart' as di;
@@ -219,7 +221,7 @@ class MyApp extends StatelessWidget {
       ),
       GoRoute(
         name: RoutesManager.orderSummaryScreen,
-        path: '${RoutesManager.orderSummaryScreen}/:firstName/:secondName/:phone/:anotherPhone/:email/:landmark/:address',
+        path: '${RoutesManager.orderSummaryScreen}/:firstName/:secondName/:phone/:anotherPhone/:email/:landmark/:address/:delivery/:city',
         builder: (context, state) => MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -255,7 +257,7 @@ class MyApp extends StatelessWidget {
             ],
             child: Directionality(
                 textDirection: TextDirection.rtl,
-                child: OrderSummaryScreen(
+                child:  OrderSummaryScreen(
                     firstName: state.pathParameters['firstName']!,
                   secondName: state.pathParameters['secondName']!,
                   phone: state.pathParameters['phone']!,
@@ -264,6 +266,7 @@ class MyApp extends StatelessWidget {
                   landmark: state.pathParameters['landmark']!,
                   address: state.pathParameters['address']!,
                   delivery: state.pathParameters['delivery']!,
+                  city: state.pathParameters['city']!,
                 ))),
       ),
       GoRoute(

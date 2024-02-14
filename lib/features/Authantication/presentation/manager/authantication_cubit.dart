@@ -188,10 +188,10 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
   }
 
 
-  void getToken() {
+  Future<String?> getToken() async{
     emit(GetTokenLoading());
     try {
-      storage?.getToken().then((value) {
+     return await storage?.getToken().then((value) {
         token = value.toString();
         emit(GetTokenSuccsess());
         if (token != "null" && token != null) {
@@ -200,7 +200,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
       });
     } catch (e) {
       emit(GetTokenError());
-      print(e.toString());
+      return e.toString();
     }
   }
 
@@ -208,13 +208,12 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
     emit(GetUserLoading());
     try {
       getUserUC.call(token).then((value) {
-        userData = value;
-        print(value.toString());
         userModel = UserModel(
             email: value.user?.email,
             name: value.user?.name,
             token: token,
             number: value.user?.number);
+        userData = value;
         emit(GetUserSuccsess());
       });
     } catch (e) {

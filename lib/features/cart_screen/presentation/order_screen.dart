@@ -3,7 +3,6 @@ import 'package:amad_furniture/core/utils/my_widget.dart';
 import 'package:amad_furniture/core/widgets/default_material_button.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
 import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_state.dart';
-import 'package:amad_furniture/features/cart_screen/data/models/order_the_cart_model.dart';
 import 'package:amad_furniture/features/cart_screen/presentation/manager/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +10,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/utils/constantes.dart';
 import '../../../core/utils/routes_manager.dart';
+import '../data/models/city_model.dart';
 
 class OrderScreen extends StatelessWidget {
    OrderScreen({super.key});
@@ -21,9 +21,8 @@ final TextEditingController anotherPhoneController = TextEditingController();
    late  TextEditingController emailController = TextEditingController(text: AuthanticationCubit.userData?.user?.email);
    final TextEditingController landmarkController = TextEditingController();
    final TextEditingController addressController = TextEditingController();
-   late String orderError="";
 
-
+bool flag = true;
   @override
   Widget build(BuildContext context) {
     CartCubit cubit = BlocProvider.of(context);
@@ -33,6 +32,10 @@ final TextEditingController anotherPhoneController = TextEditingController();
     }
     if (token != null && CartCubit.cartModel == null) {
       cubit.getCart();
+    }
+    if (CartCubit.cities == null && flag) {
+      flag = false;
+      cubit.getCitiesDeliveryPrices();
     }
     return Scaffold(
       appBar: const DefaultAppBar(),
@@ -186,7 +189,7 @@ final TextEditingController anotherPhoneController = TextEditingController();
                                             validator: CartCubit.phoneValidator,
                                             controller: phoneController,)),
                                             const SizedBox(width: 40,),
-                                            Expanded(child: OrderTextFormField(hintText: 'رقم اخر' ,validator: CartCubit.phoneValidator,controller: anotherPhoneController,)),
+                                            Expanded(child: OrderTextFormField(hintText: 'رقم اخر' ,validator: CartCubit.anotherPhoneValidator,controller: anotherPhoneController,)),
                                           ],
                                         ),
                                         Row(
@@ -211,7 +214,77 @@ final TextEditingController anotherPhoneController = TextEditingController();
                                               controller: landmarkController,)),
                                           ],
                                         ),
+                                        BlocBuilder<CartCubit, CartState>(
+                                          buildWhen: (previous, current) => current is GetCitiesDeliveryPricesLoading || current is GetCitiesDeliveryPricesSuccess || current is GetCitiesDeliveryPricesError || current is ChangeCityDropDownMenuState,
+                                          builder: (context, state) {
+                                            return Center(
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                child: state
+                                                is GetCitiesDeliveryPricesLoading ||
+                                                    CartCubit.cities == null
+                                                    ? const Center(
+                                                    child:
+                                                    CircularProgressIndicator())
+                                                    : DropdownMenu<City>(
+                                                  controller: CartCubit
+                                                      .cityDropDownMenuController,
+                                                  errorText: CartCubit
+                                                      .cityDropDownMenuError,
+                                                  requestFocusOnTap: true,
+                                                  width: 450 *
+                                                      MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      1440,
+                                                  label:
+                                                  const Text('المحافظة'),
+                                                  inputDecorationTheme:
+                                                  const InputDecorationTheme(
+                                                      filled: true,
+                                                      contentPadding:
+                                                      EdgeInsets
+                                                          .symmetric(
+                                                          vertical:
+                                                          5.0,
+                                                          horizontal:
+                                                          5),
+                                                      fillColor:
+                                                      ColorManager
+                                                          .myOffWhite,
+                                                      border: InputBorder
+                                                          .none),
+                                                  onSelected: (City? city) {
+                                                    if (city != null) {
+                                                      CartCubit.deliveryCity = city;
 
+                                                      CartCubit
+                                                          .cityDropDownMenuError =
+                                                      null;
+                                                    }
+                                                  },
+                                                  initialSelection: CartCubit.deliveryCity,
+                                                  dropdownMenuEntries: CartCubit
+                                                      .cities ==
+                                                      null
+                                                      ? []
+                                                      : CartCubit.cities!.map<
+                                                      DropdownMenuEntry<
+                                                          City>>(
+                                                        (City city) {
+                                                      return DropdownMenuEntry<
+                                                          City>(
+                                                        value: city,
+                                                        label:
+                                                        "${city.name}  ج.م  - ${city.deliveryPrice} ",
+                                                      );
+                                                    },
+                                                  ).toList(),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -220,30 +293,37 @@ final TextEditingController anotherPhoneController = TextEditingController();
                   ),
                 ),
               ),
-              BlocBuilder<CartCubit,CartState>(builder: (context, state) {
-                return state is OrderTheCartError ? Center(child: DefaultSelectableText(orderError,style: const TextStyle(color: Colors.red),),) : const SizedBox();
 
-              },),
               Center(child: DefaultMaterialButton(
-                lodingCondition: state is OrderTheCartLoading,
-                  succsessCondition: state is OrderTheCartSuccess,
-                  errorCondition:  state is OrderTheCartError,
-                  onPressed: ()async{
 
-                if(CartCubit.formKey.currentState!.validate()){
+                  onPressed: ()async{
+                    if (CartCubit
+                        .cityDropDownMenuController
+                        .text !=
+                        "") {
+                      context
+                          .go(RoutesManager.orderScreen);
+                    } else {
+                      cubit
+                          .cityDropDownMenuValidationError();
+                    }
+                if(CartCubit.formKey.currentState!.validate() && CartCubit.cityDropDownMenuController.text != "" ){
                   context.goNamed(RoutesManager.orderSummaryScreen,
                       pathParameters: {
                         'firstName': firstNameController.text,
                         'secondName': secondNameController.text,
                         'phone': phoneController.text,
-                        'anotherPhone': anotherPhoneController.text,
+                        'anotherPhone': anotherPhoneController.text == ""? '_' : anotherPhoneController.text,
                         'email': emailController.text,
                         'landmark': landmarkController.text,
                         'address': addressController.text,
                         'delivery' : CartCubit.deliveryCity?.deliveryPrice ??"0",
+                        'city' : CartCubit.deliveryCity?.name ?? "_",
                       });
                    // orderError = await cubit.orderTheCart(orderTheCartModel: OrderTheCartModel(paymentMethod: paymentMethod,city: CartCubit.deliveryCity?.id,destination: addressController.text,lastName: secondNameController.text,secondNumber: anotherPhoneController.text));
-                  print("تم الطلب");
+                }else {
+                  cubit
+                      .cityDropDownMenuValidationError();
                 }
               }, text: 'اتمام الطلب'))
             ],

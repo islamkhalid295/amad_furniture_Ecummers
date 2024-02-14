@@ -1,3 +1,4 @@
+
 import 'package:amad_furniture/features/cart_screen/presentation/manager/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import '../../../core/utils/constantes.dart';
 import '../../../core/utils/my_widget.dart';
 import '../../../core/widgets/default_material_button.dart';
 import '../../Authantication/presentation/manager/authantication_cubit.dart';
+import '../data/models/order_the_cart_model.dart';
 
 class OrderSummaryScreen extends StatelessWidget {
   OrderSummaryScreen(
@@ -17,6 +19,7 @@ class OrderSummaryScreen extends StatelessWidget {
       required this.email,
       required this.landmark,
       required this.address,
+      required this.city,
         required this.delivery});
 
   String firstName;
@@ -27,6 +30,7 @@ class OrderSummaryScreen extends StatelessWidget {
   String landmark;
   String address;
   String delivery;
+  String city;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +49,7 @@ class OrderSummaryScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 65, vertical: 30),
           child: BlocBuilder<CartCubit, CartState>(
             builder: (context, state) {
+
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -159,7 +164,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                   width: 20,
                                 ),
                                 DefaultSelectableText(
-                                  CartCubit.deliveryCity?.name ?? "",
+                                  city,
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ],
@@ -240,8 +245,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                           color: Colors.red,
                                         ),
                                       )
-                                    : state is GetCartSuccess
-                                        ? Column(
+                                     : Column(
                                             children: CartCubit
                                                     .cartModel?.cart!.products!
                                                     .map((e) =>
@@ -254,8 +258,8 @@ class OrderSummaryScreen extends StatelessWidget {
                                                         ))
                                                     .toList() ??
                                                 [],
-                                          )
-                                        : SizedBox(),
+                                          ),
+
                              state is GetCartError
                                 ? const Center(
                               child: Icon(
@@ -263,7 +267,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                 color: Colors.red,
                               ),
                             )
-                                : state is GetCartSuccess
+                                : state is !GetCartLoading
                             ? Column(
                               children: [
                                 Padding(
@@ -320,9 +324,9 @@ class OrderSummaryScreen extends StatelessWidget {
                                   Directionality(
                                     textDirection: TextDirection.ltr,
                                     child: DefaultSelectableText(
-                                      (CartCubit.cartModel?.cart
+                                      ((CartCubit.cartModel?.cart
                                           ?.totalPriceAfterPromocodes)
-                                          !.toStringAsFixed(2),
+                                          ??0).toStringAsFixed(2),
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
@@ -346,7 +350,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                   Directionality(
                                     textDirection: TextDirection.ltr,
                                     child: DefaultSelectableText(
-                                      (CartCubit.deliveryCity?.deliveryPrice)??"" ,
+                                      delivery ,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
@@ -371,11 +375,8 @@ class OrderSummaryScreen extends StatelessWidget {
                                     textDirection: TextDirection.ltr,
                                     child: DefaultSelectableText(
                                       ((CartCubit.cartModel?.cart
-                                          ?.totalPriceAfterPromocodes)! +
-                                          double.parse(CartCubit
-                                              .deliveryCity
-                                              ?.deliveryPrice ??
-                                              '0'))
+                                          ?.totalPriceAfterPromocodes)??0 +
+                                          double.parse(delivery))
                                           .toStringAsFixed(2),
                                       style: TextStyle(
                                         color: Colors.black,
@@ -400,9 +401,25 @@ class OrderSummaryScreen extends StatelessWidget {
                   //   return state is OrderTheCartError ? Center(child: DefaultSelectableText(orderError,style: const TextStyle(color: Colors.red),),) : const SizedBox();
                   //
                   // },),
+                  BlocBuilder<CartCubit,CartState>(builder: (context, state) {
+                    return state is OrderTheCartError ? Center(child: DefaultSelectableText(state.error,style: const TextStyle(color: Colors.red),),) : const SizedBox();
+
+                  },),
                   Center(
                       child: DefaultMaterialButton(
-                          onPressed: () async {}, text: 'اتمام الطلب'))
+                          lodingCondition: state is OrderTheCartLoading,
+                          succsessCondition: state is OrderTheCartSuccess,
+                          errorCondition:  state is OrderTheCartError,
+                          onPressed: () async {
+                            await cubit.orderTheCart(orderTheCartModel: OrderTheCartModel(paymentMethod: paymentMethod,city: CartCubit.deliveryCity?.id,destination: address,lastName: secondName,secondNumber: anotherPhone == '_' ? null : anotherPhone)).then((value) {
+                              if(value == 'done'){
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  content: Text("تم ارسال الطلب بنجاح",style: TextStyle(color: ColorManager.myBlack),),
+                                  backgroundColor: ColorManager.myYellow,
+                                ));
+                              }
+                            });
+                          }, text: 'اتمام الطلب'))
                 ],
               );
             },

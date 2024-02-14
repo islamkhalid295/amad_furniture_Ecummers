@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import '../../../products_screen/data/models/product_info_model.dart';
 import '../../data/models/product_amount_model.dart';
 import '../../data/models/promocode_request_model.dart';
-import '../../data/models/promocode_response_model.dart';
 
 part 'cart_state.dart';
 
@@ -43,6 +42,15 @@ static TextEditingController sellerCoponController = TextEditingController();
   static FormFieldValidator<String> phoneValidator = (value) {
     if (value!.isEmpty) {
       return 'يجب ادخال رقم الهاتف';
+    } else if (!RegExp(r'^\+\d{1,4}\d{6,}$').hasMatch(value)) {
+      return 'يرجي ادخال كود الدولة متبوعاً برقم الهاتف +20115222222';
+    } else {
+      return null;
+    }
+  };
+  static FormFieldValidator<String> anotherPhoneValidator = (value) {
+    if (value!.isEmpty) {
+      return null;
     } else if (!RegExp(r'^\+\d{1,4}\d{6,}$').hasMatch(value)) {
       return 'يرجي ادخال كود الدولة متبوعاً برقم الهاتف +20115222222';
     } else {
@@ -136,16 +144,20 @@ static TextEditingController sellerCoponController = TextEditingController();
 
 
   static CartModel? cartModel;
+  bool cartLoading = false;
    Future<void> getCart() async {
      if (token != null && token != 'null'){
+       cartLoading = true;
       emit(GetCartLoading());
       try {
-        var response = await cartRepo.getCart();
-        cartModel = CartModel.fromJson(response);
+        await cartRepo.getCart().then((value) {
+          cartModel = CartModel.fromJson(value);
         cart = cartModel!.cart!.products!
             .map((e) => ProductInfo(id: e.id))
             .toList();
-        emit(GetCartSuccess());
+          cartLoading= false;
+        emit(GetCartSuccess());});
+
       } on DioException catch (e) {
         emit(GetCartError(e.response?.data['message']));
       }
