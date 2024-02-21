@@ -46,7 +46,7 @@ final String? categoryId;
             return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+                MediaQuery.of(context).size.width > 600 ? Container(
                   decoration: const BoxDecoration(
                       border: Border(
                           left: BorderSide(color: ColorManager.myGrayLite))),
@@ -80,7 +80,7 @@ final String? categoryId;
                                 index: index),
                           )),
                   ]),
-                ),
+                ) : SizedBox(),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(15),
@@ -103,11 +103,13 @@ final String? categoryId;
                                 Expanded(
                                   child: AlignedGridView.count(
                                     crossAxisCount:
-                                        ((MediaQuery.of(context).size.width - 250) /
-                                                210)
-                                            .floor(),
-                                    mainAxisSpacing: 4,
-                                    crossAxisSpacing: 4,
+                                    MediaQuery.of(context).size.width > 600 ? ((MediaQuery.of(context).size.width -250) /
+                                                200)
+                                            .floor() : ((MediaQuery.of(context).size.width ) /
+                                        200)
+                                        .floor(),
+                                    mainAxisSpacing:0,
+                                    crossAxisSpacing:0,
                                     itemCount: CategoriesCubit
                                         .productsListModel?.products!.length,
                                     itemBuilder: (context, index) {

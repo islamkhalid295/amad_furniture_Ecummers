@@ -91,373 +91,375 @@ bool inCart= false;
                             ],
                           )
                         : const CircularProgressIndicator())
-                : Row(
-                    children: [
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                : MediaQuery.of(context).size.width > 600 ? Row(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding:
+                          const EdgeInsets.symmetric(vertical: 5.0),
+                          child: Container(
+                            width: 80,
+                            height: 3,
+                            decoration: const BoxDecoration(
+                                color: Color(0xFFFBB710)),
+                          ),
+                        ),
+                        DefaultSelectableText(
+                          CategoriesCubit.productInfo?.name ?? "",
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 36,
+                            fontFamily: 'Almarai',
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          width: 300,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5.0),
-                                child: Container(
-                                  width: 80,
-                                  height: 3,
-                                  decoration: const BoxDecoration(
-                                      color: Color(0xFFFBB710)),
-                                ),
-                              ),
-                              DefaultSelectableText(
-                                CategoriesCubit.productInfo?.name ?? "",
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 36,
-                                  fontFamily: 'Almarai',
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              SizedBox(
-                                width: 300,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Directionality(
-                                      textDirection: TextDirection.ltr,
-                                      child: Expanded(
-                                        child: DefaultSelectableText(
-                                          (double.parse(CategoriesCubit
-                                                              .productInfo
-                                                              ?.discount ??
-                                                          "0") <=
-                                                      0
-                                                  ? "ج.م" +
-                                                      "${CategoriesCubit.productInfo?.price}"
-                                                  : "${(double.parse(CategoriesCubit.productInfo?.price ?? "0") - double.parse(CategoriesCubit.productInfo?.discount ?? "0") * double.parse(CategoriesCubit.productInfo?.price ?? "0")).toStringAsFixed(2)} ج.م"),
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 26,
-                                            fontFamily: 'Almarai',
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                          maxLines: 1,
-                                        ),
-                                      ),
-                                    ),
-                                    double.parse(CategoriesCubit
-                                                    .productInfo?.discount ??
-                                                "1") >
-                                            0
-                                        ? const DefaultSelectableText(
-                                            "-",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 26,
-                                              fontFamily: 'Almarai',
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          )
-                                        : Container(),
-                                    double.parse(CategoriesCubit
-                                                    .productInfo?.discount ??
-                                                "1") >
-                                            0
-                                        ? Expanded(
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Directionality(
-                                                    textDirection:
-                                                        TextDirection.ltr,
-                                                    child:
-                                                        DefaultSelectableText(
-                                                      "${CategoriesCubit.productInfo?.price} ج.م",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: const TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 24,
-                                                          fontFamily: 'Almarai',
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .lineThrough),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        : Container(),
-                                  ],
-                                ),
-                              ),
-                              (CategoriesCubit.productInfo?.availableAmount ?? 0) > 0
-                                  ? Row(
-                                      children: [
-                                        Container(
-                                          width: 20,
-                                          height: 20,
-                                          decoration: const ShapeDecoration(
-                                            color: Color(0xFF06BD4F),
-                                            shape: OvalBorder(),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        const Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 30),
-                                          child: DefaultSelectableText(
-                                            'متوفر',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                              fontFamily: 'Almarai',
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    )
-                                  : Row(
-                                      children: [
-                                        Container(
-                                          width: 20,
-                                          height: 20,
-                                          decoration: const ShapeDecoration(
-                                            color: Colors.red,
-                                            shape: OvalBorder(),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        const Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 30),
-                                          child: DefaultSelectableText(
-                                            'غير متوفر',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 16,
-                                              fontFamily: 'Almarai',
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                              (CategoriesCubit.productInfo?.availableAmount ?? 0) > 0 ? Row(
-                                children: [
-                                  const DefaultSelectableText(
-                                    'الكميه',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15.38,
-                                      fontFamily: 'Almarai',
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 30,
-                                  ),
-                                  DefaultTextFormField(
-                                    keyboardType: TextInputType.number,
-                                    controller: amountController,
-                                    width: 60,
+                              Directionality(
+                                textDirection: TextDirection.ltr,
+                                child: Expanded(
+                                  child: DefaultSelectableText(
+                                    (double.parse(CategoriesCubit
+                                        .productInfo
+                                        ?.discount ??
+                                        "0") <=
+                                        0
+                                        ? "ج.م" +
+                                        "${CategoriesCubit.productInfo?.price}"
+                                        : "${(double.parse(CategoriesCubit.productInfo?.price ?? "0") - double.parse(CategoriesCubit.productInfo?.discount ?? "0") * double.parse(CategoriesCubit.productInfo?.price ?? "0")).toStringAsFixed(2)} ج.م"),
                                     textAlign: TextAlign.center,
-                                    paddingRight: 0,
-
-                                  ),
-                                  const SizedBox(
-                                    width: 30,
-                                  ),
-                                  BlocBuilder<CartCubit, CartState>(
-                                    builder: (context, state) {
-                                      // CartCubit cartCubit =
-                                      //     BlocProvider.of(context);
-                                      inCart = CartCubit.cartModel?.cart?.products?.contains(Products(id: productId)) ?? false;
-                                      // inCart = CartCubit.cart?.contains(CategoriesCubit.productInfo) ?? false;
-                                      return Column(
-                                        children: [
-                                          state is AddAmountOfProductToCartError ? Text(state.error,style: const TextStyle(color: Colors.red),):const SizedBox(),
-                                          DefaultMaterialButton(
-                                            minWidth: 300 * MediaQuery.of(context).size.width / 1400,
-                                            borderRadius: 10,
-                                            color: inCart ? ColorManager.myYellow : null,
-                                            textColor: inCart ? ColorManager.myBlack : null,
-                                            text: token == "null" ? "تسجيل الدخول اولا" : inCart ? "ازالة من العربة" : "اضافة الي العربة",
-                                            onPressed: () {
-                                               if (token != "null"){
-                                                      if (!inCart) {
-                                                        cartCubit.addAmountOfProductToCart(
-                                                            productAmountModel: ProductAmountModel(
-                                                                id: CategoriesCubit.productInfo!.id,
-                                                                amount: int.parse(amountController.text)));
-                                                        print(CartCubit.cart?.length);
-
-                                                        // inCart = !inCart;
-                                                      } else if (inCart) {
-                                                        print("remove");
-                                                        // inCart = !inCart;
-                                                        cartCubit.deleteAmountOfProductFromCart(
-                                                            productAmountModel: ProductAmountModel(
-                                                                id: CategoriesCubit.productInfo!.id,
-                                                                amount: CartCubit.cartModel?.cart?.products?.firstWhere((element) => element.id == productId).amount));
-                                                      }
-                                                    } else context.go(RoutesManager.loginScreen);
-                                                  },
-                                            lodingCondition: state is AddAmountOfProductToCartLoading || state is DeleteAmountOfProductToCartLoading || state is GetCartLoading,
-                                            errorCondition: state is AddAmountOfProductToCartError || state is DeleteAmountOfProductToCartError || state is GetCartLoading,
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ) : const SizedBox(),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 35),
-                                child: Container(
-                                  decoration: ShapeDecoration(
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(
-                                        width: 1,
-                                        strokeAlign:
-                                            BorderSide.strokeAlignCenter,
-                                        color: Colors.black
-                                            .withOpacity(0.3199999928474426),
-                                      ),
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 26,
+                                      fontFamily: 'Almarai',
+                                      fontWeight: FontWeight.w700,
                                     ),
+                                    maxLines: 1,
                                   ),
                                 ),
                               ),
-                              Container(
-                                height: 80,
-                                child: ListView(
-                                  children: CategoriesCubit
-                                      .productInfo!.wholesaleOffers!
-                                      .map((e) => DefaultSelectableText(
-                                            e,
-                                            style: TextStyle(
-                                              color: Colors.black.withOpacity(
-                                                  0.6000000238418579),
-                                              fontSize: 14,
-                                              fontFamily: 'Almarai',
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ))
-                                      .toList(),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 35),
-                                child: Container(
-                                  decoration: ShapeDecoration(
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(
-                                        width: 1,
-                                        strokeAlign:
-                                            BorderSide.strokeAlignCenter,
-                                        color: Colors.black
-                                            .withOpacity(0.3199999928474426),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                child: Text(
-                                  'هو عبارة عن دهن سائل غني بالأحماض الدهنية الأحادية غير المشبعة التي تمنحنا فوائد زيت الزيتون المتنوعة، ويتم استخلاصه من ثمرة الزيتون، حيث يتم الحصول على الزيت عن طريق عصرالزيتون الكامل. ويختلف تكوين زيت الزيتون باختلاف صنف الزيتون الذي يتم استخلاصه ',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontFamily: 'Almarai',
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                              double.parse(CategoriesCubit
+                                  .productInfo?.discount ??
+                                  "1") >
+                                  0
+                                  ? const DefaultSelectableText(
+                                "-",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 26,
+                                  fontFamily: 'Almarai',
+                                  fontWeight: FontWeight.w400,
                                 ),
                               )
+                                  : Container(),
+                              double.parse(CategoriesCubit
+                                  .productInfo?.discount ??
+                                  "1") >
+                                  0
+                                  ? Expanded(
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Directionality(
+                                        textDirection:
+                                        TextDirection.ltr,
+                                        child:
+                                        DefaultSelectableText(
+                                          "${CategoriesCubit.productInfo?.price} ج.م",
+                                          textAlign:
+                                          TextAlign.center,
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 24,
+                                              fontFamily: 'Almarai',
+                                              fontWeight:
+                                              FontWeight.w400,
+                                              decoration:
+                                              TextDecoration
+                                                  .lineThrough),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                                  : Container(),
                             ],
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          width: 650,
-                          height: 600,
-                          child: flexiProductimageSlider(
-                            //required fields
-                            arrayImages: List<String>.from(
-                                CategoriesCubit.productInfo?.imageUrls ?? []),
-                            // optional fields
-                            //set where you want to set your thumbnail
-                            sliderStyle: SliderStyle.overSlider,
-                            //.nextToSlider
-                            // set you slider height like 1.0,1.5,2.0 etc...
-                            aspectRatio: 0.8,
-                            //set content mode of image
-                            boxFit: BoxFit.cover,
-                            //set this if you want to set any default image index when it loads
-                            selectedImagePosition: 0,
-                            //set your thumbnail alignment in slider
-                            thumbnailAlignment: ThumbnailAlignment.bottom,
-                            //.right , .bottom
-                            thumbnailBorderType: ThumbnailBorderType.all,
-                            //.bottom, .all
-                            thumbnailBorderWidth: 1.5,
-                            //double value
+                        (CategoriesCubit.productInfo?.availableAmount ?? 0) > 0
+                            ? Row(
+                          children: [
+                            Container(
+                              width: 20,
+                              height: 20,
+                              decoration: const ShapeDecoration(
+                                color: Color(0xFF06BD4F),
+                                shape: OvalBorder(),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 30),
+                              child: DefaultSelectableText(
+                                'متوفر',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'Almarai',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                            : Row(
+                          children: [
+                            Container(
+                              width: 20,
+                              height: 20,
+                              decoration: const ShapeDecoration(
+                                color: Colors.red,
+                                shape: OvalBorder(),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 30),
+                              child: DefaultSelectableText(
+                                'غير متوفر',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontFamily: 'Almarai',
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        (CategoriesCubit.productInfo?.availableAmount ?? 0) > 0 ? Row(
+                          children: [
+                            const DefaultSelectableText(
+                              'الكميه',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 15.38,
+                                fontFamily: 'Almarai',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 30,
+                            ),
+                            DefaultTextFormField(
+                              keyboardType: TextInputType.number,
+                              controller: amountController,
+                              width: 60,
+                              textAlign: TextAlign.center,
+                              paddingRight: 0,
 
-                            //set corner radius of your thumbnail
-                            thumbnailBorderRadius: 2,
-
-                            //set your thumbnail height & width
-                            //NOTE : if you set ThumbnailShape.circle then set thumbnail width height same
-                            thumbnailWidth: 55,
-                            thumbnailHeight: 55,
-
-                            //set color of current image thumbnail border
-                            thumbnailBorderColor: Colors.blue,
-
-                            //make you action when user click on image
-                            onTap: (index) {
-                              print("selected index : $index");
-
-                              //for zooming effect on click
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => galleryZoomSlides(
-                                            //required fields
-                                            arrayImages: List<String>.from(
-                                                CategoriesCubit.productInfo
-                                                        ?.imageUrls ??
-                                                    []),
-
-                                            //Optional fields
-                                            zoomTheme: ZoomTheme.theme3,
-                                            //.theme1, .theme2, .theme3
-                                            selectedImagePosition: index,
-                                            selectedThumbnailColor: Colors.blue,
-                                          )));
-                            },
+                            ),
+                            const SizedBox(
+                              width: 30,
+                            ),
+                            BlocBuilder<CartCubit, CartState>(
+                              builder: (context, state) {
+                                // CartCubit cartCubit =
+                                //     BlocProvider.of(context);
+                                inCart = CartCubit.cartModel?.cart?.products?.contains(Products(id: productId)) ?? false;
+                                // inCart = CartCubit.cart?.contains(CategoriesCubit.productInfo) ?? false;
+                                return Expanded(
+                                  child: Column(
+                                    children: [
+                                      state is AddAmountOfProductToCartError ? Text(state.error,style: const TextStyle(color: Colors.red),):const SizedBox(),
+                                      DefaultMaterialButton(
+                                        minWidth: 300 * MediaQuery.of(context).size.width / 1400,
+                                        borderRadius: 10,
+                                        color: inCart ? ColorManager.myYellow : null,
+                                        textColor: inCart ? ColorManager.myBlack : null,
+                                        text: token == "null" ? "تسجيل الدخول اولا" : inCart ? "ازالة من العربة" : "اضافة الي العربة",
+                                        onPressed: () {
+                                          if (token != "null"){
+                                            if (!inCart) {
+                                              cartCubit.addAmountOfProductToCart(
+                                                  productAmountModel: ProductAmountModel(
+                                                      id: CategoriesCubit.productInfo!.id,
+                                                      amount: int.parse(amountController.text)));
+                                              print(CartCubit.cart?.length);
+                                  
+                                              // inCart = !inCart;
+                                            } else if (inCart) {
+                                              print("remove");
+                                              // inCart = !inCart;
+                                              cartCubit.deleteAmountOfProductFromCart(
+                                                  productAmountModel: ProductAmountModel(
+                                                      id: CategoriesCubit.productInfo!.id,
+                                                      amount: CartCubit.cartModel?.cart?.products?.firstWhere((element) => element.id == productId).amount));
+                                            }
+                                          } else context.go(RoutesManager.loginScreen);
+                                        },
+                                        lodingCondition: state is AddAmountOfProductToCartLoading || state is DeleteAmountOfProductToCartLoading || state is GetCartLoading,
+                                        errorCondition: state is AddAmountOfProductToCartError || state is DeleteAmountOfProductToCartError || state is GetCartLoading,
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ) : const SizedBox(),
+                        Padding(
+                          padding:
+                          const EdgeInsets.symmetric(vertical: 35),
+                          child: Container(
+                            decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  width: 1,
+                                  strokeAlign:
+                                  BorderSide.strokeAlignCenter,
+                                  color: Colors.black
+                                      .withOpacity(0.3199999928474426),
+                                ),
+                              ),
+                            ),
                           ),
-                        ), /*Column(
+                        ),
+                        Container(
+                          height: 80,
+                          child: ListView(
+                            children: CategoriesCubit
+                                .productInfo!.wholesaleOffers!
+                                .map((e) => DefaultSelectableText(
+                              e,
+                              style: TextStyle(
+                                color: Colors.black.withOpacity(
+                                    0.6000000238418579),
+                                fontSize: 14,
+                                fontFamily: 'Almarai',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ))
+                                .toList(),
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                          const EdgeInsets.symmetric(vertical: 35),
+                          child: Container(
+                            decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  width: 1,
+                                  strokeAlign:
+                                  BorderSide.strokeAlignCenter,
+                                  color: Colors.black
+                                      .withOpacity(0.3199999928474426),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          child: Text(
+                            'هو عبارة عن دهن سائل غني بالأحماض الدهنية الأحادية غير المشبعة التي تمنحنا فوائد زيت الزيتون المتنوعة، ويتم استخلاصه من ثمرة الزيتون، حيث يتم الحصول على الزيت عن طريق عصرالزيتون الكامل. ويختلف تكوين زيت الزيتون باختلاف صنف الزيتون الذي يتم استخلاصه ',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontFamily: 'Almarai',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Expanded(
+                  child: SizedBox(
+                    width: 650,
+                    height: 600,
+                    child: flexiProductimageSlider(
+                      //required fields
+                      arrayImages: List<String>.from(
+                          CategoriesCubit.productInfo?.imageUrls ?? []),
+                      // optional fields
+                      //set where you want to set your thumbnail
+                      sliderStyle: SliderStyle.overSlider,
+                      //.nextToSlider
+                      // set you slider height like 1.0,1.5,2.0 etc...
+                      aspectRatio: 0.8,
+                      //set content mode of image
+                      boxFit: BoxFit.cover,
+                      //set this if you want to set any default image index when it loads
+                      selectedImagePosition: 0,
+                      //set your thumbnail alignment in slider
+                      thumbnailAlignment: ThumbnailAlignment.bottom,
+                      //.right , .bottom
+                      thumbnailBorderType: ThumbnailBorderType.all,
+                      //.bottom, .all
+                      thumbnailBorderWidth: 1.5,
+                      //double value
+
+                      //set corner radius of your thumbnail
+                      thumbnailBorderRadius: 2,
+
+                      //set your thumbnail height & width
+                      //NOTE : if you set ThumbnailShape.circle then set thumbnail width height same
+                      thumbnailWidth: 55,
+                      thumbnailHeight: 55,
+
+                      //set color of current image thumbnail border
+                      thumbnailBorderColor: Colors.blue,
+
+                      //make you action when user click on image
+                      onTap: (index) {
+                        print("selected index : $index");
+
+                        //for zooming effect on click
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => galleryZoomSlides(
+                                  //required fields
+                                  arrayImages: List<String>.from(
+                                      CategoriesCubit.productInfo
+                                          ?.imageUrls ??
+                                          []),
+
+                                  //Optional fields
+                                  zoomTheme: ZoomTheme.theme3,
+                                  //.theme1, .theme2, .theme3
+                                  selectedImagePosition: index,
+                                  selectedThumbnailColor: Colors.blue,
+                                )));
+                      },
+                    ),
+                  ), /*Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                 // CarouselSlider(
@@ -496,9 +498,377 @@ bool inCart= false;
                 // ),
                               ],
                             ),*/
+                ),
+              ],
+            ) : SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: 650,
+                    height: 600,
+                    child: flexiProductimageSlider(
+                      //required fields
+                      arrayImages: List<String>.from(
+                          CategoriesCubit.productInfo?.imageUrls ?? []),
+                      // optional fields
+                      //set where you want to set your thumbnail
+                      sliderStyle: SliderStyle.overSlider,
+                      //.nextToSlider
+                      // set you slider height like 1.0,1.5,2.0 etc...
+                      aspectRatio: 0.8,
+                      //set content mode of image
+                      boxFit: BoxFit.cover,
+                      //set this if you want to set any default image index when it loads
+                      selectedImagePosition: 0,
+                      //set your thumbnail alignment in slider
+                      thumbnailAlignment: ThumbnailAlignment.bottom,
+                      //.right , .bottom
+                      thumbnailBorderType: ThumbnailBorderType.all,
+                      //.bottom, .all
+                      thumbnailBorderWidth: 1.5,
+                      //double value
+
+                      //set corner radius of your thumbnail
+                      thumbnailBorderRadius: 2,
+
+                      //set your thumbnail height & width
+                      //NOTE : if you set ThumbnailShape.circle then set thumbnail width height same
+                      thumbnailWidth: 55,
+                      thumbnailHeight: 55,
+
+                      //set color of current image thumbnail border
+                      thumbnailBorderColor: Colors.blue,
+
+                      //make you action when user click on image
+                      onTap: (index) {
+                        print("selected index : $index");
+
+                        //for zooming effect on click
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => galleryZoomSlides(
+                                  //required fields
+                                  arrayImages: List<String>.from(
+                                      CategoriesCubit.productInfo
+                                          ?.imageUrls ??
+                                          []),
+
+                                  //Optional fields
+                                  zoomTheme: ZoomTheme.theme3,
+                                  //.theme1, .theme2, .theme3
+                                  selectedImagePosition: index,
+                                  selectedThumbnailColor: Colors.blue,
+                                )));
+                      },
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding:
+                        const EdgeInsets.symmetric(vertical: 5.0),
+                        child: Container(
+                          width: 80,
+                          height: 3,
+                          decoration: const BoxDecoration(
+                              color: Color(0xFFFBB710)),
+                        ),
                       ),
+                      DefaultSelectableText(
+                        CategoriesCubit.productInfo?.name ?? "",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 36,
+                          fontFamily: 'Almarai',
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: 300,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Directionality(
+                              textDirection: TextDirection.ltr,
+                              child: Expanded(
+                                child: DefaultSelectableText(
+                                  (double.parse(CategoriesCubit
+                                      .productInfo
+                                      ?.discount ??
+                                      "0") <=
+                                      0
+                                      ? "ج.م" +
+                                      "${CategoriesCubit.productInfo?.price}"
+                                      : "${(double.parse(CategoriesCubit.productInfo?.price ?? "0") - double.parse(CategoriesCubit.productInfo?.discount ?? "0") * double.parse(CategoriesCubit.productInfo?.price ?? "0")).toStringAsFixed(2)} ج.م"),
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 26,
+                                    fontFamily: 'Almarai',
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                  maxLines: 1,
+                                ),
+                              ),
+                            ),
+                            double.parse(CategoriesCubit
+                                .productInfo?.discount ??
+                                "1") >
+                                0
+                                ? const DefaultSelectableText(
+                              "-",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 26,
+                                fontFamily: 'Almarai',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                                : Container(),
+                            double.parse(CategoriesCubit
+                                .productInfo?.discount ??
+                                "1") >
+                                0
+                                ? Expanded(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Directionality(
+                                      textDirection:
+                                      TextDirection.ltr,
+                                      child:
+                                      DefaultSelectableText(
+                                        "${CategoriesCubit.productInfo?.price} ج.م",
+                                        textAlign:
+                                        TextAlign.center,
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 24,
+                                            fontFamily: 'Almarai',
+                                            fontWeight:
+                                            FontWeight.w400,
+                                            decoration:
+                                            TextDecoration
+                                                .lineThrough),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                                : Container(),
+                          ],
+                        ),
+                      ),
+                      (CategoriesCubit.productInfo?.availableAmount ?? 0) > 0
+                          ? Row(
+                        children: [
+                          Container(
+                            width: 20,
+                            height: 20,
+                            decoration: const ShapeDecoration(
+                              color: Color(0xFF06BD4F),
+                              shape: OvalBorder(),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 30),
+                            child: DefaultSelectableText(
+                              'متوفر',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontFamily: 'Almarai',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          )
+                        ],
+                      )
+                          : Row(
+                        children: [
+                          Container(
+                            width: 20,
+                            height: 20,
+                            decoration: const ShapeDecoration(
+                              color: Colors.red,
+                              shape: OvalBorder(),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 30),
+                            child: DefaultSelectableText(
+                              'غير متوفر',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontFamily: 'Almarai',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      (CategoriesCubit.productInfo?.availableAmount ?? 0) > 0 ? Row(
+                        children: [
+                          const DefaultSelectableText(
+                            'الكميه',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15.38,
+                              fontFamily: 'Almarai',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 30,
+                          ),
+                          DefaultTextFormField(
+                            keyboardType: TextInputType.number,
+                            controller: amountController,
+                            width: 60,
+                            textAlign: TextAlign.center,
+                            paddingRight: 0,
+
+                          ),
+                          const SizedBox(
+                            width: 30,
+                          ),
+                          BlocBuilder<CartCubit, CartState>(
+                            builder: (context, state) {
+                              // CartCubit cartCubit =
+                              //     BlocProvider.of(context);
+                              inCart = CartCubit.cartModel?.cart?.products?.contains(Products(id: productId)) ?? false;
+                              // inCart = CartCubit.cart?.contains(CategoriesCubit.productInfo) ?? false;
+                              return Expanded(
+                                child: Column(
+                                  children: [
+                                    state is AddAmountOfProductToCartError ? Text(state.error,style: const TextStyle(color: Colors.red),):const SizedBox(),
+                                    DefaultMaterialButton(
+                                      minWidth: 300 * MediaQuery.of(context).size.width / 1400,
+                                      borderRadius: 10,
+                                      color: inCart ? ColorManager.myYellow : null,
+                                      textColor: inCart ? ColorManager.myBlack : null,
+                                      text: token == "null" ? "تسجيل الدخول اولا" : inCart ? "ازالة من العربة" : "اضافة الي العربة",
+                                      onPressed: () {
+                                        if (token != "null"){
+                                          if (!inCart) {
+                                            cartCubit.addAmountOfProductToCart(
+                                                productAmountModel: ProductAmountModel(
+                                                    id: CategoriesCubit.productInfo!.id,
+                                                    amount: int.parse(amountController.text)));
+                                            print(CartCubit.cart?.length);
+
+                                            // inCart = !inCart;
+                                          } else if (inCart) {
+                                            print("remove");
+                                            // inCart = !inCart;
+                                            cartCubit.deleteAmountOfProductFromCart(
+                                                productAmountModel: ProductAmountModel(
+                                                    id: CategoriesCubit.productInfo!.id,
+                                                    amount: CartCubit.cartModel?.cart?.products?.firstWhere((element) => element.id == productId).amount));
+                                          }
+                                        } else context.go(RoutesManager.loginScreen);
+                                      },
+                                      lodingCondition: state is AddAmountOfProductToCartLoading || state is DeleteAmountOfProductToCartLoading || state is GetCartLoading,
+                                      errorCondition: state is AddAmountOfProductToCartError || state is DeleteAmountOfProductToCartError || state is GetCartLoading,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ) : const SizedBox(),
+                      Padding(
+                        padding:
+                        const EdgeInsets.symmetric(vertical: 35),
+                        child: Container(
+                          decoration: ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                width: 1,
+                                strokeAlign:
+                                BorderSide.strokeAlignCenter,
+                                color: Colors.black
+                                    .withOpacity(0.3199999928474426),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 80,
+                        child: ListView(
+                          children: CategoriesCubit
+                              .productInfo!.wholesaleOffers!
+                              .map((e) => DefaultSelectableText(
+                            e,
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(
+                                  0.6000000238418579),
+                              fontSize: 14,
+                              fontFamily: 'Almarai',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ))
+                              .toList(),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                        const EdgeInsets.symmetric(vertical: 35),
+                        child: Container(
+                          decoration: ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(
+                                width: 1,
+                                strokeAlign:
+                                BorderSide.strokeAlignCenter,
+                                color: Colors.black
+                                    .withOpacity(0.3199999928474426),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        child: Text(
+                          'هو عبارة عن دهن سائل غني بالأحماض الدهنية الأحادية غير المشبعة التي تمنحنا فوائد زيت الزيتون المتنوعة، ويتم استخلاصه من ثمرة الزيتون، حيث يتم الحصول على الزيت عن طريق عصرالزيتون الكامل. ويختلف تكوين زيت الزيتون باختلاف صنف الزيتون الذي يتم استخلاصه ',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontFamily: 'Almarai',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      )
                     ],
-                  );
+                  ),
+
+                ],
+              ),
+            );
           },
         ),
       ),
