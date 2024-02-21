@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             backgroundColor: ColorManager.myWhite,
             leading: Padding(
               padding: EdgeInsets.only(
-                  right: (90 * MediaQuery.of(context).size.width / 1235)),
+                  right: (90 * MediaQuery.of(context).size.width / 1440)),
               child: BlocBuilder<BasicDataCubit, BasicDataState>(
                 builder: (context, state) {
                   return state is GetBasicDataLoading
@@ -131,6 +131,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ? 200 * MediaQuery.of(context).size.width / 800
                 : 200,
             title: TabBar(
+              tabAlignment: TabAlignment.start,
               controller: _tabController,
               onTap: (index) {
                 _scrollController.scrollToIndex(
@@ -144,9 +145,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               },
               tabs: HomeScreenCubit.tabBarTabs,
               indicatorColor: ColorManager.myYellow,
-              labelStyle: const TextStyle(
+              labelStyle: TextStyle(
                 color: Colors.black,
-                fontSize: 16,
+                fontSize: 16 * MediaQuery.of(context).size.width / 1000,
                 fontFamily: 'Almarai',
                 fontWeight: FontWeight.w700,
               ),

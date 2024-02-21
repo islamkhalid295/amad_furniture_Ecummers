@@ -546,9 +546,9 @@ class DefaultTextButton extends StatelessWidget {
           child: FittedBox(
             child: Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.black,
-                fontSize: 16,
+                fontSize: 16 * MediaQuery.of(context).size.width / 940,
                 fontFamily: 'Almarai',
                 fontWeight: FontWeight.w700,
               ),

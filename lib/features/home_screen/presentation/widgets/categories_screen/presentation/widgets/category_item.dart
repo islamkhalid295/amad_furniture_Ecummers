@@ -12,58 +12,50 @@ final GestureTapCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        maxWidth: 100,
-        maxHeight: 500,
-        minWidth: 100,
-        minHeight: 100,
-      ),
-      child: InkWell(
-        onTap: onTap,
-        child: Stack(
-          children: [
-            CachedNetworkImage(
-              width: 300* MediaQuery.of(context).size.width/1440,
-              imageUrl: imageUrl,
-              placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) {
-                return Icon(Icons.error);
-              },
-              fit: BoxFit.cover,
-              height: height,
+    return InkWell(
+      onTap: onTap,
+      child: Stack(
+        children: [
+          CachedNetworkImage(
+            width:  200,
+            imageUrl: imageUrl,
+            placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+            errorWidget: (context, url, error) {
+              return Icon(Icons.error);
+            },
+            fit: BoxFit.cover,
+            height: height,
 
-            ),
-            Container(
-              width: 80,
-              height: 3,
-              decoration: BoxDecoration(color: Color(0xFFFBB710)),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20,right: 10),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: ColorManager.myYellow,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: DefaultSelectableText(
-                    name,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: ColorManager.myBlack,
-                      fontSize: 14,
-                      fontFamily: 'Almarai',
-                      fontWeight: FontWeight.w700,
+          ),
+          Container(
+            width: 80,
+            height: 3,
+            decoration: BoxDecoration(color: Color(0xFFFBB710)),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20,right: 10),
+            child: Container(
+              decoration: BoxDecoration(
+                color: ColorManager.myYellow,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: DefaultSelectableText(
+                  name,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: ColorManager.myBlack,
+                    fontSize: 14,
+                    fontFamily: 'Almarai',
+                    fontWeight: FontWeight.w700,
 
-                    ),
                   ),
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

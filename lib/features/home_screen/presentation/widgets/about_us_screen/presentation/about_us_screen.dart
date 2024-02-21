@@ -34,8 +34,8 @@ class AboutUsScreen extends StatelessWidget {
                     children: [
                       SelectableText("مــن نــحـن",
                           style: TextStyle(
-                              fontSize:
-                                  35 * MediaQuery.of(context).size.width / 1440,
+                              fontSize: MediaQuery.of(context).size.width >600 ?
+                                  35 * MediaQuery.of(context).size.width / 1440 : 35 * MediaQuery.of(context).size.width / 700,
                               fontWeight: FontWeight.w500)),
                       SizedBox(
                         height: 20,
@@ -47,11 +47,11 @@ class AboutUsScreen extends StatelessWidget {
                             return  state is RetriveAboutUsLoading ? Center(child: CircularProgressIndicator()) : SelectableText(
                                AboutUsCubit.aboutUsModel?.aboutUs ?? "",
                                 style: TextStyle(
-                                  fontSize: 15 *
-                                      MediaQuery.of(context).size.width /
-                                      1000 *
+                                  fontSize:
+                                      MediaQuery.of(context).size.width >600 ?
+                                  25 * MediaQuery.of(context).size.width / 1440 : 25 * MediaQuery.of(context).size.width / 700 /**
                                       MediaQuery.of(context).size.height /
-                                      900,
+                                      900*/,
                                 ));
                           },
                         ),
@@ -67,7 +67,7 @@ class AboutUsScreen extends StatelessWidget {
                 ),
               )
                   : Container(
-                    height: 150 * MediaQuery.of(context).size.height / 800,
+                    height: 150 * MediaQuery.of(context).size.height / 1200,
                     decoration: BoxDecoration(
                       color: ColorManager.myYellow.withOpacity(0.5),
                       borderRadius: BorderRadius.only(
@@ -81,31 +81,22 @@ class AboutUsScreen extends StatelessWidget {
                           bottom: 15,
                           left:
                           40 * MediaQuery.of(context).size.width / 900),
-                      child: Container(
-                        height:
-                        150 * MediaQuery.of(context).size.height / 830,
+                      child: CachedNetworkImage(
+                        imageUrl:
+                        /*"https://eaglespiritgourmet.com/wp-content/uploads/2023/12/minimalist-olive-oil-bottle-glass-600x600.webp"*/ BasicDataCubit
+                            .basicDataModel!.logo?? "",
+                        placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) {
+                          return const Icon(Icons.error);
+                        },
+                        // fit: BoxFit.cover,
+                        height: 150,
                         width: 150,
-                        // width: 500 * MediaQuery.of(context).size.width / 1440 ,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: CachedNetworkImage(
-                          imageUrl:
-                          /*"https://eaglespiritgourmet.com/wp-content/uploads/2023/12/minimalist-olive-oil-bottle-glass-600x600.webp"*/ BasicDataCubit
-                              .basicDataModel!.logo?? "",
-                          placeholder: (context, url) =>
-                          const Center(child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) {
-                            return const Icon(Icons.error);
-                          },
-                          // fit: BoxFit.cover,
-                          height: 150,
-                          width: 150,
-                          alignment: Alignment.center,
-                        ),
+                        alignment: Alignment.center,
                       ),
                     ),
+                width: 200 * MediaQuery.of(context).size.width / 700,
                   ),
 
             ],
@@ -132,7 +123,7 @@ class AboutUsScreen extends StatelessWidget {
 
           Row(
             children: [
-              Expanded(
+              MediaQuery.of(context).size.width > 400 ? Expanded(
                 child: Container(
                   height: 300 * MediaQuery.of(context).size.height / 800,
                   decoration: BoxDecoration(
@@ -186,7 +177,7 @@ class AboutUsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              ) : SizedBox(),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -197,7 +188,8 @@ class AboutUsScreen extends StatelessWidget {
                       SelectableText("عن منتجاتنا",
                           style: TextStyle(
                               fontSize:
-                                  35 * MediaQuery.of(context).size.width / 1440 * MediaQuery.of(context).size.height / 900,
+                              MediaQuery.of(context).size.width >600 ?
+                              35 * MediaQuery.of(context).size.width / 1440 : 35 * MediaQuery.of(context).size.width / 700,
                               fontWeight: FontWeight.w500)),
                       SizedBox(
                         height: 20,
@@ -209,11 +201,11 @@ class AboutUsScreen extends StatelessWidget {
                             return  state is RetriveAboutUsLoading ? Center(child: CircularProgressIndicator()) : SelectableText(
                                AboutUsCubit.aboutUsModel?.aboutProducts ?? "",
                                 style: TextStyle(
-                                  fontSize: 15 *
-                                      MediaQuery.of(context).size.width /
-                                      1000 *
+                                  fontSize:
+                                      MediaQuery.of(context).size.width >600 ?
+                                  25 * MediaQuery.of(context).size.width / 1440 : 25 * MediaQuery.of(context).size.width / 700 /**
                                       MediaQuery.of(context).size.height /
-                                      900,
+                                      900*/,
                                 ));
                           },
                         ),

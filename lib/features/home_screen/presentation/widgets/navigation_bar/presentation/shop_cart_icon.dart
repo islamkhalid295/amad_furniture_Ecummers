@@ -28,13 +28,13 @@ class ShopCart extends StatelessWidget {
                     onPressed: () {
                       context.go(RoutesManager.cartScreen);
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       CupertinoIcons.cart,
-                      size: 30,
+                      size: 30 * MediaQuery.of(context).size.width / 940,
                     )),
-                state is GetCartLoading  ? const CircleAvatar(
+                state is GetCartLoading  ?  CircleAvatar(
                   backgroundColor: Colors.red,
-                  radius: 10,
+                  radius: 10 * MediaQuery.of(context).size.width / 940,
                   child: CircularProgressIndicator(color: ColorManager.myYellow,),) : CartCubit.cart != null ? CartCubit.cart!.isNotEmpty ? CircleAvatar(
                   backgroundColor: Colors.red,
                   radius: 10,
