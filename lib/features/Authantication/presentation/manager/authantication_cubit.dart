@@ -78,7 +78,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
     if (value!.isEmpty) {
       return 'يجب ادخال رقم الهاتف';
     } else if (!RegExp(r'^\+\d{1,4}\d{6,}$').hasMatch(value)) {
-      return 'يرجي ادخال كود الدولة متبوعاً برقم الهاتف +20115222222';
+      return '+يرجي ادخال كود الدولة متبوعاً برقم الهاتف ..2011522';
     } else {
       return null;
     }

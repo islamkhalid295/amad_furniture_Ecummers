@@ -12,8 +12,8 @@ import '../data/models/order_the_cart_model.dart';
 
 class OrderSummaryScreen extends StatelessWidget {
   OrderSummaryScreen(
-      {required this.firstName,
-      required this.secondName,
+      {required this.name,
+      // required this.secondName,
       required this.phone,
       required this.anotherPhone,
       required this.email,
@@ -22,8 +22,8 @@ class OrderSummaryScreen extends StatelessWidget {
       required this.city,
         required this.delivery});
 
-  String firstName;
-  String secondName;
+  String name;
+  // String secondName;
   String phone;
   String anotherPhone;
   String email;
@@ -116,7 +116,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                   width: 20,
                                 ),
                                 DefaultSelectableText(
-                                  firstName + " " + secondName,
+                                  name ,
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ],
@@ -136,15 +136,21 @@ class OrderSummaryScreen extends StatelessWidget {
                                 SizedBox(
                                   width: 20,
                                 ),
-                                DefaultSelectableText(
-                                  phone + ' ,',
-                                  style: TextStyle(fontSize: 18),
+                                Directionality(
+                                  textDirection: TextDirection.ltr,
+                                  child: DefaultSelectableText(
+                                    phone ,
+                                    style: TextStyle(fontSize: 18),
+                                  ),
                                 ),
-                                anotherPhone != ""
-                                    ? DefaultSelectableText(
-                                        anotherPhone,
-                                        style: TextStyle(fontSize: 18),
-                                      )
+                                anotherPhone != "_"
+                                    ? Directionality(
+                                      textDirection: TextDirection.ltr,
+                                      child: DefaultSelectableText(
+                                          anotherPhone+ ' ,',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                    )
                                     : SizedBox(),
                               ],
                             ),
@@ -374,10 +380,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                   Directionality(
                                     textDirection: TextDirection.ltr,
                                     child: DefaultSelectableText(
-                                      ((CartCubit.cartModel?.cart
-                                          ?.totalPriceAfterPromocodes)??0 +
-                                          double.parse(delivery))
-                                          .toStringAsFixed(2),
+                                      (((CartCubit.cartModel?.cart?.totalPriceAfterPromocodes)??0) + double.parse(delivery)).toStringAsFixed(2),
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
@@ -411,7 +414,7 @@ class OrderSummaryScreen extends StatelessWidget {
                           succsessCondition: state is OrderTheCartSuccess,
                           errorCondition:  state is OrderTheCartError,
                           onPressed: () async {
-                            await cubit.orderTheCart(orderTheCartModel: OrderTheCartModel(paymentMethod: paymentMethod,city: CartCubit.deliveryCity?.id,destination: address,lastName: secondName,secondNumber: anotherPhone == '_' ? null : anotherPhone)).then((value) {
+                            await cubit.orderTheCart(orderTheCartModel: OrderTheCartModel(paymentMethod: paymentMethod,city: CartCubit.deliveryCity?.id,destination: address,lastName: "",secondNumber: anotherPhone == '_' ? null : anotherPhone)).then((value) {
                               if(value == 'done'){
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                   content: Text("تم ارسال الطلب بنجاح",style: TextStyle(color: ColorManager.myBlack),),

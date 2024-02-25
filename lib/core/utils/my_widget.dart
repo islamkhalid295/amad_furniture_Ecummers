@@ -574,6 +574,7 @@ class DefaultTextFormField extends StatelessWidget {
       this.obscureText,
       this.textAlign = TextAlign.start,
       this.paddingRight = 10.0,
+      this.paddingleft = 10,
       this.keyboardType,
       this.onFieldSubmitted,
       this.backgroundColor});
@@ -590,6 +591,7 @@ class DefaultTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
   final double paddingRight;
+  final double paddingleft;
   final TextAlign textAlign;
   final TextInputType? keyboardType;
   final ValueChanged<String>? onFieldSubmitted;
@@ -610,7 +612,7 @@ class DefaultTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(
-          padding: EdgeInsets.only(right: paddingRight),
+          padding: EdgeInsets.only(right: paddingRight,left: paddingleft),
           child: TextFormField(
             onFieldSubmitted: onFieldSubmitted,
             keyboardType: keyboardType,

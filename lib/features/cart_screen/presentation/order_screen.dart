@@ -14,8 +14,7 @@ import '../data/models/city_model.dart';
 
 class OrderScreen extends StatelessWidget {
    OrderScreen({super.key});
-late  TextEditingController firstNameController = TextEditingController(text: AuthanticationCubit.userModel?.firstName);
-late TextEditingController secondNameController = TextEditingController(text: AuthanticationCubit.userModel?.secondName);
+late  TextEditingController nameController = TextEditingController(text: AuthanticationCubit.userData?.user?.name);
 late  TextEditingController phoneController = TextEditingController(text: AuthanticationCubit.userData?.user?.number);
 final TextEditingController anotherPhoneController = TextEditingController();
    late  TextEditingController emailController = TextEditingController(text: AuthanticationCubit.userData?.user?.email);
@@ -55,8 +54,7 @@ bool flag = true;
           ));
     }
     if (AuthanticationCubit.userModel != null){
-      firstNameController = TextEditingController(text: AuthanticationCubit.userModel?.firstName);
-      secondNameController = TextEditingController(text: AuthanticationCubit.userModel?.secondName);
+      nameController = TextEditingController(text: AuthanticationCubit.userModel?.name);
 
       phoneController = TextEditingController(text: AuthanticationCubit.userModel?.number);
       emailController = TextEditingController(text: AuthanticationCubit.userModel?.email);
@@ -173,14 +171,11 @@ bool flag = true;
                                             // ),
                                             Expanded(child:
                                             OrderTextFormField(
-                                              hintText: 'الاسم الاول',
+                                              hintText: 'الاسم',
                                             validator:  CartCubit.nameValidator,
-                                              controller: firstNameController,
+                                              controller: nameController,
                                             )),
-                                            const SizedBox(width: 40,),
-                                            Expanded(child: OrderTextFormField(hintText: 'الاسم الثاني',
-                                            validator: CartCubit.nameValidator,
-                                            controller: secondNameController,)),
+
                                           ],
                                         ),
                                         Row(
@@ -297,35 +292,25 @@ bool flag = true;
               Center(child: DefaultMaterialButton(
 
                   onPressed: ()async{
-                    if (CartCubit
-                        .cityDropDownMenuController
-                        .text !=
-                        "") {
-                      context
-                          .go(RoutesManager.orderScreen);
-                    } else {
+
+                    if(CartCubit.formKey.currentState!.validate() && CartCubit.cityDropDownMenuController.text != "" ){
+                      context.pushNamed(RoutesManager.orderSummaryScreen,
+                          pathParameters: {
+                            'firstName': nameController.text,
+                            'phone': phoneController.text,
+                            'anotherPhone': anotherPhoneController.text == ""? '_' : anotherPhoneController.text,
+                            'email': emailController.text,
+                            'landmark': landmarkController.text,
+                            'address': addressController.text,
+                            'delivery' : CartCubit.deliveryCity?.deliveryPrice ??"0",
+                            'city' : CartCubit.deliveryCity?.name ?? "_",
+                          });
+                      // orderError = await cubit.orderTheCart(orderTheCartModel: OrderTheCartModel(paymentMethod: paymentMethod,city: CartCubit.deliveryCity?.id,destination: addressController.text,lastName: secondNameController.text,secondNumber: anotherPhoneController.text));
+                    }else if(CartCubit.cityDropDownMenuController.text == "" ){
                       cubit
                           .cityDropDownMenuValidationError();
                     }
-                if(CartCubit.formKey.currentState!.validate() && CartCubit.cityDropDownMenuController.text != "" ){
-                  context.goNamed(RoutesManager.orderSummaryScreen,
-                      pathParameters: {
-                        'firstName': firstNameController.text,
-                        'secondName': secondNameController.text,
-                        'phone': phoneController.text,
-                        'anotherPhone': anotherPhoneController.text == ""? '_' : anotherPhoneController.text,
-                        'email': emailController.text,
-                        'landmark': landmarkController.text,
-                        'address': addressController.text,
-                        'delivery' : CartCubit.deliveryCity?.deliveryPrice ??"0",
-                        'city' : CartCubit.deliveryCity?.name ?? "_",
-                      });
-                   // orderError = await cubit.orderTheCart(orderTheCartModel: OrderTheCartModel(paymentMethod: paymentMethod,city: CartCubit.deliveryCity?.id,destination: addressController.text,lastName: secondNameController.text,secondNumber: anotherPhoneController.text));
-                }else {
-                  cubit
-                      .cityDropDownMenuValidationError();
-                }
-              }, text: 'اتمام الطلب'))
+                  }, text: 'اتمام الطلب'))
             ],
           ),
         ),

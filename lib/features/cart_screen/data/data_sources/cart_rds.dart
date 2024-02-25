@@ -122,9 +122,11 @@ class CartRdsImp implements CartRDS {
   @override
   Future<String> orderTheCart (OrderTheCartModel orderTheCartModel) async {
     try {
+      var cartJson =orderTheCartModel.toJson();
+      cartJson.removeWhere((key, value) => value == null);
       final response = await client.post(
           EndPoints.BASE_URL + EndPoints.ORDER_CART,
-          body: orderTheCartModel.toJson(),
+          body: cartJson,
           headers: {
             "Authorization": "Bearer $token",
           });
