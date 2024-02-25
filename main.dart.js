@@ -9580,7 +9580,7 @@ l=k}p.a4A(new A.Yg(n,q,m,l,null))
 p.OJ()
 return A.D(null,r)}})
 return A.E($async$aM_,r)},
-b6q(){var s=null,r="/products",q=A.a([A.kY(new A.ane(),s,"/"),A.kY(new A.anf(),r,"/products/:categoryId"),A.kY(new A.ang(),s,r),A.kY(new A.anh(),"/product","/product/:productId"),A.kY(new A.ani(),"/order_summary","/order_summary/:firstName/:phone/:anotherPhone/:email/:landmark/:address/:delivery/:city"),A.kY(new A.anj(),s,"/cart"),A.kY(new A.ank(),s,"/order"),A.kY(new A.anl(),s,"/authentication/create_account"),A.kY(new A.anm(),s,"/authentication/login"),A.kY(new A.ann(),s,"/authentication/forget_password"),A.kY(new A.ano(),s,"/authentication/verifyForgetPassword")],t.yo)
+b6q(){var s=null,r="/products",q=A.a([A.kY(new A.ane(),s,"/"),A.kY(new A.anf(),r,"/products/:categoryId"),A.kY(new A.ang(),s,r),A.kY(new A.anh(),"/product","/product/:productId"),A.kY(new A.ani(),"/order_summary","/order_summary/:name/:phone/:anotherPhone/:email/:landmark/:address/:delivery/:city"),A.kY(new A.anj(),s,"/cart"),A.kY(new A.ank(),s,"/order"),A.kY(new A.anl(),s,"/authentication/create_account"),A.kY(new A.anm(),s,"/authentication/login"),A.kY(new A.ann(),s,"/authentication/forget_password"),A.kY(new A.ano(),s,"/authentication/verifyForgetPassword")],t.yo)
 return new A.Tt(A.b5j(!1,s,s,s,s,s,s,s,s,!1,s,!0,s,!1,new A.ZB(new A.arP(q,A.bfL(),5))),s)},
 Tt:function Tt(a,b){this.c=a
 this.a=b},
@@ -52021,7 +52021,7 @@ p=q.a
 o=p.e
 if(o==="_")o=null
 s=2
-return A.I(q.b.Ey(new A.ao4(p.w,n,"cash","",o)).aU(0,new A.ao_(q.c),t.P),$async$$0)
+return A.I(q.b.Ey(new A.ao4(p.w,n,"cash",null,o)).aU(0,new A.ao_(q.c),t.P),$async$$0)
 case 2:return A.D(null,r)}})
 return A.E($async$$0,r)},
 $S:42}
@@ -53820,7 +53820,7 @@ p.bn(n)
 return A.kI(new A.fy(new A.br(new A.bg(q))),new A.fB(new A.br(new A.bg(r))),new A.fC(new A.br(new A.bg(m))),new A.fG(new A.br(new A.bg(p))),new A.fP(new A.br(new A.bg(s))))},
 $S:31}
 A.ani.prototype={
-$2(a,b){var s,r,q,p,o,n=null,m=A.a([A.dq(n,new A.anb(),t.u),A.dq(n,new A.anc(),t.G),A.dq(n,new A.and(),t.O)],t.Ds),l=b.r,k=l.i(0,"firstName")
+$2(a,b){var s,r,q,p,o,n=null,m=A.a([A.dq(n,new A.anb(),t.u),A.dq(n,new A.anc(),t.G),A.dq(n,new A.and(),t.O)],t.Ds),l=b.r,k=l.i(0,"name")
 k.toString
 s=l.i(0,"phone")
 s.toString
