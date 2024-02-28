@@ -101,6 +101,57 @@ class ProductItem extends StatelessWidget {
                   maxLines: 2,
                 ),
               ),
+              (product.availableAmount ?? 0) > 0
+                  ? Row(
+                children: [
+                  Container(
+                    width: 10,
+                    height: 10,
+                    decoration: const ShapeDecoration(
+                      color: Color(0xFF06BD4F),
+                      shape: OvalBorder(),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  DefaultSelectableText(
+                    'متوفر',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 13,
+                      fontFamily: 'Almarai',
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
+                ],
+              )
+                  : Row(
+                children: [
+                  Container(
+                    width: 10,
+                    height: 10,
+                    decoration: const ShapeDecoration(
+                      color: Colors.red,
+                      shape: OvalBorder(),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  DefaultSelectableText(
+                    'غير متوفر',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 13,
+                      fontFamily: 'Almarai',
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
+                ],
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -146,7 +197,7 @@ class ProductItem extends StatelessWidget {
                   ],
                 ),
               )
-                  : Container(height: 38),
+                  : Container(height: 25),
               const SizedBox(
                 height: 10,
               ),

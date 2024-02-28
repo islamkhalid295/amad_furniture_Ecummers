@@ -55,7 +55,6 @@ bool flag = true;
     }
     if (AuthanticationCubit.userModel != null){
       nameController = TextEditingController(text: AuthanticationCubit.userModel?.name);
-
       phoneController = TextEditingController(text: AuthanticationCubit.userModel?.number);
       emailController = TextEditingController(text: AuthanticationCubit.userModel?.email);
     }

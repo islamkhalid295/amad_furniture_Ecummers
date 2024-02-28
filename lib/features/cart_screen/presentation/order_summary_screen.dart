@@ -414,7 +414,7 @@ class OrderSummaryScreen extends StatelessWidget {
                           succsessCondition: state is OrderTheCartSuccess,
                           errorCondition:  state is OrderTheCartError,
                           onPressed: () async {
-                            await cubit.orderTheCart(orderTheCartModel: OrderTheCartModel(paymentMethod: paymentMethod,city: CartCubit.deliveryCity?.id,destination: address,lastName: "",secondNumber: anotherPhone == '_' ? null : anotherPhone)).then((value) {
+                            await cubit.orderTheCart(orderTheCartModel: OrderTheCartModel(paymentMethod: paymentMethod,city: CartCubit.deliveryCity?.id,destination: address,lastName: null,secondNumber: anotherPhone == '_' ? null : anotherPhone)).then((value) {
                               if(value == 'done'){
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                   content: Text("تم ارسال الطلب بنجاح",style: TextStyle(color: ColorManager.myBlack),),

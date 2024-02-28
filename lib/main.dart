@@ -221,7 +221,7 @@ class MyApp extends StatelessWidget {
       ),
       GoRoute(
         name: RoutesManager.orderSummaryScreen,
-        path: '${RoutesManager.orderSummaryScreen}/:firstName/:phone/:anotherPhone/:email/:landmark/:address/:delivery/:city',
+        path: '${RoutesManager.orderSummaryScreen}/:name/:phone/:anotherPhone/:email/:landmark/:address/:delivery/:city',
         builder: (context, state) => MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -258,7 +258,7 @@ class MyApp extends StatelessWidget {
             child: Directionality(
                 textDirection: TextDirection.rtl,
                 child:  OrderSummaryScreen(
-                    name: state.pathParameters['firstName']!,
+                    name: state.pathParameters['name']!,
                   // secondName: state.pathParameters['secondName']!,
                   phone: state.pathParameters['phone']!,
                   anotherPhone: state.pathParameters['anotherPhone']!,
