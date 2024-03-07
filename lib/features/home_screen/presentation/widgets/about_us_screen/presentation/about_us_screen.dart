@@ -1,9 +1,12 @@
+import 'dart:html' as html;
+
 import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/presentation/manager/about_us_screen_cubit.dart';
 import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/presentation/manager/about_us_screen_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../core/utils/assets_manager.dart';
 import '../../../../../../core/utils/color_manager.dart';
@@ -21,200 +24,414 @@ class AboutUsScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          BlocBuilder<BasicDataCubit, BasicDataState>(
-  builder: (context, state) {
-    return Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SelectableText("مــن نــحـن",
-                          style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width >600 ?
-                                  35 * MediaQuery.of(context).size.width / 1440 : 35 * MediaQuery.of(context).size.width / 700,
-                              fontWeight: FontWeight.w500)),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        height: 250 * MediaQuery.of(context).size.height / 900,
-                        child: BlocBuilder<AboutUsCubit, AboutUsState>(
-                          builder: (context, state) {
-                            return  state is RetriveAboutUsLoading ? Center(child: CircularProgressIndicator()) : SelectableText(
-                               AboutUsCubit.aboutUsModel?.aboutUs ?? "",
-                                style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width >600 ?
-                                  25 * MediaQuery.of(context).size.width / 1440 : 25 * MediaQuery.of(context).size.width / 700 /**
+          Expanded(
+            child: BlocBuilder<BasicDataCubit, BasicDataState>(
+              builder: (context, state) {
+                return Column(
+                  children: [
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  SelectableText("مــن نــحـن",
+                                      style: TextStyle(
+                                          fontSize:
+                                              MediaQuery.of(context).size.width >
+                                                      600
+                                                  ? 35 *
+                                                      MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      1440
+                                                  : 35 *
+                                                      MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      700,
+                                          fontWeight: FontWeight.w500)),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  BlocBuilder<AboutUsCubit, AboutUsState>(
+                                      builder: (context, state) {
+                                        return state is RetriveAboutUsLoading
+                                            ? Center(
+                                                child: CircularProgressIndicator())
+                                            : SelectableText(
+                                                AboutUsCubit
+                                                        .aboutUsModel?.aboutUs ??
+                                                    "",
+                                                style: TextStyle(
+                                                  fontSize: MediaQuery.of(context)
+                                                              .size
+                                                              .width >
+                                                          600
+                                                      ? 25 *
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          1440
+                                                      : 25 *
+                                                          MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          700 /**
+                                                MediaQuery.of(context).size.height /
+                                                900*/
+                                                  ,
+                                                ));
+                                      },
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          state is GetBasicDataLoading
+                              ? Container(
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                )
+                              : Container(
+                                  height: 150 *
                                       MediaQuery.of(context).size.height /
-                                      900*/,
-                                ));
+                                      1200,
+                                  decoration: BoxDecoration(
+                                    color: ColorManager.myYellow.withOpacity(0.5),
+                                    borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(20),
+                                        topRight: Radius.circular(20)),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 15,
+                                        right: 15,
+                                        bottom: 15,
+                                        left: 40 *
+                                            MediaQuery.of(context).size.width /
+                                            900),
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                          /*"https://eaglespiritgourmet.com/wp-content/uploads/2023/12/minimalist-olive-oil-bottle-glass-600x600.webp"*/ BasicDataCubit
+                                                  .basicDataModel!.logo ??
+                                              "",
+                                      placeholder: (context, url) => const Center(
+                                          child: CircularProgressIndicator()),
+                                      errorWidget: (context, url, error) {
+                                        return const Icon(Icons.error);
+                                      },
+                                      // fit: BoxFit.cover,
+                                      height: 150,
+                                      width: 150,
+                                      alignment: Alignment.center,
+                                    ),
+                                  ),
+                                  width:
+                                      200 * MediaQuery.of(context).size.width / 700,
+                                ),
+                        ],
+                      ),
+                    ),
+                    DefaultSelectableText(
+                        "يمكن تصفح منتجاتنا عن طريق تحميل تطبيق الهاتف"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(width: 10,),
+            
+                        MaterialButton(
+                          onPressed: () {
+                            /* await launchUrl(Uri.parse('https://wa.me/+201091832829'));*/
+                            ////TODO add app store link
+                            html.window.open(
+                                'https://wa.me/${BasicDataCubit.basicDataModel?.callUs?.number}',
+                                '_blank');
                           },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Image.asset(
+                                AssetsManager.GooglePlayIcon,
+                                fit: BoxFit.cover,
+                                width: 30,
+                                height: 30,
+                              ),
+                              SizedBox(width: 5,),
+                              FittedBox(
+                                child: Text(
+                                  'Google Play',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: ColorManager.myWhite,
+                                    fontSize: 17.59 *
+                                        MediaQuery.of(context)
+                                            .size
+                                            .width /
+                                        1440,
+                                    fontFamily: 'Almarai',
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              )
+                            ],
+                          ),
+                          height: 50,
+                          minWidth: 50,
+                          color: ColorManager.myBlack,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              state is GetBasicDataLoading
-                  ? Container(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              )
-                  : Container(
-                    height: 150 * MediaQuery.of(context).size.height / 1200,
-                    decoration: BoxDecoration(
-                      color: ColorManager.myYellow.withOpacity(0.5),
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(20),
-                          topRight: Radius.circular(20)),
+                        SizedBox(width: 10,),
+                        MaterialButton(
+                          onPressed: () {
+                            /* await launchUrl(Uri.parse('https://wa.me/+201091832829'));*/
+                            ////TODO add app store link
+                            html.window.open(
+                                'https://wa.me/${BasicDataCubit.basicDataModel?.callUs?.number}',
+                                '_blank');
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Image.asset(
+                                AssetsManager.appStoreIcon,
+                                fit: BoxFit.cover,
+                                width: 30,
+                                height: 30,
+                              ),
+                              SizedBox(width: 5,),
+            
+                              FittedBox(
+                                child: Text(
+                                  'App Store',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: ColorManager.myWhite,
+                                    fontSize: 17.59 *
+                                        MediaQuery.of(context)
+                                            .size
+                                            .width /
+                                        1440,
+                                    fontFamily: 'Almarai',
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              )
+                            ],
+                          ),
+                          minWidth: 50,
+                          height: 50,
+            
+                          color: ColorManager.myBlack,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        SizedBox(width: 10,),
+                        MaterialButton(
+                          onPressed: () {
+                            /* await launchUrl(Uri.parse('https://wa.me/+201091832829'));*/
+                            ////TODO add app store link
+                            html.window.open(
+                                'https://wa.me/${BasicDataCubit.basicDataModel?.callUs?.number}',
+                                '_blank');
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SvgPicture.asset(
+                                AssetsManager.appGalleryIcon,
+                                fit: BoxFit.cover,
+                                width: 30,
+                                height: 30,
+                              ),
+                              SizedBox(width: 5,),
+            
+                              FittedBox(
+                                child: Text(
+                                  'Huawei App Gallery',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: ColorManager.myWhite,
+                                    fontSize: 17.59 *
+                                        MediaQuery.of(context)
+                                            .size
+                                            .width /
+                                        1440,
+                                    fontFamily: 'Almarai',
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              )
+                            ],
+                          ),
+                          height: 50,
+                          minWidth: 50,
+                          color: ColorManager.myBlack,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        SizedBox(width: 10,),
+            
+                      ],
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          top: 15,
-                          right: 15,
-                          bottom: 15,
-                          left:
-                          40 * MediaQuery.of(context).size.width / 900),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                        /*"https://eaglespiritgourmet.com/wp-content/uploads/2023/12/minimalist-olive-oil-bottle-glass-600x600.webp"*/ BasicDataCubit
-                            .basicDataModel!.logo?? "",
-                        placeholder: (context, url) =>
-                        const Center(child: CircularProgressIndicator()),
-                        errorWidget: (context, url, error) {
-                          return const Icon(Icons.error);
-                        },
-                        // fit: BoxFit.cover,
-                        height: 150,
-                        width: 150,
-                        alignment: Alignment.center,
-                      ),
-                    ),
-                width: 200 * MediaQuery.of(context).size.width / 700,
-                  ),
-
-            ],
-          );
-  },
-),
+                  ],
+                );
+              },
+            ),
+          ),
           Padding(
-            padding:
-            const EdgeInsets.symmetric(vertical: 30,horizontal: 30),
+            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 30),
             child: Container(
               decoration: ShapeDecoration(
                 shape: RoundedRectangleBorder(
                   side: BorderSide(
                     width: 1,
-                    strokeAlign:
-                    BorderSide.strokeAlignCenter,
-                    color: Colors.black
-                        .withOpacity(0.3199999928474426),
+                    strokeAlign: BorderSide.strokeAlignCenter,
+                    color: Colors.black.withOpacity(0.3199999928474426),
                   ),
                 ),
               ),
             ),
           ),
-
-          Row(
-            children: [
-              MediaQuery.of(context).size.width > 400 ? Expanded(
-                child: Container(
-                  height: 300 * MediaQuery.of(context).size.height / 800,
-                  decoration: BoxDecoration(
-                    color: ColorManager.myYellow.withOpacity(0.5),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        topLeft: Radius.circular(20)),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        top: 15,
-                        left: 15,
-                        bottom: 15,
-                        right:
-                            40 * MediaQuery.of(context).size.width / 900),
-                    child: Container(
-                      height:
-                          300 * MediaQuery.of(context).size.height / 830,
-                      // width: 500 * MediaQuery.of(context).size.width / 1440 ,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: CarouselSlider(
-                        // carouselController: SliderCubit.carouselController,
-                        options: CarouselOptions(
-                          enlargeCenterPage: true,
-                          viewportFraction: 1,
-                          autoPlay: true,
+          Expanded(
+            child: Row(
+              children: [
+                MediaQuery.of(context).size.width > 400
+                    ? Expanded(
+                        child: Container(
+                          height: 270 * MediaQuery.of(context).size.height / 800,
+                          decoration: BoxDecoration(
+                            color: ColorManager.myYellow.withOpacity(0.5),
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(20),
+                                topLeft: Radius.circular(20)),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                top: 15,
+                                left: 15,
+                                bottom: 15,
+                                right:
+                                    40 * MediaQuery.of(context).size.width / 900),
+                            child: Container(
+                              height:
+                                  270 * MediaQuery.of(context).size.height / 830,
+                              // width: 500 * MediaQuery.of(context).size.width / 1440 ,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: CarouselSlider(
+                                // carouselController: SliderCubit.carouselController,
+                                options: CarouselOptions(
+                                  enlargeCenterPage: true,
+                                  viewportFraction: 1,
+                                  autoPlay: true,
+                                ),
+                                items: /*SliderCubit.sliderItemsList?.slider?*/
+                                    [
+                                  1,
+                                ].map((sliderItem) {
+                                  return Builder(
+                                    builder: (BuildContext context) {
+                                      return CachedNetworkImage(
+                                        imageUrl:
+                                            AboutUsCubit.aboutUsModel?.image ??
+                                                "",
+                                        placeholder: (context, url) =>
+                                            const Center(
+                                                child:
+                                                    CircularProgressIndicator()),
+                                        errorWidget: (context, url, error) {
+                                          return const Icon(Icons.error);
+                                        },
+                                        fit: BoxFit.cover,
+                                        alignment: Alignment.center,
+                                      );
+                                    },
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ),
                         ),
-                        items: /*SliderCubit.sliderItemsList?.slider?*/
-                            [1,].map((sliderItem) {
-                          return Builder(
-                            builder: (BuildContext context) {
-                              return CachedNetworkImage(
-                                imageUrl:
-                                AboutUsCubit.aboutUsModel?.image ??"" ,
-                                placeholder: (context, url) =>
-                                const Center(child: CircularProgressIndicator()),
-                                errorWidget: (context, url, error) {
-                                  return const Icon(Icons.error);
-                                },
-                                fit: BoxFit.cover,
-
-                                alignment: Alignment.center,
-                              );
+                      )
+                    : SizedBox(),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SelectableText("عن منتجاتنا",
+                            style: TextStyle(
+                                fontSize: MediaQuery.of(context).size.width > 600
+                                    ? 35 *
+                                        MediaQuery.of(context).size.width /
+                                        1440
+                                    : 35 *
+                                        MediaQuery.of(context).size.width /
+                                        700,
+                                fontWeight: FontWeight.w500)),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        SizedBox(
+                          height: 250 * MediaQuery.of(context).size.height / 900,
+                          child: BlocBuilder<AboutUsCubit, AboutUsState>(
+                            builder: (context, state) {
+                              return state is RetriveAboutUsLoading
+                                  ? Center(child: CircularProgressIndicator())
+                                  : SelectableText(
+                                      AboutUsCubit.aboutUsModel?.aboutProducts ??
+                                          "",
+                                      style: TextStyle(
+                                        fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width >
+                                                600
+                                            ? 25 *
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1440
+                                            : 25 *
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                700 /**
+                                      MediaQuery.of(context).size.height /
+                                      900*/
+                                        ,
+                                      ));
                             },
-                          );
-                        }).toList(),
-                      ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ) : SizedBox(),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SelectableText("عن منتجاتنا",
-                          style: TextStyle(
-                              fontSize:
-                              MediaQuery.of(context).size.width >600 ?
-                              35 * MediaQuery.of(context).size.width / 1440 : 35 * MediaQuery.of(context).size.width / 700,
-                              fontWeight: FontWeight.w500)),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        height: 250 * MediaQuery.of(context).size.height / 900,
-                        child: BlocBuilder<AboutUsCubit, AboutUsState>(
-                          builder: (context, state) {
-                            return  state is RetriveAboutUsLoading ? Center(child: CircularProgressIndicator()) : SelectableText(
-                               AboutUsCubit.aboutUsModel?.aboutProducts ?? "",
-                                style: TextStyle(
-                                  fontSize:
-                                      MediaQuery.of(context).size.width >600 ?
-                                  25 * MediaQuery.of(context).size.width / 1440 : 25 * MediaQuery.of(context).size.width / 700 /**
-                                      MediaQuery.of(context).size.height /
-                                      900*/,
-                                ));
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
