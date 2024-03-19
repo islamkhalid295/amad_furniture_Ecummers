@@ -478,7 +478,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: _router,
-      title: 'Cedage',
+      title: 'Cedage Store',
       theme: ThemeData(
         textTheme: Theme.of(context).textTheme.apply(
               fontFamily: 'Almarai',
