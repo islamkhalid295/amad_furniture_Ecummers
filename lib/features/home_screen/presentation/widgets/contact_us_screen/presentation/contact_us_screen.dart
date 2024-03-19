@@ -1,9 +1,8 @@
 import 'dart:html' as html;
 
-import 'package:amad_furniture/core/utils/color_manager.dart';
-import 'package:amad_furniture/core/widgets/default_material_button.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/data/models/contatct_us_model.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/presentation/manager/contact_us_cubit.dart';
+import 'package:cedage/core/utils/color_manager.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/contact_us_screen/data/models/contatct_us_model.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/contact_us_screen/presentation/manager/contact_us_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

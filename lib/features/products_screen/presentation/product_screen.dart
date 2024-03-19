@@ -1,7 +1,7 @@
-import 'package:amad_furniture/core/widgets/default_material_button.dart';
-import 'package:amad_furniture/features/cart_screen/data/models/cart_model.dart';
-import 'package:amad_furniture/features/cart_screen/data/models/product_amount_model.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
+import 'package:cedage/core/widgets/default_material_button.dart';
+import 'package:cedage/features/cart_screen/data/models/cart_model.dart';
+import 'package:cedage/features/cart_screen/data/models/product_amount_model.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
 import 'package:flexi_productimage_slider/flexi_productimage_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,9 +1,9 @@
-import 'package:amad_furniture/core/utils/assets_manager.dart';
-import 'package:amad_furniture/core/utils/routes_manager.dart';
-import 'package:amad_furniture/features/cart_screen/data/models/cart_model.dart';
-import 'package:amad_furniture/features/cart_screen/data/models/product_amount_model.dart';
-import 'package:amad_furniture/features/cart_screen/presentation/manager/cart_cubit.dart';
-import 'package:amad_furniture/features/cart_screen/presentation/manager/product_cubit.dart';
+import 'package:cedage/core/utils/assets_manager.dart';
+import 'package:cedage/core/utils/routes_manager.dart';
+import 'package:cedage/features/cart_screen/data/models/cart_model.dart';
+import 'package:cedage/features/cart_screen/data/models/product_amount_model.dart';
+import 'package:cedage/features/cart_screen/presentation/manager/cart_cubit.dart';
+import 'package:cedage/features/cart_screen/presentation/manager/product_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

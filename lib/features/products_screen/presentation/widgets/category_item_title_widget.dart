@@ -1,4 +1,4 @@
-import 'package:amad_furniture/features/products_screen/presentation/widgets/sub_category_item_widget.dart';
+import 'package:cedage/features/products_screen/presentation/widgets/sub_category_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

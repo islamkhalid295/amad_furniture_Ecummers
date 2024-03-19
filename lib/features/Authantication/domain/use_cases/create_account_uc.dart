@@ -1,5 +1,5 @@
-import 'package:amad_furniture/core/use_case/use_case.dart';
-import 'package:amad_furniture/features/Authantication/data/models/create_account_model.dart';
+import 'package:cedage/core/use_case/use_case.dart';
+import 'package:cedage/features/Authantication/data/models/create_account_model.dart';
 import '../repositories/authantication_repo.dart';
 
 

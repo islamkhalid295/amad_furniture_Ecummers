@@ -1,7 +1,7 @@
 import 'dart:html' as html;
 
-import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/presentation/manager/about_us_screen_cubit.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/presentation/manager/about_us_screen_state.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/about_us_screen/presentation/manager/about_us_screen_cubit.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/about_us_screen/presentation/manager/about_us_screen_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';

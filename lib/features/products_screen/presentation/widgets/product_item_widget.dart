@@ -1,7 +1,7 @@
-import 'package:amad_furniture/core/utils/assets_manager.dart';
-import 'package:amad_furniture/core/utils/routes_manager.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
-import 'package:amad_furniture/features/products_screen/data/models/product_list_model.dart';
+import 'package:cedage/core/utils/assets_manager.dart';
+import 'package:cedage/core/utils/routes_manager.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
+import 'package:cedage/features/products_screen/data/models/product_list_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -11,7 +11,7 @@ import '../../../../core/utils/constantes.dart';
 import '../../../../core/utils/my_widget.dart';
 
 class ProductItem extends StatelessWidget {
-  bool inCart =false;
+  bool inCart = false;
 
    ProductItem({super.key, required this.product});
 

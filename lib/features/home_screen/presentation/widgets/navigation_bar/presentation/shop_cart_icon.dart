@@ -1,10 +1,9 @@
-import 'package:amad_furniture/core/utils/routes_manager.dart';
+import 'package:cedage/core/utils/routes_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../../core/utils/color_manager.dart';
-import '../../../../../../core/utils/my_widget.dart';
 import '../../../../../cart_screen/presentation/manager/cart_cubit.dart';
 
 class ShopCart extends StatelessWidget {

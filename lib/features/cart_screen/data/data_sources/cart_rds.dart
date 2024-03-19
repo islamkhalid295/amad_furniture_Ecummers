@@ -1,6 +1,6 @@
-import 'package:amad_furniture/core/api/api_consummer.dart';
-import 'package:amad_furniture/core/api/end_points.dart';
-import 'package:amad_furniture/features/cart_screen/data/models/promocode_response_model.dart';
+import 'package:cedage/core/api/api_consummer.dart';
+import 'package:cedage/core/api/end_points.dart';
+import 'package:cedage/features/cart_screen/data/models/promocode_response_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../core/utils/constantes.dart';

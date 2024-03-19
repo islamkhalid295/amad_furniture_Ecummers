@@ -1,9 +1,9 @@
-import 'package:amad_furniture/core/utils/color_manager.dart';
-import 'package:amad_furniture/core/utils/routes_manager.dart';
-import 'package:amad_furniture/core/widgets/default_material_button.dart';
-import 'package:amad_furniture/features/Authantication/data/models/create_account_model.dart';
-import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
-import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_state.dart';
+import 'package:cedage/core/utils/color_manager.dart';
+import 'package:cedage/core/utils/routes_manager.dart';
+import 'package:cedage/core/widgets/default_material_button.dart';
+import 'package:cedage/features/Authantication/data/models/create_account_model.dart';
+import 'package:cedage/features/Authantication/presentation/manager/authantication_cubit.dart';
+import 'package:cedage/features/Authantication/presentation/manager/authantication_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';

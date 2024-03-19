@@ -1,4 +1,4 @@
-import 'package:amad_furniture/core/use_case/use_case.dart';
+import 'package:cedage/core/use_case/use_case.dart';
 import 'package:bloc/bloc.dart';
 import '../../data/models/faq_model.dart';
 import '../../domain/use_cases/retrive_faq_uc.dart';

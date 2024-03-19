@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:amad_furniture/core/api/end_points.dart';
-import 'package:amad_furniture/core/api/status_code.dart';
+import 'package:cedage/core/api/end_points.dart';
+import 'package:cedage/core/api/status_code.dart';
 import 'package:dio/dio.dart';
 
 import '../exceptions/server/server_exception.dart';

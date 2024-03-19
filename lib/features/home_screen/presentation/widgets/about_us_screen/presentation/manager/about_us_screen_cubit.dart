@@ -1,6 +1,5 @@
-import 'package:amad_furniture/core/use_case/use_case.dart';
+import 'package:cedage/core/use_case/use_case.dart';
 import 'package:bloc/bloc.dart';
-import 'package:carousel_slider/carousel_controller.dart';
 
 import '../../data/models/about_us_model.dart';
 import '../../domain/use_cases/about_us_uc.dart';

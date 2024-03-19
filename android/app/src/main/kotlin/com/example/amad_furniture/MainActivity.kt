@@ -1,4 +1,4 @@
-package com.example.amad_furniture
+package com.example.cedage
 
 import io.flutter.embedding.android.FlutterActivity
 

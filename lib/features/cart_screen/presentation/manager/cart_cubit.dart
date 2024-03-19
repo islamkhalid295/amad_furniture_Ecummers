@@ -1,8 +1,8 @@
-import 'package:amad_furniture/core/utils/constantes.dart';
-import 'package:amad_furniture/features/cart_screen/data/models/cart_model.dart';
-import 'package:amad_furniture/features/cart_screen/data/models/city_model.dart';
-import 'package:amad_furniture/features/cart_screen/data/models/order_the_cart_model.dart';
-import 'package:amad_furniture/features/cart_screen/domain/repositories/cart_repo.dart';
+import 'package:cedage/core/utils/constantes.dart';
+import 'package:cedage/features/cart_screen/data/models/cart_model.dart';
+import 'package:cedage/features/cart_screen/data/models/city_model.dart';
+import 'package:cedage/features/cart_screen/data/models/order_the_cart_model.dart';
+import 'package:cedage/features/cart_screen/domain/repositories/cart_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';

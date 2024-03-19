@@ -1,9 +1,9 @@
 import 'dart:html' as html;
 
-import 'package:amad_furniture/core/utils/assets_manager.dart';
-import 'package:amad_furniture/core/utils/color_manager.dart';
-import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
-import 'package:amad_furniture/features/home_screen/presentation/manager/home_screen_cubit.dart';
+import 'package:cedage/core/utils/assets_manager.dart';
+import 'package:cedage/core/utils/color_manager.dart';
+import 'package:cedage/features/Authantication/presentation/manager/authantication_cubit.dart';
+import 'package:cedage/features/home_screen/presentation/manager/home_screen_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +11,6 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/utils/constantes.dart';
-import '../../../../core/utils/my_widget.dart';
 import '../../../cart_screen/presentation/manager/cart_cubit.dart';
 import '../manager/basic_data_cubit.dart';
 import '../widgets/FAQ_screen/presentation/pages/faq_screen.dart';

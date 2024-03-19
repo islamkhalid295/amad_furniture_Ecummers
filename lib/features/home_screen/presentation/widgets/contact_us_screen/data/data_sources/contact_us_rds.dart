@@ -1,7 +1,6 @@
-import 'package:amad_furniture/core/api/api_consummer.dart';
-import 'package:amad_furniture/core/api/end_points.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/contact_us_screen/data/models/contatct_us_model.dart';
-import 'package:dio/dio.dart';
+import 'package:cedage/core/api/api_consummer.dart';
+import 'package:cedage/core/api/end_points.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/contact_us_screen/data/models/contatct_us_model.dart';
 
 abstract class ContactUsRDS {
   Future<String> sendContactInfo(ContactUsModel contactUsModel);

@@ -1,4 +1,4 @@
-import 'package:amad_furniture/core/use_case/use_case.dart';
+import 'package:cedage/core/use_case/use_case.dart';
 import '../../data/models/verifyForgetPasswordModel.dart';
 import '../repositories/authantication_repo.dart';
 

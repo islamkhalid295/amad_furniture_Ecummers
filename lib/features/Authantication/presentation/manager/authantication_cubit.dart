@@ -1,10 +1,10 @@
-import 'package:amad_furniture/core/storage/flutter_secure_storage.dart';
-import 'package:amad_furniture/features/Authantication/data/models/login_model.dart';
-import 'package:amad_furniture/features/Authantication/domain/use_cases/create_account_uc.dart';
-import 'package:amad_furniture/features/Authantication/domain/use_cases/forget_password_uc.dart';
-import 'package:amad_furniture/features/Authantication/domain/use_cases/get_user_uc.dart';
-import 'package:amad_furniture/features/Authantication/domain/use_cases/login_uc.dart';
-import 'package:amad_furniture/features/Authantication/domain/use_cases/verify_forget_password_uc.dart';
+import 'package:cedage/core/storage/flutter_secure_storage.dart';
+import 'package:cedage/features/Authantication/data/models/login_model.dart';
+import 'package:cedage/features/Authantication/domain/use_cases/create_account_uc.dart';
+import 'package:cedage/features/Authantication/domain/use_cases/forget_password_uc.dart';
+import 'package:cedage/features/Authantication/domain/use_cases/get_user_uc.dart';
+import 'package:cedage/features/Authantication/domain/use_cases/login_uc.dart';
+import 'package:cedage/features/Authantication/domain/use_cases/verify_forget_password_uc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

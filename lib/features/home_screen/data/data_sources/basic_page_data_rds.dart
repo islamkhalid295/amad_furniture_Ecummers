@@ -1,5 +1,5 @@
-import 'package:amad_furniture/core/api/api_consummer.dart';
-import 'package:amad_furniture/core/api/end_points.dart';
+import 'package:cedage/core/api/api_consummer.dart';
+import 'package:cedage/core/api/end_points.dart';
 
 import '../models/basic_data_model.dart';
 
@@ -21,7 +21,6 @@ class BasicDataRdsImp implements BasicDataRDS{
 
     return basicDataModel;
 
-    throw UnimplementedError();
   }
 
 }

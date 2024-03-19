@@ -1,6 +1,6 @@
-import 'package:amad_furniture/core/api/api_consummer.dart';
-import 'package:amad_furniture/core/api/end_points.dart';
-import 'package:amad_furniture/features/Authantication/data/models/user_model.dart';
+import 'package:cedage/core/api/api_consummer.dart';
+import 'package:cedage/core/api/end_points.dart';
+import 'package:cedage/features/Authantication/data/models/user_model.dart';
 import '../models/create_account_model.dart';
 import '../models/login_model.dart';
 import '../models/user.dart';

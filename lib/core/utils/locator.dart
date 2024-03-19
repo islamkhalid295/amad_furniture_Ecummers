@@ -1,9 +1,8 @@
-import 'package:amad_furniture/core/storage/flutter_secure_storage.dart';
-import 'package:amad_furniture/features/Authantication/domain/use_cases/create_account_uc.dart';
-import 'package:amad_furniture/features/Authantication/domain/use_cases/forget_password_uc.dart';
-import 'package:amad_furniture/features/Authantication/domain/use_cases/get_user_uc.dart';
-import 'package:amad_furniture/features/Authantication/domain/use_cases/verify_forget_password_uc.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/domain/use_cases/about_us_uc.dart';
+import 'package:cedage/features/Authantication/domain/use_cases/create_account_uc.dart';
+import 'package:cedage/features/Authantication/domain/use_cases/forget_password_uc.dart';
+import 'package:cedage/features/Authantication/domain/use_cases/get_user_uc.dart';
+import 'package:cedage/features/Authantication/domain/use_cases/verify_forget_password_uc.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/about_us_screen/domain/use_cases/about_us_uc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -28,7 +27,6 @@ import '../../features/home_screen/presentation/widgets/about_us_screen/domain/r
 import '../../features/home_screen/presentation/widgets/about_us_screen/presentation/manager/about_us_screen_cubit.dart';
 import '../../features/home_screen/presentation/widgets/categories_screen/data/data_sources/categories_rds.dart';
 import '../../features/home_screen/presentation/widgets/categories_screen/domain/repositories/categories_repo.dart';
-import '../../features/home_screen/presentation/widgets/categories_screen/domain/use_cases/retrive_categories_uc.dart';
 import '../../features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
 
 import '../../features/home_screen/presentation/widgets/contact_us_screen/data/data_sources/contact_us_rds.dart';
@@ -45,9 +43,9 @@ import '../api/dio_consummer.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  AndroidOptions _getAndroidOptions() => const AndroidOptions(
-    encryptedSharedPreferences: true,
-  );
+  // AndroidOptions _getAndroidOptions() => const AndroidOptions(
+  //   encryptedSharedPreferences: true,
+  // );
   // Features - Authantication
   sl.registerFactory(() => AuthanticationCubit(verifyForgetPasswordUC: sl(),createAccountUC: sl(),loginUC: sl(),forgetPasswordUC: sl(),getUserUC: sl()));
   sl.registerLazySingleton(() => CreateAccountUC(authanticationRepo: sl()));

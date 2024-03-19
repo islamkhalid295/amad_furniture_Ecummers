@@ -1,6 +1,6 @@
-import 'package:amad_furniture/core/utils/constantes.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/FAQ_screen/presentation/manager/faq_cubit.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/FAQ_screen/presentation/manager/faq_state.dart';
+import 'package:cedage/core/utils/constantes.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/FAQ_screen/presentation/manager/faq_cubit.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/FAQ_screen/presentation/manager/faq_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

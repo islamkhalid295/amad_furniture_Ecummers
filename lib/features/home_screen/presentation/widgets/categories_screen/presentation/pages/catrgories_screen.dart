@@ -1,5 +1,5 @@
-import 'package:amad_furniture/core/utils/color_manager.dart';
-import 'package:amad_furniture/core/utils/routes_manager.dart';
+import 'package:cedage/core/utils/color_manager.dart';
+import 'package:cedage/core/utils/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';

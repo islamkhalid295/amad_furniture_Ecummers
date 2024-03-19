@@ -1,5 +1,5 @@
 
-import 'package:amad_furniture/features/cart_screen/presentation/manager/cart_cubit.dart';
+import 'package:cedage/features/cart_screen/presentation/manager/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,7 +12,7 @@ import '../data/models/order_the_cart_model.dart';
 
 class OrderSummaryScreen extends StatelessWidget {
   OrderSummaryScreen(
-      {required this.name,
+      {super.key, required this.name,
       // required this.secondName,
       required this.phone,
       required this.anotherPhone,

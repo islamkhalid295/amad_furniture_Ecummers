@@ -1,4 +1,3 @@
-import 'package:amad_furniture/core/exceptions/server/server_exception.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:amad_furniture/core/storage/storage_consummer.dart';
+import 'package:cedage/core/storage/storage_consummer.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 

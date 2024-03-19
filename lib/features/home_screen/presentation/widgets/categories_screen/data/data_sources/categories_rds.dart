@@ -1,7 +1,7 @@
-import 'package:amad_furniture/core/api/api_consummer.dart';
-import 'package:amad_furniture/core/api/end_points.dart';
-import 'package:amad_furniture/features/products_screen/data/models/product_info_model.dart';
-import 'package:amad_furniture/features/products_screen/data/models/product_list_model.dart';
+import 'package:cedage/core/api/api_consummer.dart';
+import 'package:cedage/core/api/end_points.dart';
+import 'package:cedage/features/products_screen/data/models/product_info_model.dart';
+import 'package:cedage/features/products_screen/data/models/product_list_model.dart';
 
 import '../models/categories_model.dart';
 
@@ -25,7 +25,6 @@ class CategoriesRdsImp implements CategoriesRDS{
     print(categoriesList);
     return categoriesList;
 
-    throw UnimplementedError();
   }
 
   @override

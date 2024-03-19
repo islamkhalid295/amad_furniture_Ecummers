@@ -1,9 +1,9 @@
-import 'package:amad_furniture/core/utils/color_manager.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
-import 'package:amad_furniture/features/products_screen/data/models/product_list_model.dart';
-import 'package:amad_furniture/features/products_screen/presentation/widgets/category_item_title_widget.dart';
-import 'package:amad_furniture/features/products_screen/presentation/widgets/product_item_widget.dart';
-import 'package:amad_furniture/features/products_screen/presentation/widgets/sub_category_item_widget.dart';
+import 'package:cedage/core/utils/color_manager.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
+import 'package:cedage/features/products_screen/data/models/product_list_model.dart';
+import 'package:cedage/features/products_screen/presentation/widgets/category_item_title_widget.dart';
+import 'package:cedage/features/products_screen/presentation/widgets/product_item_widget.dart';
+import 'package:cedage/features/products_screen/presentation/widgets/sub_category_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';

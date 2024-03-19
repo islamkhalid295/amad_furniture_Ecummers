@@ -1,4 +1,4 @@
-import 'package:amad_furniture/core/use_case/use_case.dart';
+import 'package:cedage/core/use_case/use_case.dart';
 import '../../data/models/product_amount_model.dart';
 import '../repositories/cart_repo.dart';
 

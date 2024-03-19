@@ -1,4 +1,4 @@
-import 'package:amad_furniture/core/utils/my_widget.dart';
+import 'package:cedage/core/utils/my_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

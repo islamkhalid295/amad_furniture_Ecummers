@@ -1,26 +1,26 @@
 
 
-import 'package:amad_furniture/core/api/dio_consummer.dart';
-import 'package:amad_furniture/core/utils/color_manager.dart';
-import 'package:amad_furniture/core/utils/locator.dart' as di;
-import 'package:amad_furniture/core/utils/routes_manager.dart';
-import 'package:amad_furniture/features/Authantication/data/data_sources/Authantication_rds.dart';
-import 'package:amad_furniture/features/Authantication/domain/repositories/authantication_repo.dart';
-import 'package:amad_furniture/features/Authantication/domain/use_cases/create_account_uc.dart';
-import 'package:amad_furniture/features/Authantication/domain/use_cases/forget_password_uc.dart';
-import 'package:amad_furniture/features/Authantication/domain/use_cases/get_user_uc.dart';
-import 'package:amad_furniture/features/Authantication/domain/use_cases/login_uc.dart';
-import 'package:amad_furniture/features/Authantication/domain/use_cases/verify_forget_password_uc.dart';
-import 'package:amad_furniture/features/Authantication/presentation/manager/authantication_cubit.dart';
-import 'package:amad_furniture/features/Authantication/presentation/pages/forget_password_screen.dart';
-import 'package:amad_furniture/features/Authantication/presentation/pages/login_screen.dart';
-import 'package:amad_furniture/features/cart_screen/presentation/cart_screen.dart';
-import 'package:amad_furniture/features/cart_screen/presentation/manager/cart_cubit.dart';
-import 'package:amad_furniture/features/cart_screen/presentation/order_screen.dart';
-import 'package:amad_furniture/features/home_screen/presentation/manager/basic_data_cubit.dart';
-import 'package:amad_furniture/features/home_screen/presentation/pages/home_screen.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/presentation/manager/about_us_screen_cubit.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/home_slider/presentation/manager/slider_cubit.dart';
+import 'package:cedage/core/api/dio_consummer.dart';
+import 'package:cedage/core/utils/color_manager.dart';
+import 'package:cedage/core/utils/locator.dart' as di;
+import 'package:cedage/core/utils/routes_manager.dart';
+import 'package:cedage/features/Authantication/data/data_sources/Authantication_rds.dart';
+import 'package:cedage/features/Authantication/domain/repositories/authantication_repo.dart';
+import 'package:cedage/features/Authantication/domain/use_cases/create_account_uc.dart';
+import 'package:cedage/features/Authantication/domain/use_cases/forget_password_uc.dart';
+import 'package:cedage/features/Authantication/domain/use_cases/get_user_uc.dart';
+import 'package:cedage/features/Authantication/domain/use_cases/login_uc.dart';
+import 'package:cedage/features/Authantication/domain/use_cases/verify_forget_password_uc.dart';
+import 'package:cedage/features/Authantication/presentation/manager/authantication_cubit.dart';
+import 'package:cedage/features/Authantication/presentation/pages/forget_password_screen.dart';
+import 'package:cedage/features/Authantication/presentation/pages/login_screen.dart';
+import 'package:cedage/features/cart_screen/presentation/cart_screen.dart';
+import 'package:cedage/features/cart_screen/presentation/manager/cart_cubit.dart';
+import 'package:cedage/features/cart_screen/presentation/order_screen.dart';
+import 'package:cedage/features/home_screen/presentation/manager/basic_data_cubit.dart';
+import 'package:cedage/features/home_screen/presentation/pages/home_screen.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/about_us_screen/presentation/manager/about_us_screen_cubit.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/home_slider/presentation/manager/slider_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -478,7 +478,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: _router,
-      title: 'Flutter Demo',
+      title: 'Cedage',
       theme: ThemeData(
         textTheme: Theme.of(context).textTheme.apply(
               fontFamily: 'Almarai',

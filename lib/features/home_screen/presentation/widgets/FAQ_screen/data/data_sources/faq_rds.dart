@@ -1,5 +1,5 @@
-import 'package:amad_furniture/core/api/api_consummer.dart';
-import 'package:amad_furniture/core/api/end_points.dart';
+import 'package:cedage/core/api/api_consummer.dart';
+import 'package:cedage/core/api/end_points.dart';
 import '../models/faq_model.dart';
 
 abstract class FaqRDS {
@@ -18,7 +18,6 @@ class FaqRdsImp implements FaqRDS{
     print(faqList);
     return faqList;
 
-    throw UnimplementedError();
   }
 
 }

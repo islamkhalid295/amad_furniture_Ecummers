@@ -1,4 +1,4 @@
-import 'package:amad_furniture/features/home_screen/data/models/basic_data_model.dart';
+import 'package:cedage/features/home_screen/data/models/basic_data_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';

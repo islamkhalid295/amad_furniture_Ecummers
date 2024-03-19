@@ -1,7 +1,6 @@
-import 'package:amad_furniture/core/utils/constantes.dart';
-import 'package:amad_furniture/features/home_screen/domain/repositories/basic_page_data_repo.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/about_us_screen/presentation/about_us_screen.dart';
-import 'package:amad_furniture/features/home_screen/presentation/widgets/categories_screen/presentation/pages/catrgories_screen.dart';
+import 'package:cedage/core/utils/constantes.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/about_us_screen/presentation/about_us_screen.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/categories_screen/presentation/pages/catrgories_screen.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
