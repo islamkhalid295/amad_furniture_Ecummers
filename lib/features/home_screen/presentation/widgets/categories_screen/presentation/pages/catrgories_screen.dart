@@ -25,7 +25,7 @@ class CategoriesScreen extends StatelessWidget {
                   child: Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: ColorManager.myYellow.withOpacity(0.2),
+                  color: ColorManager.primary.withOpacity(0.2),
                 ),
                 height: 300,
                 width: 300,

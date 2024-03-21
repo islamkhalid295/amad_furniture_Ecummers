@@ -445,11 +445,11 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 2,
-      toolbarHeight: tabBarHeight,
+      toolbarHeight: MediaQuery.sizeOf(context).width < 450 ? 50 : tabBarHeight,
       backgroundColor: ColorManager.myWhite,
       leading: Padding(
         padding: EdgeInsets.only(
-            right: (90 * MediaQuery.of(context).size.width / 1235)),
+            right: (90 * MediaQuery.of(context).size.width / 1235),top: 5,bottom: 5),
         child: Image.asset(AssetsManager.camponyLogo),
       ),
       leadingWidth: MediaQuery.of(context).size.width < 800
@@ -461,7 +461,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
           width: 400,
           child: Row(
             children: [
-              SizedBox(width: 70,),
+              SizedBox(width: 50 * MediaQuery.of(context).size.width / 800,),
               DefaultTextButton(
                   onPressed: () {
                     context.go(RoutesManager.homeScreen);
@@ -538,8 +538,10 @@ class DefaultTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+
       decoration: BoxDecoration(
-          border: Border.all(color: ColorManager.myYellow),
+          border: Border.all(color: ColorManager.primary),
+          
           borderRadius: BorderRadius.circular(10)),
       child: TextButton(
           onPressed: onPressed,

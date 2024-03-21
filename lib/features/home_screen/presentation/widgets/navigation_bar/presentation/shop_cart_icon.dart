@@ -13,7 +13,7 @@ class ShopCart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-            border: Border.all(color: ColorManager.myYellow),
+            border: Border.all(color: ColorManager.primary),
             borderRadius: BorderRadius.circular(10)),
         child: BlocBuilder<CartCubit, CartState>(
           builder: (context, state) {
@@ -34,7 +34,7 @@ class ShopCart extends StatelessWidget {
                 state is GetCartLoading  ?  CircleAvatar(
                   backgroundColor: Colors.red,
                   radius: 10 * MediaQuery.of(context).size.width / 940,
-                  child: CircularProgressIndicator(color: ColorManager.myYellow,),) : CartCubit.cart != null ? CartCubit.cart!.isNotEmpty ? CircleAvatar(
+                  child: CircularProgressIndicator(color: ColorManager.primary,),) : CartCubit.cart != null ? CartCubit.cart!.isNotEmpty ? CircleAvatar(
                   backgroundColor: Colors.red,
                   radius: 10,
                   child: Text(

@@ -105,7 +105,7 @@ bool inCart= false;
                             width: 80,
                             height: 3,
                             decoration: const BoxDecoration(
-                                color: Color(0xFFFBB710)),
+                                color: ColorManager.primary),
                           ),
                         ),
                         DefaultSelectableText(
@@ -295,7 +295,7 @@ bool inCart= false;
                                       DefaultMaterialButton(
                                         minWidth: 300 * MediaQuery.of(context).size.width / 1400,
                                         borderRadius: 10,
-                                        color: inCart ? ColorManager.myYellow : null,
+                                        color: inCart ? ColorManager.primary : null,
                                         textColor: inCart ? ColorManager.myBlack : null,
                                         text: token == "null" ? "تسجيل الدخول اولا" : inCart ? "ازالة من العربة" : "اضافة الي العربة",
                                         onPressed: () {
@@ -766,7 +766,7 @@ bool inCart= false;
                                     DefaultMaterialButton(
                                       minWidth: 300 * MediaQuery.of(context).size.width / 1400,
                                       borderRadius: 10,
-                                      color: inCart ? ColorManager.myYellow : null,
+                                      color: inCart ? ColorManager.primary : null,
                                       textColor: inCart ? ColorManager.myBlack : null,
                                       text: token == "null" ? "تسجيل الدخول اولا" : inCart ? "ازالة من العربة" : "اضافة الي العربة",
                                       onPressed: () {

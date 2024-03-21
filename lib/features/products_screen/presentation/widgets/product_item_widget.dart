@@ -32,7 +32,7 @@ class ProductItem extends StatelessWidget {
           }else{
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text("تعذر ايجاد المنتج",style: TextStyle(color: ColorManager.myBlack),),
-              backgroundColor: ColorManager.myYellow,
+              backgroundColor: ColorManager.primary,
             ));
           }
         },
@@ -85,7 +85,7 @@ class ProductItem extends StatelessWidget {
                 child: Container(
                   width: 80,
                   height: 3,
-                  decoration: const BoxDecoration(color: Color(0xFFFBB710)),
+                  decoration: const BoxDecoration(color: ColorManager.primary),
                 ),
               ),
               Expanded(

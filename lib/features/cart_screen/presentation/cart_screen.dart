@@ -94,7 +94,7 @@ class CartScreen extends StatelessWidget {
                             child: Container(
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: ColorManager.myYellow.withOpacity(0.2),
+                            color: ColorManager.primary.withOpacity(0.2),
                           ),
                           height: 300,
                           width: 300,
@@ -654,7 +654,7 @@ class CartScreen extends StatelessWidget {
                                                                     .width /
                                                                 1440,
                                                             color: ColorManager
-                                                                .myYellow,
+                                                                .primary,
                                                             alignment: Alignment
                                                                 .center,
                                                             child: Padding(
@@ -813,7 +813,7 @@ class CartScreen extends StatelessWidget {
                                                               .width /
                                                           1440,
                                                       color: ColorManager
-                                                          .myYellow,
+                                                          .primary,
                                                       alignment: Alignment
                                                           .center,
                                                       child: Padding(

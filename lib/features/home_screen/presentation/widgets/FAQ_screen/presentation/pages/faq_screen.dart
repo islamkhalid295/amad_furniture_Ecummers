@@ -24,7 +24,7 @@ class FaqScreen extends StatelessWidget {
                 builder: (context, state) {
                   return Container(
                     decoration: BoxDecoration(
-                        color: ColorManager.myYellow.withOpacity(0.5),
+                        color: ColorManager.primary.withOpacity(0.5),
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(20),
                             topLeft: Radius.circular(20))),
@@ -77,13 +77,13 @@ class FaqScreen extends StatelessWidget {
                           Container(
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: ColorManager.myYellow.withOpacity(0.3),
+                                color: ColorManager.primary.withOpacity(0.3),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Icon(
                                   Icons.question_answer_outlined,
-                                  color: ColorManager.myYellow,
+                                  color: ColorManager.primary,
                                   size: 100 *
                                       MediaQuery.of(context).size.width /
                                       1000 *

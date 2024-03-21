@@ -128,7 +128,7 @@ bool flag = true;
                     ListTile(
                       title: const Text('الدفع عند الأستلام'),
                       leading: Radio<String>(
-          activeColor: ColorManager.myYellow,
+          activeColor: ColorManager.primary,
 
                         value: "cash",
                         groupValue: "cash",

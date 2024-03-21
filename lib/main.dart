@@ -479,11 +479,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routerConfig: _router,
       title: 'Cedage Store',
+
       theme: ThemeData(
         textTheme: Theme.of(context).textTheme.apply(
               fontFamily: 'Almarai',
             ),
-        colorScheme: ColorScheme.fromSeed(seedColor: ColorManager.myYellow),
+        colorScheme: ColorScheme.fromSeed(seedColor: ColorManager.primary),
         useMaterial3: true,
       ),
     );

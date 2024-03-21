@@ -36,7 +36,7 @@ final GestureTapCallback? onTap;
             padding: const EdgeInsets.only(top: 20,right: 10),
             child: Container(
               decoration: BoxDecoration(
-                color: ColorManager.myYellow,
+                color: ColorManager.primary.withOpacity(0.8),
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Padding(

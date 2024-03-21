@@ -44,13 +44,13 @@ class ContactUsScreen extends StatelessWidget {
                               Container(
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: ColorManager.myYellow.withOpacity(0.3),
+                                    color: ColorManager.primary.withOpacity(0.3),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Icon(
                                       Icons.contact_support_outlined,
-                                      color: ColorManager.myYellow,
+                                      color: ColorManager.primary,
                                       size: 100 *
                                           MediaQuery.of(context).size.width /
                                           1000 *
@@ -124,7 +124,7 @@ class ContactUsScreen extends StatelessWidget {
                       flex: 2,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: ColorManager.myYellow.withOpacity(0.5),
+                          color: ColorManager.primary.withOpacity(0.5),
                           borderRadius: BorderRadius.only(
                               bottomRight: Radius.circular(20),
                               topRight: Radius.circular(20)),
@@ -258,7 +258,8 @@ class ContactUsScreen extends StatelessWidget {
                       ),
                     ),
                   ],
-                ) : Column(
+                ) :
+                Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(30),
@@ -269,13 +270,13 @@ class ContactUsScreen extends StatelessWidget {
                             Container(
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: ColorManager.myYellow.withOpacity(0.3),
+                                  color: ColorManager.primary.withOpacity(0.3),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Icon(
                                     Icons.contact_support_outlined,
-                                    color: ColorManager.myYellow,
+                                    color: ColorManager.primary,
                                     size: 100 *
                                         MediaQuery.of(context).size.width /
                                         1000 *
@@ -336,135 +337,123 @@ class ContactUsScreen extends StatelessWidget {
                       flex: 2,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: ColorManager.myYellow.withOpacity(0.5),
-                          borderRadius: BorderRadius.only(
-                              bottomRight: Radius.circular(20),
-                              topRight: Radius.circular(20)),
-                        ),
+                          color: ColorManager.primary.withOpacity(0.5),
+                          borderRadius: const BorderRadius.all(
+                              Radius.circular(20),
+                        ),),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Form(
-                                key: ContactUsCubit.formKey,
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      DefaultTextFormField(
-                                        validator: ContactUsCubit.nameValidator,
-                                        controller: ContactUsCubit.nameController,
-                                        title: "الاسم",
-                                        hintText: "اسلام خالد",
-                                        icon: Icon(Icons.person_outline),
-                                      ),
-                                      DefaultTextFormField(
-                                        validator: ContactUsCubit.emailValidator,
-                                        controller:
-                                        ContactUsCubit.emailController,
-                                        title: "البريد الالكتروني",
-                                        hintText: "examble@gmail.com",
-                                        icon: Icon(Icons.email_outlined),
-                                      ),
-                                      DefaultTextFormField(
-                                        validator: ContactUsCubit.phoneValidator,
-                                        controller:
-                                        ContactUsCubit.phoneController,
-                                        title: "الهاتف",
-                                        hintText: "+201095843764",
-                                        icon: Icon(Icons.phone_enabled_outlined),
-                                      ),
-                                      DefaultTextFormField(
-                                        validator:
-                                        ContactUsCubit.messageValidator,
-                                        controller:
-                                        ContactUsCubit.messageController,
-                                        height: 200,
-                                        title: "تواصل معنا",
-                                        hintText: ".....",
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      state is SendContactUsError
-                                          ? Text(
-                                        state.error,
-                                        style: TextStyle(
-                                          color: Colors.red,
-                                        ),
-                                      )
-                                          : SizedBox(),
-                                      MaterialButton(
-                                        onPressed: () {
-                                          if (ContactUsCubit.formKey.currentState!
-                                              .validate()) {
-                                            cubit.sendContactUs(ContactUsModel(
-                                              email: ContactUsCubit
-                                                  .emailController.text,
-                                              name: ContactUsCubit
-                                                  .nameController.text,
-                                              number: ContactUsCubit
-                                                  .phoneController.text,
-                                              message: ContactUsCubit
-                                                  .messageController.text,
-                                            ));
-                                          }
-                                        },
-                                        color: ColorManager.myBlack,
-                                        minWidth: 140,
-                                        height: 55,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(25),
-                                            side: const BorderSide(
-                                                color: ColorManager.myBlack,
-                                                style: BorderStyle.solid)),
-                                        child: state is SendContactUsLoading
-                                            ? Center(
-                                            child: CircularProgressIndicator(
-                                              color: ColorManager.myWhite,
-                                            ))
-                                            : state is SendContactUsSuccsess
-                                            ? Icon(
-                                          Icons.done_outline_outlined,
-                                          color: ColorManager.myWhite,
-                                        )
-                                            : state is SendContactUsError
-                                            ? Icon(
-                                          Icons.refresh,
-                                          color: Colors.red,
-                                        )
-                                            : Text(
-                                          'ارسال',
-                                          textAlign:
-                                          TextAlign.center,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 17.59,
-                                            fontFamily: 'Almarai',
-                                            fontWeight:
-                                            FontWeight.w700,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                          child: Form(
+                            key: ContactUsCubit.formKey,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  DefaultTextFormField(
+                                    width: 200,
+                                    validator: ContactUsCubit.nameValidator,
+                                    controller: ContactUsCubit.nameController,
+                                    title: "الاسم",
+                                    hintText: "اسلام خالد",
+                                    icon: Icon(Icons.person_outline),
                                   ),
-                                ),
+                                  DefaultTextFormField(
+                                    width: 200,
+                                    validator: ContactUsCubit.emailValidator,
+                                    controller:
+                                    ContactUsCubit.emailController,
+                                    title: "البريد الالكتروني",
+                                    hintText: "examble@gmail.com",
+                                    icon: Icon(Icons.email_outlined),
+                                  ),
+                                  DefaultTextFormField(
+                                    width: 200,
+                                    validator: ContactUsCubit.phoneValidator,
+                                    controller:
+                                    ContactUsCubit.phoneController,
+                                    title: "الهاتف",
+                                    hintText: "+201095843764",
+                                    icon: Icon(Icons.phone_enabled_outlined),
+                                  ),
+                                  DefaultTextFormField(
+                                    width: 200,
+                                    validator:
+                                    ContactUsCubit.messageValidator,
+                                    controller:
+                                    ContactUsCubit.messageController,
+                                    height: 200,
+                                    title: "تواصل معنا",
+                                    hintText: ".....",
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  state is SendContactUsError
+                                      ? Text(
+                                    state.error,
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                    ),
+                                  )
+                                      : SizedBox(),
+                                  MaterialButton(
+                                    onPressed: () {
+                                      if (ContactUsCubit.formKey.currentState!
+                                          .validate()) {
+                                        cubit.sendContactUs(ContactUsModel(
+                                          email: ContactUsCubit
+                                              .emailController.text,
+                                          name: ContactUsCubit
+                                              .nameController.text,
+                                          number: ContactUsCubit
+                                              .phoneController.text,
+                                          message: ContactUsCubit
+                                              .messageController.text,
+                                        ));
+                                      }
+                                    },
+                                    color: ColorManager.myBlack,
+                                    minWidth: 140,
+                                    height: 55,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(25),
+                                        side: const BorderSide(
+                                            color: ColorManager.myBlack,
+                                            style: BorderStyle.solid)),
+                                    child: state is SendContactUsLoading
+                                        ? Center(
+                                        child: CircularProgressIndicator(
+                                          color: ColorManager.myWhite,
+                                        ))
+                                        : state is SendContactUsSuccsess
+                                        ? Icon(
+                                      Icons.done_outline_outlined,
+                                      color: ColorManager.myWhite,
+                                    )
+                                        : state is SendContactUsError
+                                        ? Icon(
+                                      Icons.refresh,
+                                      color: Colors.red,
+                                    )
+                                        : Text(
+                                      'ارسال',
+                                      textAlign:
+                                      TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17.59,
+                                        fontFamily: 'Almarai',
+                                        fontWeight:
+                                        FontWeight.w700,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              MediaQuery.of(context).size.width > 1000
-                                  ? SvgPicture.asset(
-                                "assets/images/contact_us.svg",
-                                height: 500 *
-                                    MediaQuery.of(context).size.width /
-                                    1440,
-                                width: 500 *
-                                    MediaQuery.of(context).size.width /
-                                    1440,
-                              )
-                                  : Container(),
-                            ],
+                            ),
                           ),
                         ),
                       ),

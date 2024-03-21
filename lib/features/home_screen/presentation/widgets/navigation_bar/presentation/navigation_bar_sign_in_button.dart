@@ -29,7 +29,7 @@ class NavigationBarSignInButton extends StatelessWidget {
               offset: Offset(50, 5),
               child: Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: ColorManager.myYellow),
+                    border: Border.all(color: ColorManager.primary),
                     borderRadius: BorderRadius.circular(10)),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

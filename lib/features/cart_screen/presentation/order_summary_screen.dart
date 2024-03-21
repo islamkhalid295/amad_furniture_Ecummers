@@ -418,7 +418,7 @@ class OrderSummaryScreen extends StatelessWidget {
                               if(value == 'done'){
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                                   content: Text("تم ارسال الطلب بنجاح",style: TextStyle(color: ColorManager.myBlack),),
-                                  backgroundColor: ColorManager.myYellow,
+                                  backgroundColor: ColorManager.primary,
                                 ));
                               }
                             });

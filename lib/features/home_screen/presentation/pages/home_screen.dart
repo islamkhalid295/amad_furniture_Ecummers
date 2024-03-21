@@ -88,43 +88,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             backgroundColor: ColorManager.myWhite,
             leading: Padding(
               padding: EdgeInsets.only(
-                  right: (90 * MediaQuery.of(context).size.width / 1440)),
-              child: BlocBuilder<BasicDataCubit, BasicDataState>(
-                builder: (context, state) {
-                  return state is GetBasicDataLoading
-                      ? Container(
-                    child: Center(
-                      child: SizedBox(
-                        child: Shimmer.fromColors(
-                          baseColor: Colors.grey,
-                          highlightColor: Colors.yellow,
-                          child: Container(child: Icon(Icons.image_search)),
-                        ),
-                      ),
-                    ),
-                  )
-                      : CachedNetworkImage(
-                    imageUrl:
-                    /*"https://eaglespiritgourmet.com/wp-content/uploads/2023/12/minimalist-olive-oil-bottle-glass-600x600.webp"*/ BasicDataCubit
-                        .basicDataModel!.logo?? "",
-                    placeholder: (context, url) =>
-                        SizedBox(
-                          child: Shimmer.fromColors(
-                            baseColor: Colors.grey,
-                            highlightColor: Colors.yellow,
-                            child: Container(child: Icon(Icons.image_search)),
-                          ),
-                        ),
-                    errorWidget: (context, url, error) {
-                      return const Icon(Icons.error);
-                    },
-                    // fit: BoxFit.cover,
-                    height: productItemImageHeight,
-                    width: 200,
-                    alignment: Alignment.center,
-                  );
-                },
-              ),
+                  right: (50 * MediaQuery.of(context).size.width / 1440),bottom: 5,top: 5),
+              child: Image.asset(AssetsManager.camponyLogo),
             ),
             leadingWidth: MediaQuery.of(context).size.width < 800
                 ? 200 * MediaQuery.of(context).size.width / 800
@@ -143,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 _onSectionChange(index);
               },
               tabs: HomeScreenCubit.tabBarTabs,
-              indicatorColor: ColorManager.myYellow,
+              indicatorColor: ColorManager.primary,
               labelStyle: TextStyle(
                 color: Colors.black,
                 fontSize: 16 * MediaQuery.of(context).size.width / 1000,
