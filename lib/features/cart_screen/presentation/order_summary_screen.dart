@@ -11,7 +11,7 @@ import '../../Authantication/presentation/manager/authantication_cubit.dart';
 import '../data/models/order_the_cart_model.dart';
 
 class OrderSummaryScreen extends StatelessWidget {
-  OrderSummaryScreen(
+  const OrderSummaryScreen(
       {super.key, required this.name,
       // required this.secondName,
       required this.phone,
@@ -22,15 +22,15 @@ class OrderSummaryScreen extends StatelessWidget {
       required this.city,
         required this.delivery});
 
-  String name;
   // String secondName;
-  String phone;
-  String anotherPhone;
-  String email;
-  String landmark;
-  String address;
-  String delivery;
-  String city;
+  final String name;
+  final String phone;
+  final String anotherPhone;
+  final String email;
+  final String landmark;
+  final String address;
+  final String delivery;
+  final String city;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class OrderSummaryScreen extends StatelessWidget {
       appBar: const DefaultAppBar(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 65, vertical: 30),
+          padding:  EdgeInsets.symmetric(horizontal: 65 * MediaQuery.sizeOf(context).width / 1440, vertical: 30),
           child: BlocBuilder<CartCubit, CartState>(
             builder: (context, state) {
 
@@ -64,16 +64,16 @@ class OrderSummaryScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 30),
+                    padding:  EdgeInsets.symmetric(
+                        horizontal: 10* MediaQuery.sizeOf(context).width / 1440),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadiusDirectional.circular(12),
                         color: ColorManager.orderBackgroundColor,
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 40, vertical: 25),
+                        padding:  EdgeInsets.symmetric(
+                            horizontal: 40 * MediaQuery.sizeOf(context).width / 1440, vertical: 25),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -102,7 +102,7 @@ class OrderSummaryScreen extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                DefaultSelectableText(
+                                const DefaultSelectableText(
                                   'الاسم',
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
@@ -112,18 +112,18 @@ class OrderSummaryScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 DefaultSelectableText(
                                   name ,
-                                  style: TextStyle(fontSize: 18),
+                                  style: const TextStyle(fontSize: 18),
                                 ),
                               ],
                             ),
                             Row(
                               children: [
-                                DefaultSelectableText(
+                                const DefaultSelectableText(
                                   'ارقام الهاتف',
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
@@ -133,30 +133,30 @@ class OrderSummaryScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 Directionality(
                                   textDirection: TextDirection.ltr,
                                   child: DefaultSelectableText(
                                     phone ,
-                                    style: TextStyle(fontSize: 18),
+                                    style: const TextStyle(fontSize: 18),
                                   ),
                                 ),
                                 anotherPhone != "_"
                                     ? Directionality(
                                       textDirection: TextDirection.ltr,
                                       child: DefaultSelectableText(
-                                          anotherPhone+ ' ,',
-                                          style: TextStyle(fontSize: 18),
+                                          '$anotherPhone ,',
+                                          style: const TextStyle(fontSize: 18),
                                         ),
                                     )
-                                    : SizedBox(),
+                                    : const SizedBox(),
                               ],
                             ),
                             Row(
                               children: [
-                                DefaultSelectableText(
+                                const DefaultSelectableText(
                                   'المحافظة',
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
@@ -166,18 +166,18 @@ class OrderSummaryScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 DefaultSelectableText(
                                   city,
-                                  style: TextStyle(fontSize: 18),
+                                  style: const TextStyle(fontSize: 18),
                                 ),
                               ],
                             ),
                             Row(
                               children: [
-                                DefaultSelectableText(
+                                const DefaultSelectableText(
                                   'العنوان',
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
@@ -187,18 +187,18 @@ class OrderSummaryScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 DefaultSelectableText(
                                   address,
-                                  style: TextStyle(fontSize: 18),
+                                  style: const TextStyle(fontSize: 18),
                                 ),
                               ],
                             ),
                             Row(
                               children: [
-                                DefaultSelectableText(
+                                const DefaultSelectableText(
                                   'اقرب غلمة مميزة',
                                   textAlign: TextAlign.right,
                                   style: TextStyle(
@@ -208,12 +208,12 @@ class OrderSummaryScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 DefaultSelectableText(
                                   landmark,
-                                  style: TextStyle(fontSize: 18),
+                                  style: const TextStyle(fontSize: 18),
                                 ),
                               ],
                             ),
@@ -241,7 +241,7 @@ class OrderSummaryScreen extends StatelessWidget {
                               ),
                             ),
                             state is GetCartLoading
-                                ? Center(
+                                ? const Center(
                                     child: CircularProgressIndicator(),
                                   )
                                 : state is GetCartError
@@ -292,7 +292,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Row(children: [
-                                  DefaultSelectableText(
+                                  const DefaultSelectableText(
                                     'المبلغ الاجمالي ',
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
@@ -307,7 +307,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                     child: DefaultSelectableText(
                                       (CartCubit.cartModel?.cart?.totalPrice!
                                           .toStringAsFixed(2))??"" ,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
                                         fontFamily: 'Almarai',
@@ -317,7 +317,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                   ),
                                 ]),
                                 CartCubit.cartModel?.cart?.sellerPromocode?.promocode != "" || CartCubit.cartModel?.cart?.clientPromocode?.promocode != "" ? Row(children: [
-                                  DefaultSelectableText(
+                                  const DefaultSelectableText(
                                     'المبلغ الاجمالي بعد الخصم ',
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
@@ -333,7 +333,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                       ((CartCubit.cartModel?.cart
                                           ?.totalPriceAfterPromocodes)
                                           ??0).toStringAsFixed(2),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
                                         fontFamily: 'Almarai',
@@ -341,9 +341,9 @@ class OrderSummaryScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                ]):SizedBox(),
+                                ]):const SizedBox(),
                                 Row(children: [
-                                  DefaultSelectableText(
+                                  const DefaultSelectableText(
                                     'التوصيل ',
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
@@ -357,7 +357,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                     textDirection: TextDirection.ltr,
                                     child: DefaultSelectableText(
                                       delivery ,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
                                         fontFamily: 'Almarai',
@@ -367,7 +367,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                   ),
                                 ]),
                                 Row(children: [
-                                  DefaultSelectableText(
+                                  const DefaultSelectableText(
                                     'المبلغ النهائي ',
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
@@ -381,7 +381,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                     textDirection: TextDirection.ltr,
                                     child: DefaultSelectableText(
                                       (((CartCubit.cartModel?.cart?.totalPriceAfterPromocodes)??0) + double.parse(delivery)).toStringAsFixed(2),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
                                         fontFamily: 'Almarai',
@@ -391,7 +391,7 @@ class OrderSummaryScreen extends StatelessWidget {
                                   ),
                                 ]),
                               ],
-                            ) : SizedBox(),
+                            ) : const SizedBox(),
 
 
 

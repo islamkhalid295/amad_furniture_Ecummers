@@ -6,6 +6,7 @@ import 'package:cedage/features/Authantication/domain/use_cases/get_user_uc.dart
 import 'package:cedage/features/Authantication/domain/use_cases/login_uc.dart';
 import 'package:cedage/features/Authantication/domain/use_cases/verify_forget_password_uc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -77,8 +78,8 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
   static FormFieldValidator<String> phoneValidator = (value) {
     if (value!.isEmpty) {
       return 'يجب ادخال رقم الهاتف';
-    } else if (!RegExp(r'^\+\d{1,4}\d{6,}$').hasMatch(value)) {
-      return '+يرجي ادخال كود الدولة متبوعاً برقم الهاتف ..2011522';
+    } else if (!RegExp(r"^0(10|11|12|15)[0-9]{8}$").hasMatch(value)) {
+      return 'يرجي ادخال رقم هاتف صالح';
     } else {
       return null;
     }
@@ -125,7 +126,9 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
       message = await createAccountUC.call(createAccountModel);
       emit(CreateAccountSuccsess());
     } on DioException catch (e) {
-      print("error : ${e.response?.data["message"]}");
+      if (kDebugMode) {
+        print("error : ${e.response?.data["message"]}");
+      }
       emit(CreateAccountError(error: e.response?.data["message"]));
     }
   }
@@ -140,7 +143,9 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
       passwordController.text="";
       context.go(RoutesManager.homeScreen);
     } on DioException catch (e) {
-      print("error : ${e.response?.data["message"]}");
+      if (kDebugMode) {
+        print("error : ${e.response?.data["message"]}");
+      }
       emit(LoginError(error: e.response?.data["message"]));
     }
   }
@@ -148,10 +153,14 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
   void forgetPassword(String email) async {
     emit(ForgetPasswordLoading());
     try {
-      print(await forgetPasswordUC.call(email));
+      if (kDebugMode) {
+        print(await forgetPasswordUC.call(email));
+      }
       emit(ForgetPasswordSuccsess());
     } on DioException catch (e) {
-      print("error : ${e.response?.data["message"]}");
+      if (kDebugMode) {
+        print("error : ${e.response?.data["message"]}");
+      }
       emit(ForgetPasswordError(error: e.response?.data["message"]));
     }
   }
@@ -159,10 +168,14 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
   void verifyForgetPassword(VerifyForgetPasswordModel model) async {
     emit(VerifyForgetPasswordLoading());
     try {
-      print(await verifyForgetPasswordUC.call(model));
+      if (kDebugMode) {
+        print(await verifyForgetPasswordUC.call(model));
+      }
       emit(VerifyForgetPasswordSuccsess());
     } on DioException catch (e) {
-      print("error : ${e.response?.data["message"]}");
+      if (kDebugMode) {
+        print("error : ${e.response?.data["message"]}");
+      }
       emit(VerifyForgetPasswordError(error: e.response?.data["message"]));
     }
   }

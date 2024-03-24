@@ -3,6 +3,7 @@ import 'package:cedage/features/cart_screen/data/models/cart_model.dart';
 import 'package:cedage/features/cart_screen/data/models/product_amount_model.dart';
 import 'package:cedage/features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
 import 'package:flexi_productimage_slider/flexi_productimage_slider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery_zoom_slides/gallery_zoom_slides.dart';
@@ -18,9 +19,9 @@ import '../../cart_screen/presentation/manager/cart_cubit.dart';
 class ProductScreen extends StatelessWidget {
   // bool inCart = CartCubit.cart?.contains(CategoriesCubit.productInfo) ?? false;
 
-TextEditingController amountController = TextEditingController(text: "1");
-String productId;
-bool inCart= false;
+  final TextEditingController amountController = TextEditingController(text: "1");
+  final String productId;
+   bool inCart= false;
 
   // List<String> arrayImages = const [
   //   "https://i.ibb.co/ZLFHX3F/1.png",
@@ -30,7 +31,7 @@ bool inCart= false;
   //   "https://i.ibb.co/7RWNCXH/5.png",
   //   "https://i.ibb.co/bBsh5Pm/6.png",
   // ];
-  List<String> arrayImages =
+  final List<String> arrayImages =
       List<String>.from(CategoriesCubit.productInfo?.imageUrls ??
           [
             "https://i.ibb.co/ZLFHX3F/1.png",
@@ -134,8 +135,7 @@ bool inCart= false;
                                         ?.discount ??
                                         "0") <=
                                         0
-                                        ? "ج.م" +
-                                        "${CategoriesCubit.productInfo?.price}"
+                                        ? "ج.م" "${CategoriesCubit.productInfo?.price}"
                                         : "${(double.parse(CategoriesCubit.productInfo?.price ?? "0") - double.parse(CategoriesCubit.productInfo?.discount ?? "0") * double.parse(CategoriesCubit.productInfo?.price ?? "0")).toStringAsFixed(2)} ج.م"),
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
@@ -305,18 +305,24 @@ bool inCart= false;
                                                   productAmountModel: ProductAmountModel(
                                                       id: CategoriesCubit.productInfo!.id,
                                                       amount: int.parse(amountController.text)));
-                                              print(CartCubit.cart?.length);
+                                              if (kDebugMode) {
+                                                print(CartCubit.cart?.length);
+                                              }
                                   
                                               // inCart = !inCart;
                                             } else if (inCart) {
-                                              print("remove");
+                                              if (kDebugMode) {
+                                                print("remove");
+                                              }
                                               // inCart = !inCart;
                                               cartCubit.deleteAmountOfProductFromCart(
                                                   productAmountModel: ProductAmountModel(
                                                       id: CategoriesCubit.productInfo!.id,
                                                       amount: CartCubit.cartModel?.cart?.products?.firstWhere((element) => element.id == productId).amount));
                                             }
-                                          } else context.go(RoutesManager.loginScreen);
+                                          } else {
+                                            context.go(RoutesManager.loginScreen);
+                                          }
                                         },
                                         lodingCondition: state is AddAmountOfProductToCartLoading || state is DeleteAmountOfProductToCartLoading || state is GetCartLoading,
                                         errorCondition: state is AddAmountOfProductToCartError || state is DeleteAmountOfProductToCartError || state is GetCartLoading,
@@ -328,7 +334,10 @@ bool inCart= false;
                             ),
                           ],
                         ) : const SizedBox(),
-                        Padding(
+                        if (CategoriesCubit
+                            .productInfo!.wholesaleOffers![0] != "")...
+                        [
+                          Padding(
                           padding:
                           const EdgeInsets.symmetric(vertical: 35),
                           child: Container(
@@ -362,7 +371,7 @@ bool inCart= false;
                             ))
                                 .toList(),
                           ),
-                        ),
+                        ),],
                         Padding(
                           padding:
                           const EdgeInsets.symmetric(vertical: 35),
@@ -380,11 +389,12 @@ bool inCart= false;
                             ),
                           ),
                         ),
-                        const SizedBox(
+                         SizedBox(
                           child: Text(
-                            'هو عبارة عن دهن سائل غني بالأحماض الدهنية الأحادية غير المشبعة التي تمنحنا فوائد زيت الزيتون المتنوعة، ويتم استخلاصه من ثمرة الزيتون، حيث يتم الحصول على الزيت عن طريق عصرالزيتون الكامل. ويختلف تكوين زيت الزيتون باختلاف صنف الزيتون الذي يتم استخلاصه ',
+                            CategoriesCubit
+                                .productInfo?.description ?? "",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontFamily: 'Almarai',
@@ -438,7 +448,9 @@ bool inCart= false;
 
                       //make you action when user click on image
                       onTap: (index) {
-                        print("selected index : $index");
+                        if (kDebugMode) {
+                          print("selected index : $index");
+                        }
 
                         //for zooming effect on click
                         Navigator.push(
@@ -541,7 +553,9 @@ bool inCart= false;
 
                       //make you action when user click on image
                       onTap: (index) {
-                        print("selected index : $index");
+                        if (kDebugMode) {
+                          print("selected index : $index");
+                        }
 
                         //for zooming effect on click
                         Navigator.push(
@@ -605,8 +619,7 @@ bool inCart= false;
                                       ?.discount ??
                                       "0") <=
                                       0
-                                      ? "ج.م" +
-                                      "${CategoriesCubit.productInfo?.price}"
+                                      ? "ج.م" "${CategoriesCubit.productInfo?.price}"
                                       : "${(double.parse(CategoriesCubit.productInfo?.price ?? "0") - double.parse(CategoriesCubit.productInfo?.discount ?? "0") * double.parse(CategoriesCubit.productInfo?.price ?? "0")).toStringAsFixed(2)} ج.م"),
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
@@ -776,18 +789,24 @@ bool inCart= false;
                                                 productAmountModel: ProductAmountModel(
                                                     id: CategoriesCubit.productInfo!.id,
                                                     amount: int.parse(amountController.text)));
-                                            print(CartCubit.cart?.length);
+                                            if (kDebugMode) {
+                                              print(CartCubit.cart?.length);
+                                            }
 
                                             // inCart = !inCart;
                                           } else if (inCart) {
-                                            print("remove");
+                                            if (kDebugMode) {
+                                              print("remove");
+                                            }
                                             // inCart = !inCart;
                                             cartCubit.deleteAmountOfProductFromCart(
                                                 productAmountModel: ProductAmountModel(
                                                     id: CategoriesCubit.productInfo!.id,
                                                     amount: CartCubit.cartModel?.cart?.products?.firstWhere((element) => element.id == productId).amount));
                                           }
-                                        } else context.go(RoutesManager.loginScreen);
+                                        } else {
+                                          context.go(RoutesManager.loginScreen);
+                                        }
                                       },
                                       lodingCondition: state is AddAmountOfProductToCartLoading || state is DeleteAmountOfProductToCartLoading || state is GetCartLoading,
                                       errorCondition: state is AddAmountOfProductToCartError || state is DeleteAmountOfProductToCartError || state is GetCartLoading,

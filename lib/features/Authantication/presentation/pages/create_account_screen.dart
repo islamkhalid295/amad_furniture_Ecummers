@@ -181,8 +181,7 @@ class CreateAccountScreen extends StatelessWidget {
                                                       .emailController.text,
                                                   name: AuthanticationCubit
                                                       .firstNameController.text + " " + AuthanticationCubit.secondNameController.text,
-                                                  number: AuthanticationCubit
-                                                      .phoneController.text,
+                                                  number: "+2${AuthanticationCubit.phoneController.text}",
                                                   password: AuthanticationCubit
                                                       .passwordController.text));
                                             }

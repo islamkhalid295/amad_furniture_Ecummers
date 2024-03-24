@@ -94,7 +94,7 @@ class ContactUsScreen extends StatelessWidget {
                                     width: 40,
                                     height: 40,
                                   ),
-                                  FittedBox(
+                                  const FittedBox(
                                     child: Text(
                                       'وتساب',
                                       textAlign: TextAlign.center,
@@ -106,11 +106,11 @@ class ContactUsScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(width: 10,)
+                                  const SizedBox(width: 10,)
                                 ],
                               ),
                                 minWidth: 100,
-                                color: Color(0xff2da539),
+                                color: const Color(0xff2da539),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -125,7 +125,7 @@ class ContactUsScreen extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           color: ColorManager.primary.withOpacity(0.5),
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                               bottomRight: Radius.circular(20),
                               topRight: Radius.circular(20)),
                         ),
@@ -146,7 +146,7 @@ class ContactUsScreen extends StatelessWidget {
                                         controller: ContactUsCubit.nameController,
                                         title: "الاسم",
                                         hintText: "اسلام خالد",
-                                        icon: Icon(Icons.person_outline),
+                                        icon: const Icon(Icons.person_outline),
                                       ),
                                       DefaultTextFormField(
                                         validator: ContactUsCubit.emailValidator,
@@ -154,7 +154,7 @@ class ContactUsScreen extends StatelessWidget {
                                             ContactUsCubit.emailController,
                                         title: "البريد الالكتروني",
                                         hintText: "examble@gmail.com",
-                                        icon: Icon(Icons.email_outlined),
+                                        icon: const Icon(Icons.email_outlined),
                                       ),
                                       DefaultTextFormField(
                                         validator: ContactUsCubit.phoneValidator,
@@ -162,7 +162,7 @@ class ContactUsScreen extends StatelessWidget {
                                             ContactUsCubit.phoneController,
                                         title: "الهاتف",
                                         hintText: "+201095843764",
-                                        icon: Icon(Icons.phone_enabled_outlined),
+                                        icon: const Icon(Icons.phone_enabled_outlined),
                                       ),
                                       DefaultTextFormField(
                                         validator:
@@ -173,17 +173,17 @@ class ContactUsScreen extends StatelessWidget {
                                         title: "تواصل معنا",
                                         hintText: ".....",
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       ),
                                       state is SendContactUsError
                                           ? Text(
                                               state.error,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 color: Colors.red,
                                               ),
                                             )
-                                          : SizedBox(),
+                                          : const SizedBox(),
                                       MaterialButton(
                                         onPressed: () {
                                           if (ContactUsCubit.formKey.currentState!
@@ -210,21 +210,21 @@ class ContactUsScreen extends StatelessWidget {
                                                 color: ColorManager.myBlack,
                                                 style: BorderStyle.solid)),
                                         child: state is SendContactUsLoading
-                                            ? Center(
+                                            ? const Center(
                                                 child: CircularProgressIndicator(
                                                 color: ColorManager.myWhite,
                                               ))
                                             : state is SendContactUsSuccsess
-                                                ? Icon(
+                                                ? const Icon(
                                                     Icons.done_outline_outlined,
                                                     color: ColorManager.myWhite,
                                                   )
                                                 : state is SendContactUsError
-                                                    ? Icon(
+                                                    ? const Icon(
                                                         Icons.refresh,
                                                         color: Colors.red,
                                                       )
-                                                    : Text(
+                                                    : const Text(
                                                         'ارسال',
                                                         textAlign:
                                                             TextAlign.center,
@@ -243,13 +243,15 @@ class ContactUsScreen extends StatelessWidget {
                               ),
                               MediaQuery.of(context).size.width > 1000
                                   ? SvgPicture.asset(
-                                      "assets/images/contact_us.svg",
+                                fit: BoxFit.cover,
+                                      "assets/images/Chat-amico.svg",
                                       height: 500 *
                                           MediaQuery.of(context).size.width /
                                           1440,
-                                      width: 500 *
+                                      width: 200 *
                                           MediaQuery.of(context).size.width /
                                           1440,
+
                                     )
                                   : Container(),
                             ],
@@ -261,80 +263,74 @@ class ContactUsScreen extends StatelessWidget {
                 ) :
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(30),
-                      child: SingleChildScrollView(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: ColorManager.primary.withOpacity(0.3),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.contact_support_outlined,
-                                    color: ColorManager.primary,
-                                    size: 100 *
-                                        MediaQuery.of(context).size.width /
-                                        1000 *
-                                        MediaQuery.of(context).size.height /
-                                        900,
-                                  ),
-                                )),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 30),
-                              child: SelectableText("تواصل معنا",
-                                  style: TextStyle(
-                                      fontSize: MediaQuery.of(context).size.width >600 ?
-                                      40 * MediaQuery.of(context).size.width / 1440 : 40 * MediaQuery.of(context).size.width / 700,
-                                      fontWeight: FontWeight.w500)),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: ColorManager.primary.withOpacity(0.3),
                             ),
-                            SizedBox(width: 30,),
-                            MaterialButton(onPressed: () {
-                              /* await launchUrl(Uri.parse('https://wa.me/+201091832829'));*/
-                              html.window.open(
-                                  'https://wa.me/${BasicDataCubit.basicDataModel?.callUs?.number}',
-                                  '_blank');
-                            },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Image.asset(
-                                    AssetsManager.whatsappIcon,
-                                    fit: BoxFit.cover,
-                                    width: 40,
-                                    height: 40,
-                                  ),
-                                  FittedBox(
-                                    child: Text(
-                                      'وتساب',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: ColorManager.myWhite,
-                                        fontSize: 17.59,
-                                        fontFamily: 'Almarai',
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 10,)
-                                ],
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Icon(
+                                Icons.contact_support_outlined,
+                                color: ColorManager.primary,
+                                size: 100 *
+                                    MediaQuery.of(context).size.width /
+                                    1000 *
+                                    MediaQuery.of(context).size.height /
+                                    900,
                               ),
-                              minWidth: 100,
-                              color: Color(0xff2da539),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
-                          ],
+                            )),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          child: SelectableText("تواصل معنا",
+                              style: TextStyle(
+                                  fontSize: MediaQuery.of(context).size.width >600 ?
+                                  40 * MediaQuery.of(context).size.width / 1440 : 40 * MediaQuery.of(context).size.width / 700,
+                                  fontWeight: FontWeight.w500)),
                         ),
-                      ),
+                        const SizedBox(width: 30,),
+                        MaterialButton(onPressed: () {
+                          /* await launchUrl(Uri.parse('https://wa.me/+201091832829'));*/
+                          html.window.open(
+                              'https://wa.me/${BasicDataCubit.basicDataModel?.callUs?.number}',
+                              '_blank');
+                        },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Image.asset(
+                                AssetsManager.whatsappIcon,
+                                fit: BoxFit.cover,
+                                width: 40,
+                                height: 40,
+                              ),
+                              const FittedBox(
+                                child: Text(
+                                  'وتساب',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: ColorManager.myWhite,
+                                    fontSize: 17.59,
+                                    fontFamily: 'Almarai',
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10,)
+                            ],
+                          ),
+                          minWidth: 100,
+                          color: const Color(0xff2da539),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ],
                     ),
                     Expanded(
-                      flex: 2,
                       child: Container(
                         decoration: BoxDecoration(
                           color: ColorManager.primary.withOpacity(0.5),
@@ -357,7 +353,7 @@ class ContactUsScreen extends StatelessWidget {
                                     controller: ContactUsCubit.nameController,
                                     title: "الاسم",
                                     hintText: "اسلام خالد",
-                                    icon: Icon(Icons.person_outline),
+                                    icon: const Icon(Icons.person_outline),
                                   ),
                                   DefaultTextFormField(
                                     width: 200,
@@ -366,7 +362,7 @@ class ContactUsScreen extends StatelessWidget {
                                     ContactUsCubit.emailController,
                                     title: "البريد الالكتروني",
                                     hintText: "examble@gmail.com",
-                                    icon: Icon(Icons.email_outlined),
+                                    icon: const Icon(Icons.email_outlined),
                                   ),
                                   DefaultTextFormField(
                                     width: 200,
@@ -375,7 +371,7 @@ class ContactUsScreen extends StatelessWidget {
                                     ContactUsCubit.phoneController,
                                     title: "الهاتف",
                                     hintText: "+201095843764",
-                                    icon: Icon(Icons.phone_enabled_outlined),
+                                    icon: const Icon(Icons.phone_enabled_outlined),
                                   ),
                                   DefaultTextFormField(
                                     width: 200,
@@ -383,21 +379,21 @@ class ContactUsScreen extends StatelessWidget {
                                     ContactUsCubit.messageValidator,
                                     controller:
                                     ContactUsCubit.messageController,
-                                    height: 200,
+                                    height: 150,
                                     title: "تواصل معنا",
                                     hintText: ".....",
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   state is SendContactUsError
                                       ? Text(
                                     state.error,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.red,
                                     ),
                                   )
-                                      : SizedBox(),
+                                      : const SizedBox(),
                                   MaterialButton(
                                     onPressed: () {
                                       if (ContactUsCubit.formKey.currentState!
@@ -424,21 +420,21 @@ class ContactUsScreen extends StatelessWidget {
                                             color: ColorManager.myBlack,
                                             style: BorderStyle.solid)),
                                     child: state is SendContactUsLoading
-                                        ? Center(
+                                        ? const Center(
                                         child: CircularProgressIndicator(
                                           color: ColorManager.myWhite,
                                         ))
                                         : state is SendContactUsSuccsess
-                                        ? Icon(
+                                        ? const Icon(
                                       Icons.done_outline_outlined,
                                       color: ColorManager.myWhite,
                                     )
                                         : state is SendContactUsError
-                                        ? Icon(
+                                        ? const Icon(
                                       Icons.refresh,
                                       color: Colors.red,
                                     )
-                                        : Text(
+                                        : const Text(
                                       'ارسال',
                                       textAlign:
                                       TextAlign.center,
@@ -478,14 +474,14 @@ class ContactUsScreen extends StatelessWidget {
                             return Row(
                               children: [
                                 state is GetBasicDataLoading
-                                    ? Center(
+                                    ? const Center(
                                         child: CircularProgressIndicator(),
                                       )
                                     : Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          DefaultSelectableText(
+                                          const DefaultSelectableText(
                                             'اتصل بنا',
                                             style: TextStyle(
                                               color: Colors.black,
@@ -494,10 +490,10 @@ class ContactUsScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w400,
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 10,
                                           ),
-                                          DefaultSelectableText(
+                                          const DefaultSelectableText(
                                             'البريد الالكتروني',
                                             style: TextStyle(
                                               color: Color(0xFF848484),
@@ -513,17 +509,17 @@ class ContactUsScreen extends StatelessWidget {
                                                         ?.callUs?.email ??
                                                     " "
                                                 : " ",
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Color(0xFF848484),
                                               fontSize: 18,
                                               fontFamily: 'Inter',
                                               fontWeight: FontWeight.w400,
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 8,
                                           ),
-                                          DefaultSelectableText(
+                                          const DefaultSelectableText(
                                             'رقم الجوال',
                                             style: TextStyle(
                                               color: Color(0xFF848484),
@@ -538,7 +534,7 @@ class ContactUsScreen extends StatelessWidget {
                                                         ?.callUs?.number ??
                                                     " "
                                                 : " ",
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               color: Color(0xFF848484),
                                               fontSize: 16,
                                               fontWeight: FontWeight.w400,
@@ -548,18 +544,18 @@ class ContactUsScreen extends StatelessWidget {
                                       ),
                                 state is GetBasicDataLoading
                                     ? Expanded(
-                                        child: Container(
-                                          child: Center(
-                                            child: CircularProgressIndicator(),
-                                          ),
+                                        child: const Center(
+                                          child: CircularProgressIndicator(),
                                         ),
                                       )
                                     : Expanded(
                                         child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: BasicDataCubit
                                               .basicDataModel!.socialmedia!
                                               .map(
-                                                (e) => Padding(
+                                                (e) => e.logo == '' ? const SizedBox():Padding(
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: InkWell(
@@ -594,13 +590,11 @@ class ContactUsScreen extends StatelessWidget {
                                                 ),
                                               )
                                               .toList(),
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
                                         ),
                                       ),
                                 Container(
-                                  height: 68,
-                                  width: 164,
+                                  height: 120,
+                                  width: 300,
                                   child: Image.asset(
                                     AssetsManager.camponyLogo,
                                   ),
@@ -615,14 +609,14 @@ class ContactUsScreen extends StatelessWidget {
                               child: Column(
                                 children: [
                                   state is GetBasicDataLoading
-                                      ? Center(
+                                      ? const Center(
                                     child: CircularProgressIndicator(),
                                   )
                                       : Column(
                                     crossAxisAlignment:
                                     CrossAxisAlignment.start,
                                     children: [
-                                      DefaultSelectableText(
+                                      const DefaultSelectableText(
                                         'اتصل بنا',
                                         style: TextStyle(
                                           color: Colors.black,
@@ -631,10 +625,10 @@ class ContactUsScreen extends StatelessWidget {
                                           fontWeight: FontWeight.w400,
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       ),
-                                      DefaultSelectableText(
+                                      const DefaultSelectableText(
                                         'البريد الالكتروني',
                                         style: TextStyle(
                                           color: Color(0xFF848484),
@@ -650,16 +644,16 @@ class ContactUsScreen extends StatelessWidget {
                                             ?.callUs?.email ??
                                             " "
                                             : " ",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Color(0xFF848484),
                                           fontSize: 18,
                                           fontWeight: FontWeight.w400,
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 8,
                                       ),
-                                      DefaultSelectableText(
+                                      const DefaultSelectableText(
                                         'رقم الجوال',
                                         style: TextStyle(
                                           color: Color(0xFF848484),
@@ -674,7 +668,7 @@ class ContactUsScreen extends StatelessWidget {
                                             ?.callUs?.number ??
                                             " "
                                             : " ",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Color(0xFF848484),
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
@@ -682,18 +676,16 @@ class ContactUsScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 50,),
+                                  const SizedBox(height: 50,),
                                   state is GetBasicDataLoading
-                                      ? Container(
-                                        child: Center(
-                                          child: CircularProgressIndicator(),
-                                        ),
+                                      ? const Center(
+                                        child: CircularProgressIndicator(),
                                       )
                                       : Row(
                                         children: BasicDataCubit
                                             .basicDataModel!.socialmedia!
                                             .map(
-                                              (e) => Padding(
+                                              (e) => e.logo ==''?const SizedBox() : Padding(
                                             padding:
                                             const EdgeInsets.all(8.0),
                                             child: InkWell(
@@ -731,30 +723,15 @@ class ContactUsScreen extends StatelessWidget {
                                         mainAxisAlignment:
                                         MainAxisAlignment.center,
                                       ),
-                                  SizedBox(height: 50,),
+                                  const SizedBox(height: 50,),
                                   state is GetBasicDataLoading
-                                      ? Container(
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  )
+                                      ? const Center(
+                                        child: CircularProgressIndicator(),
+                                      )
                                       : Container(
                                     height: 68,
                                     width: 164,
-                                    child: CachedNetworkImage(
-                                      imageUrl:
-                                      /*"https://eaglespiritgourmet.com/wp-content/uploads/2023/12/minimalist-olive-oil-bottle-glass-600x600.webp"*/ BasicDataCubit
-                                          .basicDataModel!.logo?? "",
-                                      placeholder: (context, url) =>
-                                      const Center(child: CircularProgressIndicator()),
-                                      errorWidget: (context, url, error) {
-                                        return const Icon(Icons.error);
-                                      },
-                                      // fit: BoxFit.cover,
-                                      height: productItemImageHeight,
-                                      width: 200,
-                                      alignment: Alignment.center,
-                                    ),
+                                    child: Image.asset(AssetsManager.camponyLogo),
                                   ),
                                 ],
                               ),

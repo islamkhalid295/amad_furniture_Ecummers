@@ -4,11 +4,10 @@ import 'package:cedage/core/utils/assets_manager.dart';
 import 'package:cedage/core/utils/color_manager.dart';
 import 'package:cedage/features/Authantication/presentation/manager/authantication_cubit.dart';
 import 'package:cedage/features/home_screen/presentation/manager/home_screen_cubit.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/utils/constantes.dart';
 import '../../../cart_screen/presentation/manager/cart_cubit.dart';
@@ -101,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 _scrollController.scrollToIndex(
                   index,
                   preferPosition: AutoScrollPosition.begin,
-                  duration: Duration(
+                  duration: const Duration(
                     seconds: 3,
                   ),
                 );
@@ -111,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               indicatorColor: ColorManager.primary,
               labelStyle: TextStyle(
                 color: Colors.black,
-                fontSize: 16 * MediaQuery.of(context).size.width / 1000,
+                fontSize: MediaQuery.of(context).size.width > 600 ? 18  : 12  ,
                 fontFamily: 'Almarai',
                 fontWeight: FontWeight.w700,
               ),
@@ -122,14 +121,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               isScrollable: true,
             ),
             actions: [
-              SizedBox(
-                width: 30 * MediaQuery.of(context).size.width / 1440,
-              ),
+
               const ShopCart(),
               SizedBox(
-                width: 30 * MediaQuery.of(context).size.width / 1440,
+                width: 10 * MediaQuery.of(context).size.width / 1440,
               ),
-              const NavigationBarSignInButton(),
+               const NavigationBarSignInButton(),
               // Container(
               //   decoration: BoxDecoration(border: Border.all(color: ColorManager.myYellow),borderRadius: BorderRadius.circular(10)),
               //   child: TextButton(onPressed: ()=> context.go('/authentication/create_account'), child: Text("تسجيل الدخول",style: TextStyle(
@@ -151,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   'https://wa.me/${BasicDataCubit.basicDataModel?.callUs?.number}',
                   '_blank');
             },
-            hoverColor: Color(0x7643ff56),
+            hoverColor: const Color(0x7643ff56),
             icon: Image.asset(
               AssetsManager.whatsappIcon,
               fit: BoxFit.cover,
@@ -171,7 +168,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           body: NotificationListener(
             onNotification: (notification) {
               if (notification is ScrollEndNotification) {
-                print(notification.metrics.pixels);
+                if (kDebugMode) {
+                  print(notification.metrics.pixels);
+                }
                 final index = _getSectionIndexFromScrollOffset(
                     notification.metrics.pixels, getSectionHeight(context));
 
@@ -200,16 +199,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       _scrollController.scrollToIndex(
                         2,
                         preferPosition: AutoScrollPosition.begin,
-                        duration: Duration(
+                        duration: const Duration(
                           seconds: 3,
                         ),
                       );
                       _onSectionChange(2);
                     }),
-                    AboutUsScreen(),
-                    CategoriesScreen(),
-                    FaqScreen(),
-                    ContactUsScreen(),
+                    const AboutUsScreen(),
+                    const CategoriesScreen(),
+                    const FaqScreen(),
+                    const ContactUsScreen(),
                     // AboutUsScreen(),
                     // AboutUsScreen(),
                   ][index] /*HomeScreenCubit.homeScreenSections[index]*/,

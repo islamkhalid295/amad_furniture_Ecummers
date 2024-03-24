@@ -21,7 +21,7 @@ final TextEditingController anotherPhoneController = TextEditingController();
    final TextEditingController landmarkController = TextEditingController();
    final TextEditingController addressController = TextEditingController();
 
-bool flag = true;
+    bool flag = true;
   @override
   Widget build(BuildContext context) {
     CartCubit cubit = BlocProvider.of(context);
@@ -61,7 +61,7 @@ bool flag = true;
 
     return SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 65,vertical: 30),
+          padding:  EdgeInsets.symmetric(horizontal: 65 * MediaQuery.sizeOf(context).width / 1440,vertical: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -76,7 +76,7 @@ bool flag = true;
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 30),
+                padding:  EdgeInsets.symmetric(horizontal: 10* MediaQuery.sizeOf(context).width / 1440,),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(12),
@@ -84,7 +84,7 @@ bool flag = true;
 
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40 , vertical: 25),
+                    padding:  EdgeInsets.symmetric(horizontal: 40 * MediaQuery.sizeOf(context).width / 1440, vertical: 25),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -226,7 +226,7 @@ bool flag = true;
                                                   errorText: CartCubit
                                                       .cityDropDownMenuError,
                                                   requestFocusOnTap: true,
-                                                  width: 450 *
+                                                  width: 600 *
                                                       MediaQuery.of(context)
                                                           .size
                                                           .width /
@@ -295,7 +295,7 @@ bool flag = true;
                     if(CartCubit.formKey.currentState!.validate() && CartCubit.cityDropDownMenuController.text != "" ){
                       context.pushNamed(RoutesManager.orderSummaryScreen,
                           pathParameters: {
-                            'firstName': nameController.text,
+                            'name': nameController.text,
                             'phone': phoneController.text,
                             'anotherPhone': anotherPhoneController.text == ""? '_' : anotherPhoneController.text,
                             'email': emailController.text,

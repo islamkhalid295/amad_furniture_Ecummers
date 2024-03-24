@@ -1,6 +1,6 @@
 class EndPoints {
 
-  static const  BASE_URL="https://amad-ecommerce.onrender.com/";
+  static const  BASE_URL="https://api.cedage.com/";
 
   static const String GET_BASIC_DATA = "client/basic/getbasicpage";
   static const String CONTACT_US = "client/basic/contactus";

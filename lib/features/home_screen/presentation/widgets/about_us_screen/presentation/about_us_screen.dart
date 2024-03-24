@@ -108,12 +108,17 @@ class AboutUsScreen extends StatelessWidget {
                             ),
                           )
                               : Container(
-                            height: 150 *
+                            height: 200 *
                                 MediaQuery
                                     .of(context)
                                     .size
                                     .height /
                                 1200,
+                            width:
+                            200 * MediaQuery
+                                .of(context)
+                                .size
+                                .width / 700,
                             decoration: BoxDecoration(
                               color: ColorManager.primary.withOpacity(0.5),
                               borderRadius: BorderRadius.only(
@@ -131,28 +136,9 @@ class AboutUsScreen extends StatelessWidget {
                                           .size
                                           .width /
                                       900),
-                              child: CachedNetworkImage(
-                                imageUrl:
-                                /*"https://eaglespiritgourmet.com/wp-content/uploads/2023/12/minimalist-olive-oil-bottle-glass-600x600.webp"*/ BasicDataCubit
-                                    .basicDataModel!.logo ??
-                                    "",
-                                placeholder: (context, url) =>
-                                const Center(
-                                    child: CircularProgressIndicator()),
-                                errorWidget: (context, url, error) {
-                                  return const Icon(Icons.error);
-                                },
-                                // fit: BoxFit.cover,
-                                height: 150,
-                                width: 150,
-                                alignment: Alignment.center,
-                              ),
+                              child: Image.asset(AssetsManager.camponyLogo),
                             ),
-                            width:
-                            200 * MediaQuery
-                                .of(context)
-                                .size
-                                .width / 700,
+
                           ),
                         ],
                       ),

@@ -4,6 +4,7 @@ import 'package:cedage/core/widgets/default_material_button.dart';
 import 'package:cedage/features/Authantication/presentation/manager/authantication_state.dart';
 import 'package:cedage/features/cart_screen/data/models/city_model.dart';
 import 'package:cedage/features/cart_screen/presentation/manager/cart_cubit.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -14,18 +15,20 @@ import '../../Authantication/presentation/manager/authantication_cubit.dart';
 import '../data/models/promocode_request_model.dart';
 
 class CartScreen extends StatelessWidget {
-  CartScreen({super.key});
+   CartScreen({super.key});
 
-  double totalPrice = 0;
-  String couponError = "";
-  bool flag = true;
+   double totalPrice = 0;
+   String couponError = "";
+   bool flag = true;
 
   @override
   Widget build(BuildContext context) {
     CartCubit cubit = BlocProvider.of(context);
     AuthanticationCubit authanticationCubit = BlocProvider.of(context);
     if (token == null) {
-      print("get token");
+      if (kDebugMode) {
+        print("get token");
+      }
       authanticationCubit.getToken().then((value) {
         cubit.getCart().then((value) {
           totalPrice = (CartCubit.cartModel?.cart?.totalPrice) ?? -1;
@@ -36,7 +39,9 @@ class CartScreen extends StatelessWidget {
         }
       });
     } else if (token != null) {
-      print("get cart");
+      if (kDebugMode) {
+        print("get cart");
+      }
       cubit.getCart().then((value) {
         totalPrice = (CartCubit.cartModel?.cart?.totalPrice) ?? -1;
       });
@@ -115,8 +120,8 @@ class CartScreen extends StatelessWidget {
                           ),
                         )))
                     : Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 60, vertical: 10),
+                        padding:  EdgeInsets.symmetric(
+                            horizontal: 60* MediaQuery.sizeOf(context).width / 1440, vertical: 10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -351,13 +356,13 @@ class CartScreen extends StatelessWidget {
                                       const EdgeInsets.symmetric(vertical: 30),
                                   child: Row(
                                     children: [
-                                      const Expanded(
+                                       Expanded(
                                         child: DefaultSelectableText(
                                           textAlign: TextAlign.center,
                                           'التوصيل',
                                           style: TextStyle(
-                                            color: Color(0xFF242424),
-                                            fontSize: 26,
+                                            color: const Color(0xFF242424),
+                                            fontSize: MediaQuery.sizeOf(context).width > 520 ? 26 : 18,
                                             fontFamily: 'Almarai',
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -383,7 +388,7 @@ class CartScreen extends StatelessWidget {
                                                     errorText: CartCubit
                                                         .cityDropDownMenuError,
                                                     requestFocusOnTap: true,
-                                                    width: 450 *
+                                                    width: 600 *
                                                         MediaQuery.of(context)
                                                             .size
                                                             .width /
@@ -461,8 +466,9 @@ class CartScreen extends StatelessWidget {
                                       Expanded(
                                         child: Column(
                                           children: [
-                                            const DefaultSelectableText(
-                                              "المبلغ شامل التوصيل",
+                                             const DefaultSelectableText(
+                                              "شامل التوصيل",
+                                              textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 color: Color(0xFF242424),
                                                 fontSize: 16,
@@ -511,13 +517,13 @@ class CartScreen extends StatelessWidget {
                                       const EdgeInsets.symmetric(vertical: 30),
                                   child: Row(
                                     children: [
-                                      const Expanded(
+                                       Expanded(
                                         child: DefaultSelectableText(
                                           textAlign: TextAlign.center,
                                           'اكود الخصم',
                                           style: TextStyle(
-                                            color: Color(0xFF242424),
-                                            fontSize: 26,
+                                            color: const Color(0xFF242424),
+                                            fontSize: MediaQuery.sizeOf(context).width > 520 ? 26 : 18,
                                             fontFamily: 'Almarai',
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -550,7 +556,7 @@ class CartScreen extends StatelessWidget {
                                                   children: [
                                                     Container(
                                                       height: 40,
-                                                      width: 280 *
+                                                      width: 400 *
                                                           MediaQuery.of(context)
                                                               .size
                                                               .width /
@@ -566,6 +572,7 @@ class CartScreen extends StatelessWidget {
                                                                 top: 10.0,
                                                                 bottom: 4),
                                                         child: TextFormField(
+                                                          maxLines: 1,
                                                           controller: CartCubit
                                                               .clientCoponController,
                                                           decoration:
@@ -581,6 +588,7 @@ class CartScreen extends StatelessWidget {
                                                       ),
                                                     ),
                                                     DefaultMaterialButton(
+                                                      fontSize: MediaQuery.sizeOf(context).width < 520 ? 12 : null,
                                                       lodingCondition: state
                                                               is AddClientPromoCodeToCartLoading ||
                                                           state
@@ -676,7 +684,7 @@ class CartScreen extends StatelessWidget {
                                                                       textAlign:
                                                                           TextAlign
                                                                               .center,
-                                                                      style: TextStyle(
+                                                                      style: const TextStyle(
                                                                           fontSize:
                                                                               20)),
                                                                 )
@@ -709,7 +717,7 @@ class CartScreen extends StatelessWidget {
                                                   children: [
                                                     Container(
                                                       height: 40,
-                                                      width: 280 *
+                                                      width: 400 *
                                                           MediaQuery.of(context)
                                                               .size
                                                               .width /
@@ -725,6 +733,7 @@ class CartScreen extends StatelessWidget {
                                                                 top: 10.0,
                                                                 bottom: 4),
                                                         child: TextFormField(
+                                                          maxLines: 1,
                                                           controller: CartCubit
                                                               .sellerCoponController,
                                                           decoration:
@@ -836,7 +845,7 @@ class CartScreen extends StatelessWidget {
                                                                 textAlign:
                                                                 TextAlign
                                                                     .center,
-                                                                style: TextStyle(
+                                                                style: const TextStyle(
                                                                     fontSize:
                                                                     20)),
                                                           )
@@ -891,6 +900,7 @@ class CartScreen extends StatelessWidget {
                                           children: [
                                             const DefaultSelectableText(
                                               "بعد الخصم",
+                                              textAlign: TextAlign.center,
                                               style: TextStyle(
                                                 color: Color(0xFF242424),
                                                 fontSize: 16,

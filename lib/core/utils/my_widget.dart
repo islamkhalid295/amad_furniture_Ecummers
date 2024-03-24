@@ -138,7 +138,8 @@ class CartProductItem extends StatelessWidget {
                           : SizedBox(),
                       Row(
                         children: [
-                          const DefaultSelectableText(
+                          if(MediaQuery.sizeOf(context).width > 650)...
+                          [const DefaultSelectableText(
                             'الكميه',
                             style: TextStyle(
                               color: Colors.black,
@@ -149,7 +150,7 @@ class CartProductItem extends StatelessWidget {
                           ),
                           const SizedBox(
                             width: 8,
-                          ),
+                          ),],
                           Expanded(
                             child: Column(
                               children: [
@@ -445,7 +446,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 2,
-      toolbarHeight: MediaQuery.sizeOf(context).width < 450 ? 50 : tabBarHeight,
+      toolbarHeight: tabBarHeight,
       backgroundColor: ColorManager.myWhite,
       leading: Padding(
         padding: EdgeInsets.only(
