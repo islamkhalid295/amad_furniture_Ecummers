@@ -24,12 +24,13 @@ class ShopCart extends StatelessWidget {
             return Stack(
               children: [
                 IconButton(
+
+                  iconSize:  22 ,
                     onPressed: () {
                       context.go(RoutesManager.cartScreen);
                     },
-                    icon: const Icon(
+                    icon:  const Icon(
                       CupertinoIcons.cart,
-                      size: 18,
                     )),
                 state is GetCartLoading  ?  CircleAvatar(
                   backgroundColor: Colors.red,

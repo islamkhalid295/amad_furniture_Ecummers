@@ -464,7 +464,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               SizedBox(width: 50 * MediaQuery.of(context).size.width / 800,),
               DefaultTextButton(
-                fontSize:MediaQuery.of(context).size.width > 400 ?  20 : 10,
+                fontSize:MediaQuery.of(context).size.width > 450 ?  20 : 10,
                   onPressed: () {
                     context.go(RoutesManager.homeScreen);
                   },
@@ -473,7 +473,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
                 width: 30* MediaQuery.of(context).size.width / 1440,
               ),
               DefaultTextButton(
-                  fontSize:MediaQuery.of(context).size.width > 400 ?  20 : 10,
+                  fontSize:MediaQuery.of(context).size.width > 450 ?  20 : 10,
 
 
                   onPressed: () {
@@ -495,7 +495,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         const NavigationBarSignInButton(),
         const SizedBox(
-          width: 20,
+          width: 5,
         ),
       ],
     );
