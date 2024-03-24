@@ -106,7 +106,7 @@ final String? categoryId;
                                     MediaQuery.of(context).size.width > 600 ? ((MediaQuery.of(context).size.width -250) /
                                                 200)
                                             .floor() : ((MediaQuery.of(context).size.width ) /
-                                        200)
+                                        150)
                                         .floor(),
                                     mainAxisSpacing:0,
                                     crossAxisSpacing:0,

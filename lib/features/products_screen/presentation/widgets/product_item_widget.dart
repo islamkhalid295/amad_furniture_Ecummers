@@ -37,7 +37,7 @@ class ProductItem extends StatelessWidget {
           }
         },
         child: Container(
-          height: productItemHeight,
+          height: MediaQuery.of(context).size.width > 400 ? productItemHeight : productItemHeight -100,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +55,7 @@ class ProductItem extends StatelessWidget {
                         return const Icon(Icons.error);
                       },
                       fit: BoxFit.cover,
-                      height: productItemImageHeight,
+                      height: MediaQuery.of(context).size.width > 400 ? productItemImageHeight : productItemImageHeight -100,
                       width: 200,
                       alignment: Alignment.center,
                     ),
@@ -63,12 +63,12 @@ class ProductItem extends StatelessWidget {
                   (double.parse(product.discount ?? "0")) > 0 ? Center(
                     child: Container(
                       alignment: Alignment.bottomRight,
-                      height: productItemImageHeight + 4,
+                      height: MediaQuery.of(context).size.width > 400 ? productItemImageHeight + 4 : productItemImageHeight-100 + 4 ,
                       width: 208,
                       child: Image.asset(
                         AssetsManager.saleImage,
-                        height: 47.9 * 1.8,
-                        width: 60 * 1.8,
+                        height: MediaQuery.of(context).size.width > 400 ? 47.9 * 1.8 :47.9* 1.3,
+                        width: MediaQuery.of(context).size.width > 400 ? 60 * 1.8 : 60* 1.3,
                       ),
                     ),
                   ) : Container(),

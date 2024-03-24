@@ -464,14 +464,18 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               SizedBox(width: 50 * MediaQuery.of(context).size.width / 800,),
               DefaultTextButton(
+                fontSize:MediaQuery.of(context).size.width > 400 ?  20 : 10,
                   onPressed: () {
                     context.go(RoutesManager.homeScreen);
                   },
                   title: "الرئيسية"),
               SizedBox(
-                width: 30,
+                width: 30* MediaQuery.of(context).size.width / 1440,
               ),
               DefaultTextButton(
+                  fontSize:MediaQuery.of(context).size.width > 400 ?  20 : 10,
+
+
                   onPressed: () {
                     context.go(RoutesManager.productsScreen);
                   },
@@ -531,10 +535,11 @@ class DefaultSelectableText extends StatelessWidget {
 }
 
 class DefaultTextButton extends StatelessWidget {
-  const DefaultTextButton({super.key, required this.title, this.onPressed});
+  const DefaultTextButton({super.key, required this.title, this.onPressed, this.fontSize});
 
   final String title;
   final VoidCallback? onPressed;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -551,7 +556,7 @@ class DefaultTextButton extends StatelessWidget {
               title,
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 16 * MediaQuery.of(context).size.width / 940,
+                fontSize: fontSize ?? 16 * MediaQuery.of(context).size.width / 940,
                 fontFamily: 'Almarai',
                 fontWeight: FontWeight.w700,
               ),
