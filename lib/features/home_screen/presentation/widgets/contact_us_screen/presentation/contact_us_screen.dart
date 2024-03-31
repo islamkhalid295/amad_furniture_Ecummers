@@ -460,7 +460,7 @@ class ContactUsScreen extends StatelessWidget {
               Container(
                 height: 200,
                 decoration: const ShapeDecoration(
-                  color: ColorManager.myWhite,
+                  color: ColorManager.darkPrimary,
                   shape: RoundedRectangleBorder(
                     side: BorderSide(width: 1, color: ColorManager.myGrayLite),
                   ),
@@ -484,7 +484,7 @@ class ContactUsScreen extends StatelessWidget {
                                           const DefaultSelectableText(
                                             'اتصل بنا',
                                             style: TextStyle(
-                                              color: Colors.black,
+                                              color: ColorManager.myWhite,
                                               fontSize: 26,
                                               fontFamily: 'Almarai',
                                               fontWeight: FontWeight.w400,
@@ -496,7 +496,8 @@ class ContactUsScreen extends StatelessWidget {
                                           const DefaultSelectableText(
                                             'البريد الالكتروني',
                                             style: TextStyle(
-                                              color: Color(0xFF848484),
+                                              color: ColorManager.myWhite,
+
                                               fontSize: 18,
                                               fontFamily: 'Inter',
                                               fontWeight: FontWeight.w500,
@@ -510,7 +511,8 @@ class ContactUsScreen extends StatelessWidget {
                                                     " "
                                                 : " ",
                                             style: const TextStyle(
-                                              color: Color(0xFF848484),
+                                              color: ColorManager.myWhite,
+
                                               fontSize: 18,
                                               fontFamily: 'Inter',
                                               fontWeight: FontWeight.w400,
@@ -522,7 +524,8 @@ class ContactUsScreen extends StatelessWidget {
                                           const DefaultSelectableText(
                                             'رقم الجوال',
                                             style: TextStyle(
-                                              color: Color(0xFF848484),
+                                              color: ColorManager.myWhite,
+
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -535,7 +538,8 @@ class ContactUsScreen extends StatelessWidget {
                                                     " "
                                                 : " ",
                                             style: const TextStyle(
-                                              color: Color(0xFF848484),
+                                              color: ColorManager.myWhite,
+
                                               fontSize: 16,
                                               fontWeight: FontWeight.w400,
                                             ),
@@ -612,70 +616,79 @@ class ContactUsScreen extends StatelessWidget {
                                       ? const Center(
                                     child: CircularProgressIndicator(),
                                   )
-                                      : Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      const DefaultSelectableText(
-                                        'اتصل بنا',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 26,
-                                          fontFamily: 'Almarai',
-                                          fontWeight: FontWeight.w400,
+                                      : Container(
+                                    color: ColorManager.darkPrimary,
+
+                                        child: Column(
+                                                                            crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                            children: [
+                                        const DefaultSelectableText(
+                                          'اتصل بنا',
+                                          style: TextStyle(
+                                            color: ColorManager.myWhite,
+
+                                            fontSize: 26,
+                                            fontFamily: 'Almarai',
+                                            fontWeight: FontWeight.w400,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const DefaultSelectableText(
-                                        'البريد الالكتروني',
-                                        style: TextStyle(
-                                          color: Color(0xFF848484),
-                                          fontSize: 18,
-                                          fontFamily: 'Inter',
-                                          fontWeight: FontWeight.w500,
+                                        const SizedBox(
+                                          height: 10,
                                         ),
-                                      ),
-                                      DefaultSelectableText(
-                                        BasicDataCubit.basicDataModel !=
-                                            null
-                                            ? BasicDataCubit.basicDataModel
-                                            ?.callUs?.email ??
-                                            " "
-                                            : " ",
-                                        style: const TextStyle(
-                                          color: Color(0xFF848484),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w400,
+                                        const DefaultSelectableText(
+                                          'البريد الالكتروني',
+                                          style: TextStyle(
+                                            color: ColorManager.myWhite,
+
+                                            fontSize: 18,
+                                            fontFamily: 'Inter',
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      const DefaultSelectableText(
-                                        'رقم الجوال',
-                                        style: TextStyle(
-                                          color: Color(0xFF848484),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
+                                        DefaultSelectableText(
+                                          BasicDataCubit.basicDataModel !=
+                                              null
+                                              ? BasicDataCubit.basicDataModel
+                                              ?.callUs?.email ??
+                                              " "
+                                              : " ",
+                                          style: const TextStyle(
+                                            color: ColorManager.myWhite,
+
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400,
+                                          ),
                                         ),
-                                      ),
-                                      DefaultSelectableText(
-                                        BasicDataCubit.basicDataModel !=
-                                            null
-                                            ? BasicDataCubit.basicDataModel
-                                            ?.callUs?.number ??
-                                            " "
-                                            : " ",
-                                        style: const TextStyle(
-                                          color: Color(0xFF848484),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
+                                        const SizedBox(
+                                          height: 8,
                                         ),
+                                        const DefaultSelectableText(
+                                          'رقم الجوال',
+                                          style: TextStyle(
+                                            color: ColorManager.myWhite,
+
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        DefaultSelectableText(
+                                          BasicDataCubit.basicDataModel !=
+                                              null
+                                              ? BasicDataCubit.basicDataModel
+                                              ?.callUs?.number ??
+                                              " "
+                                              : " ",
+                                          style: const TextStyle(
+                                            color: ColorManager.myWhite,
+
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                                                            ],
+                                                                          ),
                                       ),
-                                    ],
-                                  ),
                                   const SizedBox(height: 50,),
                                   state is GetBasicDataLoading
                                       ? const Center(
