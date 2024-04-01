@@ -30,7 +30,7 @@ class ContactUsScreen extends StatelessWidget {
           return Column(
             children: [
               Container(
-                height: getSectionHeight(context) - 100,
+                height: getSectionHeight(context) - 140,
                 child: MediaQuery.of(context).size.width > 600 ? Row(
                   children: [
                     Expanded(
@@ -458,7 +458,7 @@ class ContactUsScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 200,
+                height: 160,
                 decoration: const ShapeDecoration(
                   color: ColorManager.darkPrimary,
                   shape: RoundedRectangleBorder(
@@ -485,20 +485,20 @@ class ContactUsScreen extends StatelessWidget {
                                             'اتصل بنا',
                                             style: TextStyle(
                                               color: ColorManager.myWhite,
-                                              fontSize: 26,
+                                              fontSize: 20,
                                               fontFamily: 'Almarai',
                                               fontWeight: FontWeight.w400,
                                             ),
                                           ),
                                           const SizedBox(
-                                            height: 10,
+                                            height: 6,
                                           ),
                                           const DefaultSelectableText(
                                             'البريد الالكتروني',
                                             style: TextStyle(
                                               color: ColorManager.myWhite,
 
-                                              fontSize: 18,
+                                              fontSize: 14,
                                               fontFamily: 'Inter',
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -513,20 +513,20 @@ class ContactUsScreen extends StatelessWidget {
                                             style: const TextStyle(
                                               color: ColorManager.myWhite,
 
-                                              fontSize: 18,
+                                              fontSize: 14,
                                               fontFamily: 'Inter',
                                               fontWeight: FontWeight.w400,
                                             ),
                                           ),
                                           const SizedBox(
-                                            height: 8,
+                                            height: 6,
                                           ),
                                           const DefaultSelectableText(
                                             'رقم الجوال',
                                             style: TextStyle(
                                               color: ColorManager.myWhite,
 
-                                              fontSize: 18,
+                                              fontSize: 14,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
@@ -540,7 +540,7 @@ class ContactUsScreen extends StatelessWidget {
                                             style: const TextStyle(
                                               color: ColorManager.myWhite,
 
-                                              fontSize: 16,
+                                              fontSize: 14,
                                               fontWeight: FontWeight.w400,
                                             ),
                                           ),

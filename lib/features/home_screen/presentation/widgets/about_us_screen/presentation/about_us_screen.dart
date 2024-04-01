@@ -101,19 +101,16 @@ class AboutUsScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          state is GetBasicDataLoading
-                              ? Container(
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          )
-                              : Container(
-                            height: 200 *
+                          Container(
+                            height: 180 * MediaQuery
+                    .of(context)
+                    .size
+                    .height / 800, /*200 *
                                 MediaQuery
                                     .of(context)
                                     .size
                                     .height /
-                                1200,
+                                1200,*/
                             width:
                             200 * MediaQuery
                                 .of(context)
@@ -141,6 +138,20 @@ class AboutUsScreen extends StatelessWidget {
 
                           ),
                         ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                      child: Container(
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              width: 1,
+                              strokeAlign: BorderSide.strokeAlignCenter,
+                              color: Colors.black.withOpacity(0.3199999928474426),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     DefaultSelectableText(
@@ -344,74 +355,102 @@ class AboutUsScreen extends StatelessWidget {
                     .of(context)
                     .size
                     .width > 400
-                    ? Expanded(
-                  child: Container(
-                    height: 270 * MediaQuery
-                        .of(context)
-                        .size
-                        .height / 800,
-                    decoration: BoxDecoration(
-                      color: ColorManager.primary.withOpacity(0.5),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          topLeft: Radius.circular(20)),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          top: 15,
-                          left: 15,
-                          bottom: 15,
-                          right:
-                          40 * MediaQuery
+                    ? Container(
+                      height: 270 * MediaQuery
+                          .of(context)
+                          .size
+                          .height / 800,
+                      decoration: BoxDecoration(
+                        color: ColorManager.primary.withOpacity(0.5),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            topLeft: Radius.circular(20)),
+                      ),
+                      child: BlocBuilder<AboutUsCubit, AboutUsState>(
+  builder: (context, state) {
+    return Padding(
+                        padding: EdgeInsets.only(
+                            top: 15,
+                            left: 15,
+                            bottom: 15,
+                            right:
+                            40 * MediaQuery
+                                .of(context)
+                                .size
+                                .width / 900),
+                        child: state is RetriveAboutUsLoading
+                            ? Container(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        )
+                            :Container(
+                          height:
+                          270 * MediaQuery
                               .of(context)
                               .size
-                              .width / 900),
-                      child: Container(
-                        height:
-                        270 * MediaQuery
-                            .of(context)
-                            .size
-                            .height / 830,
-                        // width: 500 * MediaQuery.of(context).size.width / 1440 ,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: CarouselSlider(
-                          // carouselController: SliderCubit.carouselController,
-                          options: CarouselOptions(
-                            enlargeCenterPage: true,
-                            viewportFraction: 1,
-                            autoPlay: true,
+                              .height / 830,
+                          // width: 500 * MediaQuery.of(context).size.width / 1440 ,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          items: /*SliderCubit.sliderItemsList?.slider?*/
-                          [
-                            1,
-                          ].map((sliderItem) {
-                            return Builder(
-                              builder: (BuildContext context) {
-                                return CachedNetworkImage(
-                                  imageUrl:
-                                  AboutUsCubit.aboutUsModel?.image ??
-                                      "",
-                                  placeholder: (context, url) =>
-                                  const Center(
-                                      child:
-                                      CircularProgressIndicator()),
-                                  errorWidget: (context, url, error) {
-                                    return const Icon(Icons.error);
-                                  },
-                                  fit: BoxFit.cover,
-                                  alignment: Alignment.center,
-                                );
-                              },
-                            );
-                          }).toList(),
+                          child: CachedNetworkImage(
+                            imageUrl:
+                            AboutUsCubit.aboutUsModel?.image ??
+                                "",
+                            placeholder: (context, url) =>
+                            const Center(
+                                child:
+                                CircularProgressIndicator()),
+                            errorWidget: (context, url, error) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: const
+                                  CircularProgressIndicator(),
+                                ),
+                              );
+                            },
+                            fit: BoxFit.cover,
+                            alignment: Alignment.center,
+                          )
+                          /*CarouselSlider(
+                            // carouselController: SliderCubit.carouselController,
+                            options: CarouselOptions(
+                              enlargeCenterPage: true,
+                              viewportFraction: 1,
+                              autoPlay: true,
+                            ),
+                            items: *//*SliderCubit.sliderItemsList?.slider?*//*
+                            [
+                              1,
+                            ].map((sliderItem) {
+                              return Builder(
+                                builder: (BuildContext context) {
+                                  return CachedNetworkImage(
+                                    imageUrl:
+                                    AboutUsCubit.aboutUsModel?.image ??
+                                        "",
+                                    placeholder: (context, url) =>
+                                    const Center(
+                                        child:
+                                        CircularProgressIndicator()),
+                                    errorWidget: (context, url, error) {
+                                      return const Icon(Icons.error);
+                                    },
+                                    fit: BoxFit.cover,
+                                    alignment: Alignment.center,
+                                  );
+                                },
+                              );
+                            }).toList(),
+                          )*/,
                         ),
-                      ),
-                    ),
-                  ),
-                )
+                      );
+  },
+),
+                    )
                     : SizedBox(),
                 Expanded(
                   child: Padding(
@@ -486,6 +525,21 @@ class AboutUsScreen extends StatelessWidget {
               ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+            child: Container(
+              decoration: ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    width: 1,
+                    strokeAlign: BorderSide.strokeAlignCenter,
+                    color: Colors.black.withOpacity(0.3199999928474426),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
         ],
       ),
     );
