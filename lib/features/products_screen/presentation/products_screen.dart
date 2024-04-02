@@ -20,6 +20,8 @@ final String? categoryId;
   Widget build(BuildContext context) {
     AuthanticationCubit authanticationCubit = BlocProvider.of(context);
     CartCubit cartCubit = BlocProvider.of(context);
+    CategoriesCubit.productsListModel = null;
+    CategoriesCubit.poductsLoaded = false;
     if (token == null) {
       authanticationCubit.getToken();
     }

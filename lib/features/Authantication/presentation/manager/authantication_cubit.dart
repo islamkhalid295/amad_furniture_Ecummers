@@ -129,7 +129,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
       if (kDebugMode) {
         print("error : ${e.response?.data["message"]}");
       }
-      emit(CreateAccountError(error: e.response?.data["message"]));
+      emit(CreateAccountError(error: e.response?.data["message"]??"الرجاء التحقق من الاتصال بالانترنت"));
     }
   }
 
@@ -146,7 +146,7 @@ class AuthanticationCubit extends Cubit<AuthanticationState> {
       if (kDebugMode) {
         print("error : ${e.response?.data["message"]}");
       }
-      emit(LoginError(error: e.response?.data["message"]));
+      emit(LoginError(error: e.response?.data["message"] ?? "الرجاء التحقق من الاتصال بالانترنت"));
     }
   }
 
