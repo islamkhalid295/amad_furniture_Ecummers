@@ -390,7 +390,7 @@ class AboutUsScreen extends StatelessWidget {
                               .of(context)
                               .size
                               .height / 830,
-                          // width: 500 * MediaQuery.of(context).size.width / 1440 ,
+                           width: 500 * MediaQuery.of(context).size.width / 1440 ,
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),

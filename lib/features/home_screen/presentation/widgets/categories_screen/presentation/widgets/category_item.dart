@@ -46,7 +46,7 @@ final GestureTapCallback? onTap;
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: ColorManager.myBlack,
-                    fontSize: 14,
+                    fontSize: MediaQuery.sizeOf(context).width > 600 ? 14 : 12,
                     fontFamily: 'Almarai',
                     fontWeight: FontWeight.w700,
 

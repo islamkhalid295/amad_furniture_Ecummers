@@ -5,6 +5,7 @@ import 'package:cedage/features/cart_screen/data/models/product_amount_model.dar
 import 'package:cedage/features/cart_screen/presentation/manager/cart_cubit.dart';
 import 'package:cedage/features/cart_screen/presentation/manager/product_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cedage/features/home_screen/presentation/widgets/categories_screen/presentation/manager/categories_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -477,6 +478,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 
                   onPressed: () {
+    CategoriesCubit.currentCategoryName = 'الكل';
                     context.go(RoutesManager.productsScreen);
                   },
                   title: "المنتجات"),
@@ -557,7 +559,6 @@ class DefaultTextButton extends StatelessWidget {
               style: TextStyle(
                 color: Colors.black,
                 fontSize: fontSize ?? 16 * MediaQuery.of(context).size.width / 940,
-                fontFamily: 'Almarai',
                 fontWeight: FontWeight.w700,
               ),
             ),
