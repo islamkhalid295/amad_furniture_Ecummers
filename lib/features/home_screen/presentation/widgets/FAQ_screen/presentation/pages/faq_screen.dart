@@ -51,22 +51,24 @@ class FaqScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w500)),
                         ],
                       ),
-                      SizedBox(height: 10,),
+                      const SizedBox(height: 10,),
                       Align(
+                        alignment: AlignmentDirectional.centerStart,
                         child: Container(
-                          height: getSectionHeight(context)-200,
+                          // height: getSectionHeight(context)-200,
 
                           decoration: BoxDecoration(
                             color: ColorManager.primary.withOpacity(0.5),
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                                 bottomLeft: Radius.circular(20),
                                 topLeft: Radius.circular(20)),
                           ),
+                          width: MediaQuery.sizeOf(context).width-40,
 
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: state is RetriveFaqLoading
-                                ? Column(
+                                ? const Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Center(
@@ -74,29 +76,28 @@ class FaqScreen extends StatelessWidget {
                                 ),
                               ],
                             )
-                                : state is RetriveFaqError ?  Center(child: Text("حدث خطأ ما يرجا المحاولة في وقت لاحق",style: TextStyle(color: Colors.red),)):
-                            SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  ListView.builder(
-                                    itemBuilder: (context, index) =>
-                                        QuestionsWidget(
-                                            questions: FaqCubit
-                                                .faqList!.faq![1].question,
-                                            answer: FaqCubit
-                                                .faqList!.faq![1].answer
-                                        ),
-                                    itemCount: /*FaqCubit.faqList?.faq?.length*/20,
-                                    shrinkWrap: true,
-                                  ),
-                                ],
-                                mainAxisSize: MainAxisSize.min,
+                                : state is RetriveFaqError ?  const Center(child: Text("حدث خطأ ما يرجا المحاولة في وقت لاحق",style: TextStyle(color: Colors.red),)):
+                            ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minHeight: 100,
+                                maxHeight: getSectionHeight(context)-300,
+                              ),
+                              child: ListView.builder(
+                                itemBuilder: (context, index) =>
+                                    QuestionsWidget(
+                                        questions: FaqCubit
+                                            .faqList!
+                                            .faq![index]
+                                            .question,
+                                        answer: FaqCubit.faqList!
+                                            .faq![index].answer),
+                                itemCount: FaqCubit.faqList?.faq?.length
+                                ,
+                                shrinkWrap: true,
                               ),
                             ),
                           ),
-                          width: MediaQuery.sizeOf(context).width-40,
                         ),
-                        alignment: AlignmentDirectional.centerStart,
                       ),
                     ],
                   );

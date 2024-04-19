@@ -17,14 +17,14 @@ final GestureTapCallback? onTap;
       child: Stack(
         children: [
           CachedNetworkImage(
-            width:  200,
+            width:  MediaQuery.of(context).size.width,
             imageUrl: imageUrl,
             placeholder: (context, url) => Center(child: CircularProgressIndicator()),
             errorWidget: (context, url, error) {
               return Icon(Icons.error);
             },
             fit: BoxFit.cover,
-            height: height,
+            height: MediaQuery.of(context).size.height,
 
           ),
           Container(

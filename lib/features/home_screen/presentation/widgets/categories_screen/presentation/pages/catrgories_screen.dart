@@ -55,54 +55,50 @@ class CategoriesScreen extends StatelessWidget {
                 ? Container(
                     height: getSectionHeight(context),
                     child: const Center(child: CircularProgressIndicator()))
-                : SingleChildScrollView(
-                    child: GridView.custom(
-                      shrinkWrap: true,
+                : GridView.custom(
+                  shrinkWrap: true,
 
-                      gridDelegate: SliverWovenGridDelegate.count(
-                        crossAxisCount: MediaQuery.of(context).size.width > 600
-                            ? (MediaQuery.of(context).size.width / 200).floor()
-                            : (MediaQuery.of(context).size.width / 100).floor(),
-                        mainAxisSpacing: 3,
-                        crossAxisSpacing: 4,
-                        pattern: [
-                          WovenGridTile(1),
-                          // WovenGridTile(
-                          //   5 / 7,
-                          //   crossAxisRatio: 0.9,
-                          //   alignment: AlignmentDirectional.centerEnd,
-                          // ),
-                        ],
-                      ),
-                      childrenDelegate: SliverChildBuilderDelegate(
-
-                        childCount:
-                            CategoriesCubit.categoriesList?.categories?.length,
-                        (context, index) => CategoryItem(
-                          onTap: () {
-                            CategoriesCubit.currentCategoryName =
-                                CategoriesCubit.categoriesList
-                                        ?.categories?[index].name ??
-                                    "";
-                            context.goNamed(RoutesManager.productsScreen,
-                                pathParameters: {
-                                  'categoryId': CategoriesCubit.categoriesList
-                                          ?.categories?[index].id ??
-                                      "",
-                                });
-                            // cubit.getProductsByCategory(CategoriesCubit.categoriesList?.categories?[index].id);
-                          },
-                          height: 250,
-                          imageUrl: CategoriesCubit.categoriesList
-                                  ?.categories?[index].imageUrl ??
-                              "",
-                          name: CategoriesCubit
-                                  .categoriesList?.categories?[index].name ??
-                              "",
-                        ),
-                      ),
+                  gridDelegate: SliverWovenGridDelegate.count(
+                    crossAxisCount: MediaQuery.of(context).size.width > 600
+                        ? (MediaQuery.of(context).size.width / 300).floor()
+                        : (MediaQuery.of(context).size.width / 180).floor(),
+                    mainAxisSpacing: 3,
+                    crossAxisSpacing: 4,
+                    pattern: [
+                      WovenGridTile(1),
+                      // WovenGridTile(
+                      //   5 / 7,
+                      //   crossAxisRatio: 0.9,
+                      //   alignment: AlignmentDirectional.centerEnd,
+                      // ),
+                    ],
+                  ),
+                  childrenDelegate: SliverChildBuilderDelegate(
+                    childCount: CategoriesCubit.categoriesList?.categories?.length,
+                    (context, index) => CategoryItem(
+                      onTap: () {
+                        CategoriesCubit.currentCategoryName =
+                            CategoriesCubit.categoriesList
+                                    ?.categories?[index].name ??
+                                "";
+                        context.goNamed(RoutesManager.productsScreen,
+                            pathParameters: {
+                              'categoryId': CategoriesCubit.categoriesList
+                                      ?.categories?[index].id ??
+                                  "",
+                            });
+                        // cubit.getProductsByCategory(CategoriesCubit.categoriesList?.categories?[index].id);
+                      },
+                      height: 250,
+                      imageUrl: CategoriesCubit.categoriesList
+                              ?.categories?[index].imageUrl ??
+                          "",
+                      name: CategoriesCubit
+                              .categoriesList?.categories?[index].name ??
+                          "",
                     ),
-                  )
+                  ),
+                )
             /*MasonryGridView.count(
                     crossAxisCount: 6,
 
