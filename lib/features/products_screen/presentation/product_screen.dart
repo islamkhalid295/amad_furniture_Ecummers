@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:cedage/core/widgets/default_material_button.dart';
 import 'package:cedage/features/cart_screen/data/models/cart_model.dart';
 import 'package:cedage/features/cart_screen/data/models/product_amount_model.dart';
@@ -66,7 +68,7 @@ class ProductScreen extends StatelessWidget {
     } else if (CartCubit.cart == null && !cartCubit.cartLoading) {
       cartCubit.getCart();
     }
-    if(!categoriesCubit.poductsLoading) {
+    if(!CategoriesCubit.poductsLoading || !CategoriesCubit.poductsLoaded) {
       categoriesCubit.getProduct(productId);
     }
     return Scaffold(
@@ -354,9 +356,7 @@ class ProductScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
-                          height: 80,
-                          child: ListView(
+                          ListView(
                             children: CategoriesCubit
                                 .productInfo!.wholesaleOffers!
                                 .map((e) => DefaultSelectableText(
@@ -370,8 +370,9 @@ class ProductScreen extends StatelessWidget {
                               ),
                             ))
                                 .toList(),
-                          ),
-                        ),],
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                          ),],
                         Padding(
                           padding:
                           const EdgeInsets.symmetric(vertical: 35),
@@ -835,23 +836,22 @@ class ProductScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
-                        height: 80,
-                        child: ListView(
-                          children: CategoriesCubit
-                              .productInfo!.wholesaleOffers!
-                              .map((e) => DefaultSelectableText(
-                            e,
-                            style: TextStyle(
-                              color: Colors.black.withOpacity(
-                                  0.6000000238418579),
-                              fontSize: 14,
-                              fontFamily: 'Almarai',
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ))
-                              .toList(),
-                        ),
+                      ListView(
+                        children: CategoriesCubit
+                            .productInfo!.wholesaleOffers!
+                            .map((e) => DefaultSelectableText(
+                          e,
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(
+                                0.6000000238418579),
+                            fontSize: 14,
+                            fontFamily: 'Almarai',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ))
+                            .toList(),
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
                       ),
                       Padding(
                         padding:
@@ -870,11 +870,12 @@ class ProductScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(
+                       SizedBox(
                         child: Text(
-                          'هو عبارة عن دهن سائل غني بالأحماض الدهنية الأحادية غير المشبعة التي تمنحنا فوائد زيت الزيتون المتنوعة، ويتم استخلاصه من ثمرة الزيتون، حيث يتم الحصول على الزيت عن طريق عصرالزيتون الكامل. ويختلف تكوين زيت الزيتون باختلاف صنف الزيتون الذي يتم استخلاصه ',
+                          CategoriesCubit
+                              .productInfo!.description ?? "",
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 14,
                             fontFamily: 'Almarai',

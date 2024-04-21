@@ -22,7 +22,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
 static String currentCategoryName = "الكل";
 static bool categoryLoaded = false;
 static bool poductsLoaded = false;
- bool poductsLoading = false;
+static bool poductsLoading = false;
 
 
   void retriveCategories ()async
